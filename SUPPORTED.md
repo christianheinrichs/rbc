@@ -1,0 +1,48 @@
+Supported games
+===============
+
+- A Hand With Many Fingers
+- Alan Wake - American Nightmare (GOG version)
+- Amnesia - A Machine for Pigs
+- Amnesia - The Dark Descent
+- Becherov
+- Buddy Simulator 1984
+- Cave Story
+- Chaser
+- Darkest Dungeon
+- else Heart.Break()
+- Enigmatis - The Ghosts of Maple Creek
+- Grand Theft Auto III
+- Grand Theft Auto: San Andreas
+- Grand Theft Auto: Vice City
+- Hacknet
+- Hellblade: Senua’s Sacrifice
+- Hotline Miami Original
+- Inkslinger
+- Inside
+- Jotun - Valhalla Edition
+- Master Spy
+- Metro 2033 Redux
+- Mirror’s Edge
+- Mount & Blade: Warband - Viking Conquest
+- Oddworld - New 'n' Tasty
+- Outlast
+- Painkiller
+- Quake III
+- Remothered - Tormented Fathers
+- Ritual of the Moon (Partial support, cleanup only)
+- S.T.A.L.K.E.R. - Clear Sky
+- Saints Row 3
+- Serious Sam: The First Encounter
+- Sludge Life
+- SOMA
+- SWAT 4
+- Syberia I
+- Syberia II
+- The Cat Lady
+- The Infectious Madness of Doctor Dekker
+- The Longest Journey
+- The Suicide of Rachel Foster
+- The Witcher 1
+- Uplink
+- Vampire’s Dawn 2
