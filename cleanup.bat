@@ -15,7 +15,7 @@ rem Delete the Colestia folder
 rd /q /s %colestiadir%
 
 rem Delete registry keys
-reg delete HKEY_CURRENT_USER\SOFTWARE\Colestia /f
+reg delete HKCU\SOFTWARE\Colestia /f
 
 rem Alan Wake - American Nightmare
 
@@ -25,6 +25,7 @@ rem Delete the Remedy folder
 rd /q /s %remedydir%
 
 rem Amnesia - The Dark Descent
+rem Amnesia - A Machine for Pigs
 
 set "amnesiadir=%userprofile%\Documents\Amnesia"
 
@@ -42,7 +43,7 @@ rem Delete profile data
 del %becherovdir%\Data\Player\profiles.dat
 
 rem Delete all registry data for Becherov
-reg delete HKEY_CURRENT_USER\Software\Inputwish /f
+reg delete HKCU\Software\Inputwish /f
 
 rem Buddy Simulator 1984
 
@@ -70,15 +71,15 @@ rem Delete configuration and profile data. Profile data also contains savegame
 rem markers
 del %cavestorydir%\*.dat
 
-rem Delete window.rect
+rem Delete window.rect, which might be rectangular window data
 del %cavestorydir%\*.rect
 
 rem Chaser
 
 set "chaserdir=%gamerootdir%\Chaser"
 
-rem Delete Users folder, which contains at least a bind and settings file
-rd /q /s %chaserdir%\Save\Users
+rem Delete .cfg file
+del %chaserdir%\Save\Users\*.cfg
 
 rem Delete savegame files
 del %chaserdir%\Save\*.sav
@@ -91,7 +92,7 @@ rem Delete Darkest Dungeon folder, which should contain all profiles
 rd /q /s %darkestdungeondir%
 
 rem Delete registry keys
-reg delete "HKEY_CURRENT_USER\Software\Red Hook Studios" /f
+reg delete "HKCU\Software\Red Hook Studios" /f
 
 rem else Heart.Break()
 
@@ -104,7 +105,7 @@ rem Delete savegames
 del %ehbrootdir%\ElseHeartbreak_Data\Saves\*.json
 
 rem Delete registry keys
-reg delete HKEY_CURRENT_USER\Software\Miman /f
+reg delete HKCU\Software\Miman /f
 
 rem Enigmatis - The Ghosts of Maple Creek
 
@@ -113,21 +114,21 @@ set "amdir=%appdata%\Artifex Mundi\"
 rem Delete Artifex Mundi directory
 rd /q /s "%amdir%"
 
-rem Grand Theft Auto III
+rem GTA III
 
 set "gta3dir=%userprofile%\Documents\GTA3 User Files"
 
 rem Delete GTA3 directory
 rd /q /s "%gta3dir%"
 
-rem Grand Theft Auto: Vice City
+rem GTA: Vice City
 
 set "gtavcdir=%userprofile%\Documents\GTA Vice City User Files"
 
 rem Delete GTA: Vice City directory
 rd /q /s "%gtavcdir%"
 
-rem Grand Theft Auto: San Andreas
+rem GTA: San Andreas
 
 set "gtasadir=%userprofile%\Documents\GTA San Andreas User Files"
 
@@ -197,7 +198,7 @@ rem Delete Playdead folder in local low app data storage
 rd /q /s %playdeadlldir%
 
 rem Delete Playdead registry keys
-reg delete HKEY_CURRENT_USER\Software\Playdead /f
+reg delete HKCU\Software\Playdead /f
 
 rem Jotun - Valhalla Edition
 
@@ -207,7 +208,7 @@ rem Delete Thunder Lotus Games folder
 rd /q /s "%tldir%"
 
 rem Delete Thunder Lotus Games registry keys
-reg delete "HKEY_CURRENT_USER\Software\Thunder Lotus Games" /f
+reg delete "HKCU\Software\Thunder Lotus Games" /f
 
 rem Master Spy
 
@@ -228,7 +229,7 @@ rem Delete 4A Games directory in local appdata
 rd /q /s "%m2033localdir%"
 
 rem Delete 4A Games registry keys
-reg delete HKEY_CURRENT_USER\Software\4A-Games /f
+reg delete HKCU\Software\4A-Games /f
 
 rem Mirror’s Edge
 
@@ -241,10 +242,17 @@ rem Mount & Blade Warband
 
 set "mbwuserdir=%userprofile%\Documents\Mount&Blade Warband"
 set "mbwroamingdir=%appdata%\Mount&Blade Warband"
+set "mbwrootdir=%gamerootdir%\Mount and Blade - Warband"
 set "mbwsavedir=%userprofile%\Documents\Mount&Blade Warband Savegames"
 
 rem Delete Mount & Blade Warband user directory
 rd /q /s "%mbwuserdir%"
+
+rem Delete Mount & Blade Warband log file
+del "%mbwrootdir%\rgl_log.txt"
+
+rem Delete Mount & Blade Warband registry keys
+reg delete HKCU\SOFTWARE\MountAndBladeWarbandKeys /f
 
 rem Delete Mount & Blade Warband roaming directory
 rd /q /s "%mbwroamingdir%"
@@ -284,7 +292,7 @@ rem Delete savegame folders and savegames
 rd /q /s "%pk1rootdir%\SaveGames"
 
 rem Delete registry keys
-reg delete HKEY_CURRENT_USER\Software\PeopleCanFly /f
+reg delete HKCU\Software\PeopleCanFly /f
 
 rem Quake III
 
@@ -368,6 +376,9 @@ rem Sludge Life
 set "sllldir=%userprofile%\AppData\LocalLow\TerriVellmann"
 set "slrootdir=%gamerootdir%\SludgeLife"
 
+rem Delete pictures
+del /q %slrootdir%\PICS\*
+
 rem Delete savegame
 del %slrootdir%\save.txt
 
@@ -375,7 +386,17 @@ rem Delete local low directory
 rd /q /s %sllldir%
 
 rem Delete registry keys
-reg delete HKEY_CURRENT_USER\Software\TerriVellmann /f
+reg delete HKCU\Software\TerriVellmann /f
+
+rem SOMA
+
+set "somadir=%userprofile%\Documents\My Games\Soma"
+
+rem Delete the Soma folder. Files here include configuration, log files,
+rem an empty first start flag, profile folders which in turn contain savegames,
+rem user bindings and user settings
+
+rd /q /s "%somadir%"
 
 rem SWAT 4
 
@@ -392,15 +413,15 @@ del "%swat4sysdir%\User.ini"
 rem Delete log file
 del "%swat4sysdir%\Swat4.log"
 
-rem Syberia I
+rem Syberia
 
 set "syberiarootdir=%gamerootdir%\Syberia"
 set "syberiasavedir=%userprofile%\Documents\Syberia Saves"
 
-rem Delete Syberia I debug log file
+rem Delete Syberia debug log file
 del %syberiarootdir%\debug.log
 
-rem Delete Syberia I savegame directory
+rem Delete Syberia savegame directory
 rd /q /s "%syberiasavedir%"
 
 rem Syberia II
@@ -421,19 +442,16 @@ set "tclsavedir=%userprofile%\Saved Games\The Cat Lady"
 rem Delete savegame directory
 rd /q /s "%tclsavedir%"
 
-rem The Suicide of Rachel Foster
-
-set "daedalicdir=%localappdata%\Daedalic Entertainment GmbH"
-
-rem Delete Daedalic folder
-rd /q /s "%daedalicdir%"
-
 rem The Infectious Madness of Doctor Dekker
 
 set "timoddappdir=%appdata%\timodd"
+set "timoddrootdir=%gamerootdir%\The Infectious Madness of Doctor Dekker"
 
 rem Delete app data folder
 rd /q /s %timoddappdir%
+
+rem Delete init.json settings file
+del "%timoddrootdir%\resources\app\init.json"
 
 rem The Longest Journey
 
@@ -445,6 +463,13 @@ del "%tljrootdir%\preferences.ini"
 rem Delete savegame folders and savegames
 rd /q /s "%tljrootdir%\Save\01"
 del "%tljrootdir%\Save\01.txt"
+
+rem The Suicide of Rachel Foster
+
+set "daedalicdir=%localappdata%\Daedalic Entertainment GmbH"
+
+rem Delete Daedalic folder
+rd /q /s "%daedalicdir%"
 
 rem The Witcher
 
@@ -466,8 +491,8 @@ rem Uplink
 set "ulrootdir=%gamerootdir%\Uplink"
 
 rem Delete all files in users directory
-rem Here, there is a user file, a temporary user file backup, an options file
-rem and a debug log
+rem Files here contain user file, temporary user file backup, options file and
+rem a debug log
 del /q %ulrootdir%\users\*
 
 rem Delete all files in temporary user folder

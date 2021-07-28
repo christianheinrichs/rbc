@@ -30,7 +30,7 @@ Supported games
 - Painkiller
 - Quake III
 - Remothered - Tormented Fathers
-- Ritual of the Moon (Partial support, cleanup only)
+- Ritual of the Moon
 - S.T.A.L.K.E.R. - Clear Sky
 - Saints Row 3
 - Serious Sam: The First Encounter

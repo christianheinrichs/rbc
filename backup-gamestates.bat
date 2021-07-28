@@ -14,13 +14,9 @@ rem A Hand With Many Fingers
 
 set "ahwmfsavedir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers\saves"
 
-rem Create backup directory if it doesn’t exist
-echo A Hand With Many Fingers: Creating backup directory
-md "A Hand With Many Fingers\saves"
-
 rem Copy savegame file
 echo A Hand With Many Fingers: Backing up savegame file
-copy "%ahwmfsavedir%\autosave.save" "A Hand With Many Fingers\saves"
+xcopy /e /i /y "%ahwmfsavedir%" "A Hand With Many Fingers\saves"
 
 rem Export registry keys into file
 echo A Hand With Many Fingers: Backing up registry keys
@@ -29,70 +25,55 @@ reg export HKCU\SOFTWARE\Colestia "A Hand With Many Fingers\ahwmf.reg" /y
 echo A Hand With Many Fingers: Done.
 echo.
 
-rem Alan Wake - American Nightmare
+rem Alan Wake’s American Nightmare
 
 set "awandir=%userprofile%\Documents\Remedy\AmericanNightmare_GOG_Version"
 
-rem Create backup directory if it doesn’t exist
-echo Alan Wake - American Nightmare: Creating backup directory
-md "Alan Wake - American Nightmare\savegames"
+rem Back up config file (which contains Arcade score data), keybinds, resolution
+rem settings and savegames
+echo Alan Wake's American Nightmare: Backing up config file, keybinds, resolution settings, savegames
+xcopy /e /i /y %awandir% "Alan Wake's American Nightmare"
 
-rem Copy savegame file
-echo Alan Wake - American Nightmare: Backing up savegame file
-copy %awandir%\savegames\savegame_awns\savegame.aws "Alan Wake - American Nightmare\savegames\savegame_awns"
-
-rem Copy config file, which for example stores Arcade scores separately
-echo Alan Wake - American Nightmare: Backing up config file
-copy %awandir%\config "Alan Wake - American Nightmare"
-
-echo Alan Wake - American Nightmare: Done.
+echo Alan Wake's American Nightmare: Done.
 echo.
 
-rem Amnesia - A Machine for Pigs
+rem Amnesia: A Machine For Pigs
 
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
 
-rem Create backup directory if it doesn’t exist
-echo Amnesia - A Machine for Pigs: Creating backup directory
-md "Amnesia - A Machine for Pigs\New Player"
+rem Copy savegames, key bindings and user settings. Also, add the start flag. In
+rem addition to that, create folder structure
+rem TODO: Research /exclude parameter for log file exclusion
+echo Amnesia: A Machine For Pigs - Backing up profile folder, first start flag and main settings
+xcopy /e /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
 
-rem Copy main setting file
-echo Amnesia - A Machine for Pigs: Backing up main setting file
-copy "%aamfpdir%\main_settings.cfg" "Amnesia - A Machine for Pigs"
-
-rem Copy savegames, key bindings and user main_settings
-echo Amnesia - A Machine for Pigs: Backing up profile folder
-copy "%aamfpdir%\New Player\*" "Amnesia - A Machine for Pigs\New Player"
-
-echo Amnesia - A Machine for Pigs: Done.
+echo Amnesia: A Machine For Pigs - Done.
 echo.
 
-rem Amnesia - The Dark Descent
+rem Amnesia: The Dark Descent
 
-set "amnesiadir=%userprofile%\Documents\Amnesia\Main\New Player"
+set "amnesiadir=%userprofile%\Documents\Amnesia\Main"
 
-rem Create backup directory if it doesn’t exist
-echo Amnesia - The Dark Descent
-md "Amnesia - The Dark Descent\New Player"
+rem Copy savegames, key bindings and user settings. Also, add the start flag. In
+rem addition to that, create folder structure
+rem TODO: Research /exclude parameter for log file exclusion
+echo Amnesia: The Dark Descent - Backing up profile folder, first start flag and main settings
+xcopy /e /i /y "%amnesiadir%" "Amnesia - The Dark Descent"
 
-rem Copy savegame files from profile folder
-echo Amnesia - The Dark Descent: Backing up savegame files
-copy "%amnesiadir%\*.sav" "Amnesia - The Dark Descent"
-
-echo Amnesia - The Dark Descent: Done.
+echo Amnesia: The Dark Descent - Done.
 echo.
 
 rem Becherov
 
 set "becherovdir=%gamerootdir%\Becherov\Data\Player"
 
-rem Create backup directory if it doesn’t exist
-echo Becherov: Creating backup directory
-md Becherov
-
 rem Copy profile data file into Becherov folder
 echo Becherov: Backing up profile data
-copy %becherovdir%\profiles.dat Becherov
+xcopy /i /y %becherovdir%\*.dat Becherov
+
+rem Export settings into a file
+echo Becherov: Backing up registry keys
+reg export HKCU\SOFTWARE\Inputwish Becherov\becherov.reg /y
 
 echo Becherov: Done.
 echo.
@@ -102,18 +83,13 @@ rem Buddy Simulator 1984
 set "bs1984datadir=%userprofile%\Documents\Buddy Simulator 1984"
 set "bs1984rootdir=%gamerootdir%\Buddy Simulator 1984"
 
-rem Create backup directories
-echo Buddy Simulator 1984: Creating backup folders
-md "Buddy Simulator 1984\Buddy Simulator 1984"
-md "Buddy Simulator 1984\Memories"
-
 rem Copy new version of data folder
 echo Buddy Simulator 1984: Backing up current data folder
-xcopy /e /y "%bs1984datadir%" "Buddy Simulator 1984\Buddy Simulator 1984"
+xcopy /e /i /y "%bs1984datadir%" "Buddy Simulator 1984\DATA"
 
 rem Copy memories
 echo Buddy Simulator 1984: Backing up memories
-copy "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories\*" "Buddy Simulator 1984\Memories"
+xcopy /i /y "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories\*" "Buddy Simulator 1984\Memories"
 
 rem Export registry keys into file
 echo Buddy Simulator 1984: Backing up registry keys
@@ -126,13 +102,13 @@ rem Cave Story
 
 set "cavestorydir=%gamerootdir%\Cave_Story"
 
-rem Create backup directory if it doesn’t exist
-echo Cave Story: Creating backup directory
-md "Cave Story"
-
 rem Copy profile data from the game’s root directory into ‘Cave Story’ folder
 echo Cave Story: Backing up profile data
-copy %cavestorydir%\Profile.dat "Cave Story"
+xcopy /i /y %cavestorydir%\*.dat "Cave Story"
+
+rem Back up window.rect
+echo Cave Story: Backing up window.rect
+copy %cavestorydir%\*.rect "Cave Story"
 
 echo Cave Story: Done.
 echo.
@@ -141,28 +117,24 @@ rem Chaser
 
 set "chaserdir=%gamerootdir%\Chaser\Save"
 
-rem Create backup directory if it doesn’t exist
-echo Chase: Creating backup directory
-md "Chaser"
-
 rem Copy all savegame files into Chaser directory
 echo Chaser: Backing up savegames
-copy %chaserdir%\*.sav Chaser
+xcopy /i /y %chaserdir%\*.sav Chaser\Save
+
+rem Copy Users folder
+echo Chaser: Backing up user keybinds and settings
+xcopy /e /i /y %chaserdir%\Users Chaser\Users
 
 echo Chaser: Done.
 echo.
 
 rem Darkest Dungeon
 
-set "ddprofiledir=%userprofile%\Documents\Darkest\profile_0"
-
-rem Create backup directory if it doesn’t exist
-echo Darkest Dungeon: Creating backup directory
-md "Darkest Dungeon"
+set "dddir=%userprofile%\Documents\Darkest"
 
 rem Copy JSON files into ‘Darkest Dungeon’ directory
-echo Darkest Dungeon: Backing up JSON files
-copy %ddprofiledir%\*.json "Darkest Dungeon"
+echo Darkest Dungeon: Backing up profiles and persistent options file
+xcopy /e /i /y %dddir% "Darkest Dungeon"
 
 echo Darkest Dungeon: Done.
 echo.
@@ -171,13 +143,13 @@ rem else Heart.Break()
 
 set "ehbsavedir=%gamerootdir%\ElseHeartbreak\ElseHeartbreak_Data\Saves"
 
-rem Create backup directory if it doesn’t exist
-echo else Heart.Break(): Creating backup directory
-md "Else Heartbreak"
-
-rem Copy JSON savegame files into ‘Else Heartbreak’ folder
+rem Copy JSON savegame files into ‘Saves’ folder
 echo else Heart.Break(): Backing up JSON savegames folder
-copy %ehbsavedir%\*.json "Else Heartbreak"
+xcopy /i /y %ehbsavedir%\*.json "Else Heartbreak\Saves"
+
+rem Export registry keys. Settings are stored in them.
+echo else Heart.Break(): Backing up registry keys
+reg export HKCU\SOFTWARE\Miman "Else Heartbreak\else-heartbreak.reg" /y
 
 echo else Heart.Break(): Done.
 echo.
@@ -213,13 +185,9 @@ rem Grand Theft Auto III
 
 set "gta3dir=%userprofile%\Documents\GTA3 User Files"
 
-rem Create folder structure
-echo Grand Theft Auto III: Creating folder structure
-md "GTA III"
-
 rem Copy settings file and all savegames
 echo Grand Theft Auto III: Backing up settings file and savegames
-copy "%gta3dir%\*" "GTA III"
+xcopy /i /y "%gta3dir%\*" "GTA III"
 
 echo Grand Theft Auto III: Done.
 echo.
@@ -228,13 +196,9 @@ rem Grand Theft Auto: Vice City
 
 set "gtavcdir=%userprofile%\Documents\GTA Vice City User Files"
 
-rem Create folder structure
-echo Grand Theft Auto: Vice City - Creating folder structure
-md "GTA Vice City"
-
 rem Copy settings file and all savegames
 echo Grand Theft Auto: Vice City - Backing up settings file and savegames
-copy "%gtavcdir%\*" "GTA Vice City"
+xcopy /i /y "%gtavcdir%\*" "GTA Vice City"
 
 echo Grand Theft Auto: Vice City - Done.
 echo.
@@ -243,13 +207,9 @@ rem Grand Theft Auto: San Andreas
 
 set "gtasadir=%userprofile%\Documents\GTA San Andreas User Files"
 
-rem Create folder structure
-echo Grand Theft Auto: San Andreas - Creating folder structure
-md "GTA - San Andreas"
-
-rem Backup the whole folder including subdirectories
+rem Backup the whole folder with subdirectories
 echo Grand Theft Auto: San Andreas - Backing up user files
-xcopy /e /y "%gtasadir%" "GTA - San Andreas"
+xcopy /e /i /y "%gtasadir%" "GTA - San Andreas"
 
 echo Grand Theft Auto: San Andreas - Done.
 echo.
@@ -257,30 +217,30 @@ echo.
 rem Hacknet
 
 set "hacknetdir=%userprofile%\Documents\My Games\Hacknet\Accounts"
-
-rem Create folder structure
-echo Hacknet: Creating folder structure
-md "Hacknet"
+set "hnrootdir=%gamerootdir%\Hacknet"
 
 rem Copy Accounts.txt and XML savegame file into Hacknet directory
 echo Hacknet: Backing up Accounts.txt and XML savegame file
-copy "%hacknetdir%\*.txt" Hacknet
-copy "%hacknetdir%\*.xml" Hacknet
+xcopy /i /y "%hacknetdir%\*" Hacknet\Accounts
+
+rem Back up settings file
+echo Hacknet: Backing up settings file
+copy %hnrootdir%\Settings.txt Hacknet
 
 echo Hacknet: Done.
 echo.
 
 rem Hellblade - Senua’s Sacrifice
 
-set "hbsavedir=%userprofile%\AppData\Local\HellbladeGame\Saved\SaveGames"
-
-rem Create folder structure
-echo Hellblade - Senua's Sacrifice: Creating folder structure
-md "Hellblade - Senua's Sacrifice"
+set "hbsavedir=%userprofile%\AppData\Local\HellbladeGame\Saved"
 
 rem Copy savegame file into Hellblade folder
 echo Hellblade - Senua's Sacrifice: Backing up savegame file
-copy %hbsavedir%\*.sav "Hellblade - Senua's Sacrifice"
+xcopy /i /y %hbsavedir%\SaveGames\*.sav "Hellblade - Senua's Sacrifice\SaveGames"
+
+rem Copy user settings file
+echo Hellblade - Senua's Sacrifice: Backing up user settings
+copy %hbsavedir%\Config\WindowsNoEditor\GameUserSettings.ini "Hellblade - Senua's Sacrifice"
 
 echo Hellblade - Senua's Sacrifice: Done.
 echo.
@@ -295,7 +255,6 @@ md "Hotline Miami Original"
 
 rem Copy savegame files from the game’s root directory into
 rem ‘Hotline Miami Original’ folder
-
 echo Hotline Miami Original: Backing up savegame files
 copy "%hmrootdir%\achievements.dat" "Hotline Miami Original"
 copy "%hmrootdir%\mask.nfo" "Hotline Miami Original"
@@ -311,7 +270,7 @@ rem Inkslinger
 
 rem Create folder structure
 echo Inkslinger: Creating folder structure
-md "Inkslinger"
+md Inkslinger
 
 rem Export registry keys into file
 echo Inkslinger: Backing up registry keys
@@ -322,15 +281,15 @@ echo.
 
 rem Inside
 
-set "insidedir=%userprofile%\AppData\Roaming\Playdead\Inside"
-
-rem Create folder structure
-echo Inside: Creating folder structure
-md Inside
+set "insidedir=%appdata%\Playdead\Inside"
 
 rem Backup savegame files into Inside folder
 echo Inside: Backing up savegame file
-copy "%insidedir%\*.sav" Inside
+xcopy /i /y "%insidedir%\*.sav" Inside
+
+rem Back up registry keys. Settings are stored here
+echo Inside: Backing up registry keys
+reg export HKCU\SOFTWARE\Playdead Inside\inside.reg /y
 
 echo Inside: Done.
 echo.
@@ -339,17 +298,9 @@ rem Jotun - Valhalla Edition
 
 set "jvesavedir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
 
-rem Create folder structure
-echo Jotun - Valhalla Edition: Creating folder structure
-md "Jotun - Valhalla Edition"
-
-rem Backup savegame file
-echo Jotun - Valhalla Edition: Backing up savegame file
-copy "%jvesavedir%\JotunGames.sav" "Jotun - Valhalla Edition"
-
-rem Backup options file
-echo Jotun - Valhalla Edition: Backing up options file
-copy "%jvesavedir%\JotunOptions.sav" "Jotun - Valhalla Edition"
+rem Backup options and savegame file
+echo Jotun - Valhalla Edition: Backing up options and savegame file
+xcopy /i /y "%jvesavedir%\*.sav" "Jotun - Valhalla Edition"
 
 echo Jotun - Valhalla Edition: Done.
 echo.
@@ -358,13 +309,9 @@ rem Master Spy
 
 set "masterspydir=%localappdata%\Master Spy\Local Storage"
 
-rem Create folder structure
-echo Master Spy: Creating folder structure
-md "Master Spy"
-
 rem Copy all files from the game’s local storage into ‘Master Spy’ directory
 echo Master Spy: Backing up local storage
-copy "%masterspydir%\*" "Master Spy"
+xcopy /i /y "%masterspydir%\*" "Master Spy"
 
 echo Master Spy: Done.
 echo.
@@ -372,14 +319,15 @@ echo.
 rem Metro 2033 Redux
 
 set "m2033reduxdir=%userprofile%\Documents\4A Games\Metro Redux\2033"
-
-rem Create folder structure
-echo Metro 2033 Redux: Creating folder structure
-md "Metro 2033 Redux"
+set "m2033reduxappdatadir=%localappdata%\4A Games\Metro Redux\2033"
 
 rem Copy autosave file and player files
 echo Metro 2033 Redux: Backing up autosave and player files
-copy "%m2033reduxdir%\*" "Metro 2033 Redux"
+xcopy /i /y "%m2033reduxdir%\*" "Metro 2033 Redux\Savegames"
+
+rem Copy user keybinds and settings
+echo Metro 2033 Redux: Backing up keybinds and settings
+copy "%m2033reduxappdatadir%\*.cfg" "Metro 2033 Redux"
 
 echo Metro 2033 Redux: Done.
 echo.
@@ -388,32 +336,29 @@ rem Mirror’s Edge
 
 set "medir=%userprofile%\Documents\EA Games\Mirror's Edge\TdGame"
 
-rem Create folder structure
-echo Mirror's Edge: Creating folder structure
-md "Mirror's Edge"
-
 rem Copy savegame file from game’s savegame directory
 echo Mirror's Edge: Backing up .dat file
-copy "%medir%\Savefiles\*.dat" "Mirror's Edge"
+xcopy /i /y "%medir%\Savefiles\*.dat" "Mirror's Edge"
 
 rem Copy settings file and keybind file
 echo Mirror's Edge: Backing up configuration and keybinds file
-copy "%medir%\Config\*" "Mirror's Edge"
+copy "%medir%\Config\*.ini" "Mirror's Edge"
 
 echo Mirror's Edge: Done.
 echo.
 
 rem Mount & Blade Warband - Viking Conquest
 
+set "mbwdir=%userprofile%\Documents\Mount&Blade Warband"
 set "mbwvcsavedir=%userprofile%\Documents\Mount&Blade Warband Savegames\Viking Conquest"
-
-rem Create folder structure
-echo Mount and Blade: Warband - Viking Conquest: Creating folder structure
-md "Mount & Blade Warband - Viking Conquest"
 
 rem Backup savegame files
 echo Mount and Blade: Warband - Viking Conquest: Backing up savegame files
-copy "%mbwvcsavedir%\*.sav" "Mount & Blade Warband - Viking Conquest"
+xcopy /i /y "%mbwvcsavedir%\*.sav" "Mount & Blade Warband - Viking Conquest"
+
+rem Backup configuration files
+echo Mount and Blade: Warband - Viking Conquest: Backing up config file
+copy "%mbwdir%\*.txt" "Mount & Blade Warband - Viking Conquest"
 
 echo echo Mount and Blade: Warband - Viking Conquest: Done.
 echo.
@@ -422,47 +367,39 @@ rem Oddworld - New 'n' Tasty
 
 set "onntsavedir=%gamerootdir%\Oddworld - New 'n' Tasty\SaveGame"
 
-rem Create folder structure
-echo Oddworld - New 'n' Tasty: Creating folder structure
-md "Oddworld - New 'n' Tasty"
-
-rem Backup save slot files from the game’s savegame folder
-echo Oddworld - New 'n' Tasty: Backing up save slot files
-copy "%onntsavedir%\*.NnT" "Oddworld - New 'n' Tasty"
+rem Backup files from the game’s savegame folder
+echo Oddworld - New 'n' Tasty: Backing up savegames and settings
+xcopy /i /y "%onntsavedir%\*.NnT" "Oddworld - New 'n' Tasty"
 
 echo Oddworld - New 'n' Tasty: Done.
 echo.
 
 rem Outlast
 
-set "olsavedir=%userprofile%\Documents\My Games\Outlast\OLGame\SaveData"
-
-rem Create folder structure
-echo Outlast: Creating folder structure
-md Outlast
+set "oldir=%userprofile%\Documents\My Games\Outlast\OLGame"
 
 rem Backup Outlast profile
-echo Outlast: Backing up profile
-copy "%olsavedir%\*.olprofile" Outlast
+echo Outlast: Backing up profile and savegame files
+xcopy /i /y "%oldir%\SaveData\*" Outlast\SaveData
 
-rem Backup savegame files
-echo Outlast: Backing up savegame files
-copy "%olsavedir%\*.sav" Outlast
+rem Backup config folder
+echo Outlast: Backing up config folder
+xcopy /e /i /y "%oldir%\Config" Outlast\Config
 
 echo Outlast: Done.
 echo.
 
 rem Painkiller
 
-set "pksavedir=%gamerootdir%\Painkiller Black\SaveGames"
-
-rem Create folder structure
-echo Painkiller: Creating folder structure
-md Painkiller
+set "pkdir=%gamerootdir%\Painkiller Black"
 
 rem Copy all savegame files and automatically create directories
 echo Painkiller: Backing up savegame files and creating directories
-xcopy /e /y "%pksavedir%\*" Painkiller
+xcopy /e /i /y "%pkdir%\SaveGames" Painkiller\SaveGames
+
+rem Back up config file
+echo Painkiller: Backing up config file
+copy "%pkdir%\Bin\*.ini" Painkiller
 
 echo Painkiller: Done.
 echo.
@@ -471,13 +408,9 @@ rem Quake III
 
 set "q3rootdir=%gamerootdir%\Quake III Arena"
 
-rem Create folder structure
-echo Quake III: Creating folder structure
-md "Quake III"
-
 rem Backup config files from baseq3 directory
 echo Quake III: Backing up config files
-copy "%q3rootdir%\baseq3\*.cfg" "Quake III"
+xcopy /i /y "%q3rootdir%\baseq3\*.cfg" "Quake III"
 
 echo Quake III: Done.
 echo.
@@ -486,29 +419,30 @@ rem Remothered - Tormented Fathers
 
 set "rtfsavedir=%localappdata%\Remothered\Saved\SaveGames"
 
-rem Create folder structure
-echo Remothered - Tormented Fathers: Creating folder structure
-md "Remothered - Tormented Fathers"
-
 rem Backup all savegame files
-echo Remothered - Tormented Fathers: Backing up savegame files
-copy %rtfsavedir%\*.sav "Remothered - Tormented Fathers"
+echo Remothered - Tormented Fathers: Backing up savegames and settings
+xcopy /i /y %rtfsavedir%\*.sav "Remothered - Tormented Fathers"
 
 echo Remothered - Tormented Fathers: Done.
 echo.
+
+rem Ritual of the Moon
+
+rem Create folder structure
+echo Ritual of the Moon: Creating folder structure
+md "Ritual of the Moon"
+
+rem Backup registry keys
+echo Ritual of the Moon: Backing up progress and settings
+reg export "HKCU\SOFTWARE\Kara Stone" "Ritual of the Moon\rotm.reg" /y
 
 rem S.T.A.L.K.E.R. Clear Sky
 
 set "stalkercsdir=%userprofile%\Documents\stalke~1"
 
-rem Create folder structure
-echo S.T.A.L.K.E.R. Clear Sky: Creating folder structure
-md "S.T.A.L.K.E.R. Clear Sky\savedgames"
-
 rem Backup savegame files
 echo S.T.A.L.K.E.R. Clear Sky: Backing up savegame textures and saves
-copy %stalkercsdir%\savedgames\*.dds "S.T.A.L.K.E.R. Clear Sky\savedgames"
-copy %stalkercsdir%\savedgames\*.sav "S.T.A.L.K.E.R. Clear Sky\savedgames"
+xcopy /i /y %stalkercsdir%\savedgames\* "S.T.A.L.K.E.R. Clear Sky\savedgames"
 
 rem Backup user keybinds and settings
 echo S.T.A.L.K.E.R. Clear Sky: Backing up user.ltx file
@@ -519,15 +453,11 @@ echo.
 
 rem Saints Row 3
 
-set "sr3dir=%userprofile%\AppData\Local\Saints Row The Third"
-
-rem Create folder structure
-echo Saints Row 3: Creating folder structure
-md "Saints Row 3"
+set "sr3dir=%localappdata%\Saints Row The Third"
 
 rem Backup savegame files
 echo Saints Row 3: Backing up savegame files
-copy "%sr3dir%\savedir.sr3d_pc" "Saints Row 3"
+xcopy /i /y "%sr3dir%\savedir.sr3d_pc" "Saints Row 3"
 copy "%sr3dir%\*.sr3s_pc" "Saints Row 3"
 copy "%sr3dir%\sr3def_profile" "Saints Row 3"
 
@@ -538,49 +468,54 @@ rem Serious Sam: The First Encounter
 
 set "sstfedir=%gamerootdir%\Serious Sam The First Encounter"
 
-rem Create folder structure
-echo Serious Sam: The First Encounter: Creating folder structure
-md "Serious Sam - The First Encounter\Controls"
-md "Serious Sam - The First Encounter\Players"
-md "Serious Sam - The First Encounter\SaveGame\Player0\Quick"
-md "Serious Sam - The First Encounter\Scripts"
+rem Copy control files
+echo Serious Sam: The First Encounter - Backing up control files
+xcopy /i /y "%sstfedir%\Controls\*.ctl" "Serious Sam - The First Encounter\Controls"
 
-rem Copy Controls file for player slot 0
-echo Serious Sam: The First Encounter: Backing up Controls file
-copy "%sstfedir%\Controls\Controls0.ctl" "Serious Sam - The First Encounter\Controls"
+rem Copy .plr files from Players directory
+echo Serious Sam: The First Encounter - Backing up .plr files
+xcopy /i /y "%sstfedir%\Players\*.plr" "Serious Sam - The First Encounter\Players"
 
-rem Copy .plr file from Players directory
-echo Serious Sam: The First Encounter: Backing up .plr file
-copy "%sstfedir%\Players\Player0.plr" "Serious Sam - The First Encounter\Players"
-
-rem Copy all files from player profile directory
-echo Serious Sam: The First Encounter: Backing up savegame files
-copy "%sstfedir%\SaveGame\Player0\*" "Serious Sam - The First Encounter\SaveGame\Player0"
-
-rem Copy all files from player profile quicksave directory
-echo Serious Sam: The First Encounter: Backing up quicksave files
-copy "%sstfedir%\SaveGame\Player0\Quick\*" "Serious Sam - The First Encounter\SaveGame\Player0\Quick"
+rem Copy savegame files
+echo Serious Sam: The First Encounter - Backing up savegame files
+xcopy /e /i /y "%sstfedir%\SaveGame" "Serious Sam - The First Encounter\SaveGame"
 
 rem Copy persistent symbols file, which contains setting values
-echo Serious Sam: The First Encounter: Backing up persistent symbols file
+echo Serious Sam: The First Encounter - Backing up persistent symbols file
+md "Serious Sam - The First Encounter\Scripts"
 copy "%sstfedir%\Scripts\PersistentSymbols.ini" "Serious Sam - The First Encounter\Scripts"
 
-echo Serious Sam: The First Encounter: Done.
+echo Serious Sam: The First Encounter - Done.
 echo.
 
 rem Sludge Life
 
 set "slrootdir=%gamerootdir%\SludgeLife"
 
-rem Create folder structure
-echo Sludge Life: Creating folder structure
-md "Sludge Life"
+rem Back up pictures
+echo Sludge Life: Backing up pictures
+xcopy /e /i /y %slrootdir%\PICS "Sludge Life\PICS"
 
 rem Backup savegame file from the game’s root directory
 echo Sludge Life: Backing up savegame file
 copy %slrootdir%\save.txt "Sludge Life"
 
+rem Backup registry keys. Settings are stored here
+echo Sludge Life: Backing up registry keys
+reg export HKCU\SOFTWARE\TerriVellmann "Sludge Life\sludgelife.reg" /y
+
 echo Sludge Life: Done.
+echo.
+
+rem SOMA
+
+set "somadir=%userprofile%\Documents\My Games\Soma"
+
+rem Backup Soma\Main folder
+echo SOMA: Backing up profile folder, first start flag and main settings
+xcopy /e /i /y "%somadir%" "SOMA"
+
+echo SOMA: Done.
 echo.
 
 rem SWAT 4
@@ -606,32 +541,24 @@ copy "%swat4sysdir%\User.ini" "SWAT 4"
 echo SWAT 4: Done.
 echo.
 
-rem Syberia I
+rem Syberia
 
 set "syberiasavedir=%userprofile%\Documents\Syberia Saves"
 
-rem Create folder structure
-echo Syberia I: Creating folder structure
-md "Syberia"
+rem Backup config and savegame files
+echo Syberia: Backing up configuration and savegames
+xcopy /i /y "%syberiasavedir%\*" Syberia
 
-rem Backup savegame files
-echo Syberia I: Backing up savegame files
-copy "%syberiasavedir%\*.sav" Syberia
-
-echo Syberia I: Done.
+echo Syberia: Done.
 echo.
 
 rem Syberia II
 
 set "syb2savedir=%userprofile%\Documents\Syberia 2 Saves"
 
-rem Create folder structure
-echo Syberia II: Creating folder structure
-md "Syberia 2"
-
-rem Backup savegame files
-echo Syberia II: Backing up savegame files
-copy "%syb2savedir%\*.sav" "Syberia 2"
+rem Backup config and savegame files
+echo Syberia II: Backing up configuration and savegames
+xcopy /i /y "%syb2savedir%\*" "Syberia 2"
 
 echo Syberia II: Done.
 echo.
@@ -640,28 +567,25 @@ rem The Cat Lady
 
 set "tclsavedir=%userprofile%\Saved Games\The Cat Lady"
 
-rem Create folder structure
-echo The Cat Lady: Creating folder structure
-md "The Cat Lady"
-
-rem Copy savegame files from savegame folder
-echo The Cat Lady: Backing up savegame files
-copy "%tclsavedir%\agssave.*" "The Cat Lady"
+rem Copy settings and savegame files
+echo The Cat Lady: Backing up settings and savegames
+xcopy /i /y "%tclsavedir%\*" "The Cat Lady"
 
 echo The Cat Lady: Done.
 echo.
 
 rem The Infectious Madness of Doctor Dekker
 
+set "timoddrootdir=%gamerootdir%\The Infectious Madness of Doctor Dekker"
 set "timoddsavedir=%userprofile%\AppData\Roaming\timodd"
-
-rem Create folder structure
-echo The Infectious Madness of Doctor Dekker: Creating folder structure
-md "The Infectious Madness of Doctor Dekker"
 
 rem Copy savegame files from the game’s savegame folder
 echo The Infectious Madness of Doctor Dekker: Backing up JSON savegame files
-copy %timoddsavedir%\*.json "The Infectious Madness of Doctor Dekker"
+xcopy /i /y %timoddsavedir%\*.json "The Infectious Madness of Doctor Dekker"
+
+rem Copy init.json file
+echo The Infectious Madness of Doctor Dekker: Backing up settings
+copy "%timoddrootdir%\resources\app\init.json" "The Infectious Madness of Doctor Dekker\settings"
 
 echo The Infectious Madness of Doctor Dekker: Done.
 echo.
@@ -670,17 +594,9 @@ rem The Longest Journey
 
 set "tljrootdir=%gamerootdir%\The Longest Journey"
 
-rem Create folder structure
-echo The Longest Journey: Creating folder structure
-md "The Longest Journey"
-
-rem Copy profile data from game folder into this folder
-echo The Longest Journey: Copying plaintext profile data
-copy "%tljrootdir%\Save\01.txt" "The Longest Journey"
-
-rem Copy savegame data from game folder into this folder
-echo The Longest Journey: Copying savegame data
-copy "%tljrootdir%\Save\01\*" "The Longest Journey\01"
+rem Backup savegame index, profile data, savegames, thumbnails
+echo The Longest Journey: Backing up savegame index, profile data, savegames and thumbnails
+xcopy /e /i /y "%tljrootdir%\Save" "The Longest Journey\Save"
 
 rem Copy game settings
 echo The Longest Journey: Backing up game settings
@@ -691,15 +607,15 @@ echo.
 
 rem The Suicide of Rachel Foster
 
-set "tsorfsavedir=%localappdata%\Daedalic Entertainment GmbH\The Suicide of Rachel Foster\Saved\SaveGames"
+set "tsorfsavedir=%localappdata%\Daedalic Entertainment GmbH\The Suicide of Rachel Foster\Saved"
 
-rem Create folder structure
-echo The Suicide of Rachel Foster: Creating folder structure
-md "The Suicide of Rachel Foster"
+rem Backup savegame files
+echo The Suicide of Rachel Foster: Backing up savegame file and game options
+xcopy /i /y "%tsorfsavedir%\SaveGames\*.sav" "The Suicide of Rachel Foster\SaveGames"
 
-rem Backup savegame file
-echo The Suicide of Rachel Foster: Backing up savegame file
-copy "%tsorfsavedir%\OverlookSave.sav" "The Suicide of Rachel Foster"
+rem Backup user settings
+echo The Suicide of Rachel Foster: Backing up user settings
+copy "%tsorfsavedir%\Config\WindowsNoEditor\GameUserSettings.ini" "The Suicide of Rachel Foster"
 
 echo The Suicide of Rachel Foster: Done.
 echo.
@@ -708,13 +624,9 @@ rem The Witcher
 
 set "tw1savedir=%userprofile%\Documents\The Witcher\saves"
 
-rem Create folder structure
-echo The Witcher: Creating folder structure
-md "The Witcher"
-
 rem Backup savegame files
 echo The Witcher: Backing up savegame files
-copy "%tw1savedir%\*" "The Witcher"
+xcopy /i /y "%tw1savedir%\*.TheWitcherSave" "The Witcher"
 
 rem Export registry keys into file
 echo The Witcher: Backing up registry keys
@@ -727,17 +639,13 @@ rem Uplink
 
 set "uluserdir=%gamerootdir%\Uplink\users"
 
-rem Create folder structure
-echo Uplink: Creating folder structure
-md Uplink
+rem Copy user files from Uplink’s users directory
+echo Uplink: Backing up user files
+xcopy /i /y %uluserdir%\*.usr Uplink
 
 rem Copy options file from Uplink’s users directory
 echo Uplink: Backing up options file
 copy %uluserdir%\options Uplink
-
-rem Copy user files from Uplink’s users directory
-echo Uplink: Backing up user files
-copy %uluserdir%\*.usr Uplink
 
 echo Uplink: Done.
 echo.
@@ -746,13 +654,9 @@ rem Vampire’s Dawn 2
 
 set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
 
-rem Create folder structure
-echo Vampire's Dawn 2: Creating folder structure
-md "Vampires Dawn 2"
-
 rem Copy savegame files
 echo Vampire's Dawn 2: Backing up savegames
-copy %vd2rootdir%\*.lsd "Vampires Dawn 2"
+xcopy /i /y %vd2rootdir%\*.lsd "Vampires Dawn 2"
 
 echo Vampire's Dawn 2: Done.
 echo.
