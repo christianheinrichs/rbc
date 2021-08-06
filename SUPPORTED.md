@@ -2,16 +2,23 @@ Supported games
 ===============
 
 - A Hand With Many Fingers
-- Alan Wake - American Nightmare (GOG version)
+- Alan Wake’s American Nightmare (GOG version)
 - Amnesia - A Machine for Pigs
 - Amnesia - The Dark Descent
+- ANNO 1602
 - Becherov
+- BioShock
 - Buddy Simulator 1984
 - Cave Story
 - Chaser
 - Darkest Dungeon
+- Diablo
+- Diablo II
+- Die Völker
 - else Heart.Break()
 - Enigmatis - The Ghosts of Maple Creek
+- Gothic
+- Gothic II
 - Grand Theft Auto III
 - Grand Theft Auto: San Andreas
 - Grand Theft Auto: Vice City
@@ -22,12 +29,18 @@ Supported games
 - Inside
 - Jotun - Valhalla Edition
 - Master Spy
+- Metal Gear Solid
 - Metro 2033 Redux
 - Mirror’s Edge
 - Mount & Blade: Warband - Viking Conquest
+- Oddworld: Abe’s Oddysee
+- Oddworld: Abe’s Exoddus
 - Oddworld - New 'n' Tasty
 - Outlast
 - Painkiller
+- Postal Plus
+- Postal 2
+- Quake II
 - Quake III
 - Remothered - Tormented Fathers
 - Ritual of the Moon
@@ -36,10 +49,12 @@ Supported games
 - Serious Sam: The First Encounter
 - Sludge Life
 - SOMA
+- SPY Fox - Dry Cereal
 - SWAT 4
 - Syberia I
 - Syberia II
 - The Cat Lady
+- The Elder Scrolls III: Morrowind
 - The Infectious Madness of Doctor Dekker
 - The Longest Journey
 - The Suicide of Rachel Foster

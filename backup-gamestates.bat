@@ -4,7 +4,6 @@ rem This script should backup profiles, settings and savegames, which are herein
 rem collectively referred to as gamestate.
 
 rem Write the path to your game directory here
-
 set "gamerootdir="
 
 echo Gamestate backup script running
@@ -63,6 +62,25 @@ xcopy /e /i /y "%amnesiadir%" "Amnesia - The Dark Descent"
 echo Amnesia: The Dark Descent - Done.
 echo.
 
+rem ANNO 1602
+
+set "anno1602rootdir=%gamerootdir%\ANNO1602"
+
+rem Backup savegames
+echo ANNO 1602: Backing up savegames
+xcopy /e /i /y %anno1602rootdir%\Savegame "ANNO 1602\Savegame"
+
+rem Backup Game.dat
+echo ANNO 1602: Backing up Game.dat file
+copy %anno1602rootdir%\Game.dat "ANNO 1602"
+
+rem Backup registry keys
+echo ANNO 1602: Backing up registry keys
+reg export HKCU\SOFTWARE\ANNO1602 "ANNO 1602\anno1602.reg" /y
+
+echo ANNO 1602: Done.
+echo.
+
 rem Becherov
 
 set "becherovdir=%gamerootdir%\Becherov\Data\Player"
@@ -76,6 +94,22 @@ echo Becherov: Backing up registry keys
 reg export HKCU\SOFTWARE\Inputwish Becherov\becherov.reg /y
 
 echo Becherov: Done.
+echo.
+
+rem BioShock
+
+set "bs1dir=%appdata%\Bioshock"
+set "bs1sgdir=%userprofile%\Documents\Bioshock\SaveGames"
+
+rem Backup savegames
+echo BioShock: Backing up savegames
+xcopy /e /i /y %bs1sgdir% "BioShock\SaveGames"
+
+rem Backup memory file, configuration and keybinds
+echo BioShock: Backing up memory file, configuration and keybinds
+xcopy /e /i /y %bs1dir% "BioShock\AppData"
+
+echo BioShock: Done.
 echo.
 
 rem Buddy Simulator 1984
@@ -139,6 +173,70 @@ xcopy /e /i /y %dddir% "Darkest Dungeon"
 echo Darkest Dungeon: Done.
 echo.
 
+rem Diablo (Classic)
+
+set "diablorootdir=%gamerootdir%\Diablo"
+
+rem Backup savegame files
+echo Diablo (Classic): Backing up savegame files
+xcopy /i /y %diablorootdir%\*.sv Diablo\Classic
+
+echo Diablo (Classic): Done.
+echo.
+
+rem Diablo
+
+rem Backup savegame files
+echo Diablo: Backing up savegame files
+xcopy /i /y %diablorootdir%\dx\*.sv Diablo\DX
+
+rem Backup DX configuration
+echo Diablo: Backing up DX configuration
+copy %diablorootdir%\dx\dxcfg.ini Diablo\DX
+
+echo Diablo: Done.
+echo.
+
+rem Diablo: Hellfire
+
+rem Backup savegame files
+echo Diablo: Hellfire - Backing up savegame files
+xcopy /i /y %diablorootdir%\hellfire\*.hsv Diablo\Hellfire
+
+echo Diablo: Hellfire - Done.
+echo.
+
+rem Diablo II
+
+set "d2rootdir=%gamerootdir%\Diablo II"
+set "d2sgdir=%userprofile%\Saved Games\Diablo II"
+
+rem Backup savegame files
+echo Diablo II: Backing up savegame files
+xcopy /e /i /y "%d2sgdir%" "Diablo II\Saved Games"
+
+rem Backup default.key file
+echo Diablo II: Backing up default.key file
+copy "%d2rootdir%\default.key" "Diablo II"
+
+rem Backup registry keys
+echo Diablo II: Backing up registry keys
+reg export "HKCU\SOFTWARE\Blizzard Entertainment\Diablo II" "Diablo II\d2.reg" /y
+
+echo Diablo II: Done.
+echo.
+
+rem Die Völker
+
+set "dvdir=%gamerootdir%\Alien Nations"
+
+rem Backup configuration and savegame files
+echo Die Voelker: Backing up configuration and savegame files
+xcopy /e /i /y "%dvdir%\Savegames" "Die Voelker\Savegames"
+
+echo Die Voelker: Done.
+echo.
+
 rem else Heart.Break()
 
 set "ehbsavedir=%gamerootdir%\ElseHeartbreak\ElseHeartbreak_Data\Saves"
@@ -179,6 +277,36 @@ echo Enigmatis - The Ghosts of Maple Creek: Backing up savegame file
 copy "%enigmatisdir%\Save_01.cub" "Enigmatis - The Ghosts of Maple Creek"
 
 echo Enigmatis - The Ghosts of Maple Creek: Done.
+echo.
+
+rem Gothic
+
+set "g1rootdir=%gamerootdir%\Gothic"
+
+rem Backup savegames
+echo Gothic: Backing up savegames
+xcopy /e /i /y %g1rootdir%\Saves Gothic\Saves
+
+rem Backup configuration file
+echo Gothic: Backing up configuration file
+xcopy /i /y %g1rootdir%\system\*.INI Gothic\system
+
+echo Gothic: Done.
+echo.
+
+rem Gothic II
+
+set "g2rootdir=%gamerootdir%\Gothic II Gold"
+
+rem Backup savegames
+echo Gothic II: Backing up savegames
+xcopy /e /i /y "%g2rootdir%\Saves" "Gothic II\Saves"
+
+rem Backup configuration file
+echo Gothic II: Backing up configuration file
+xcopy /i /y "%g2rootdir%\system\*.INI" "Gothic II\system"
+
+echo Gothic II: Done.
 echo.
 
 rem Grand Theft Auto III
@@ -316,6 +444,37 @@ xcopy /i /y "%masterspydir%\*" "Master Spy"
 echo Master Spy: Done.
 echo.
 
+rem Metal Gear Solid
+
+set "mgsdir=%gamerootdir%\Metal Gear Solid"
+
+rem Backup savegames
+echo Metal Gear Solid: Backing up savegames
+xcopy /e /i /y "%mgsdir%\SavedGames" "Metal Gear Solid\SavedGames"
+
+rem Backup configuration files
+echo Metal Gear Solid: Backing up MGS configuration files
+xcopy /i /y "%mgsdir%\*.cfg" "Metal Gear Solid"
+
+rem Backup DirectX configuration
+echo Metal Gear Solid: Backing up DirectX configuration
+copy "%mgsdir%\dxcfg.ini" "Metal Gear Solid"
+
+rem Backup VR records
+echo Metal Gear Solid: Backing up VR records
+copy "%mgsdir%\records.vr" "Metal Gear Solid"
+
+rem Backup photos
+echo Metal Gear Solid: Backing up photos
+xcopy /e /i /y "%mgsdir%\PHOTOS" "Metal Gear Solid\PHOTOS"
+
+rem Backup registry keys
+echo Metal Gear Solid: Backing up registry keys
+reg export "HKCU\SOFTWARE\Metal Gear Solid" "Metal Gear Solid\mgs.reg" /y
+
+echo Metal Gear Solid: Done.
+echo.
+
 rem Metro 2033 Redux
 
 set "m2033reduxdir=%userprofile%\Documents\4A Games\Metro Redux\2033"
@@ -363,6 +522,36 @@ copy "%mbwdir%\*.txt" "Mount & Blade Warband - Viking Conquest"
 echo echo Mount and Blade: Warband - Viking Conquest: Done.
 echo.
 
+rem Oddworld: Abe’s Oddysee
+
+set "oaodir=%gamerootdir%\Abes Oddysee"
+
+rem Backup savegames
+echo Oddworld: Abe's Oddysee - Backing up savegames
+xcopy /i /y "%oaodir%\*.sav" "Oddworld - Abe's Oddysee"
+
+rem Backup configuration
+echo Oddworld: Abe's Oddysee - Backing up configuration
+copy "%oaodir%\abe.ini" "Oddworld - Abe's Oddysee"
+
+echo Oddworld: Abe's Oddysee - Done.
+echo.
+
+rem Oddworld: Abe’s Exoddus
+
+set "oaedir=%gamerootdir%\Abes Exoddus"
+
+rem Backup savegames
+echo Oddworld: Abe's Exoddus - Backing up savegames
+xcopy /i /y "%oaedir%\*.sav" "Oddworld - Abe's Exoddus"
+
+rem Backup configuration
+echo Oddworld: Abe's Exoddus - Backing up configuration
+copy "%oaedir%\abe2.ini" "Oddworld - Abe's Exoddus"
+
+echo Oddworld: Abe's Exoddus - Done.
+echo.
+
 rem Oddworld - New 'n' Tasty
 
 set "onntsavedir=%gamerootdir%\Oddworld - New 'n' Tasty\SaveGame"
@@ -401,7 +590,95 @@ rem Back up config file
 echo Painkiller: Backing up config file
 copy "%pkdir%\Bin\*.ini" Painkiller
 
+rem Back up registry keys
+echo Painkiller: Backing up registry keys
+reg export HKEY_CURRENT_USER\SOFTWARE\PeopleCanFly Painkiller\painkiller-1.reg /y
+reg export HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly Painkiller\painkiller-2.reg /y
+
 echo Painkiller: Done.
+echo.
+
+rem Postal Plus
+
+set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+
+rem Back up savegames and highscores
+echo Postal Plus: Backing up savegames and highscores
+xcopy /e /i /y "%p1dir%\res\SaveGame" "Postal Plus\SaveGame"
+
+rem Backup configuration
+echo Postal Plus: Backing up configuration
+copy "%p1dir%\*.ini" "Postal Plus"
+
+echo Postal Plus: Done.
+echo.
+
+rem Postal 2
+
+set "p2dir=%gamerootdir%\Postal2STP"
+
+rem Backup savegames
+echo Postal 2: Backing up savegames
+xcopy /e /i /y "%p2dir%\Save" "Postal 2\Save"
+
+rem Backup configuration, keybinds and savegame information
+echo Postal 2: Backing up configuration, keybinds and savegame information
+md "Postal 2\System"
+copy "%p2dir%\System\Postal2.ini" "Postal 2\System"
+copy "%p2dir%\System\SavedGameInfo.ini" "Postal 2\System"
+copy "%p2dir%\System\User.ini" "Postal 2\System"
+
+echo Postal 2: Done.
+echo.
+
+rem Quake II
+
+set "q2rootdir=%gamerootdir%\Quake II"
+
+rem Backup savegames
+echo Quake II: Backing up savegames
+xcopy /e /i /y "%q2rootdir%\baseq2\save" "Quake II\Base\save"
+
+rem Backup keybinds and configuration file
+echo Quake II: Backing up keybinds and configuration
+copy "%q2rootdir%\baseq2\*.cfg" "Quake II\Base"
+
+echo Quake II: Done.
+echo.
+
+rem Quake II mission pack: The Reckoning
+
+rem Backup savegames
+echo Quake II mission pack: The Reckoning - Backing up savegames
+xcopy /e /i /y "%q2rootdir%\xatrix\save" "Quake II\The Reckoning\save"
+
+rem Backup keybinds and configuration file
+echo Quake II mission pack: The Reckoning - Backing up keybinds and configuration
+copy "%q2rootdir%\xatrix\*.cfg" "Quake II\The Reckoning"
+
+echo Quake II mission pack: The Reckoning - Done.
+echo.
+
+rem Quake II mission pack 2: Ground Zero
+
+rem Backup savegames
+echo Quake II mission pack 2: Ground Zero - Backing up savegames
+xcopy /e /i /y "%q2rootdir%\rogue\save" "Quake II\Ground Zero\save"
+
+rem Backup keybinds and configuration file
+echo Quake II mission pack 2: Ground Zero - Backing up keybinds and configuration
+copy "%q2rootdir%\rogue\*.cfg" "Quake II\Ground Zero"
+
+echo Quake II mission pack 2: Ground Zero - Done.
+echo.
+
+rem Quake II - The Eraser Bot
+
+rem Backup keybinds and configuration file
+echo Quake II - The Eraser Bot: Backing up keybinds and configuration
+xcopy /i /y "%q2rootdir%\Eraser\*.cfg" "Quake II\The Eraser Bot"
+
+echo Quake II - The Eraser Bot:  Done.
 echo.
 
 rem Quake III
@@ -518,6 +795,17 @@ xcopy /e /i /y "%somadir%" "SOMA"
 echo SOMA: Done.
 echo.
 
+rem SPY Fox - Dry Cereal
+
+set "sfdrsavedir=C:\hegames"
+
+rem Backup savegames
+echo SPY Fox - Dry Cereal: Backing up savegames
+xcopy /i /y %sfdrsavedir%\* "SPY Fox - Dry Cereal"
+
+echo SPY Fox - Dry Cereal: Done.
+echo.
+
 rem SWAT 4
 
 set "swat4sysdir=%gamerootdir%\SWAT 4\Content\System"
@@ -572,6 +860,29 @@ echo The Cat Lady: Backing up settings and savegames
 xcopy /i /y "%tclsavedir%\*" "The Cat Lady"
 
 echo The Cat Lady: Done.
+echo.
+
+rem The Elder Scrolls III: Morrowind
+
+set "tes3rootdir=%gamerootdir%\Morrowind"
+
+rem Backup savegames
+echo The Elder Scrolls III: Morrowind - Backing up savegames
+xcopy /e /i /y %tes3rootdir%\Saves Morrowind\Saves
+
+rem Backup configuration file
+echo The Elder Scrolls III: Morrowind - Backing up configuration file
+copy %tes3rootdir%\Morrowind.ini Morrowind
+
+rem Backup journal
+echo The Elder Scrolls III: Morrowind - Backing up journal
+copy %tes3rootdir%\Journal.htm Morrowind
+
+rem Backup registry keys
+echo The Elder Scrolls III: Morrowind - Backing up registry keys
+reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks" Morrowind\morrowind.reg /y
+
+echo The Elder Scrolls III: Morrowind - Done.
 echo.
 
 rem The Infectious Madness of Doctor Dekker

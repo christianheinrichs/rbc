@@ -4,7 +4,6 @@ rem This script takes care of traces left behind by the games listed in the
 rem SUPPORTED.md file.
 
 rem Write the path to your game directory here
-
 set "gamerootdir="
 
 rem A Hand With Many Fingers
@@ -35,6 +34,19 @@ rem user bindings and user settings
 
 rd /q /s %amnesiadir%
 
+rem ANNO 1602
+
+set "anno1602rootdir=%gamerootdir%\ANNO1602"
+
+rem Delete Game.dat file
+del %anno1602rootdir%\Game.dat
+
+rem Delete savegames
+del /q %anno1602rootdir%\Savegame\*
+
+rem Delete registry keys
+reg delete HKCU\SOFTWARE\ANNO1602 /f
+
 rem Becherov
 
 set "becherovdir=%gamerootdir%\Becherov"
@@ -44,6 +56,20 @@ del %becherovdir%\Data\Player\profiles.dat
 
 rem Delete all registry data for Becherov
 reg delete HKCU\Software\Inputwish /f
+
+rem BioShock
+
+set "bs1dir=%appdata%\Bioshock"
+set "bs1sgdir=%userprofile%\Documents\Bioshock"
+
+rem Delete savegame directory
+rd /q /s %bs1sgdir%
+
+rem Delete Bioshock folder located in AppData
+echo BioShock: Deleting Bioshock AppData folder
+rd /q /s %bs1dir%
+
+echo.
 
 rem Buddy Simulator 1984
 
@@ -94,6 +120,69 @@ rd /q /s %darkestdungeondir%
 rem Delete registry keys
 reg delete "HKCU\Software\Red Hook Studios" /f
 
+rem Diablo (Classic)
+
+set "diablorootdir=%gamerootdir%\Diablo"
+
+rem Delete savegames
+del %diablorootdir%\*.sv
+
+rem Delete log files
+del %diablorootdir%\*.log
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Blizzard Entertainment\Diablo" /f
+
+rem Diablo
+
+rem Delete savegames
+del %diablorootdir%\dx\*.sv
+
+rem Delete DX configuration
+del %diablorootdir%\dx\dxcfg.ini
+
+rem Diablo: Hellfire
+
+rem Delete savegames
+del %diablorootdir%\hellfire\*.hsv
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Blizzard Entertainment" /f
+
+rem Diablo II
+
+set "d2dir=%userprofile%\Documents\Diablo II"
+set "d2rootdir=%gamerootdir%\Diablo II"
+set "d2sgdir=%userprofile%\Saved Games\Diablo II"
+
+rem Delete savegame directory
+rd /q /s "%d2sgdir%"
+
+rem Delete Diablo II directory located in the ‘Documents’ folder
+rd /q /s "%d2dir%"
+
+rem Delete Battle.net log
+del "%d2rootdir%\BnetLog.txt"
+
+rem Delete default.key file
+del "%d2rootdir%\default.key"
+
+rem Delete Battle.net updater log
+del "%d2rootdir%\bnupdate.log"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Blizzard Entertainment\Diablo II" /f
+
+rem Die Völker
+
+set "dvdir=%gamerootdir%\Alien Nations"
+
+rem Delete configuration and savegame files
+del /q "%dvdir%\Savegames\*"
+
+echo Die Voelker: Done.
+echo.
+
 rem else Heart.Break()
 
 set "ehbrootdir=%gamerootdir%\ElseHeartbreak"
@@ -114,21 +203,56 @@ set "amdir=%appdata%\Artifex Mundi\"
 rem Delete Artifex Mundi directory
 rd /q /s "%amdir%"
 
-rem GTA III
+rem Gothic
+
+set "g1rootdir=%gamerootdir%\Gothic"
+
+rem Delete installation log
+del %g1rootdir%\install.log
+
+rem Delete Saves folder
+rd /q /s %g1rootdir%\Saves
+
+rem Delete GOTHIC.INI file
+del %g1rootdir%\system\GOTHIC.INI
+
+rem Delete MSSFAST.M3D file
+del %g1rootdir%\system\MSSFAST.M3D
+
+rem Delete RPT file
+del %g1rootdir%\system\GOTHIC.RPT
+
+rem Gothic II
+
+set "g2rootdir=%gamerootdir%\Gothic II Gold"
+
+rem Delete installation log
+del "%g2rootdir%\*.log"
+
+rem Delete Saves folder
+rd /q /s "%g2rootdir%\Saves"
+
+rem Delete GOTHIC.INI file
+del "%g2rootdir%\system\Gothic.INI"
+
+rem Delete MSSSOFT.M3D file
+del "%g2rootdir%\system\MSSSOFT.M3D"
+
+rem Grand Theft Auto III
 
 set "gta3dir=%userprofile%\Documents\GTA3 User Files"
 
 rem Delete GTA3 directory
 rd /q /s "%gta3dir%"
 
-rem GTA: Vice City
+rem Grand Theft Auto: Vice City
 
 set "gtavcdir=%userprofile%\Documents\GTA Vice City User Files"
 
 rem Delete GTA: Vice City directory
 rd /q /s "%gtavcdir%"
 
-rem GTA: San Andreas
+rem Grand Theft Auto: San Andreas
 
 set "gtasadir=%userprofile%\Documents\GTA San Andreas User Files"
 
@@ -217,6 +341,31 @@ set "masterspydir=%localappdata%\Master Spy"
 rem Delete local Master Spy directory
 rd /q /s "%masterspydir%"
 
+rem Metal Gear Solid
+
+set "mgsdir=%gamerootdir%\Metal Gear Solid"
+
+rem Delete configuration files
+del "%mgsdir%\*.cfg"
+
+rem Delete log file
+del "%mgsdir%\profile.log"
+
+rem Delete DirectX configuration
+del "%mgsdir%\dxcfg.ini"
+
+rem Delete VR records
+del "%mgsdir%\records.vr"
+
+rem Delete photos
+del /q "%mgsdir%\PHOTOS\*"
+
+rem Delete savegames
+del /q "%mgsdir%\SavedGames\*"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Metal Gear Solid" /f
+
 rem Metro 2033 Redux
 
 set "m2033devdir=%userprofile%\Documents\4A Games"
@@ -260,6 +409,26 @@ rd /q /s "%mbwroamingdir%"
 rem Delete Mount & Blade Warband savegame directory
 rd /q /s "%mbwsavedir%"
 
+rem Oddworld: Abe’s Oddysee
+
+set "oaodir=%gamerootdir%\Abes Oddysee"
+
+rem Delete savegames
+del "%oaodir%\*.sav"
+
+rem Delete configuration
+del "%oaodir%\abe.ini"
+
+rem Oddworld: Abe’s Exoddus
+
+set "oaedir=%gamerootdir%\Abes Exoddus"
+
+rem Delete savegames
+del "%oaedir%\*.sav"
+
+rem Delete configuration
+del "%oaedir%\abe2.ini"
+
 rem Oddworld - New 'n' Tasty
 
 set "onntdatadir=%gamerootdir%\Oddworld - New 'n' Tasty\NNT_Data"
@@ -293,6 +462,66 @@ rd /q /s "%pk1rootdir%\SaveGames"
 
 rem Delete registry keys
 reg delete HKCU\Software\PeopleCanFly /f
+reg delete HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly /f
+
+rem Postal Plus
+
+set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+
+rem Delete configuration file
+del "%p1dir%\*.ini"
+
+rem Delete savegames and highscores
+del /q "%p1dir%\res\SaveGame\*"
+
+rem Postal 2
+
+set "p2dir=%gamerootdir%\Postal2STP"
+
+rem Delete savegames
+del /q "%p2dir%\Save\*"
+
+rem Delete log file
+del "%p2dir%\System\Postal2.log"
+
+rem Delete configuration, keybinds and savegame information
+del "%p2dir%\System\Postal2.ini"
+del "%p2dir%\System\SavedGameInfo.ini"
+del "%p2dir%\System\User.ini"
+
+rem Quake II
+
+set "q2rootdir=%gamerootdir%\Quake II"
+
+rem Delete .cfg files
+del "%q2rootdir%\baseq2\*.cfg"
+
+rem Delete save folder
+rd /q /s "%q2rootdir%\baseq2\save"
+
+rem Quake II mission pack: The Reckoning
+
+rem Delete .cfg files
+del "%q2rootdir%\xatrix\*.cfg"
+
+rem Delete save folder
+rd /q /s "%q2rootdir%\xatrix\save"
+
+rem Quake II mission pack 2: Ground Zero
+
+rem Delete .cfg files
+del "%q2rootdir%\rogue\*.cfg"
+
+rem Delete save folder
+rd /q /s "%q2rootdir%\rogue\save"
+
+rem Quake II - The Eraser Bot
+
+rem Delete config.cfg
+del "%q2rootdir%\Eraser\config.cfg"
+
+rem Delete save folder
+rd /q /s "%q2rootdir%\Eraser\save"
 
 rem Quake III
 
@@ -398,6 +627,12 @@ rem user bindings and user settings
 
 rd /q /s "%somadir%"
 
+rem SPY Fox - Dry Cereal
+
+set "sfdrsavedir=C:\hegames"
+
+rd /q /s %sfdrsavedir%
+
 rem SWAT 4
 
 set "swat4sysdir=%gamerootdir%\SWAT 4\Content\System"
@@ -441,6 +676,28 @@ set "tclsavedir=%userprofile%\Saved Games\The Cat Lady"
 
 rem Delete savegame directory
 rd /q /s "%tclsavedir%"
+
+rem The Elder Scrolls III: Morrowind
+
+set "tes3rootdir=%gamerootdir%\Morrowind"
+
+rem Delete savegames
+del /q %tes3rootdir%\Saves\*.ess
+
+rem Delete configuration file
+del %tes3rootdir%\Morrowind.ini
+
+rem Delete journal
+del %tes3rootdir%\Journal.htm
+
+rem Delete warning log
+del %tes3rootdir%\Warnings.txt
+
+rem Delete program flow log
+del %tes3rootdir%\ProgramFlow.txt
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks" /f
 
 rem The Infectious Madness of Doctor Dekker
 

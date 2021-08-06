@@ -4,7 +4,6 @@ rem This script restores gamestates, which include profiles, savegames, setting
 rem files etc.
 
 rem Write the path to your game directory here
-
 set "gamerootdir="
 
 echo Gamestate restore script running
@@ -58,6 +57,25 @@ xcopy /e /i /y "Amnesia - The Dark Descent" "%amnesiaprofiledir%"
 echo Amnesia - The Dark Descent: Done.
 echo.
 
+rem ANNO 1602
+
+set "anno1602rootdir=%gamerootdir%\ANNO1602"
+
+rem Restore savegames
+echo ANNO 1602: Restoring savegames
+xcopy /e /i /y "ANNO 1602\Savegame" %anno1602rootdir%\Savegame
+
+rem Restore Game.dat
+echo ANNO 1602: Restoring Game.dat file
+copy "ANNO 1602"\Game.dat %anno1602rootdir%
+
+rem Restore registry keys
+echo ANNO 1602: Restoring registry keys
+reg import "ANNO 1602\anno1602.reg"
+
+echo ANNO 1602: Done.
+echo.
+
 rem Becherov
 
 set "becherovprofiledir=%gamerootdir%\Becherov\Data\Player"
@@ -71,6 +89,22 @@ echo Becherov: Restoring registry keys
 reg import Becherov\becherov.reg
 
 echo Becherov: Done.
+echo.
+
+rem BioShock
+
+set "bs1dir=%appdata%\Bioshock"
+set "bs1sgdir=%userprofile%\Documents\Bioshock\SaveGames"
+
+rem Restore savegames
+echo BioShock: Restoring savegames
+xcopy /e /i /y "BioShock\SaveGames" %bs1sgdir%
+
+rem Restore memory file, configuration and keybinds
+echo BioShock: Restoring memory file, configuration and keybinds
+xcopy /e /i /y "BioShock\AppData" %bs1dir%
+
+echo BioShock: Done.
 echo.
 
 rem Buddy Simulator 1984
@@ -131,6 +165,70 @@ xcopy /e /i /y "Darkest Dungeon" %dddir%
 echo Darkest Dungeon: Done.
 echo.
 
+rem Diablo (Classic)
+
+set "diablorootdir=%gamerootdir%\Diablo"
+
+rem Restore savegame files
+echo Diablo (Classic): Restoring savegame files
+xcopy /i /y Diablo\Classic\*.sv %diablorootdir%
+
+echo Diablo (Classic): Done.
+echo.
+
+rem Diablo
+
+rem Restore savegame files
+echo Diablo: Restoring savegame files
+xcopy /i /y Diablo\DX\*.sv %diablorootdir%\dx
+
+rem Restore DX configuration
+echo Diablo: Restoring DX configuration
+copy Diablo\DX\dxcfg.ini %diablorootdir%\dx
+
+echo Diablo: Done.
+echo.
+
+rem Diablo: Hellfire
+
+rem Restore savegame files
+echo Diablo: Hellfire - Restoring savegame files
+xcopy /i /y Diablo\Hellfire\*.hsv %diablorootdir%\hellfire
+
+echo Diablo: Hellfire - Done.
+echo.
+
+rem Diablo II
+
+set "d2rootdir=%gamerootdir%\Diablo II"
+set "d2sgdir=%userprofile%\Saved Games\Diablo II"
+
+rem Restore savegame files
+echo Diablo II: Restoring savegame files
+xcopy /e /i /y "Diablo II\Saved Games" "%d2sgdir%"
+
+rem Restore default.key file
+echo Diablo II: Restoring default.key file
+copy "Diablo II\default.key" "%d2rootdir%"
+
+rem Restore registry keys
+echo Diablo II: Restoring registry keys
+reg import "Diablo II\d2.reg"
+
+echo Diablo II: Done.
+echo.
+
+rem Die Völker
+
+set "dvdir=%gamerootdir%\Alien Nations"
+
+rem Restore configuration and savegame files
+echo Die Voelker: Restoring configuration and savegame files
+xcopy /e /i /y "Die Voelker\Savegames" "%dvdir%\Savegames"
+
+echo Die Voelker: Done.
+echo.
+
 rem else Heart.Break()
 
 set "ehbsavedir=%gamerootdir%\ElseHeartbreak\ElseHeartbreak_Data\Saves"
@@ -167,6 +265,36 @@ echo Enigmatis - The Ghosts of Maple Creek: Copying global and player profile
 copy "Enigmatis - The Ghosts of Maple Creek\*.prf" "%etgomcprofiledir%"
 
 echo Enigmatis - The Ghosts of Maple Creek: Done.
+echo.
+
+rem Gothic
+
+set "g1rootdir=%gamerootdir%\Gothic"
+
+rem Restore savegames
+echo Gothic: Restoring savegames
+xcopy /e /i /y Gothic\Saves %g1rootdir%\Saves
+
+rem Backup configuration file
+echo Gothic: Restoring configuration file
+xcopy /i /y Gothic\system\*.INI %g1rootdir%\system
+
+echo Gothic: Done.
+echo.
+
+rem Gothic II
+
+set "g2rootdir=%gamerootdir%\Gothic II Gold"
+
+rem Backup savegames
+echo Gothic II: Restoring savegames
+xcopy /e /i /y "Gothic II\Saves" "%g2rootdir%\Saves"
+
+rem Backup configuration file
+echo Gothic II: Backing up configuration file
+xcopy /i /y "Gothic II\system\*.INI" "%g2rootdir%\system"
+
+echo Gothic II: Done.
 echo.
 
 rem GTA III
@@ -293,6 +421,37 @@ copy "Master Spy\*.localstorage-journal" "%masterspydir%"
 echo Master Spy: Done.
 echo.
 
+rem Metal Gear Solid
+
+set "mgsdir=%gamerootdir%\Metal Gear Solid"
+
+rem Restore savegames
+echo Metal Gear Solid: Restoring savegames
+xcopy /e /i /y "Metal Gear Solid\SavedGames" "%mgsdir%\SavedGames"
+
+rem Restore configuration files
+echo Metal Gear Solid: Restoring MGS configuration files
+xcopy /i /y "Metal Gear Solid\*.cfg" "%mgsdir%"
+
+rem Restore DirectX configuration
+echo Metal Gear Solid: Restoring DirectX configuration
+copy "Metal Gear Solid\dxcfg.ini" "%mgsdir%"
+
+rem Restore VR records
+echo Metal Gear Solid: Restoring VR records
+copy "Metal Gear Solid\records.vr" "%mgsdir%"
+
+rem Restore photos
+echo Metal Gear Solid: Restoring photos
+xcopy /e /i /y "Metal Gear Solid\PHOTOS" "%mgsdir%\PHOTOS"
+
+rem Restore registry keys
+echo Metal Gear Solid: Restoring registry keys
+reg import "Metal Gear Solid\mgs.reg"
+
+echo Metal Gear Solid: Done.
+echo.
+
 rem Metro 2033 Redux
 
 set "m2033reduxdir=%userprofile%\Documents\4A Games\Metro Redux\2033"
@@ -340,6 +499,36 @@ xcopy /i /y "Mount & Blade Warband - Viking Conquest\*.txt" "%mbwdir%\"
 echo Mount and Blade Warband: Viking Conquest - Done.
 echo.
 
+rem Oddworld: Abe’s Oddysee
+
+set "oaodir=%gamerootdir%\Abes Oddysee"
+
+rem Restore savegames
+echo Oddworld: Abe's Oddysee - Restoring savegames
+xcopy /i /y "Oddworld - Abe's Oddysee\*.sav" "%oaodir%"
+
+rem Restore configuration
+echo Oddworld: Abe's Oddysee - Restoring configuration
+copy "Oddworld - Abe's Oddysee\abe.ini" "%oaodir%"
+
+echo Oddworld: Abe's Oddysee - Done.
+echo.
+
+rem Oddworld: Abe’s Exoddus
+
+set "oaedir=%gamerootdir%\Abes Exoddus"
+
+rem Restore savegames
+echo Oddworld: Abe's Exoddus - Restoring savegames
+xcopy /i /y "Oddworld - Abe's Exoddus\*.sav" "%oaedir%"
+
+rem Backup configuration
+echo Oddworld: Abe's Exoddus - Restoring configuration
+copy "Oddworld - Abe's Exoddus\abe2.ini" "%oaedir%"
+
+echo Oddworld: Abe's Exoddus - Done.
+echo.
+
 rem Oddworld - New 'n' Tasty
 
 set "onntsavedir=%gamerootdir%\Oddworld - New 'n' Tasty\SaveGame"
@@ -377,7 +566,94 @@ rem Restore config file
 echo Painkiller: Restoring config file
 copy Painkiller\*.ini "%pkdir%\Bin"
 
+rem Restore registry keys
+echo Painkiller: Restoring registry keys
+reg import Painkiller\painkiller-1.reg
+reg import Painkiller\painkiller-2.reg
+
 echo Painkiller: Done.
+echo.
+
+rem Postal Plus
+
+set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+
+rem Restore savegames and highscores
+echo Postal Plus: Restoring savegames and highscores
+xcopy /e /i /y "Postal Plus\SaveGame" "%p1dir%\res\SaveGame"
+
+rem Restoring configuration
+echo Postal Plus: Restoring configuration
+copy "Postal Plus\*.ini" "%p1dir%"
+
+echo Postal Plus: Done.
+echo.
+
+rem Postal 2
+
+set "p2dir=%gamerootdir%\Postal2STP"
+
+rem Restore savegames
+echo Postal 2: Restoring savegames
+xcopy /e /i /y "Postal 2\Save" "%p2dir%\Save"
+
+rem Restore configuration, keybinds and savegame information
+echo Postal 2: Restoring configuration, keybinds and savegame information
+copy "Postal 2\System\Postal2.ini" "%p2dir%\System"
+copy "Postal 2\System\SavedGameInfo.ini" "%p2dir%\System"
+copy "Postal 2\System\User.ini" "%p2dir%\System"
+
+echo Postal 2: Done.
+echo.
+
+rem Quake II
+
+set "q2rootdir=%gamerootdir%\Quake II"
+
+rem Restore savegames
+echo Quake II: Restoring savegames
+xcopy /e /i /y "Quake II\Base\save" "%q2rootdir%\baseq2\save"
+
+rem Restore keybinds and configuration
+echo Quake II: Restoring keybinds and configuration
+copy "Quake II\Base\*.cfg" "%q2rootdir%\baseq2"
+
+echo Quake II: Done.
+echo.
+
+rem Quake II mission pack: The Reckoning
+
+rem Restore savegames
+echo Quake II mission pack: The Reckoning - Restoring savegames
+xcopy /e /i /y "Quake II\The Reckoning\save" "%q2rootdir%\xatrix\save"
+
+rem Restore keybinds and configuration
+echo Quake II mission pack: The Reckoning - Restoring keybinds and configuration
+copy "Quake II\The Reckoning\*.cfg" "%q2rootdir%\xatrix"
+
+echo Quake II mission pack: The Reckoning - Done.
+echo.
+
+rem Quake II mission pack 2: Ground Zero
+
+rem Restore savegames
+echo Quake II mission pack 2: Ground Zero - Restoring savegames
+xcopy /e /i /y "Quake II\Ground Zero\save" "%q2rootdir%\rogue\save"
+
+rem Restore keybinds and configuration
+echo Quake II mission pack 2: Ground Zero - Restoring keybinds and configuration
+copy "Quake II\Ground Zero\*.cfg" "%q2rootdir%\rogue"
+
+echo Quake II mission pack 2: Ground Zero - Done.
+echo.
+
+rem Quake II - The Eraser Bot
+
+rem Backup keybinds and configuration file
+echo Quake II - The Eraser Bot: Restoring keybinds and configuration
+xcopy /i /y "Quake II\The Eraser Bot\*.cfg" "%q2rootdir%\Eraser"
+
+echo Quake II - The Eraser Bot:  Done.
 echo.
 
 rem Quake III
@@ -499,6 +775,17 @@ xcopy /e /i /y "SOMA" "%somadir%"
 echo SOMA: Done.
 echo.
 
+rem SPY Fox - Dry Cereal
+
+set "sfdrsavedir=C:\hegames"
+
+rem Restore savegames
+echo SPY Fox - Dry Cereal: Restoring savegames
+xcopy /i /y "SPY Fox - Dry Cereal\*" %sfdrsavedir%
+
+echo SPY Fox - Dry Cereal: Done.
+echo.
+
 rem SWAT 4
 
 set "swat4sysdir=%gamerootdir%\SWAT 4\Content\System"
@@ -541,6 +828,29 @@ echo The Cat Lady: Restoring settings and savegames
 xcopy /i /y  "The Cat Lady\*" "%tclsavedir%"
 
 echo The Cat Lady: Done.
+echo.
+
+rem The Elder Scrolls III: Morrowind
+
+set "tes3rootdir=%gamerootdir%\Morrowind"
+
+rem Restore savegames
+echo The Elder Scrolls III: Morrowind - Restoring savegames
+xcopy /e /i /y Morrowind\Saves %tes3rootdir%\Saves
+
+rem Restore journal
+echo The Elder Scrolls III: Morrowind - Restoring journal
+copy Morrowind\Journal.htm %tes3rootdir%
+
+rem Restore configuration file
+echo The Elder Scrolls III: Morrowind - Restoring configuration file
+copy Morrowind\Morrowind.ini %tes3rootdir%
+
+rem Restore registry keys
+echo The Elder Scrolls III: Morrowind - Restoring registry keys
+reg import Morrowind\morrowind.reg
+
+echo The Elder Scrolls III: Morrowind - Done.
 echo.
 
 rem The Infectious Madness of Doctor Dekker

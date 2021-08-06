@@ -5,7 +5,7 @@ This is the RBC. A simple abbreviation symbolising three tasks. Restore, Backup,
 Clean up. A collection of three batch files which you can apply to offline
 games.
 
-Introduction
+##### Introduction
 
 Video game privacy these days is turning into more and more of an issue; this is
 especially true for new releases, requiring to be constantly connected to the
@@ -28,7 +28,7 @@ To see which games are currently supported, please read the
 [SUPPORTED](SUPPORTED.md) document. This project was tested on Windows 10
 64-bit.
 
-Quick start guide
+##### Quick start guide
 
 1. Go offline. Do this by any method of your choice. Either use a physical
    ethernet killswitch, a physical wi-fi killswitch, disable all network
@@ -42,7 +42,7 @@ Quick start guide
 7. When you’re done playing, run the backup script.
 8. Finally, run the cleanup script and remove the flash drive.
 
-A word of warning
+##### A word of warning
 
 *Although these scripts have been tested (not to the fullest extent), data loss
 can still occur due to bugs and different system configurations; among other
