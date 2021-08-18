@@ -3,9 +3,11 @@ Supported games
 
 - A Hand With Many Fingers
 - Alan Wake’s American Nightmare (GOG version)
+- Aliens Versus Predator - Classic 2000
 - Amnesia - A Machine for Pigs
 - Amnesia - The Dark Descent
 - ANNO 1602
+- Barrow Hill - Curse of the Ancient Circle
 - Becherov
 - BioShock
 - Buddy Simulator 1984
@@ -17,13 +19,19 @@ Supported games
 - Die Völker
 - else Heart.Break()
 - Enigmatis - The Ghosts of Maple Creek
+- Europa Universalis
+- Europa Universalis II
+- Firewatch
 - Gothic
 - Gothic II
+- Grand Theft Auto
 - Grand Theft Auto III
 - Grand Theft Auto: San Andreas
 - Grand Theft Auto: Vice City
 - Hacknet
+- Hearts of Iron
 - Hellblade: Senua’s Sacrifice
+- Hitman - Codename 47
 - Hotline Miami Original
 - Inkslinger
 - Inside
@@ -36,8 +44,13 @@ Supported games
 - Oddworld: Abe’s Oddysee
 - Oddworld: Abe’s Exoddus
 - Oddworld - New 'n' Tasty
+- Omikron: The Nomad Soul
+- Open Arena
 - Outlast
 - Painkiller
+- Penumbra: Black Plague
+- Penumbra: Overture
+- Penumbra: Requiem
 - Postal Plus
 - Postal 2
 - Quake II
@@ -51,13 +64,18 @@ Supported games
 - SOMA
 - SPY Fox - Dry Cereal
 - SWAT 4
+- Sudden Strike
 - Syberia I
 - Syberia II
+- The Alto Collection
 - The Cat Lady
 - The Elder Scrolls III: Morrowind
 - The Infectious Madness of Doctor Dekker
 - The Longest Journey
 - The Suicide of Rachel Foster
 - The Witcher 1
+- Tom Clancy’s Splinter Cell
+- Unreal
+- Unreal II - The Awakening
 - Uplink
 - Vampire’s Dawn 2

@@ -23,6 +23,26 @@ set "remedydir=%userprofile%\Documents\Remedy"
 rem Delete the Remedy folder
 rd /q /s %remedydir%
 
+rem Aliens Versus Predator - Classic 2000
+
+set "avpc2kdir1=%localappdata%\AvPGold"
+set "avpc2kdir2=%localappdata%\Rebellion\AvP Classic"
+set "avpc2krootdir=%gamerootdir%\Aliens versus Predator Classic"
+
+rem Delete log files
+del "%avpc2krootdir%\ConsoleLog.txt"
+del "%avpc2krootdir%\bin_Crossplay\ConsoleLog.txt"
+del "%avpc2krootdir%\bin\ConsoleLog.txt"
+
+rem Delete profiles, savegames and video configuration
+rd /q /s "%avpc2kdir2%"
+
+rem Delete Launcher.ini
+rd /q /s "%avpc2kdir1%"
+
+rem Delete configuration
+del "%avpc2krootdir%\CONFIG.CFG"
+
 rem Amnesia - The Dark Descent
 rem Amnesia - A Machine for Pigs
 
@@ -46,6 +66,16 @@ del /q %anno1602rootdir%\Savegame\*
 
 rem Delete registry keys
 reg delete HKCU\SOFTWARE\ANNO1602 /f
+
+rem Barrow Hill - Curse of the Ancient Circle
+
+set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
+
+rem Delete savegames
+del "%bh1rootdir%\*.sav"
+
+rem Delete settings file
+del "%bh1rootdir%\*.mat"
 
 rem Becherov
 
@@ -203,6 +233,56 @@ set "amdir=%appdata%\Artifex Mundi\"
 rem Delete Artifex Mundi directory
 rd /q /s "%amdir%"
 
+rem Europa Universalis
+
+set "eu1rootdir=%gamerootdir%\Europa Universalis"
+
+rem Delete log files
+del "%eu1rootdir%\debug.txt"
+del "%eu1rootdir%\log.txt"
+del "%eu1rootdir%\netlog.txt"
+
+rem Delete savegames
+del /q "%eu1rootdir%\Scenarios\Save Games\*"
+
+rem Delete configuration
+del "%eu1rootdir%\*.eu"
+
+rem Europa Universalis II
+
+set "eu2rootdir=%gamerootdir%\Europa Universalis 2"
+
+rem Delete history file
+del "%eu2rootdir%\history.txt"
+
+rem Delete log files
+del "%eu2rootdir%\debug.txt"
+del "%eu2rootdir%\log.txt"
+del "%eu2rootdir%\netlog.txt"
+
+rem Delete savegames
+del /q "%eu2rootdir%\Scenarios\save games\*"
+
+rem Delete configuration
+del "%eu2rootdir%\*.eu"
+
+rem Delete settings file
+del "%eu2rootdir%\settings.cfg"
+
+rem Firewatch
+
+set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto"
+set "fwrootdir=%gamerootdir%\Firewatch"
+
+rem Delete localisation file, keybinds, photos and savegames
+rd /q /s %fwlldir%
+
+rem Delete log file
+del %fwrootdir%\Firewatch_Data\*.txt
+
+rem Delete settings
+reg delete HKCU\SOFTWARE\CampoSanto\Firewatch /f
+
 rem Gothic
 
 set "g1rootdir=%gamerootdir%\Gothic"
@@ -237,6 +317,19 @@ del "%g2rootdir%\system\Gothic.INI"
 
 rem Delete MSSSOFT.M3D file
 del "%g2rootdir%\system\MSSSOFT.M3D"
+
+rem Grand Theft Auto
+
+set "gta1rootdir=%gamerootdir%\Grand Theft Auto"
+
+rem Delete .dat file
+del "%gta1rootdir%\GTADATA\*.dat"
+
+rem Delete replay file
+del "%gta1rootdir%\GTADATA\REPLAY.REP"
+
+rem Delete language settings and key configuration
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\DMA Design\Grand Theft Auto" /f
 
 rem Grand Theft Auto III
 
@@ -276,6 +369,22 @@ rem in XML format. These user profiles also contain savegame information, but
 rem are only functional in combination with the correct accounts file
 rd /q /s "%hacknetdir%"
 
+rem Hearts of Iron
+
+set "hoirootdir=%gamerootdir%\Hearts of Iron"
+
+rem Delete configuration
+del "%hoirootdir%\*.eu"
+
+rem Delete savegame debug log file
+del "%hoirootdir%\savedebug.txt"
+
+rem Delete history file
+del "%hoirootdir%\history.txt"
+
+rem Delete savegames
+del /q "%hoirootdir%\scenarios\save games\*"
+
 rem Hellblade - Senua’s Sacrifice
 
 set "hellbladedir=%localappdata%\HellbladeGame"
@@ -283,6 +392,19 @@ set "hellbladedir=%localappdata%\HellbladeGame"
 rem Delete local appdata Hellblade folder which contains .ini files and the
 rem savegame in .sav format
 rd /q /s %hellbladedir%
+
+rem Hitman - Codename 47
+
+set "hc47rootdir=%gamerootdir%\Hitman Codename 47"
+
+rem Delete savegames
+del "%hc47rootdir%\*.sav"
+
+rem Delete keybinds and sound settings
+del "%hc47rootdir%\*.cfg"
+
+rem Delete configuration file
+del "%hc47rootdir%\Hitman.ini"
 
 rem Hotline Miami Original
 
@@ -443,6 +565,24 @@ del "%onntdatadir%\output_log.txt"
 rem Delete Oddworld Inhabitants registry keys
 reg delete "HKCU\Software\Oddworld Inhabitants, Inc." /f
 
+rem Omikron: The Nomad Soul
+
+set "otnsrootdir=%gamerootdir%\Omikron - The Nomad Soul"
+
+rem Delete configuration, keybinds and savegames
+del "%otnsrootdir%\IAM\GAMES"
+
+rem Open Arena
+
+set "oaaddir=%appdata%\OpenArena"
+set "oarootdir=%gamerootdir%\Open Arena"
+
+rem Delete Open Arena appdata folder
+rd /q /s %oaaddir%
+
+rem Delete log file
+del "%oarootdir%\stderr.txt"
+
 rem Outlast
 
 set "oluserdir=%userprofile%\Documents\My Games\Outlast"
@@ -463,6 +603,21 @@ rd /q /s "%pk1rootdir%\SaveGames"
 rem Delete registry keys
 reg delete HKCU\Software\PeopleCanFly /f
 reg delete HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly /f
+
+rem Penumbra: Overture
+
+set "podir=%userprofile%\Documents\Penumbra Overture"
+
+rem Delete keybinds, log files, settings and savegames
+rd /q /s "%podir%"
+
+rem Penumbra: Black Plague
+rem Penumbra: Requiem
+
+set "penumbradir=%userprofile%\Documents\Penumbra"
+
+rem Delete keybinds, log files, savegames and settings
+rd /q /s %penumbradir%
 
 rem Postal Plus
 
@@ -629,9 +784,22 @@ rd /q /s "%somadir%"
 
 rem SPY Fox - Dry Cereal
 
-set "sfdrsavedir=C:\hegames"
+set "sfdcsavedir=C:\hegames"
 
-rd /q /s %sfdrsavedir%
+rd /q /s %sfdcsavedir%
+
+rem Sudden Strike
+
+set "ssrootdir=%gamerootdir%\Sudden Strike"
+
+rem Delete savegames
+rd /q /s "%ssrootdir%\SaveGames"
+
+rem Delete .ini file
+del "%ssrootdir%\sudtest.ini"
+
+rem Delete ratings data
+del "%ssrootdir%\ratings\*.rtc"
 
 rem SWAT 4
 
@@ -669,6 +837,16 @@ del "%syb2rootdir%"\debug.log
 
 rem Delete Syberia II savegame directory
 rd /q /s "%syb2savedir%"
+
+rem The Alto Collection
+
+set "taclldir=%userprofile%\AppData\LocalLow\Team Alto"
+
+rem Delete analytical information and log file
+rd /q /s "%taclldir%"
+
+rem Delete configuration and savegame data
+reg delete "HKCU\SOFTWARE\Team Alto\The Alto Collection" /f
 
 rem The Cat Lady
 
@@ -742,6 +920,48 @@ rd /q /s "%w1userdir%"
 
 rem Delete Witcher 1 registry keys
 reg delete "HKCU\Software\CD Projekt RED" /f
+
+rem Tom Clancy’s Splinter Cell
+
+set "tcscrootdir=%gamerootdir%\Splinter Cell"
+
+rem Delete savegames
+rd /q /s "%tcscrootdir%\Save"
+
+rem Delete configuration files
+del "%tcscrootdir%\system\SplinterCell.ini"
+del "%tcscrootdir%\system\SplinterCellUser.ini"
+
+rem Unreal
+
+set "unrealrootdir=%gamerootdir%\Unreal Gold"
+
+rem Delete savegames
+del /q "%unrealrootdir%\Save\*"
+
+rem Delete configuration and keybinds
+del "%unrealrootdir%\System\Unreal.ini"
+del "%unrealrootdir%\System\User.ini"
+
+rem Delete log file
+del "%unrealrootdir%\System\*.log"
+
+rem Unreal II - The Awakening
+
+set "unreal2rootdir=%gamerootdir%\Unreal 2 - The Awakening"
+
+rem Delete savegames
+del /q "%unreal2rootdir%\singleplayer\Save\*"
+
+rem Delete configuration and keybinds
+del "%unreal2rootdir%\singleplayer\System\Unreal2.ini"
+del "%unreal2rootdir%\singleplayer\System\User.ini"
+
+rem Delete Golem file
+del "%unreal2rootdir%\singleplayer\System\Golem.u"
+
+rem Delete log files
+del "%unreal2rootdir%\singleplayer\System\*.log"
 
 rem Uplink
 

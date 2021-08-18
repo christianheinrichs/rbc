@@ -36,15 +36,35 @@ xcopy /e /i /y %awandir% "Alan Wake's American Nightmare"
 echo Alan Wake's American Nightmare: Done.
 echo.
 
+rem Aliens Versus Predator - Classic 2000
+
+set "avpc2kdir1=%localappdata%\AvPGold"
+set "avpc2kdir2=%localappdata%\Rebellion\AvP Classic"
+set "avpc2krootdir=%gamerootdir%\Aliens versus Predator Classic"
+
+rem Backup profiles, savegames and video configuration
+echo Aliens Versus Predator - Classic 2000: Backing up profiles, savegames and video configuration
+xcopy /e /i /y "%avpc2kdir2%" "Aliens Versus Predator - Classic 2000\AvP Classic"
+
+rem Backup Launcher.ini
+echo Aliens Versus Predator - Classic 2000: Backing up Launcher.ini
+xcopy /e /i /y "%avpc2kdir1%" "Aliens Versus Predator - Classic 2000\AvPGold"
+
+rem Backup configuration
+echo Aliens Versus Predator - Classic 2000: Backing up configuration
+copy "%avpc2krootdir%\CONFIG.CFG" "Aliens Versus Predator - Classic 2000"
+
+echo Aliens Versus Predator - Classic 2000: Done.
+echo.
+
 rem Amnesia: A Machine For Pigs
 
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
 
 rem Copy savegames, key bindings and user settings. Also, add the start flag. In
 rem addition to that, create folder structure
-rem TODO: Research /exclude parameter for log file exclusion
 echo Amnesia: A Machine For Pigs - Backing up profile folder, first start flag and main settings
-xcopy /e /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
+xcopy /e /exclude:exclude.txt /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
 
 echo Amnesia: A Machine For Pigs - Done.
 echo.
@@ -55,9 +75,8 @@ set "amnesiadir=%userprofile%\Documents\Amnesia\Main"
 
 rem Copy savegames, key bindings and user settings. Also, add the start flag. In
 rem addition to that, create folder structure
-rem TODO: Research /exclude parameter for log file exclusion
 echo Amnesia: The Dark Descent - Backing up profile folder, first start flag and main settings
-xcopy /e /i /y "%amnesiadir%" "Amnesia - The Dark Descent"
+xcopy /e /exclude:exclude.txt /i /y "%amnesiadir%" "Amnesia - The Dark Descent"
 
 echo Amnesia: The Dark Descent - Done.
 echo.
@@ -79,6 +98,21 @@ echo ANNO 1602: Backing up registry keys
 reg export HKCU\SOFTWARE\ANNO1602 "ANNO 1602\anno1602.reg" /y
 
 echo ANNO 1602: Done.
+echo.
+
+rem Barrow Hill - Curse of the Ancient Circle
+
+set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
+
+rem Backup savegames
+echo Barrow Hill - Curse of the Ancient Circle: Backing up savegames
+xcopy /i /y "%bh1rootdir%\*.sav" "Barrow Hill - Curse of the Ancient Circle"
+
+rem Backup settings
+echo Barrow Hill - Curse of the Ancient Circle: Backing up settings
+copy "%bh1rootdir%\*.mat" "Barrow Hill - Curse of the Ancient Circle"
+
+echo Barrow Hill - Curse of the Ancient Circle: Done.
 echo.
 
 rem Becherov
@@ -279,6 +313,59 @@ copy "%enigmatisdir%\Save_01.cub" "Enigmatis - The Ghosts of Maple Creek"
 echo Enigmatis - The Ghosts of Maple Creek: Done.
 echo.
 
+rem Europa Universalis
+
+set "eu1rootdir=%gamerootdir%\Europa Universalis"
+
+rem Backup savegames
+echo Europa Universalis: Backing up savegames
+xcopy /e /i /y "%eu1rootdir%\Scenarios\Save Games" "Europa Universalis\Scenarios\Save Games"
+
+rem Backup configuration
+echo Europa Universalis: Backing up configuration
+copy "%eu1rootdir%\*.eu" "Europa Universalis"
+
+echo Europa Universalis: Done.
+echo.
+
+rem Europa Universalis II
+
+set "eu2rootdir=%gamerootdir%\Europa Universalis 2"
+
+rem Backup savegames
+echo Europa Universalis II: Backing up savegames
+xcopy /e /i /y "%eu2rootdir%\Scenarios\save games" "Europa Universalis II\Scenarios\save games"
+
+rem Backup history file
+echo Europa Universalis II: Backing up history file
+copy "%eu2rootdir%\history.txt" "Europa Universalis II"
+
+rem Backup configuration
+echo Europa Universalis II: Backing up configuration
+copy "%eu2rootdir%\*.eu" "Europa Universalis II"
+
+rem Backup settings
+echo Europa Universalis II: Backing up settings
+copy "%eu2rootdir%\settings.cfg" "Europa Universalis II"
+
+echo Europa Universalis II: Done.
+echo.
+
+rem Firewatch
+
+set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto"
+
+rem Backup localisation file, keybinds, photos and savegames
+echo Firewatch: Backing up localisation file, keybinds, photos and savegames
+xcopy /e /i /y %fwlldir% "Firewatch\CampoSanto"
+
+rem Backup settings
+echo Firewatch: Backing up settings
+reg export HKCU\SOFTWARE\CampoSanto\Firewatch "Firewatch\firewatch.reg" /y
+
+echo Firewatch: Done.
+echo.
+
 rem Gothic
 
 set "g1rootdir=%gamerootdir%\Gothic"
@@ -307,6 +394,25 @@ echo Gothic II: Backing up configuration file
 xcopy /i /y "%g2rootdir%\system\*.INI" "Gothic II\system"
 
 echo Gothic II: Done.
+echo.
+
+rem Grand Theft Auto
+
+set "gta1rootdir=%gamerootdir%\Grand Theft Auto"
+
+rem Backup .dat file
+echo Grand Theft Auto: Backing up .dat file
+xcopy /i /y "%gta1rootdir%\GTADATA\*.dat" "Grand Theft Auto\GTADATA"
+
+rem Backup replay file
+echo Grand Theft Auto: Backing up replay file
+copy "%gta1rootdir%\GTADATA\REPLAY.REP" "Grand Theft Auto\GTADATA"
+
+rem Backup language settings and key configuration
+echo Grand Theft Auto: Backing up language settings and key configuration
+reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\DMA Design\Grand Theft Auto" "Grand Theft Auto\gta-settings.reg" /y
+
+echo Grand Theft Auto: Done.
 echo.
 
 rem Grand Theft Auto III
@@ -358,6 +464,25 @@ copy %hnrootdir%\Settings.txt Hacknet
 echo Hacknet: Done.
 echo.
 
+rem Hearts of Iron
+
+set "hoirootdir=%gamerootdir%\Hearts of Iron"
+
+rem Backup savegames
+echo Hearts of Iron: Backing up savegames
+xcopy /e /i /y "%hoirootdir%\scenarios\save games" "Hearts of Iron\Scenarios\Save Games"
+
+rem Backup configuration
+echo Hearts of Iron: Backing up configuration
+copy "%hoirootdir%\*.eu" "Hearts of Iron"
+
+rem Backup history file
+echo Hearts of Iron: Backing up history file
+copy "%hoirootdir%\history.txt" "Hearts of Iron"
+
+echo Hearts of Iron: Done.
+echo.
+
 rem Hellblade - Senua’s Sacrifice
 
 set "hbsavedir=%userprofile%\AppData\Local\HellbladeGame\Saved"
@@ -371,6 +496,25 @@ echo Hellblade - Senua's Sacrifice: Backing up user settings
 copy %hbsavedir%\Config\WindowsNoEditor\GameUserSettings.ini "Hellblade - Senua's Sacrifice"
 
 echo Hellblade - Senua's Sacrifice: Done.
+echo.
+
+rem Hitman - Codename 47
+
+set "hc47rootdir=%gamerootdir%\Hitman Codename 47"
+
+rem Backup savegames
+echo Hitman - Codename 47: Backing up savegames
+xcopy /i /y "%hc47rootdir%\*.sav" "Hitman - Codename 47"
+
+rem Backup keybinds and sound settings
+echo Hitman - Codename 47: Backing up keybinds and sound settings
+copy "%hc47rootdir%\*.cfg" "Hitman - Codename 47"
+
+rem Backup configuration file
+echo Hitman - Codename 47: Backing up configuration
+copy "%hc47rootdir%\Hitman.ini" "Hitman - Codename 47"
+
+echo Hitman - Codename 47: Done.
 echo.
 
 rem Hotline Miami Original
@@ -563,6 +707,29 @@ xcopy /i /y "%onntsavedir%\*.NnT" "Oddworld - New 'n' Tasty"
 echo Oddworld - New 'n' Tasty: Done.
 echo.
 
+rem Omikron: The Nomad Soul
+
+set "otnsrootdir=%gamerootdir%\Omikron - The Nomad Soul"
+
+rem Backup configuration, keybinds and savegames
+echo Omikron: The Nomad Soul - Backing up configuration, keybinds and savegames
+md "Omikron - The Nomad Soul"
+copy "%otnsrootdir%\IAM\GAMES" "Omikron - The Nomad Soul"
+
+echo Omikron: The Nomad Soul - Done.
+echo.
+
+rem Open Arena
+
+set "oaaddir=%appdata%\OpenArena"
+
+rem Backup Open Arena appdata folder
+echo Open Arena: Backing up appdata folder
+xcopy /e /i /y %oaaddir% "Open Arena"
+
+echo Open Arena: Done.
+echo.
+
 rem Outlast
 
 set "oldir=%userprofile%\Documents\My Games\Outlast\OLGame"
@@ -596,6 +763,39 @@ reg export HKEY_CURRENT_USER\SOFTWARE\PeopleCanFly Painkiller\painkiller-1.reg /
 reg export HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly Painkiller\painkiller-2.reg /y
 
 echo Painkiller: Done.
+echo.
+
+rem Penumbra: Black Plague
+
+set "pbpdir=%userprofile%\Documents\Penumbra\Black Plague"
+
+rem Backup keybinds, savegames and settings
+echo Penumbra: Black Plague - Backing up keybinds, savegames and settings
+xcopy /e /exclude:exclude.txt /i /y "%pbpdir%" "Penumbra - Black Plague"
+
+echo Penumbra: Black Plague - Done.
+echo.
+
+rem Penumbra: Overture
+
+set "podir=%userprofile%\Documents\Penumbra Overture"
+
+rem Backup keybinds, settings and savegames
+echo Penumbra: Overture - Backing up keybinds, settings and savegames
+xcopy /e /exclude:exclude.txt /i /y "%podir%" "Penumbra - Overture"
+
+echo Penumbra: Overture - Done.
+echo.
+
+rem Penumbra: Requiem
+
+set "prdir=%userprofile%\Documents\Penumbra\Requiem"
+
+rem Backup keybinds, savegames and settings
+echo Penumbra: Requiem - Backing up keybinds, savegames and settings
+xcopy /e /exclude:exclude.txt /i /y "%prdir%" "Penumbra - Requiem"
+
+echo Penumbra: Requiem - Done.
 echo.
 
 rem Postal Plus
@@ -790,20 +990,39 @@ set "somadir=%userprofile%\Documents\My Games\Soma"
 
 rem Backup Soma\Main folder
 echo SOMA: Backing up profile folder, first start flag and main settings
-xcopy /e /i /y "%somadir%" "SOMA"
+xcopy /e /exclude:exclude.txt /i /y "%somadir%" "SOMA"
 
 echo SOMA: Done.
 echo.
 
 rem SPY Fox - Dry Cereal
 
-set "sfdrsavedir=C:\hegames"
+set "sfdcsavedir=C:\hegames"
 
 rem Backup savegames
 echo SPY Fox - Dry Cereal: Backing up savegames
-xcopy /i /y %sfdrsavedir%\* "SPY Fox - Dry Cereal"
+xcopy /i /y %sfdcsavedir%\* "SPY Fox - Dry Cereal"
 
 echo SPY Fox - Dry Cereal: Done.
+echo.
+
+rem Sudden Strike
+
+set "ssrootdir=%gamerootdir%\Sudden Strike"
+
+rem Backup savegames
+echo Sudden Strike: Backing up savegames
+xcopy /e /i /y "%ssrootdir%\SaveGames" "Sudden Strike\SaveGames"
+
+rem Backup .ini file
+echo Sudden Strike: Backing up .ini file
+copy "%ssrootdir%\sudtest.ini" "Sudden Strike"
+
+rem Backup ratings data
+echo Sudden Strike: Backing up ratings data
+xcopy /i /y "%ssrootdir%\ratings\*.rtc" "Sudden Strike\ratings"
+
+echo Sudden Strike: Done.
 echo.
 
 rem SWAT 4
@@ -849,6 +1068,18 @@ echo Syberia II: Backing up configuration and savegames
 xcopy /i /y "%syb2savedir%\*" "Syberia 2"
 
 echo Syberia II: Done.
+echo.
+
+rem The Alto Collection
+
+rem Create folder structure
+md "The Alto Collection"
+
+rem Backup configuration and savegame data
+echo The Alto Collection: Backing up configuration and save data
+reg export "HKCU\SOFTWARE\Team Alto\The Alto Collection" "The Alto Collection\tac.reg" /y
+
+echo The Alto Collection: Done.
 echo.
 
 rem The Cat Lady
@@ -944,6 +1175,67 @@ echo The Witcher: Backing up registry keys
 reg export "HKCU\SOFTWARE\CD Projekt RED" "The Witcher\tw1-settings.reg" /y
 
 echo The Witcher: Done.
+echo.
+
+rem Tom Clancy’s Splinter Cell
+
+set "tcscrootdir=%gamerootdir%\Splinter Cell"
+
+rem Backup savegames
+echo Tom Clancy's Splinter Cell: Backing up savegames
+xcopy /e /i /y "%tcscrootdir%\Save" "Splinter Cell\Save"
+
+rem Backup configuration files
+echo Tom Clancy's Splinter Cell: Backing up configuration files
+md "Splinter Cell\system"
+copy "%tcscrootdir%\system\SplinterCell.ini" "Splinter Cell\system"
+copy "%tcscrootdir%\system\SplinterCellUser.ini" "Splinter Cell\system"
+
+echo Tom Clancy's Splinter Cell: Done.
+echo.
+
+rem Unreal
+
+set "unrealrootdir=%gamerootdir%\Unreal Gold"
+
+rem Backup savegames
+echo Unreal: Backing up savegames
+xcopy /e /i /y "%unrealrootdir%\Save" "Unreal\Save"
+
+echo.
+
+rem Backup configuration and keybinds
+echo Unreal: Backing up configuration and keybinds
+md "Unreal\System"
+copy "%unrealrootdir%\System\Unreal.ini" "Unreal\System"
+copy "%unrealrootdir%\System\User.ini" "Unreal\System"
+
+echo Unreal: Done.
+echo.
+
+rem Unreal II - The Awakening
+
+set "unreal2rootdir=%gamerootdir%\Unreal 2 - The Awakening"
+
+rem Backup savegames
+echo Unreal II - The Awakening: Backing up savegames
+xcopy /e /i /y "%unreal2rootdir%\singleplayer\Save" "Unreal II\Save"
+
+echo.
+
+rem Backup configuration and keybinds
+echo Unreal II - The Awakening: Backing up configuration and keybinds
+md "Unreal II\System"
+copy "%unreal2rootdir%\singleplayer\System\Unreal2.ini" "Unreal II\System"
+copy "%unreal2rootdir%\singleplayer\System\User.ini" "Unreal II\System"
+
+echo.
+
+rem Backup Golem file
+echo Unreal II - The Awakening: Backing up Golem file
+copy "%unreal2rootdir%\singleplayer\System\Golem.u" "Unreal II\System"
+
+echo Unreal II - The Awakening: Done.
 echo.
 
 rem Uplink

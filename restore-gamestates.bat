@@ -35,6 +35,27 @@ xcopy /e /i /y "Alan Wake's American Nightmare" %remedydir%
 echo Alan Wake's American Nightmare: Done.
 echo.
 
+rem Aliens Versus Predator - Classic 2000
+
+set "avpc2kdir1=%localappdata%\AvPGold"
+set "avpc2kdir2=%localappdata%\Rebellion\AvP Classic"
+set "avpc2krootdir=%gamerootdir%\Aliens versus Predator Classic"
+
+rem Restore profiles, savegames and video configuration
+echo Aliens Versus Predator - Classic 2000: Restoring profiles, savegames and video configuration
+xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvP Classic" "%avpc2kdir2%"
+
+rem Restore Launcher.ini
+echo Aliens Versus Predator - Classic 2000: Restoring Launcher.ini
+xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvPGold" "%avpc2kdir1%"
+
+rem Restore configuration
+echo Aliens Versus Predator - Classic 2000: Restoring configuration
+copy "Aliens Versus Predator - Classic 2000\CONFIG.CFG" "%avpc2krootdir%"
+
+echo Aliens Versus Predator - Classic 2000: Done.
+echo.
+
 rem Amnesia: A Machine for Pigs
 
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
@@ -74,6 +95,21 @@ echo ANNO 1602: Restoring registry keys
 reg import "ANNO 1602\anno1602.reg"
 
 echo ANNO 1602: Done.
+echo.
+
+rem Barrow Hill - Curse of the Ancient Circle
+
+set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
+
+rem Restore savegames
+echo Barrow Hill - Curse of the Ancient Circle: Restoring savegames
+xcopy /i /y "Barrow Hill - Curse of the Ancient Circle\*.sav" "%bh1rootdir%"
+
+rem Restore settings
+echo Barrow Hill - Curse of the Ancient Circle: Restoring settings
+copy "Barrow Hill - Curse of the Ancient Circle\*.mat" "%bh1rootdir%"
+
+echo Barrow Hill - Curse of the Ancient Circle: Done.
 echo.
 
 rem Becherov
@@ -267,6 +303,59 @@ copy "Enigmatis - The Ghosts of Maple Creek\*.prf" "%etgomcprofiledir%"
 echo Enigmatis - The Ghosts of Maple Creek: Done.
 echo.
 
+rem Europa Universalis
+
+set "eu1rootdir=%gamerootdir%\Europa Universalis"
+
+rem Restore savegames
+echo Europa Universalis: Restoring savegames
+xcopy /e /i /y "Europa Universalis\Scenarios\Save Games" "%eu1rootdir%\Scenarios\Save Games"
+
+rem Restore configuration
+echo Europa Universalis: Restoring configuration
+copy "Europa Universalis\*.eu" "%eu1rootdir%"
+
+echo Europa Universalis: Done.
+echo.
+
+rem Europa Universalis II
+
+set "eu2rootdir=%gamerootdir%\Europa Universalis 2"
+
+rem Restore savegames
+echo Europa Universalis II: Restoring savegames
+xcopy /e /i /y "Europa Universalis II\Scenarios\save games" "%eu2rootdir%\Scenarios\save games"
+
+rem Restore history file
+echo Europa Universalis II: Restoring history file
+copy "Europa Universalis II\history.txt" "%eu2rootdir%"
+
+rem Restore configuration
+echo Europa Universalis II: Restoring configuration
+copy "Europa Universalis II\*.eu" "%eu2rootdir%"
+
+rem Restore settings
+echo Europa Universalis II: Restoring settings
+copy "Europa Universalis II\settings.cfg" "%eu2rootdir%"
+
+echo Europa Universalis II: Done.
+echo.
+
+rem Firewatch
+
+set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto"
+
+rem Restore localisation file, keybinds, photos and savegames
+echo Firewatch: Restoring localisation file, keybinds, photos and savegames
+xcopy /e /i /y "Firewatch\CampoSanto" %fwlldir%
+
+rem Restore settings
+echo Firewatch: Restoring settings
+reg import "Firewatch\firewatch.reg"
+
+echo Firewatch: Done.
+echo.
+
 rem Gothic
 
 set "g1rootdir=%gamerootdir%\Gothic"
@@ -297,7 +386,26 @@ xcopy /i /y "Gothic II\system\*.INI" "%g2rootdir%\system"
 echo Gothic II: Done.
 echo.
 
-rem GTA III
+rem Grand Theft Auto
+
+set "gta1rootdir=%gamerootdir%\Grand Theft Auto"
+
+rem Restore .dat file
+echo Grand Theft Auto: Restoring .dat file
+copy "Grand Theft Auto\GTADATA\*.dat" "%gta1rootdir%\GTADATA"
+
+rem Restore replay file
+echo Grand Theft Auto: Restoring replay file
+copy "Grand Theft Auto\GTADATA\REPLAY.REP" "%gta1rootdir%\GTADATA"
+
+rem Restore language settings and key configuration
+echo Grand Theft Auto: Restoring language settings and key configuration
+reg import "Grand Theft Auto\gta-settings.reg"
+
+echo Grand Theft Auto: Done.
+echo.
+
+rem Grand Theft Auto III
 
 set "gta3dir=%userprofile%\Documents\GTA3 User Files"
 
@@ -343,6 +451,25 @@ copy Hacknet\Settings.txt %hnrootdir%
 echo Hacknet: Done.
 echo.
 
+rem Hearts of Iron
+
+set "hoirootdir=%gamerootdir%\Hearts of Iron"
+
+rem Restore savegames
+echo Hearts of Iron: Restoring savegames
+xcopy /e /i /y "Hearts of Iron\Scenarios\Save Games" "%hoirootdir%\scenarios\save games"
+
+rem Restore configuration
+echo Hearts of Iron: Restoring configuration
+copy "Hearts of Iron\*.eu" "%hoirootdir%"
+
+rem Restore history file
+echo Hearts of Iron: Restoring history file
+copy "Hearts of Iron\history.txt" "%hoirootdir%"
+
+echo Hearts of Iron: Done.
+echo.
+
 rem Hellblade - Senua’s Sacrifice
 
 set "hbsavedir=%userprofile%\AppData\Local\HellbladeGame\Saved"
@@ -356,6 +483,25 @@ echo Hellblade - Senua's Sacrifice: Restoring user settings
 xcopy /i /y "Hellblade - Senua's Sacrifice\*.ini" %hbsavedir%\Config\WindowsNoEditor
 
 echo Hellblade - Senua's Sacrifice: Done.
+echo.
+
+rem Hitman - Codename 47
+
+set "hc47rootdir=%gamerootdir%\Hitman Codename 47"
+
+rem Restore savegames
+echo Hitman - Codename 47: Restoring savegames
+copy "Hitman - Codename 47\*.sav" "%hc47rootdir%"
+
+rem Restore keybinds and sound settings
+echo Hitman - Codename 47: Restoring keybinds and sound settings
+copy "Hitman - Codename 47\*.cfg" "%hc47rootdir%"
+
+rem Restore configuration file
+echo Hitman - Codename 47: Restoring configuration
+copy "Hitman - Codename 47\Hitman.ini" "%hc47rootdir%"
+
+echo Hitman - Codename 47: Done.
 echo.
 
 rem Hotline Miami Original
@@ -540,6 +686,28 @@ xcopy /i /y "Oddworld - New 'n' Tasty\*.NnT" "%onntsavedir%"
 echo Oddworld - New 'n' Tasty: Done.
 echo.
 
+rem Omikron: The Nomad Soul
+
+set "otnsrootdir=%gamerootdir%\Omikron - The Nomad Soul"
+
+rem Restore configuration, keybinds and savegames
+echo Omikron: The Nomad Soul - Restoring configuration, keybinds and savegames
+copy "Omikron - The Nomad Soul\GAMES" "%otnsrootdir%\IAM"
+
+echo Omikron: The Nomad Soul - Done.
+echo.
+
+rem Open Arena
+
+set "oaaddir=%appdata%\OpenArena"
+
+rem Restore Open Arena appdata folder
+echo Open Arena: Restoring appdata folder
+xcopy /e /i /y "Open Arena" %oaaddir%
+
+echo Open Arena: Done.
+echo.
+
 rem Outlast
 set "oldir=%userprofile%\Documents\My Games\Outlast\OLGame"
 
@@ -572,6 +740,39 @@ reg import Painkiller\painkiller-1.reg
 reg import Painkiller\painkiller-2.reg
 
 echo Painkiller: Done.
+echo.
+
+rem Penumbra: Black Plague
+
+set "pbpdir=%userprofile%\Documents\Penumbra\Black Plague"
+
+rem Restore keybinds, savegames and settings
+echo Penumbra: Black Plague - Restoring keybinds, savegames and settings
+xcopy /e /i /y "Penumbra - Black Plague" "%pbpdir%"
+
+echo Penumbra: Black Plague - Done.
+echo.
+
+rem Penumbra: Overture
+
+set "podir=%userprofile%\Documents\Penumbra Overture"
+
+rem Restore keybinds, settings and savegames
+echo Penumbra: Overture - Restoring keybinds, settings and savegames
+xcopy /e /i /y "Penumbra - Overture" "%podir%"
+
+echo Penumbra: Overture - Done.
+echo.
+
+rem Penumbra: Requiem
+
+set "prdir=%userprofile%\Documents\Penumbra\Requiem"
+
+rem Restore keybinds, savegames and settings
+echo Penumbra: Requiem - Restoring keybinds, savegames and settings
+xcopy /e /i /y "Penumbra - Requiem" "%prdir%"
+
+echo Penumbra: Requiem - Done.
 echo.
 
 rem Postal Plus
@@ -777,13 +978,32 @@ echo.
 
 rem SPY Fox - Dry Cereal
 
-set "sfdrsavedir=C:\hegames"
+set "sfdcsavedir=C:\hegames"
 
 rem Restore savegames
 echo SPY Fox - Dry Cereal: Restoring savegames
-xcopy /i /y "SPY Fox - Dry Cereal\*" %sfdrsavedir%
+xcopy /i /y "SPY Fox - Dry Cereal\*" %sfdcsavedir%
 
 echo SPY Fox - Dry Cereal: Done.
+echo.
+
+rem Sudden Strike
+
+set "ssrootdir=%gamerootdir%\Sudden Strike"
+
+rem Restore savegames
+echo Sudden Strike: Restoring savegames
+xcopy /e /i /y "Sudden Strike\SaveGames" "%ssrootdir%\SaveGames"
+
+rem Restore .ini file
+echo Sudden Strike: Restoring .ini file
+copy "Sudden Strike\sudtest.ini" "%ssrootdir%"
+
+rem Restore ratings data
+echo Sudden Strike: Restoring ratings data
+xcopy /i /y "Sudden Strike\ratings\*.rtc" "%ssrootdir%\ratings"
+
+echo Sudden Strike: Done.
 echo.
 
 rem SWAT 4
@@ -818,6 +1038,11 @@ xcopy /i /y "Syberia 2\*" "%syb2savedir%"
 
 echo Syberia II: Done.
 echo.
+
+rem The Alto Collection
+
+rem Restore configuration and savegame data
+reg import "The Alto Collection\tac.reg"
 
 rem The Cat Lady
 
@@ -912,6 +1137,66 @@ echo The Witcher: Restoring settings via registry keys
 reg import "The Witcher\tw1-settings.reg"
 
 echo The Witcher: Done.
+echo.
+
+rem Tom Clancy’s Splinter Cell
+
+set "tcscrootdir=%gamerootdir%\Splinter Cell"
+
+rem Restore savegames
+echo Tom Clancy's Splinter Cell: Restoring savegames
+xcopy /e /i /y "Splinter Cell\Save" "%tcscrootdir%\Save"
+
+rem Restore configuration files
+echo Tom Clancy's Splinter Cell: Restoring configuration files
+copy "Splinter Cell\system\SplinterCell.ini" "%tcscrootdir%\system"
+copy "Splinter Cell\system\SplinterCellUser.ini" "%tcscrootdir%\system"
+
+echo Tom Clancy's Splinter Cell: Done.
+echo.
+
+rem Unreal
+
+set "unrealrootdir=%gamerootdir%\Unreal Gold"
+
+rem Restore savegames
+echo Unreal: Restoring savegames
+xcopy /e /i /y "Unreal\Save" "%unrealrootdir%\Save"
+
+echo.
+
+rem Restore configuration and keybinds
+echo Unreal: Restoring configuration and keybinds
+copy "Unreal\System\Unreal.ini" "%unrealrootdir%\System"
+copy "Unreal\System\User.ini" "%unrealrootdir%\System"
+
+echo.
+
+echo Unreal: Done.
+echo.
+
+rem Unreal II - The Awakening
+
+set "unreal2rootdir=%gamerootdir%\Unreal 2 - The Awakening"
+
+rem Restore savegames
+echo Unreal II - The Awakening: Restoring savegames
+xcopy /e /i /y "Unreal II\Save" "%unreal2rootdir%\singleplayer\Save"
+
+echo.
+
+rem Restore configuration and keybinds
+echo Unreal II - The Awakening: Restoring configuration and keybinds
+copy "Unreal II\System\Unreal2.ini" "%unreal2rootdir%\singleplayer\System"
+copy "Unreal II\System\User.ini" "%unreal2rootdir%\singleplayer\System"
+
+echo.
+
+rem Restore Golem file
+echo Unreal II - The Awakening: Restoring Golem file
+copy "Unreal II\System\Golem.u" "%unreal2rootdir%\singleplayer\System"
+
+echo Unreal II - The Awakening: Done.
 echo.
 
 rem Uplink
