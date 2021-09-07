@@ -6,6 +6,13 @@ rem SUPPORTED.md file.
 rem Write the path to your game directory here
 set "gamerootdir="
 
+title Cleanup script running
+
+mode con cols=100
+
+echo Cleanup script running
+echo.
+
 rem A Hand With Many Fingers
 
 set "colestiadir=%userprofile%\AppData\LocalLow\Colestia"
@@ -16,12 +23,19 @@ rd /q /s %colestiadir%
 rem Delete registry keys
 reg delete HKCU\SOFTWARE\Colestia /f
 
+rem Alan Wake
+
+set "awdir=%userprofile%\Documents\Remedy\AlanWake_GOG_Version"
+
+rem Delete the ‘AlanWake_GOG_Version’ folder
+rd /q /s %awdir%
+
 rem Alan Wake - American Nightmare
 
-set "remedydir=%userprofile%\Documents\Remedy"
+set "awandir=%userprofile%\Documents\Remedy\AmericanNightmare_GOG_Version"
 
-rem Delete the Remedy folder
-rd /q /s %remedydir%
+rem Delete the ‘AmericanNightmare_GOG_Version’ folder
+rd /q /s %awandir%
 
 rem Aliens Versus Predator - Classic 2000
 
@@ -38,7 +52,7 @@ rem Delete profiles, savegames and video configuration
 rd /q /s "%avpc2kdir2%"
 
 rem Delete Launcher.ini
-rd /q /s "%avpc2kdir1%"
+rd /q /s %avpc2kdir1%
 
 rem Delete configuration
 del "%avpc2krootdir%\CONFIG.CFG"
@@ -53,6 +67,17 @@ rem an empty first start flag, profile folders which in turn contain savegames,
 rem user bindings and user settings
 
 rd /q /s %amnesiadir%
+
+rem Anachronox
+
+set "anoxrootdir=%gamerootdir%\Anachronox"
+
+rem Delete SAVE folder
+rd /q /s %anoxrootdir%\anoxdata\SAVE
+
+rem Delete log files
+del %anoxrootdir%\*.log
+del /q %anoxrootdir%\anoxdata\logs\*
 
 rem ANNO 1602
 
@@ -77,6 +102,25 @@ del "%bh1rootdir%\*.sav"
 rem Delete settings file
 del "%bh1rootdir%\*.mat"
 
+rem Battle Realms
+
+set "br1rootdir=%gamerootdir%\Battle Realms"
+
+rem Delete log files
+del "%br1rootdir%\protlog*"
+
+rem Delete configuration file
+del "%br1rootdir%\*.ini"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Liquid Entertainment\Battle Realms" /f
+
+rem Delete Serpent DLL file
+del "%br1rootdir%\Scripts\Serpent 5E_F.dll"
+
+rem Delete savegames
+del "%br1rootdir%\Saved Games\*.br1"
+
 rem Becherov
 
 set "becherovdir=%gamerootdir%\Becherov"
@@ -96,10 +140,7 @@ rem Delete savegame directory
 rd /q /s %bs1sgdir%
 
 rem Delete Bioshock folder located in AppData
-echo BioShock: Deleting Bioshock AppData folder
 rd /q /s %bs1dir%
-
-echo.
 
 rem Buddy Simulator 1984
 
@@ -139,6 +180,38 @@ del %chaserdir%\Save\Users\*.cfg
 
 rem Delete savegame files
 del %chaserdir%\Save\*.sav
+
+rem Crashday
+
+set "crashdayrootdir=%gamerootdir%\Crashday"
+
+rem Delete log files
+del %crashdayrootdir%\*.log
+del %crashdayrootdir%\loc\eng\*.log
+del %crashdayrootdir%\loc\ger\*.log
+del %crashdayrootdir%\trkdata\cars\*.log
+del %crashdayrootdir%\trkdata\tiles\*.log
+
+rem Delete minigame highscores
+del %crashdayrootdir%\career\minigame\*.hig
+
+rem Delete quickchat file
+del %crashdayrootdir%\quickchat.txt
+
+rem Delete configuration files
+del %crashdayrootdir%\contrldx.cfg
+del %crashdayrootdir%\propsfx.cfg
+del %crashdayrootdir%\sounddx.cfg
+
+rem Backup track highscores and replay file
+del %gamerootdir%\Crashday\trkdata\tracks\*.hig
+del "%gamerootdir%\Crashday\trkdata\tracks\_!replay!_.trk"
+
+rem Delete replays
+del %crashdayrootdir%\replays\*.rpl
+
+rem Delete last user file and savegames
+del /q %crashdayrootdir%\savegame\*
 
 rem Darkest Dungeon
 
@@ -210,8 +283,42 @@ set "dvdir=%gamerootdir%\Alien Nations"
 rem Delete configuration and savegame files
 del /q "%dvdir%\Savegames\*"
 
-echo Die Voelker: Done.
-echo.
+rem Driver
+
+set "driverrootdir=%gamerootdir%\Driver"
+
+rem Delete logs
+del %driverrootdir%\*.log
+
+rem Delete configuration
+del %driverrootdir%\CONFIG.DAT
+
+rem Delete start position file
+del %driverrootdir%\*.X
+
+rem Delete temporary user replay data
+del "%driverrootdir%\ReplayData\User\$TEMP$.CFG"
+del "%driverrootdir%\ReplayData\User\$TEMP$.PADS"
+
+rem Delete highscores, replays and savegames
+del /q %driverrootdir%\Saves\*
+
+rem Dungeon Keeper 2
+
+set "dk2rootdir=%gamerootdir%\Dungeon Keeper 2"
+
+rem Delete log file
+del "%dk2rootdir%\*.LOG"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Bullfrog Productions Ltd\Dungeon Keeper II" /f
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bullfrog Productions Ltd\Dungeon Keeper II" /f
+
+rem Delete highscores
+del "%dk2rootdir%\Data\Settings\*.dat"
+
+rem Delete savegames
+del "%dk2rootdir%\Data\Save\*.SAV"
 
 rem else Heart.Break()
 
@@ -248,7 +355,7 @@ del /q "%eu1rootdir%\Scenarios\Save Games\*"
 rem Delete configuration
 del "%eu1rootdir%\*.eu"
 
-rem Europa Universalis II
+rem Europa Universalis
 
 set "eu2rootdir=%gamerootdir%\Europa Universalis 2"
 
@@ -422,6 +529,14 @@ del "%hmrootdir%\tempsave.sav"
 rem Delete HM’s user folder, which contains at least one .cfg file
 rd /q /s "%hmuserdir%"
 
+rem Hotline Miami Updated
+
+set "hmudir=%userprofile%\Documents\My Games\HotlineMiami"
+
+rem Delete Hotline Miami folder, which includes configuration, a log file and
+rem save data
+rd /q /s "%hmudir%"
+
 rem Inkslinger
 
 set "inkslingerlldir=%userprofile%\AppData\LocalLow\Gateway"
@@ -455,6 +570,36 @@ rd /q /s "%tldir%"
 
 rem Delete Thunder Lotus Games registry keys
 reg delete "HKCU\Software\Thunder Lotus Games" /f
+
+rem L’Amerzone
+
+set "larootdir=%gamerootdir%\AmerZone"
+
+rem Delete savegames
+del %larootdir%\*.bin
+
+rem Legacy of Kain: Soul Reaver
+
+set "loksrdir=%gamerootdir%\Legacy of Kain Soul Reaver"
+
+rem Delete savegame file
+del "%loksrdir%\*.her"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Crystal Dynamics\Legacy of Kain: Soul Reaver" /f
+
+rem Mafia
+
+set "mafiarootdir=%gamerootdir%\Mafia"
+
+rem Delete log file
+del %mafiarootdir%\log.txt
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Illusion Softworks\Mafia" /f
+
+rem Delete savegame files
+del /q %mafiarootdir%\savegame\*
 
 rem Master Spy
 
@@ -508,6 +653,24 @@ set "eadir=%userprofile%\Documents\EA Games"
 
 rem Delete EA Games directory
 rd /q /s "%eadir%"
+
+rem Mount & Blade
+
+set "mbdir=%appdata%\Mount&Blade"
+set "mbrootdir=%gamerootdir%\Mount and Blade"
+set "mbsavedir=%userprofile%\Documents\Mount&Blade Savegames"
+
+rem Delete savegame folder
+rd /q /s "%mbsavedir%"
+
+rem Delete Mount & Blade appdata folder
+rd /q /s "%mbdir%"
+
+rem Delete log file
+del "%mbrootdir%\rgl_log.txt"
+
+rem Delete Mount & Blade registry keys
+reg delete HKCU\SOFTWARE\MountAndBladeKeys /f
 
 rem Mount & Blade Warband
 
@@ -619,6 +782,41 @@ set "penumbradir=%userprofile%\Documents\Penumbra"
 rem Delete keybinds, log files, savegames and settings
 rd /q /s %penumbradir%
 
+rem Planescape: Torment
+
+set "ptrootdir=%gamerootdir%\Planescape Torment"
+
+rem Delete save folder
+rd /q /s "%ptrootdir%\save"
+
+rem Delete cache files
+del /q "%ptrootdir%\cache\*"
+
+rem Delete configuration file
+del "%ptrootdir%\Torment.ini"
+
+rem Delete log files
+del "%ptrootdir%\*.log"
+
+rem Delete error log file
+del "%ptrootdir%\*.err"
+
+rem Port Royale
+
+set "prrootdir=%gamerootdir%\Port Royale"
+
+rem Delete log files
+del "%prrootdir%\*.2DL"
+
+rem Delete player .aim files
+del "%prrootdir%\Run\Player*"
+
+rem Delete options file
+del "%prrootdir%\Save\*.sav"
+
+rem Delete savegames
+del "%prrootdir%\Save\*.mrk"
+
 rem Postal Plus
 
 set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
@@ -683,12 +881,32 @@ rem Quake III
 set "q3rootdir=%gamerootdir%\Quake III Arena"
 
 rem Delete log files in root directory
-echo Quake III: Deleting log files
 del "%q3rootdir%\*.log"
 
 rem Delete configuration files from baseq3 directory
-echo Quake III: Deleting configuration files
 del "%q3rootdir%\baseq3\*.cfg"
+
+rem Red Faction
+
+set "rfrootdir=%gamerootdir%\Red Faction"
+
+rem Delete savegames
+del /q "%rfrootdir%\savegame\*"
+
+rem Delete configuration file
+del "%rfrootdir%\*.cfg"
+
+rem Delete D3D file
+del "%rfrootdir%\*.id"
+
+rem Delete banlist
+del "%rfrootdir%\banlist.txt"
+
+rem Delete console history
+del "%rfrootdir%\console_history"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Volition\Red Faction" /f
 
 rem Remothered - Tormented Fathers
 
@@ -713,6 +931,29 @@ set "stalkercsdir=%userprofile%\Documents\stalke~1"
 
 rem Delete S.T.A.L.K.E.R. Clear Sky user directory
 rd /q /s %stalkercsdir%
+
+rem S.T.A.L.K.E.R. Shadow of Chernobyl
+
+set "sshocdir=%userprofile%\Documents\Stalker-SHOC"
+
+rem Delete S.T.A.L.K.E.R. Shadow of Chernobyl user directory
+rd /q /s %sshocdir%
+
+rem Sacred Gold
+
+set "sgrootdir=%gamerootdir%\Sacred Gold"
+
+rem Delete log files
+del "%sgrootdir%\*.log"
+
+rem Delete exported characters and savegames
+del /q "%sgrootdir%\save\*"
+
+rem Delete configuration files
+del "%sgrootdir%\*.cfg"
+
+rem Delete GLOBAL.TXT
+del "%sgrootdir%\GLOBAL.TXT"
 
 rem Saints Row 3
 
@@ -921,6 +1162,22 @@ rd /q /s "%w1userdir%"
 rem Delete Witcher 1 registry keys
 reg delete "HKCU\Software\CD Projekt RED" /f
 
+rem Thief: The Dark Project
+
+set "ttdprootdir=%gamerootdir%\Thief Gold"
+
+rem Delete mission start save file
+del "%ttdprootdir%\*.sav"
+
+rem Delete savegames
+del "%ttdprootdir%\SAVES\*.sav"
+
+rem Delete configuration
+del "%ttdprootdir%\cam.cfg"
+
+rem Delete keybinds
+del "%ttdprootdir%\user.bnd"
+
 rem Tom Clancy’s Splinter Cell
 
 set "tcscrootdir=%gamerootdir%\Splinter Cell"
@@ -981,5 +1238,46 @@ set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
 
 rem Delete savegame files
 del /q %vd2rootdir%\*.lsd
+
+rem Worms Armageddon
+
+set "warootdir=%gamerootdir%\Worms Armageddon"
+
+rem Delete games data
+del /q "%warootdir%\User\Games\*"
+
+rem Delete team data
+del /q "%warootdir%\User\Teams\*"
+
+rem Delete custom.dat file
+del "%warootdir%\custom.dat"
+
+rem Delete land.dat file
+del "%warootdir%\DATA\land.dat"
+
+rem Delete registry keys
+reg delete HKCU\SOFTWARE\Team17SoftwareLTD\WormsArmageddon /f
+
+echo Worms Armageddon: Done.
+echo.
+
+rem XIII
+
+set "xiiirootdir=%gamerootdir%\XIII"
+
+rem Delete sound log
+del %xiiirootdir%\usnd_log.txt
+
+rem Delete video debug file
+del %xiiirootdir%\system\Debug_video.txt
+
+rem Delete XIII log file
+del %xiiirootdir%\system\XIII.log
+
+rem Delete XIII configuration file
+del %xiiirootdir%\system\XIII.ini
+
+rem Delete profiles, which also contain savegame data
+del %xiiirootdir%\Save\*.pro
 
 pause

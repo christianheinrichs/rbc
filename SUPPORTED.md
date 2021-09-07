@@ -2,21 +2,27 @@ Supported games
 ===============
 
 - A Hand With Many Fingers
+- Alan Wake (GOG version)
 - Alan Wake’s American Nightmare (GOG version)
 - Aliens Versus Predator - Classic 2000
 - Amnesia - A Machine for Pigs
 - Amnesia - The Dark Descent
+- Anachronox
 - ANNO 1602
 - Barrow Hill - Curse of the Ancient Circle
+- Battle Realms
 - Becherov
 - BioShock
 - Buddy Simulator 1984
 - Cave Story
 - Chaser
+- Crashday
 - Darkest Dungeon
 - Diablo
 - Diablo II
 - Die Völker
+- Driver
+- Dungeon Keeper 2
 - else Heart.Break()
 - Enigmatis - The Ghosts of Maple Creek
 - Europa Universalis
@@ -33,13 +39,19 @@ Supported games
 - Hellblade: Senua’s Sacrifice
 - Hitman - Codename 47
 - Hotline Miami Original
+- Hotline Miami Updated
 - Inkslinger
 - Inside
 - Jotun - Valhalla Edition
+- L’Amerzone
+- Legacy of Kain: Soul Reaver
+- Mafia
 - Master Spy
 - Metal Gear Solid
 - Metro 2033 Redux
 - Mirror’s Edge
+- Mount & Blade
+- Mount & Blade: Warband
 - Mount & Blade: Warband - Viking Conquest
 - Oddworld: Abe’s Oddysee
 - Oddworld: Abe’s Exoddus
@@ -51,13 +63,18 @@ Supported games
 - Penumbra: Black Plague
 - Penumbra: Overture
 - Penumbra: Requiem
+- Planescape: Torment
+- Port Royale
 - Postal Plus
 - Postal 2
 - Quake II
 - Quake III
+- Red Faction
 - Remothered - Tormented Fathers
 - Ritual of the Moon
 - S.T.A.L.K.E.R. - Clear Sky
+- S.T.A.L.K.E.R. - Shadow of Chernobyl
+- Sacred Gold
 - Saints Row 3
 - Serious Sam: The First Encounter
 - Sludge Life
@@ -74,8 +91,11 @@ Supported games
 - The Longest Journey
 - The Suicide of Rachel Foster
 - The Witcher 1
+- Thief: The Dark Project
 - Tom Clancy’s Splinter Cell
 - Unreal
 - Unreal II - The Awakening
 - Uplink
 - Vampire’s Dawn 2
+- Worms Armageddon
+- XIII
