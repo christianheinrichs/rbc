@@ -50,7 +50,7 @@ if exist "Alan Wake" (
 	xcopy /e /i /y "Alan Wake" %awdir%
 	echo.
 ) else (
-	echo Alan Wake: Backup folder not found. Skipping...
+	echo Alan Wake: Directory not found. Skipping...
 	echo.
 )
 
@@ -64,11 +64,11 @@ set "awandir=%userprofile%\Documents\Remedy\AmericanNightmare_GOG_Version"
 rem Restore config file (which contains Arcade score data), keybinds, resolution
 rem settings and savegames
 if exist "Alan Wake's American Nightmare" (
-	echo Alan Wake's American Nightmare: Restoring config file, keybinds, resolution settings, savegames
+	echo Alan Wake's American Nightmare: Backing up config file, keybinds, resolution settings, savegames
 	xcopy /e /i /y "Alan Wake's American Nightmare" %awandir%
 	echo.
 ) else (
-	echo Alan Wake's American Nightmare: Backup folder not found. Skipping...
+	echo Alan Wake's American Nightmare: Directory not found. Skipping...
 	echo.
 )
 
@@ -82,16 +82,34 @@ set "avpc2kdir2=%localappdata%\Rebellion\AvP Classic"
 set "avpc2krootdir=%gamerootdir%\Aliens versus Predator Classic"
 
 rem Restore profiles, savegames and video configuration
-echo Aliens Versus Predator - Classic 2000: Restoring profiles, savegames and video configuration
-xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvP Classic" "%avpc2kdir2%"
+if exist "Aliens Versus Predator - Classic 2000\AvP Classic" (
+	echo Aliens Versus Predator - Classic 2000: Restoring profiles, savegames and video configuration
+	xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvP Classic" "%avpc2kdir2%"
+	echo.
+) else (
+	echo Aliens Versus Predator - Classic 2000: AvP Classic folder not found. Skipping...
+	echo.
+)
 
 rem Restore Launcher.ini
-echo Aliens Versus Predator - Classic 2000: Restoring Launcher.ini
-xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvPGold" "%avpc2kdir1%"
+if exist "Aliens Versus Predator - Classic 2000\AvPGold" (
+	echo Aliens Versus Predator - Classic 2000: Restoring Launcher.ini
+	xcopy /e /i /y "Aliens Versus Predator - Classic 2000\AvPGold" "%avpc2kdir1%"
+	echo.
+) else (
+	echo Aliens Versus Predator - Classic 2000: AvPGold folder not found. Skipping...
+	echo.
+)
 
 rem Restore configuration
-echo Aliens Versus Predator - Classic 2000: Restoring configuration
-copy "Aliens Versus Predator - Classic 2000\CONFIG.CFG" "%avpc2krootdir%"
+if exist "Aliens Versus Predator - Classic 2000\CONFIG.CFG" (
+	echo Aliens Versus Predator - Classic 2000: Restoring configuration
+	copy "Aliens Versus Predator - Classic 2000\CONFIG.CFG" "%avpc2krootdir%"
+	echo.
+) else (
+	echo Aliens Versus Predator - Classic 2000: Configuration not found. Skipping...
+	echo.
+)
 
 echo Aliens Versus Predator - Classic 2000: Done.
 echo.
@@ -263,9 +281,9 @@ rem Becherov
 set "becherovrootdir=%gamerootdir%\Becherov"
 
 rem Restore profile data
-if exist Becherov\*.dat (
+if exist Becherov\Data\Player\*.dat (
 	echo Becherov: Restoring profile data
-	copy Becherov\*.dat %becherovrootdir%\Data\Player
+	xcopy /i /y Becherov\Data\Player\*.dat %becherovrootdir%\Data\Player
 	echo.
 ) else (
 	echo Becherov: Profile data not found. Skipping...
@@ -291,12 +309,12 @@ set "bs1dir=%appdata%\Bioshock"
 set "bs1sgdir=%userprofile%\Documents\Bioshock\SaveGames"
 
 rem Restore savegames
-if exist BioShock\SaveGames (
+if exist BioShock\SaveGames\*.bsb (
 	echo BioShock: Restoring savegames
 	xcopy /e /i /y "BioShock\SaveGames" %bs1sgdir%
 	echo.
 ) else (
-	echo BioShock: SaveGames folder not found. Skipping...
+	echo BioShock: Savegames not found. Skipping...
 	echo.
 )
 
@@ -321,7 +339,7 @@ set "bs1984rootdir=%gamerootdir%\Buddy Simulator 1984"
 rem Restore DATA folder
 if exist "Buddy Simulator 1984\DATA" (
 	echo Buddy Simulator 1984: Restoring data folder
-	xcopy /e /i /y "Buddy Simulator 1984\DATA" "%userprofile%\Documents\Buddy Simulator 1984"
+	xcopy /e /i /y "Buddy Simulator 1984\DATA" "%bs1984datadir%"
 	echo.
 ) else (
 	echo Buddy Simulator 1984: DATA folder not found. Skipping...
@@ -350,7 +368,7 @@ if exist "Buddy Simulator 1984\buddy-sim-1984.reg" (
 
 rem Cave Story
 
-set "cavestorydir=%gamerootdir%\Cave_Story"
+set "cavestoryrootdir=%gamerootdir%\Cave_Story"
 
 rem Copy .dat into the game’s root directory
 if exist "Cave Story\*.dat" (
@@ -368,7 +386,7 @@ if exist "Cave Story\*.rect" (
 	copy "Cave Story\*.rect" %cavestorydir%
 	echo.
 ) else (
-	echo Cave Story: window.rect file not found
+	echo Cave Story: window.rect not found. Skipping...
 	echo.
 )
 
@@ -469,7 +487,7 @@ if exist Crashday\quickchat.txt (
 	copy Crashday\quickchat.txt %crashdayrootdir%
 	echo.
 ) else (
-	echo Crashday: Quickchat file not found. Skipping...
+	echo Crashday: Quickchat file backup not found. Skipping...
 	echo.
 )
 
@@ -553,12 +571,12 @@ set "d2rootdir=%gamerootdir%\Diablo II"
 set "d2sgdir=%userprofile%\Saved Games\Diablo II"
 
 rem Restore savegame files
-if exist "Diablo II\Saved Games" (
+if exist "Diablo II\Saved Games\*.d2s" (
 	echo Diablo II: Restoring savegame files
 	xcopy /e /i /y "Diablo II\Saved Games" "%d2sgdir%"
 	echo.
 ) else (
-	echo Diablo II: Saved Games folder not found. Skipping...
+	echo Diablo II: Savegames not found. Skipping...
 	echo.
 )
 
@@ -585,6 +603,43 @@ if exist "Diablo II\d2.reg" (
 echo Diablo II: Done.
 echo.
 
+rem Die Gilde
+
+set "gilderootdir=%gamerootdir%\Die Gilde"
+
+rem Restore savegames
+if exist "Die Gilde\Resources\gamedata\saves\*.SAV" (
+	echo Die Gilde: Restoring savegames
+	xcopy /i /y "Die Gilde\Resources\gamedata\saves\*.SAV" "%gilderootdir%\Resources\gamedata\saves"
+	echo.
+) else (
+	echo Die Gilde: Savegame backup not found. Skipping...
+	echo.
+)
+
+rem Restore configuration
+if exist "Die Gilde\game.ini" (
+	echo Die Gilde: Restoring configuration
+	xcopy /i /y "Die Gilde\game.ini" "%gilderootdir%"
+	echo.
+) else (
+	echo Die Gilde: Configuration backup not found. Skipping...
+	echo.
+)
+
+rem Restore registry keys
+if exist "Die Gilde\gilde.reg" (
+	echo Die Gilde: Restoring registry keys
+	reg import "Die Gilde\gilde.reg"
+	echo.
+) else (
+	echo Die Gilde: Registry keys backup not found. Skipping...
+	echo.
+)
+
+echo Die Gilde: Done.
+echo.
+
 rem Die Völker
 
 set "dvrootdir=%gamerootdir%\Alien Nations"
@@ -595,7 +650,7 @@ if exist "Die Voelker\Savegames" (
 	xcopy /e /i /y "Die Voelker\Savegames" "%dvdir%\Savegames"
 	echo.
 ) else (
-	echo Die Voelker: Savegames directory not found. Skipping...
+	echo Die Voelker: Savegames folder not found. Skipping...
 	echo.
 )
 
@@ -704,7 +759,7 @@ if exist "Else Heartbreak\Saves\*.json" (
 	copy "Else Heartbreak\Saves\*.json" %ehbsavedir%
 	echo.
 ) else (
-	echo "else Heart.Break(): JSON savegame files not found. Skipping..."
+	echo "else Heart.Break(): Savegames not found. Skipping..."
 	echo.
 )
 
@@ -723,23 +778,16 @@ echo.
 
 rem Enigmatis - The Ghosts of Maple Creek
 
-set "etgomcprofiledir=%appdata%\Artifex Mundi\Enigmatis_TheGhostOfMapleCreek\CE\profile"
+set "etgomcdir=%appdata%\Artifex Mundi\Enigmatis_TheGhostOfMapleCreek"
 
-rem Create profile folder structure
-echo Enigmatis - The Ghosts of Maple Creek: Creating profile folder structure
-md "%etgomcprofiledir%"
-
-rem Copy achievement file into profile folder
-echo Enigmatis - The Ghosts of Maple Creek: Copying achievement file
-copy "Enigmatis - The Ghosts of Maple Creek\*.ach" "%etgomcprofiledir%"
-
-rem Copy savegame file into profile folder
-echo Enigmatis - The Ghosts of Maple Creek: Copying savegame
-copy "Enigmatis - The Ghosts of Maple Creek\*.cub" "%etgomcprofiledir%"
-
-rem Copy global and player profile
-echo Enigmatis - The Ghosts of Maple Creek: Copying global and player profile
-copy "Enigmatis - The Ghosts of Maple Creek\*.prf" "%etgomcprofiledir%"
+if exist "Enigmatis - The Ghosts of Maple Creek\CE\profile\*.prf" (
+	echo Enigmatis - The Ghosts of Maple Creek: Restoring profile folder
+	xcopy /e /i /y "Enigmatis - The Ghosts of Maple Creek\CE\profile" "%etgomcdir%"
+	echo.
+) else (
+	echo Enigmatis - The Ghosts of Maple Creek: Profiles not found. Skipping...
+	echo.
+)
 
 echo Enigmatis - The Ghosts of Maple Creek: Done.
 echo.
@@ -827,7 +875,7 @@ if exist Firewatch\CampoSanto (
 	xcopy /e /i /y Firewatch\CampoSanto %fwlldir%
 	echo.
 ) else (
-	echo Firewatch: Folder not found. Skipping...
+	echo Firewatch: Backup not found. Skipping...
 	echo.
 )
 
@@ -864,7 +912,7 @@ if exist Gothic\system\*.INI (
 	xcopy /i /y Gothic\system\*.INI %g1rootdir%\system
 	echo.
 ) else (
-	echo Gothic: Configuration file not found. Skipping...
+	echo Gothic: Configuration not found. Skipping...
 	echo.
 )
 
@@ -875,7 +923,7 @@ rem Gothic II
 
 set "g2rootdir=%gamerootdir%\Gothic II Gold"
 
-rem Backup savegames
+rem Restore savegames
 if exist "Gothic II\Saves" (
 	echo Gothic II: Restoring savegames
 	xcopy /e /i /y "Gothic II\Saves" "%g2rootdir%\Saves"
@@ -973,7 +1021,7 @@ rem Grand Theft Auto: San Andreas
 
 set "gtasadir=%userprofile%\Documents\GTA San Andreas User Files"
 
-rem Restore settings files, savegames, gallery and user tracks
+rem Restore settings file, savegames, gallery and user tracks
 if exist "GTA - San Andreas" (
 	echo Grand Theft Auto: San Andreas - Restoring user folder
 	xcopy /e /i /y "GTA - San Andreas" "%gtasadir%"
@@ -988,13 +1036,13 @@ echo.
 
 rem Hacknet
 
-set "hacknetdir=%userprofile%\Documents\My Games\Hacknet\Accounts"
+set "hacknetdir=%userprofile%\Documents\My Games\Hacknet"
 set "hnrootdir=%gamerootdir%\Hacknet"
 
 rem Restore Accounts folder
 if exist Hacknet\Accounts (
 	echo Hacknet: Restoring Accounts folder
-	xcopy /e /i /y Hacknet\Accounts "%hacknetdir%"
+	xcopy /e /i /y Hacknet\Accounts "%hacknetdir%\Accounts"
 	echo.
 ) else (
 	echo Hacknet: Accounts folder not found. Skipping...
@@ -1003,7 +1051,7 @@ if exist Hacknet\Accounts (
 
 rem Restore settings
 if exist Hacknet\Settings.txt (
-	echo Hacknet: Restoring settings file
+	echo Hacknet: Restoring settings
 	copy Hacknet\Settings.txt %hnrootdir%
 	echo.
 ) else (
@@ -1019,7 +1067,7 @@ rem Hearts of Iron
 set "hoirootdir=%gamerootdir%\Hearts of Iron"
 
 rem Restore savegames
-if exist "Hearts of Iron\Scenarios\Save Games" (
+if exist "Hearts of Iron\Scenarios\Save Games\*.eug" (
 	echo Hearts of Iron: Restoring savegames
 	xcopy /e /i /y "Hearts of Iron\Scenarios\Save Games" "%hoirootdir%\scenarios\save games"
 	echo.
@@ -1053,12 +1101,12 @@ echo.
 
 rem Hellblade - Senua’s Sacrifice
 
-set "hbsavedir=%userprofile%\AppData\Local\HellbladeGame\Saved"
+set "hbdir=%userprofile%\AppData\Local\HellbladeGame"
 
 rem Copy savegame file into the game’s savegame folder
 if exist "Hellblade - Senua's Sacrifice\SaveGames\*.sav" (
 	echo Hellblade - Senua's Sacrifice: Restoring savegame
-	xcopy /i /y "Hellblade - Senua's Sacrifice\SaveGames\*.sav" %hbsavedir%\SaveGames
+	xcopy /i /y "Hellblade - Senua's Sacrifice\SaveGames\*.sav" %hbdir%\Saved\SaveGames
 	echo.
 ) else (
 	echo Hellblade - Senua's Sacrifice: Savegame not found. Skipping...
@@ -1068,7 +1116,7 @@ if exist "Hellblade - Senua's Sacrifice\SaveGames\*.sav" (
 rem Restore user settings file
 if exist "Hellblade - Senua's Sacrifice\*.ini" (
 	echo Hellblade - Senua's Sacrifice: Restoring user settings
-	xcopy /i /y "Hellblade - Senua's Sacrifice\*.ini" %hbsavedir%\Config\WindowsNoEditor
+	xcopy /i /y "Hellblade - Senua's Sacrifice\*.ini" %hbdir%\Saved\Config\WindowsNoEditor
 	echo.
 ) else (
 	echo Hellblade - Senua's Sacrifice: User settings not found. Skipping...
@@ -1141,7 +1189,7 @@ if exist "Hotline Miami Updated" (
 	xcopy /e /i /y "Hotline Miami Updated" "%hmudir%"
 	echo.
 ) else (
-	echo Hotline Miami Updated: Configuration and save data not found. Skipping...
+	echo Hotline Miami Updated: Backup folder not found. Skipping...
 	echo.
 )
 
@@ -1191,12 +1239,12 @@ echo.
 
 rem Jotun - Valhalla Edition
 
-set "jvesavedir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
+set "jvedir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
 
 rem Copy savegame file into the game’s savegame folder
 if exist "Jotun - Valhalla Edition\*.sav" (
 	echo Jotun - Valhalla Edition: Restoring savegame and options
-	xcopy /i /y "Jotun - Valhalla Edition\*.sav" "%jvesavedir%"
+	xcopy /i /y "Jotun - Valhalla Edition\*.sav" "%jvedir%"
 	echo.
 ) else (
 	echo Jotun - Valhalla Edition: Option and savegame files not found. Skipping...
@@ -1250,7 +1298,7 @@ if exist Mafia\savegame (
 	xcopy /e /i /y Mafia\savegame %mafiarootdir%\savegame
 	echo.
 ) else (
-	echo Mafia: Savegame folder not found. Skipping...
+	echo Mafia: Backup folder not found. Skipping...
 	echo.
 )
 
@@ -1269,18 +1317,18 @@ echo.
 
 rem Master Spy
 
-set "masterspydir=%localappdata%\Master Spy\Local Storage"
+set "masterspydir=%localappdata%\Master Spy"
 
 rem Copy local storage files into the game’s local storage
 if exist "Master Spy\*.localstorage" (
 	if exist "Master Spy\*.localstorage-journal" (
 		echo Master Spy: Restoring local storage state
-		xcopy /i /y "Master Spy\*.localstorage" "%masterspydir%"
-		copy "Master Spy\*.localstorage-journal" "%masterspydir%"
+		xcopy /i /y "Master Spy\*.localstorage" "%masterspydir%\Local Storage"
+		copy "Master Spy\*.localstorage-journal" "%masterspydir%\Local Storage"
 		echo.
 	)
 ) else (
-	echo Master Spy: Local storage not found. Skipping...
+	echo Master Spy: Local storage backup not found. Skipping...
 	echo.
 )
 
@@ -1361,18 +1409,18 @@ set "m2033reduxappdatadir=%localappdata%\4A Games\Metro Redux\2033"
 
 rem Restore autosave file
 if exist "Metro 2033 Redux\Savegames\*" (
-	echo Metro 2033 Redux: Restoring autosaves and player files
+	echo Metro 2033 Redux: Restoring autosave and player files
 	xcopy /i /y "Metro 2033 Redux\Savegames\*" "%m2033reduxdir%"
 	echo.
 ) else (
-	echo Metro 2033 Redux: Autosaves and player files not found. Skipping...
+	echo Metro 2033 Redux: Autosave and player files not found. Skipping...
 	echo.
 )
 
-rem Restore player files
+rem Restore user keybinds and settings
 if exist "Metro 2033 Redux\*.cfg" (
 	echo Metro 2033 Redux: Restoring keybinds and settings
-	xcopy /i /y "Metro 2033 Redux\*.cfg" "%m2033reduxappdatadir%"
+	copy "Metro 2033 Redux\*.cfg" "%m2033reduxappdatadir%"
 	echo.
 ) else (
 	echo Metro 2033 Redux: Keybinds and settings not found. Skipping...
@@ -1384,12 +1432,12 @@ echo.
 
 rem Mirror’s Edge
 
-set "medir=%userprofile%\Documents\EA Games\Mirror's Edge\TdGame"
+set "medir=%userprofile%\Documents\EA Games\Mirror's Edge"
 
 rem Copy savegame file into the game’s savegame folder
 if exist "Mirror's Edge\*.dat" (
 	echo Mirror's Edge: Restoring savegame file
-	xcopy /i /y "Mirror's Edge\*.dat" "%medir%\Savefiles"
+	xcopy /i /y "Mirror's Edge\*.dat" "%medir%\TdGame\Savefiles"
 	echo.
 ) else (
 	echo Mirror's Edge: Savegame file not found. Skipping...
@@ -1398,11 +1446,11 @@ if exist "Mirror's Edge\*.dat" (
 
 rem Copy configuration file into the game’s config folder
 if exist "Mirror's Edge\*.ini" (
-	echo Mirror's Edge: Restoring configuration file
-	xcopy /i /y "Mirror's Edge\*.ini" "%medir%\Config"
+	echo Mirror's Edge: Restoring configuration and keybinds file
+	xcopy /i /y "Mirror's Edge\*.ini" "%medir%\TdGame\Config"
 	echo.
 ) else (
-	echo Mirror's Edge: Configuration file not found. Skipping...
+	echo Mirror's Edge: Configuration and keybinds file not found. Skipping...
 	echo.
 )
 
@@ -1416,7 +1464,7 @@ set "mbsavedir=%userprofile%\Documents\Mount&Blade Savegames"
 
 rem Restore savegame files
 if exist "Mount & Blade\Savegames" (
-	echo Mount and Blade: Restore savegames
+	echo Mount and Blade: Restoring savegames
 	xcopy /e /i /y "Mount & Blade\Savegames" "%mbsavedir%\Native"
 	echo.
 ) else (
@@ -1458,7 +1506,7 @@ if exist "Mount & Blade Warband\Config\*.txt" (
 	xcopy /i /y "Mount & Blade Warband\Config\*.txt" "%mbwdir%"
 	echo.
 ) else (
-	echo Mount and Blade: Warband - Restoring config file
+	echo Mount and Blade: Warband - Config file not found. Skipping...
 	echo.
 )
 
@@ -1522,22 +1570,22 @@ echo.
 
 rem Oddworld: Abe’s Exoddus
 
-set "oaedir=%gamerootdir%\Abes Exoddus"
+set "oaerootdir=%gamerootdir%\Abes Exoddus"
 
 rem Restore savegames
 if exist "Oddworld - Abe's Exoddus\*.sav" (
 	echo Oddworld: Abe's Exoddus - Restoring savegames
-	xcopy /i /y "Oddworld - Abe's Exoddus\*.sav" "%oaedir%"
+	xcopy /i /y "Oddworld - Abe's Exoddus\*.sav" "%oaerootdir%"
 	echo.
 ) else (
 	echo Oddworld: Abe's Exoddus - Savegames not found. Skipping...
 	echo.
 )
 
-rem Backup configuration
+rem Restore configuration
 if exist "Oddworld - Abe's Exoddus\abe2.ini" (
 	echo Oddworld: Abe's Exoddus - Restoring configuration
-	copy "Oddworld - Abe's Exoddus\abe2.ini" "%oaedir%"
+	copy "Oddworld - Abe's Exoddus\abe2.ini" "%oaerootdir%"
 	echo.
 ) else (
 	echo Oddworld: Abe's Exoddus - Configuration not found. Skipping...
@@ -1549,12 +1597,12 @@ echo.
 
 rem Oddworld - New 'n' Tasty
 
-set "onntsavedir=%gamerootdir%\Oddworld - New 'n' Tasty\SaveGame"
+set "onntrootdir=%gamerootdir%\Oddworld - New 'n' Tasty"
 
 rem Copy save slot files into the game’s savegame directory
-if exist "Oddworld - New 'n' Tasty\*.NnT" (
+if exist "Oddworld - New 'n' Tasty\SaveGame\*.NnT" (
 	echo Oddworld - New 'n' Tasty: Restoring save slot files
-	xcopy /i /y "Oddworld - New 'n' Tasty\*.NnT" "%onntsavedir%"
+	xcopy /i /y "Oddworld - New 'n' Tasty\SaveGame\*.NnT" "%onntrootdir%\SaveGame"
 	echo.
 ) else (
 	echo Oddworld - New 'n' Tasty: Save slot files not found. Skipping...
@@ -1599,12 +1647,12 @@ echo Open Arena: Done.
 echo.
 
 rem Outlast
-set "oldir=%userprofile%\Documents\My Games\Outlast\OLGame"
+set "oldir=%userprofile%\Documents\My Games\Outlast"
 
 rem Restore profile and savegame files
 if exist Outlast\SaveData\* (
 	echo Outlast: Restoring profile and savegame files
-	xcopy /i /y Outlast\SaveData\* "%oldir%\SaveData"
+	xcopy /i /y Outlast\SaveData\* "%oldir%\OLGame\SaveData"
 	echo.
 ) else (
 	echo Outlast: SaveData not found. Skipping...
@@ -1614,7 +1662,7 @@ if exist Outlast\SaveData\* (
 rem Restore config folder
 if exist Outlast\Config (
 	echo Outlast: Restoring config folder
-	xcopy /e /i /y Outlast\Config "%oldir%\Config"
+	xcopy /e /i /y Outlast\Config "%oldir%\OLGame\Config"
 	echo.
 ) else (
 	echo Outlast: Config folder not found. Skipping...
@@ -1633,7 +1681,6 @@ if exist Painkiller\SaveGames (
 	echo Painkiller: Restoring savegames
 	xcopy /e /i /y Painkiller\SaveGames "%pkdir%\SaveGames"
 	echo.
-	)
 ) else (
 	echo Painkiller: Savegames backup not found. Skipping...
 	echo.
@@ -1686,7 +1733,7 @@ rem Penumbra: Overture
 
 set "podir=%userprofile%\Documents\Penumbra Overture"
 
-rem Restore keybinds, settings and savegames
+rem Restore keybinds, savegames and settings
 if exist "Penumbra - Overture" (
 	echo Penumbra: Overture - Restoring keybinds, settings and savegames
 	xcopy /e /i /y "Penumbra - Overture" "%podir%"
@@ -1782,12 +1829,12 @@ echo.
 
 rem Postal Plus
 
-set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+set "p1rootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
 
 rem Restore savegames and highscores
-if exist "Postal Plus\SaveGame" (
+if exist "Postal Plus\res\SaveGame" (
 	echo Postal Plus: Restoring savegames and highscores
-	xcopy /e /i /y "Postal Plus\SaveGame" "%p1dir%\res\SaveGame"
+	xcopy /e /i /y "Postal Plus\res\SaveGame" "%p1rootdir%\res\SaveGame"
 	echo.
 ) else (
 	echo Postal Plus: SaveGame folder backup not found. Skipping...
@@ -1797,7 +1844,7 @@ if exist "Postal Plus\SaveGame" (
 rem Restoring configuration
 if exist "Postal Plus\*.ini" (
 	echo Postal Plus: Restoring configuration
-	copy "Postal Plus\*.ini" "%p1dir%"
+	copy "Postal Plus\*.ini" "%p1rootdir%"
 	echo.
 ) else (
 	echo Postal Plus: Configuration backup not found. Skipping...
@@ -1809,15 +1856,15 @@ echo.
 
 rem Postal 2
 
-set "p2dir=%gamerootdir%\Postal2STP"
+set "p2rootdir=%gamerootdir%\Postal2STP"
 
 rem Restore savegames
-if exist "Postal 2\Save" (
+if exist "Postal 2\Save\*.usa" (
 	echo Postal 2: Restoring savegames
-	xcopy /e /i /y "Postal 2\Save" "%p2dir%\Save"
+	xcopy /e /i /y "Postal 2\Save" "%p2rootdir%\Save"
 	echo.
 ) else (
-	echo Postal 2: Save backup folder not found. Skipping...
+	echo Postal 2: Savegame backup not found. Skipping...
 	echo.
 )
 
@@ -1826,9 +1873,9 @@ if exist "Postal 2\System\Postal2.ini" (
 	if exist "Postal 2\System\SavedGameInfo.ini" (
 		if exist "Postal 2\System\User.ini" (
 			echo Postal 2: Restoring configuration, keybinds and savegame information
-			copy "Postal 2\System\Postal2.ini" "%p2dir%\System"
-			copy "Postal 2\System\SavedGameInfo.ini" "%p2dir%\System"
-			copy "Postal 2\System\User.ini" "%p2dir%\System"
+			copy "Postal 2\System\Postal2.ini" "%p2rootdir%\System"
+			copy "Postal 2\System\SavedGameInfo.ini" "%p2rootdir%\System"
+			copy "Postal 2\System\User.ini" "%p2rootdir%\System"
 			echo.
 		)
 	)
@@ -1854,7 +1901,7 @@ if exist "Quake II\Base\save" (
 	echo.
 )
 
-rem Restore keybinds and configuration
+rem Restore configuration and keybinds
 if exist "Quake II\Base\*.cfg" (
 	echo Quake II: Restoring keybinds and configuration
 	copy "Quake II\Base\*.cfg" "%q2rootdir%\baseq2"
@@ -1919,10 +1966,10 @@ echo.
 
 rem Quake II - The Eraser Bot
 
-rem Backup keybinds and configuration file
-if exist "Quake II\The Eraser Bot\*.cfg" (
+rem Restore keybinds and configuration file
+if exist "Quake II\The Eraser Bot\config.cfg" (
 	echo Quake II - The Eraser Bot: Restoring keybinds and configuration
-	xcopy /i /y "Quake II\The Eraser Bot\*.cfg" "%q2rootdir%\Eraser"
+	xcopy /i /y "Quake II\The Eraser Bot\config.cfg" "%q2rootdir%\Eraser"
 	echo.
 ) else (
 	echo Quake II - The Eraser Bot: Configuration and keybinds backup not found. Skipping...
@@ -1998,15 +2045,15 @@ echo.
 
 rem Remothered - Tormented Fathers
 
-set "rtfsavedir=%localappdata%\Remothered\Saved\SaveGames"
+set "rtfdir=%localappdata%\Remothered"
 
 rem Restore savegame files
 if exist "Remothered - Tormented Fathers\*.sav" (
-	echo Remothered - Tormented Fathers: Restoring savegame files
-	xcopy /i /y "Remothered - Tormented Fathers\*.sav" %rtfsavedir%
+	echo Remothered - Tormented Fathers: Restoring savegames and settings
+	xcopy /i /y "Remothered - Tormented Fathers\*.sav" %rtfdir%\Saved\SaveGames
 	echo.
 ) else (
-	echo Remothered - Tormented Fathers: Savegame files backup not found. Skipping...
+	echo Remothered - Tormented Fathers: Savegames and settings backup not found. Skipping...
 	echo.
 )
 
@@ -2144,22 +2191,22 @@ echo.
 
 rem Serious Sam: The First Encounter
 
-set "sstfedir=%gamerootdir%\Serious Sam The First Encounter"
+set "sstferootdir=%gamerootdir%\Serious Sam The First Encounter"
 
 rem Restore control files
 if exist "Serious Sam - The First Encounter\Controls\*.ctl" (
 	echo Serious Sam: The First Encounter - Restoring control files
-	xcopy /i /y "Serious Sam - The First Encounter\Controls\*.ctl" "%sstfedir%\Controls"
+	xcopy /i /y "Serious Sam - The First Encounter\Controls\*.ctl" "%sstferootdir%\Controls"
 	echo.
 ) else (
 	echo Serious Sam: The First Encounter - Control files backup not found. Skipping...
 	echo.
 )
 
-rem Restore .plr files Players directory
+rem Restore .plr files
 if exist "Serious Sam - The First Encounter\Players\*.plr" (
 	echo Serious Sam: The First Encounter - Restoring .plr files
-	xcopy /i /y "Serious Sam - The First Encounter\Players\*.plr" "%sstfedir%\Players"
+	xcopy /i /y "Serious Sam - The First Encounter\Players\*.plr" "%sstferootdir%\Players"
 	echo.
 ) else (
 	echo Serious Sam: The First Encounter - .plr files backup not found. Skipping...
@@ -2169,17 +2216,17 @@ if exist "Serious Sam - The First Encounter\Players\*.plr" (
 rem Restore savegame files
 if exist "Serious Sam - The First Encounter\SaveGame" (
 	echo Serious Sam: The First Encounter - Restoring savegame files
-	xcopy /e /i /y "Serious Sam - The First Encounter\SaveGame" "%sstfedir%\SaveGame"
+	xcopy /e /i /y "Serious Sam - The First Encounter\SaveGame" "%sstferootdir%\SaveGame"
 	echo.
 ) else (
 	echo Serious Sam: The First Encounter - Savegame backup not found. Skipping...
 	echo.
 )
 
-rem Restore persistent symbols files, which contains setting values
+rem Restore persistent symbols file, which contains setting values
 if exist "Serious Sam - The First Encounter\Scripts\PersistentSymbols.ini" (
 	echo Serious Sam: The First Encounter - Restoring persistent symbols file
-	copy "Serious Sam - The First Encounter\Scripts\PersistentSymbols.ini" "%sstfedir%\Scripts"
+	copy "Serious Sam - The First Encounter\Scripts\PersistentSymbols.ini" "%sstferootdir%\Scripts"
 	echo.
 ) else (
 	echo Serious Sam: The First Encounter - Persistent symbols file backup not found. Skipping...
@@ -2194,7 +2241,7 @@ rem Sludge Life
 set "slrootdir=%gamerootdir%\SludgeLife"
 
 rem Restore pictures
-if exist "Sludge Life\PICS" (
+if exist "Sludge Life\PICS\*.png" (
 	echo Sludge Life: Restoring pictures
 	xcopy /e /i /y "Sludge Life\PICS" %slrootdir%\PICS
 	echo.
@@ -2391,16 +2438,6 @@ if exist Morrowind\Saves (
 	echo.
 )
 
-rem Restore journal
-if exist Morrowind\Journal.htm (
-	echo The Elder Scrolls III: Morrowind - Restoring journal
-	copy Morrowind\Journal.htm %tes3rootdir%
-	echo.
-) else (
-	echo The Elder Scrolls III: Morrowind - Journal backup not found. Skipping...
-	echo.
-)
-
 rem Restore configuration file
 if exist Morrowind\Morrowind.ini (
 	echo The Elder Scrolls III: Morrowind - Restoring configuration file
@@ -2408,6 +2445,16 @@ if exist Morrowind\Morrowind.ini (
 	echo.
 ) else (
 	echo The Elder Scrolls III: Morrowind - Configuration file backup not found. Skipping...
+	echo.
+)
+
+rem Restore journal
+if exist Morrowind\Journal.htm (
+	echo The Elder Scrolls III: Morrowind - Restoring journal
+	copy Morrowind\Journal.htm %tes3rootdir%
+	echo.
+) else (
+	echo The Elder Scrolls III: Morrowind - Journal backup not found. Skipping...
 	echo.
 )
 
@@ -2682,12 +2729,12 @@ echo.
 
 rem Uplink
 
-set "uluserdir=%gamerootdir%\Uplink\users"
+set "ulrootdir=%gamerootdir%\Uplink"
 
 rem Copy user files into Uplink’s users folder
 if exist Uplink\*.usr (
 	echo Uplink: Restoring user files
-	xcopy /i /y Uplink\*.usr %uluserdir%
+	xcopy /i /y Uplink\*.usr %ulrootdir%\users
 	echo.
 ) else (
 	echo Uplink: User files backup not found. Skipping...
@@ -2697,7 +2744,7 @@ if exist Uplink\*.usr (
 rem Copy options file into Uplink’s users folder
 if exist Uplink\options (
 	echo Uplink: Restoring options file
-	copy Uplink\options %uluserdir%
+	copy Uplink\options %ulrootdir%\users
 	echo.
 ) else (
 	echo Uplink: Options file backup not found. Skipping...

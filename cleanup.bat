@@ -276,6 +276,19 @@ del "%d2rootdir%\bnupdate.log"
 rem Delete registry keys
 reg delete "HKCU\SOFTWARE\Blizzard Entertainment\Diablo II" /f
 
+rem Die Gilde
+
+set "gilderootdir=%gamerootdir%\Die Gilde"
+
+rem Delete configuration
+del "%gilderootdir%\game.ini"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Ahead Entertainment" /f
+
+rem Delete savegames
+del /q "%gilderootdir%\Resources\gamedata\saves\*"
+
 rem Die Völker
 
 set "dvdir=%gamerootdir%\Alien Nations"

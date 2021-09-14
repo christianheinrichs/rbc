@@ -20,6 +20,7 @@ Supported games
 - Darkest Dungeon
 - Diablo
 - Diablo II
+- Die Gilde
 - Die Völker
 - Driver
 - Dungeon Keeper 2
