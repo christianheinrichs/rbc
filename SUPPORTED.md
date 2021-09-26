@@ -18,6 +18,7 @@ Supported games
 - Chaser
 - Crashday
 - Darkest Dungeon
+- Dear Devere
 - Diablo
 - Diablo II
 - Die Gilde
@@ -28,6 +29,7 @@ Supported games
 - Enigmatis - The Ghosts of Maple Creek
 - Europa Universalis
 - Europa Universalis II
+- FaeFever
 - Firewatch
 - Gothic
 - Gothic II
