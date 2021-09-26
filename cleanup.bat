@@ -15,13 +15,13 @@ echo.
 
 rem A Hand With Many Fingers
 
-set "colestiadir=%userprofile%\AppData\LocalLow\Colestia"
+set "ahwmflldir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers"
 
-rem Delete the Colestia folder
-rd /q /s %colestiadir%
+rem Delete the LocalLow folder
+rd /q /s %ahwmflldir%
 
 rem Delete registry keys
-reg delete HKCU\SOFTWARE\Colestia /f
+reg delete "HKCU\SOFTWARE\Colestia\A Hand With Many Fingers" /f
 
 rem Alan Wake
 
@@ -129,7 +129,7 @@ rem Delete profile data
 del %becherovdir%\Data\Player\profiles.dat
 
 rem Delete all registry data for Becherov
-reg delete HKCU\Software\Inputwish /f
+reg delete HKCU\Software\Inputwish\Becherov /f
 
 rem BioShock
 
@@ -158,7 +158,7 @@ rem Delete memories
 del /q "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories\*"
 
 rem Delete registry keys
-reg delete "HKCU\SOFTWARE\Not a Sailor Studios" /f
+reg delete "HKCU\SOFTWARE\Not a Sailor Studios\Buddy Simulator 1984" /f
 
 rem Cave Story
 
@@ -221,7 +221,22 @@ rem Delete Darkest Dungeon folder, which should contain all profiles
 rd /q /s %darkestdungeondir%
 
 rem Delete registry keys
-reg delete "HKCU\Software\Red Hook Studios" /f
+reg delete "HKCU\Software\Red Hook Studios\Darkest Dungeon" /f
+
+rem Dear Devere
+
+set "ddaddir=%appdata%\RenPy\DearDevere-1581812927"
+set "ddrootdir=%gamerootdir%\Dear Devere"
+
+rem Delete log file
+del "%ddrootdir%\*.txt"
+
+rem Delete screenshots
+del "%ddrootdir%\*.png"
+
+rem Delete savegames
+del /q "%ddrootdir%\game\saves\*"
+rd /q /s "%ddaddir%"
 
 rem Diablo (Classic)
 
@@ -344,14 +359,14 @@ rem Delete savegames
 del %ehbrootdir%\ElseHeartbreak_Data\Saves\*.json
 
 rem Delete registry keys
-reg delete HKCU\Software\Miman /f
+reg delete "HKCU\Software\Miman\Else Heartbreak" /f
 
 rem Enigmatis - The Ghosts of Maple Creek
 
-set "amdir=%appdata%\Artifex Mundi\"
+set "etgomcdir=%appdata%\Artifex Mundi\Enigmatis_TheGhostOfMapleCreek"
 
-rem Delete Artifex Mundi directory
-rd /q /s "%amdir%"
+rem Delete directory located in ‘Artifex Mundi’
+rd /q /s "%etgomcdir%"
 
 rem Europa Universalis
 
@@ -389,9 +404,19 @@ del "%eu2rootdir%\*.eu"
 rem Delete settings file
 del "%eu2rootdir%\settings.cfg"
 
+rem FaeFever
+
+set "fflldir=%userprofile%\AppData\LocalLow\MonkeyWizardEntertainment\FaeFever"
+
+rem Delete registry keys
+reg delete HKCU\SOFTWARE\MonkeyWizardEntertainment\FaeFever /f
+
+rem Delete LocalLow directory
+rd /q /s "%fflldir%"
+
 rem Firewatch
 
-set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto"
+set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto\Firewatch"
 set "fwrootdir=%gamerootdir%\Firewatch"
 
 rem Delete localisation file, keybinds, photos and savegames
@@ -552,37 +577,37 @@ rd /q /s "%hmudir%"
 
 rem Inkslinger
 
-set "inkslingerlldir=%userprofile%\AppData\LocalLow\Gateway"
+set "inkslingerlldir=%userprofile%\AppData\LocalLow\Gateway\Inkslinger"
 
-rem Delete Gateway folder
+rem Delete Inkslinger folder
 rd /q /s %inkslingerlldir%
 
 rem Delete registry keys
-reg delete "HKCU\SOFTWARE\Gateway" /f
+reg delete "HKCU\SOFTWARE\Gateway\Inkslinger" /f
 
 rem Inside
 
-set "playdeaddir=%appdata%\Playdead"
-set "playdeadlldir=%userprofile%\AppData\LocalLow\Playdead"
+set "insideaddir=%appdata%\Playdead\Inside"
+set "insidelldir=%userprofile%\AppData\LocalLow\Playdead\INSIDE"
 
-rem Delete Playdead folder
-rd /q /s %playdeaddir%
+rem Delete Inside folder
+rd /q /s %insideaddir%
 
-rem Delete Playdead folder in local low app data storage
-rd /q /s %playdeadlldir%
+rem Delete LocalLow INSIDE folder
+rd /q /s %insidelldir%
 
-rem Delete Playdead registry keys
-reg delete HKCU\Software\Playdead /f
+rem Delete INSIDE registry keys
+reg delete HKCU\Software\Playdead\INSIDE /f
 
 rem Jotun - Valhalla Edition
 
-set "tldir=%userprofile%\AppData\LocalLow\Thunder Lotus Games"
+set "jvelldir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
 
-rem Delete Thunder Lotus Games folder
-rd /q /s "%tldir%"
+rem Delete LocalLow folder
+rd /q /s "%jvelldir%"
 
-rem Delete Thunder Lotus Games registry keys
-reg delete "HKCU\Software\Thunder Lotus Games" /f
+rem Delete registry keys
+reg delete "HKCU\Software\Thunder Lotus Games\Jotun" /f
 
 rem L’Amerzone
 
@@ -623,49 +648,49 @@ rd /q /s "%masterspydir%"
 
 rem Metal Gear Solid
 
-set "mgsdir=%gamerootdir%\Metal Gear Solid"
+set "mgsrootdir=%gamerootdir%\Metal Gear Solid"
 
 rem Delete configuration files
-del "%mgsdir%\*.cfg"
+del "%mgsrootdir%\*.cfg"
 
 rem Delete log file
-del "%mgsdir%\profile.log"
+del "%mgsrootdir%\profile.log"
 
 rem Delete DirectX configuration
-del "%mgsdir%\dxcfg.ini"
+del "%mgsrootdir%\dxcfg.ini"
 
 rem Delete VR records
-del "%mgsdir%\records.vr"
+del "%mgsrootdir%\records.vr"
 
 rem Delete photos
-del /q "%mgsdir%\PHOTOS\*"
+del /q "%mgsrootdir%\PHOTOS\*"
 
 rem Delete savegames
-del /q "%mgsdir%\SavedGames\*"
+del /q "%mgsrootdir%\SavedGames\*"
 
 rem Delete registry keys
 reg delete "HKCU\SOFTWARE\Metal Gear Solid" /f
 
 rem Metro 2033 Redux
 
-set "m2033devdir=%userprofile%\Documents\4A Games"
-set "m2033localdir=%localappdata%\4A Games"
+set "m2033dir=%userprofile%\Documents\4A Games\Metro Redux"
+set "m2033laddir=%localappdata%\4A Games\Metro Redux"
 
-rem Delete 4A Games directory
-rd /q /s "%m2033devdir%"
+rem Delete Metro Redux directory
+rd /q /s "%m2033dir%"
 
-rem Delete 4A Games directory in local appdata
-rd /q /s "%m2033localdir%"
+rem Delete local AppData directory
+rd /q /s "%m2033laddir%"
 
-rem Delete 4A Games registry keys
-reg delete HKCU\Software\4A-Games /f
+rem Delete registry keys
+reg delete "HKCU\Software\4A-Games\Metro Redux" /f
 
 rem Mirror’s Edge
 
-set "eadir=%userprofile%\Documents\EA Games"
+set "medir=%userprofile%\Documents\EA Games\Mirror's Edge"
 
-rem Delete EA Games directory
-rd /q /s "%eadir%"
+rem Delete Mirror’s Edge directory
+rd /q /s "%medir%"
 
 rem Mount & Blade
 
@@ -687,8 +712,8 @@ reg delete HKCU\SOFTWARE\MountAndBladeKeys /f
 
 rem Mount & Blade Warband
 
+set "mbwaddir=%appdata%\Mount&Blade Warband"
 set "mbwuserdir=%userprofile%\Documents\Mount&Blade Warband"
-set "mbwroamingdir=%appdata%\Mount&Blade Warband"
 set "mbwrootdir=%gamerootdir%\Mount and Blade - Warband"
 set "mbwsavedir=%userprofile%\Documents\Mount&Blade Warband Savegames"
 
@@ -701,8 +726,8 @@ del "%mbwrootdir%\rgl_log.txt"
 rem Delete Mount & Blade Warband registry keys
 reg delete HKCU\SOFTWARE\MountAndBladeWarbandKeys /f
 
-rem Delete Mount & Blade Warband roaming directory
-rd /q /s "%mbwroamingdir%"
+rem Delete Mount & Blade Warband AppData directory
+rd /q /s "%mbwaddir%"
 
 rem Delete Mount & Blade Warband savegame directory
 rd /q /s "%mbwsavedir%"
@@ -729,17 +754,16 @@ del "%oaedir%\abe2.ini"
 
 rem Oddworld - New 'n' Tasty
 
-set "onntdatadir=%gamerootdir%\Oddworld - New 'n' Tasty\NNT_Data"
-set "onntsavedir=%gamerootdir%\Oddworld - New 'n' Tasty\SaveGame"
+set "onntrootdir=%gamerootdir%\Oddworld - New 'n' Tasty"
 
 rem Delete all files in savegame folder
-del /q "%onntsavedir%\*"
+del /q "%onntrootdir%\SaveGame\*"
 
 rem Delete Unity log file
-del "%onntdatadir%\output_log.txt"
+del "%onntrootdir%\NNT_Data\output_log.txt"
 
-rem Delete Oddworld Inhabitants registry keys
-reg delete "HKCU\Software\Oddworld Inhabitants, Inc." /f
+rem Delete registry keys
+reg delete "HKCU\Software\Oddworld Inhabitants, Inc.\Oddworld New 'n' Tasty" /f
 
 rem Omikron: The Nomad Soul
 
@@ -753,7 +777,7 @@ rem Open Arena
 set "oaaddir=%appdata%\OpenArena"
 set "oarootdir=%gamerootdir%\Open Arena"
 
-rem Delete Open Arena appdata folder
+rem Delete Open Arena AppData folder
 rd /q /s %oaaddir%
 
 rem Delete log file
@@ -778,7 +802,7 @@ rd /q /s "%pk1rootdir%\SaveGames"
 
 rem Delete registry keys
 reg delete HKCU\Software\PeopleCanFly /f
-reg delete HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly /f
+reg delete HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly\Painkiller /f
 
 rem Penumbra: Overture
 
@@ -923,20 +947,20 @@ reg delete "HKCU\SOFTWARE\Volition\Red Faction" /f
 
 rem Remothered - Tormented Fathers
 
-set "rtfdir=%localappdata%\Remothered"
+set "rtfladdir=%localappdata%\Remothered"
 
 rem Delete Remothered directory
-rd /q /s %rtfdir%
+rd /q /s %rtfladdir%
 
 rem Ritual of the Moon
 
-set "rotmlldir=%userprofile%\AppData\LocalLow\Kara Stone"
+set "rotmlldir=%userprofile%\AppData\LocalLow\Kara Stone\R o t M"
 
 rem Delete LocalLow folder
 rd /q /s "%rotmlldir%"
 
 rem Delete registry keys
-reg delete "HKCU\SOFTWARE\Kara Stone" /f
+reg delete "HKCU\SOFTWARE\Kara Stone\R o t M" /f
 
 rem S.T.A.L.K.E.R. Clear Sky
 
@@ -970,17 +994,17 @@ del "%sgrootdir%\GLOBAL.TXT"
 
 rem Saints Row 3
 
-set "sr3localdir=%localappdata%\Saints Row The Third"
+set "sr3laddir=%localappdata%\Saints Row The Third"
 set "sr3rootdir=%gamerootdir%\Saints Row 3"
 
 rem Delete local app data folder
-rd /q /s "%sr3localdir%"
+rd /q /s "%sr3laddir%"
 
 rem Delete display configuration file and viewed.dat
 del "%sr3rootdir%\display.ini"
 del "%sr3rootdir%\viewed.dat"
 
-rem Serious Sam The First Encounter
+rem Serious Sam: The First Encounter
 
 set "sstferootdir=%gamerootdir%\Serious Sam The First Encounter"
 
@@ -1011,20 +1035,20 @@ del /q "%sstferootdir%\Levels\*.vis"
 
 rem Sludge Life
 
-set "sllldir=%userprofile%\AppData\LocalLow\TerriVellmann"
-set "slrootdir=%gamerootdir%\SludgeLife"
+set "sllldir=%userprofile%\AppData\LocalLow\TerriVellmann\SludgeLife"
+set "slrootdir=%gamerootdir%\Sludge Life"
 
 rem Delete pictures
-del /q %slrootdir%\PICS\*
+del /q "%slrootdir%\PICS\*"
 
 rem Delete savegame
-del %slrootdir%\save.txt
+del "%slrootdir%\save.txt"
 
 rem Delete local low directory
-rd /q /s %sllldir%
+rd /q /s "%sllldir%"
 
 rem Delete registry keys
-reg delete HKCU\Software\TerriVellmann /f
+reg delete HKCU\Software\TerriVellmann\SludgeLife /f
 
 rem SOMA
 
@@ -1129,15 +1153,16 @@ rem Delete program flow log
 del %tes3rootdir%\ProgramFlow.txt
 
 rem Delete registry keys
-reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks" /f
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks\Morrowind" /f
+reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks\TES3 Editor" /f
 
 rem The Infectious Madness of Doctor Dekker
 
-set "timoddappdir=%appdata%\timodd"
+set "timoddaddir=%appdata%\timodd"
 set "timoddrootdir=%gamerootdir%\The Infectious Madness of Doctor Dekker"
 
 rem Delete app data folder
-rd /q /s %timoddappdir%
+rd /q /s %timoddaddir%
 
 rem Delete init.json settings file
 del "%timoddrootdir%\resources\app\init.json"
@@ -1155,25 +1180,25 @@ del "%tljrootdir%\Save\01.txt"
 
 rem The Suicide of Rachel Foster
 
-set "daedalicdir=%localappdata%\Daedalic Entertainment GmbH"
+set "tsorfladdir=%localappdata%\Daedalic Entertainment GmbH\The Suicide of Rachel Foster"
 
-rem Delete Daedalic folder
-rd /q /s "%daedalicdir%"
+rem Delete local AppData folder
+rd /q /s "%tsorfladdir%"
 
 rem The Witcher
 
-set "w1localdir=%localappdata%\The Witcher"
-set "w1userdir=%userprofile%\Documents\The Witcher"
+set "w1dir=%userprofile%\Documents\The Witcher"
+set "w1laddir=%localappdata%\The Witcher"
 
-rem Delete Witcher 1 local appdata folder
+rem Delete Witcher local appdata folder
 rem Contains multiple folders and log files
-rd /q /s "%w1localdir%"
+rd /q /s "%w1laddir%"
 
-rem Delete Witcher 1 user directory
-rd /q /s "%w1userdir%"
+rem Delete Witcher user directory
+rd /q /s "%w1dir%"
 
-rem Delete Witcher 1 registry keys
-reg delete "HKCU\Software\CD Projekt RED" /f
+rem Delete Witcher registry keys
+reg delete "HKCU\Software\CD Projekt RED\Witcher" /f
 
 rem Thief: The Dark Project
 
@@ -1249,7 +1274,7 @@ rem Vampire’s Dawn 2
 
 set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
 
-rem Delete savegame files
+rem Delete savegames
 del /q %vd2rootdir%\*.lsd
 
 rem Worms Armageddon
