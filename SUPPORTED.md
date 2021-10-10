@@ -9,10 +9,13 @@ Supported games
 - Amnesia - The Dark Descent
 - Anachronox
 - ANNO 1602
+- Baldur’s Gate
+- Baldur’s Gate: Enhanced Edition
 - Barrow Hill - Curse of the Ancient Circle
 - Battle Realms
 - Becherov
 - BioShock
+- Blood Omen: Legacy of Kain
 - Buddy Simulator 1984
 - Cave Story
 - Chaser
@@ -50,6 +53,7 @@ Supported games
 - Legacy of Kain: Soul Reaver
 - Mafia
 - Master Spy
+- Metal Gear
 - Metal Gear Solid
 - Metro 2033 Redux
 - Mirror’s Edge

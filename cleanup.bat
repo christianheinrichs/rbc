@@ -18,7 +18,7 @@ rem A Hand With Many Fingers
 set "ahwmflldir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers"
 
 rem Delete the LocalLow folder
-rd /q /s %ahwmflldir%
+rd /q /s "%ahwmflldir%"
 
 rem Delete registry keys
 reg delete "HKCU\SOFTWARE\Colestia\A Hand With Many Fingers" /f
@@ -92,6 +92,26 @@ del /q %anno1602rootdir%\Savegame\*
 rem Delete registry keys
 reg delete HKCU\SOFTWARE\ANNO1602 /f
 
+rem Baldur’s Gate
+
+set "bgrootdir=%gamerootdir%\Baldur's Gate"
+
+rem Delete configuration file
+del "%bgrootdir%\Baldur.ini"
+
+rem Delete characters
+del /q "%bgrootdir%\Characters\*"
+
+rem Delete savegame folder
+rd /q /s "%bgrootdir%\Save"
+
+rem Baldur’s Gate: Enhanced Edition
+
+set "bgeedir=%userprofile%\Documents\Baldur's Gate - Enhanced Edition"
+
+rem Delete folder
+rd /q /s "%bgeedir%"
+
 rem Barrow Hill - Curse of the Ancient Circle
 
 set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
@@ -141,6 +161,23 @@ rd /q /s %bs1sgdir%
 
 rem Delete Bioshock folder located in AppData
 rd /q /s %bs1dir%
+
+rem Blood Omen: Legacy of Kain
+
+set "bolokrootdir=%gamerootdir%\Blood Omen"
+
+rem Delete DirectX configuration
+del "%bolokrootdir%\dxcfg.ini"
+
+rem Delete configuration files and PTEMP.TMP
+del "%bolokrootdir%\Cfg\*.cfg"
+del "%bolokrootdir%\Cfg\*.TMP"
+
+rem Delete registry keys
+reg delete HKCU\SOFTWARE\LegacyOfKain /f
+
+rem Delete savegames
+del "%bolokrootdir%\Saves\*.sav"
 
 rem Buddy Simulator 1984
 
@@ -645,6 +682,19 @@ set "masterspydir=%localappdata%\Master Spy"
 
 rem Delete local Master Spy directory
 rd /q /s "%masterspydir%"
+
+rem Metal Gear
+
+set "mgrootdir=%gamerootdir%\Metal Gear"
+
+rem Delete DirectX configuration
+del "%mgrootdir%\dxcfg.ini"
+
+rem Delete configuration
+del "%mgrootdir%\settings.ini"
+
+rem Delete savegame data
+del /q "%mgrootdir%\SaveData\*"
 
 rem Metal Gear Solid
 

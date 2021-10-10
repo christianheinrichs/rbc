@@ -249,6 +249,67 @@ if exist "%anno1602rootdir%" (
 echo ANNO 1602: Done.
 echo.
 
+rem Baldur’s Gate
+
+set "bgrootdir=%gamerootdir%\Baldur's Gate"
+
+rem Installation check
+if exist "%bgrootdir%" (
+	rem Restore savegames
+	if exist "Baldur's Gate\Save" (
+		echo Baldur's Gate: Restoring savegames
+		xcopy /e /i /y "Baldur's Gate\Save" "%bgrootdir%\Save"
+		echo.
+	) else (
+		echo Baldur's Gate: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration file
+	if exist "Baldur's Gate\Baldur.ini" (
+		echo Baldur's Gate: Restoring configuration file
+		xcopy /i /y "Baldur's Gate\Baldur.ini" "%bgrootdir%"
+		echo.
+	) else (
+		echo Baldur's Gate: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore characters
+	if exist "Baldur's Gate\Characters\*.chr" (
+		echo Baldur's Gate: Restoring characters
+		xcopy /e /i /y "Baldur's Gate\Characters" "%bgrootdir%\Characters"
+		echo.
+	) else (
+		echo Baldur's Gate: Character backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Baldur's Gate: Installation not found. Skipping...
+	echo.
+)
+
+echo Baldur's Gate: Done.
+echo.
+
+rem Baldur’s Gate: Enhanced Edition
+
+set "bgeedir=%userprofile%\Documents\Baldur's Gate - Enhanced Edition"
+
+rem Restore savegames, ‘The Black Pits’ savegames, characters, character
+rem biographies, portraits and the Baldur.lua script
+if exist "Baldur's Gate - Enhanced Edition" (
+	echo Baldur's Gate: Enhanced Edition - Restoring folder
+	xcopy /e /i /y "Baldur's Gate - Enhanced Edition" "%bgeedir%"
+	echo.
+) else (
+	echo Baldur's Gate: Enhanced Edition - Folder backup not found. Skipping...
+	echo.
+)
+
+echo Baldur's Gate: Enhanced Edition - Done.
+echo.
+
 rem Barrow Hill - Curse of the Ancient Circle
 
 set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
@@ -401,6 +462,50 @@ if exist "%bs1rootdir%" (
 )
 
 echo BioShock: Done.
+echo.
+
+rem Blood Omen: Legacy of Kain
+
+set "bolokrootdir=%gamerootdir%\Blood Omen"
+
+rem Restore savegames
+if exist "Blood Omen - Legacy of Kain\Saves\*.sav" (
+	echo Blood Omen: Legacy of Kain - Restoring savegames
+	xcopy /e /i /y "Blood Omen - Legacy of Kain\Saves" "%bolokrootdir%\Saves"
+	echo.
+) else (
+	echo Blood Omen: Legacy of Kain - Savegames backup not found. Skipping...
+	echo.
+)
+
+rem Restore configuration files and PTEMP.TMP
+if exist "Blood Omen - Legacy of Kain\Cfg\*.cfg" (
+	if exist "Blood Omen - Legacy of Kain\Cfg\*.TMP" (
+		echo Blood Omen: Legacy of Kain - Restoring configuration files and PTEMP.TMP
+		xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.cfg" "%bolokrootdir%\Cfg"
+		xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.TMP" "%bolokrootdir%\Cfg"
+		echo.
+	)
+) else (
+	echo Blood Omen: Legacy of Kain - Configuration files and PTEMP.TMP backup not found. Skipping...
+	echo.
+)
+
+rem Restore DirectX configuration
+if exist "Blood Omen - Legacy of Kain\dxcfg.ini" (
+	echo Blood Omen: Legacy of Kain - Restoring DirectX configuration
+	xcopy /i /y "Blood Omen - Legacy of Kain\dxcfg.ini" "%bolokrootdir%"
+	echo.
+) else (
+	echo Blood Omen: Legacy of Kain - DirectX configuration backup not found. Skipping...
+	echo.
+)
+
+rem Restore registry keys
+echo Blood Omen: Legacy of Kain - Restoring registry keys
+reg import "Blood Omen - Legacy of Kain\bolok.reg"
+
+echo Blood Omen: Legacy of Kain - Done.
 echo.
 
 rem Buddy Simulator 1984
@@ -1717,6 +1822,49 @@ if exist "%masterspyrootdir%" (
 )
 
 echo Master Spy: Done.
+echo.
+
+rem Metal Gear
+
+set "mgrootdir=%gamerootdir%\Metal Gear"
+
+rem Installation check
+if exist "%mgrootdir%" (
+	rem Restore savegame data
+	if exist "Metal Gear\SaveData\*.bin" (
+		echo Metal Gear: Restoring savegame data
+		xcopy /i /y "Metal Gear\SaveData\*.bin" "%mgrootdir%\SaveData"
+		echo.
+	) else (
+		echo Metal Gear: Savegame data backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore settings
+	if exist "Metal Gear\settings.ini" (
+		echo Metal Gear: Restoring settings
+		xcopy /i /y "Metal Gear\settings.ini" "%mgrootdir%"
+		echo.
+	) else (
+		echo Metal Gear: Settings backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DirectX configuration
+	if exist "Metal Gear\dxcfg.ini" (
+		echo Metal Gear: Restoring DirectX configuration
+		xcopy /i /y "Metal Gear\dxcfg.ini" "%mgrootdir%"
+		echo.
+	) else (
+		echo Metal Gear: DirectX configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Metal Gear: Installation not found. Skipping...
+	echo.
+)
+
+echo Metal Gear: Done.
 echo.
 
 rem Metal Gear Solid

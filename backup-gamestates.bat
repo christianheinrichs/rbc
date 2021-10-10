@@ -190,6 +190,61 @@ reg export HKCU\SOFTWARE\ANNO1602 "ANNO 1602\anno1602.reg" /y
 echo ANNO 1602: Done.
 echo.
 
+rem Baldur’s Gate
+
+set "bgrootdir=%gamerootdir%\Baldur's Gate"
+
+rem Backup savegames
+if exist "%bgrootdir%\Save" (
+	echo Baldur's Gate: Backing up savegames
+	xcopy /e /i /y "%bgrootdir%\Save" "Baldur's Gate\Save"
+	echo.
+) else (
+	echo Baldur's Gate: Savegame folder not found. Skipping...
+	echo.
+)
+
+rem Backup configuration file
+if exist "%bgrootdir%\Baldur.ini" (
+	echo Baldur's Gate: Backing up configuration file
+	xcopy /i /y "%bgrootdir%\Baldur.ini" "Baldur's Gate"
+	echo.
+) else (
+	echo Baldur's Gate: Configuration file not found. Skipping...
+	echo.
+)
+
+rem Backup characters
+if exist "%bgrootdir%\Characters\*.chr" (
+	echo Baldur's Gate: Backing up characters
+	xcopy /e /i /y "%bgrootdir%\Characters" "Baldur's Gate\Characters"
+	echo.
+) else (
+	echo Baldur's Gate: Characters not found. Skipping...
+	echo.
+)
+
+echo Baldur's Gate: Done.
+echo.
+
+rem Baldur’s Gate: Enhanced Edition
+
+set "bgeedir=%userprofile%\Documents\Baldur's Gate - Enhanced Edition"
+
+rem Backup savegames, ‘The Black Pits’ savegames, characters, character
+rem biographies, portraits and the Baldur.lua script
+if exist "%bgeedir%" (
+	echo Baldur's Gate: Enhanced Edition - Backing up folder
+	xcopy /e /i /y "%bgeedir%" "Baldur's Gate - Enhanced Edition"
+	echo.
+) else (
+	echo Baldur's Gate: Enhanced Edition - Folder not found. Skipping...
+	echo.
+)
+
+echo Baldur's Gate: Enhanced Edition - Done.
+echo.
+
 rem Barrow Hill - Curse of the Ancient Circle
 
 set "bh1rootdir=%gamerootdir%\Barrow Hill - Curse of the Ancient Circle"
@@ -313,6 +368,50 @@ if exist %bs1dir%\*.ini (
 )
 
 echo BioShock: Done.
+echo.
+
+rem Blood Omen: Legacy of Kain
+
+set "bolokrootdir=%gamerootdir%\Blood Omen"
+
+rem Backup savegames
+if exist "%bolokrootdir%\Saves\*.sav" (
+	echo Blood Omen: Legacy of Kain - Backing up savegames
+	xcopy /e /i /y "%bolokrootdir%\Saves" "Blood Omen - Legacy of Kain\Saves"
+	echo.
+) else (
+	echo Blood Omen: Legacy of Kain - Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files and PTEMP.TMP
+if exist "%bolokrootdir%\Cfg\*.cfg" (
+	if exist "%bolokrootdir%\Cfg\*.TMP" (
+		echo Blood Omen: Legacy of Kain - Backing up configuration files and PTEMP.TMP
+		xcopy /e /i /y "%bolokrootdir%\Cfg\*.cfg" "Blood Omen - Legacy of Kain\Cfg"
+		xcopy /e /i /y "%bolokrootdir%\Cfg\*.TMP" "Blood Omen - Legacy of Kain\Cfg"
+		echo.
+	)
+) else (
+	echo Blood Omen: Legacy of Kain - Configuration files and PTEMP.TMP not found. Skipping...
+	echo.
+)
+
+rem Backup DirectX configuration
+if exist "%bolokrootdir%\dxcfg.ini" (
+	echo Blood Omen: Legacy of Kain - Backing up DirectX configuration
+	xcopy /i /y "%bolokrootdir%\dxcfg.ini" "Blood Omen - Legacy of Kain"
+	echo.
+) else (
+	echo Blood Omen: Legacy of Kain - DirectX configuration not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Blood Omen: Legacy of Kain - Backing up registry keys
+reg export "HKCU\SOFTWARE\LegacyOfKain" "Blood Omen - Legacy of Kain\bolok.reg" /y
+
+echo Blood Omen: Legacy of Kain - Done.
 echo.
 
 rem Buddy Simulator 1984
@@ -1373,6 +1472,43 @@ if exist "%masterspydir%\Local Storage\*" (
 )
 
 echo Master Spy: Done.
+echo.
+
+rem Metal Gear
+
+set "mgrootdir=%gamerootdir%\Metal Gear"
+
+rem Backup savegame data
+if exist "%mgrootdir%\SaveData\*.bin" (
+	echo Metal Gear: Backing up savegame data
+	xcopy /i /y "%mgrootdir%\SaveData\*.bin" "Metal Gear\SaveData"
+	echo.
+) else (
+	echo Metal Gear: Savegame data not found. Skipping...
+	echo.
+)
+
+rem Backup settings
+if exist "%mgrootdir%\settings.ini" (
+	echo Metal Gear: Backing up settings
+	xcopy /i /y "%mgrootdir%\settings.ini" "Metal Gear"
+	echo.
+) else (
+	echo Metal Gear: Settings file not found. Skipping...
+	echo.
+)
+
+rem Backup DirectX configuration
+if exist "%mgrootdir%\dxcfg.ini" (
+	echo Metal Gear: Backing up DirectX configuration
+	xcopy /i /y "%mgrootdir%\dxcfg.ini" "Metal Gear"
+	echo.
+) else (
+	echo Metal Gear: DirectX configuration not found. Skipping...
+	echo.
+)
+
+echo Metal Gear: Done.
 echo.
 
 rem Metal Gear Solid
