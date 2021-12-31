@@ -13,6 +13,15 @@ mode con cols=100
 echo Gamestate backup script running
 echo.
 
+if "%gamerootdir%" == "" (
+	echo Please specify your game root directory
+	pause
+	exit
+) else (
+	echo Game root directory found. Continuing...
+	echo.
+)
+
 rem A Hand With Many Fingers
 
 set "ahwmfsavedir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers\saves"
@@ -448,7 +457,7 @@ echo.
 
 rem Cave Story
 
-set "cavestoryrootdir=%gamerootdir%\Cave_Story"
+set "cavestoryrootdir=%gamerootdir%\Cave Story"
 
 rem Copy profile data from the game’s root directory into ‘Cave Story’ folder
 if exist %cavestorydir%\*.dat (
@@ -748,6 +757,7 @@ echo Die Gilde: Done.
 echo.
 
 rem Die Völker
+rem English title: Alien Nations
 
 set "dvrootdir=%gamerootdir%\Alien Nations"
 
@@ -1401,7 +1411,9 @@ if exist "%jvelldir%\*.sav" (
 echo Jotun - Valhalla Edition: Done.
 echo.
 
+
 rem L’Amerzone
+rem English title: Amerzone
 
 set "larootdir=%gamerootdir%\AmerZone"
 
@@ -1416,6 +1428,39 @@ if exist "%larootdir%\*.bin" (
 )
 
 echo L'Amerzone: Done.
+echo.
+
+rem Layers of Fear
+rem Layers of Fear: Inheritance
+
+set "loflldir=%userprofile%\AppData\LocalLow\Bloober Team\Layers of Fear"
+
+rem Backup savegames
+if exist "%loflldir%\0\*.dat" (
+	echo Layers of Fear: Backing up savegames
+	xcopy /i /y "%loflldir%\0\*.dat" "Layers of Fear\Savegames"
+	echo.
+) else (
+	echo Layers of Fear: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files
+if exist "%loflldir%\0\cfg\*.xml" (
+	echo Layers of Fear: Backing up configuration files
+	xcopy /i /y "%loflldir%\0\cfg\*.xml" "Layers of Fear\cfg"
+	echo.
+) else (
+	echo Layers of Fear: Configuration files not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Layers of Fear: Backing up registry keys
+reg export "HKCU\SOFTWARE\Bloober Team\Layers of Fear" "Layers of Fear\lof.reg" /y
+echo.
+
+echo Layers of Fear: Done.
 echo.
 
 rem Legacy of Kain: Soul Reaver
@@ -1709,6 +1754,27 @@ if exist "%mbwdir%\*.txt" (
 )
 
 echo Mount and Blade: Warband - Viking Conquest: Done.
+echo.
+
+rem Never Alone
+
+set "nadir=%userprofile%\AppData\LocalLow\E-Line Media\Never Alone"
+
+rem Backup savegame data
+if exist "%nadir%\*.dat" (
+	echo Never Alone: Backing up savegame
+	xcopy /i /y "%nadir%\*.dat" "Never Alone"
+	echo.
+) else (
+	echo Never Alone: Savegame not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Never Alone: Backing up registry keys
+reg export "HKCU\SOFTWARE\E-Line Media\Never Alone" "Never Alone\na.reg" /y
+
+echo Never Alone: Done.
 echo.
 
 rem Oddworld: Abe’s Oddysee
@@ -2234,7 +2300,8 @@ if exist "%rotmrootdir%" (
 	echo.
 )
 
-rem S.T.A.L.K.E.R. Clear Sky
+rem S.T.A.L.K.E.R. Чистое Небо
+rem English title: S.T.A.L.K.E.R. Clear Sky
 
 set "scsdir=%userprofile%\Documents\stalke~1"
 
@@ -2721,7 +2788,8 @@ if exist "%tsorfsavedir%\Config\WindowsNoEditor\GameUserSettings.ini" (
 echo The Suicide of Rachel Foster: Done.
 echo.
 
-rem The Witcher
+rem Wiedźmin
+rem English title: The Witcher
 
 set "tw1savedir=%userprofile%\Documents\The Witcher\saves"
 
@@ -2818,6 +2886,100 @@ if exist "%tcscrootdir%\system\SplinterCell.ini" (
 )
 
 echo Tom Clancy's Splinter Cell: Done.
+echo.
+
+rem Тургор
+rem English title: The Void
+
+set "thevoiddir=%userprofile%\Documents\My Games\Void"
+set "turgordir=%userprofile%\Documents\My Games\Turgor"
+set "thevoidrootdir=%gamerootdir%\The Void"
+set "turgorrootdir=%gamerootdir%\Turgor"
+set "turgorpddir=%programdata%\Ice-pick Lodge\Turgor"
+set "thevoidpddir=%programdata%\Ice-pick Lodge\Void"
+
+rem Тургор: Backup savegames
+if exist "%turgordir%\Savegames\*.sav" (
+	echo Turgor: Backing up savegames
+	xcopy /e /i /y "%turgordir%\Savegames" "Turgor\Savegames"
+	echo.
+) else (
+	echo Turgor: Savegames not found. Skipping...
+	echo.
+)
+
+rem The Void: Backup savegames
+if exist "%thevoiddir%\Savegames\*.sav" (
+	echo The Void: Backing up savegames
+	xcopy /e /i /y "%turgordir%\Savegames" "The Void\Savegames"
+	echo.
+) else (
+	echo The Void: Savegames not found. Skipping...
+	echo.
+)
+
+rem Тургор: Backup settings
+if exist "%turgorrootdir%\data\settings.xml" (
+	echo Turgor: Backing up settings
+
+	if not exist Turgor\settings (
+		md Turgor\settings
+	)
+
+	xcopy /i /y "%turgorrootdir%\data\settings.xml" "Turgor\settings"
+	echo.
+) else (
+	echo Turgor: Settings XML file not found. Skipping...
+	echo.
+)
+
+rem The Void: Backup settings
+if exist "%thevoidrootdir%\data\settings.xml" (
+	echo The Void: Backing up settings
+
+	if not exist "The Void\settings" (
+		md "The Void\settings"
+	)
+
+	xcopy /i /y "%thevoidrootdir%\data\settings.xml" "The Void\settings"
+	echo.
+) else (
+	echo The Void: Settings XML file not found. Skipping...
+	echo.
+)
+
+rem Тургор: Backup render and sound settings
+if exist "%turgorpddir%\*.xml" (
+	echo Turgor: Backing up render and sound settings
+	xcopy /e /i /y "%turgorpddir%" "Turgor\settings"
+	echo.
+) else (
+	echo Turgor: Render and sound settings not found. Skipping...
+	echo.
+)
+
+rem The Void: Backup render and sound settings
+if exist "%thevoidpddir%\*.xml" (
+	echo The Void: Backing up render and sound settings
+	xcopy /e /i /y "%thevoidpddir%" "The Void\settings"
+	echo.
+) else (
+	echo The Void: Render and sound settings not found. Skipping...
+	echo.
+)
+
+rem Тургор: Export registry keys
+echo Turgor: Backing up registry keys
+reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Turgor" "Turgor\turgor.reg" /y
+echo.
+
+rem The Void: Export registry keys
+echo The Void: Backing up registry keys
+reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Void" "The Void\the-void.reg" /y
+echo.
+
+echo Turgor: Done.
+echo The Void: Done.
 echo.
 
 rem Unreal
@@ -2921,7 +3083,7 @@ echo.
 
 rem Vampire’s Dawn 2
 
-set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
+set "vd2rootdir=%gamerootdir%\Vampire's Dawn 2"
 
 rem Backup savegame files
 if exist "%vd2rootdir%\*.lsd" (
@@ -2936,6 +3098,44 @@ if exist "%vd2rootdir%\*.lsd" (
 echo Vampire's Dawn 2: Done.
 echo.
 
+rem What Remains of Edith Finch
+
+set "wroefdir=%localappdata%\FinchGame"
+
+rem Backup savegame
+rem Since the game creates a random ID suffix combined with the machine name,
+rem the existence check is being done on the SaveGames folder instead of the
+rem actual savegame. Not sure how to solve this.
+if exist "%wroefdir%\Saved\SaveGames" (
+	echo What Remains of Edith Finch: Backing up savegame
+	xcopy /e /i /y "%wroefdir%\Saved\SaveGames" "What Remains of Edith Finch\Saved\SaveGames"
+	echo.
+) else (
+	echo What Remains of Edith Finch: Savegame folder not found. Skipping...
+	echo.
+)
+
+rem Backup game user settings file and Engine settings file
+rem The rest of the .ini files seem to be empty, so there is no reason to back
+rem them up
+if exist "%wroefdir%\Saved\Config\WindowsNoEditor\*.ini" (
+	echo What Remains of Edith Finch: Backing up configuration files
+
+	if not exist "What Remains of Edith Finch\Saved\Config\WindowsNoEditor" (
+		md "What Remains of Edith Finch\Saved\Config\WindowsNoEditor"
+	)
+
+	xcopy /i /y "%wroefdir%\Saved\Config\WindowsNoEditor\Engine.ini" "What Remains of Edith Finch\Saved\Config\WindowsNoEditor"
+	xcopy /i /y "%wroefdir%\Saved\Config\WindowsNoEditor\GameUserSettings.ini" "What Remains of Edith Finch\Saved\Config\WindowsNoEditor"
+	echo.
+) else (
+	echo What Remains of Edith Finch: Configuration files not found. Skipping...
+	echo.
+)
+
+echo What Remains of Edith Finch: Done.
+echo.
+
 rem Worms Armageddon
 
 set "warootdir=%gamerootdir%\Worms Armageddon"
@@ -2947,6 +3147,7 @@ if exist "%warootdir%\User\Games\*.WAgame" (
 	echo.
 ) else (
 	echo Worms Armageddon: Games data not found. Skipping...
+	echo.
 )
 
 rem Backup team data

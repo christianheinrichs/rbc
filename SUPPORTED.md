@@ -25,7 +25,7 @@ Supported games
 - Diablo
 - Diablo II
 - Die Gilde
-- Die Völker
+- Die Völker (English title: Alien Nations)
 - Driver
 - Dungeon Keeper 2
 - else Heart.Break()
@@ -49,7 +49,8 @@ Supported games
 - Inkslinger
 - Inside
 - Jotun - Valhalla Edition
-- L’Amerzone
+- L’Amerzone (English title: Amerzone)
+- Layers of Fear, including Layers of Fear: Inheritance
 - Legacy of Kain: Soul Reaver
 - Mafia
 - Master Spy
@@ -60,6 +61,7 @@ Supported games
 - Mount & Blade
 - Mount & Blade: Warband
 - Mount & Blade: Warband - Viking Conquest
+- Never Alone
 - Oddworld: Abe’s Oddysee
 - Oddworld: Abe’s Exoddus
 - Oddworld - New 'n' Tasty
@@ -79,7 +81,7 @@ Supported games
 - Red Faction
 - Remothered - Tormented Fathers
 - Ritual of the Moon
-- S.T.A.L.K.E.R. - Clear Sky
+- S.T.A.L.K.E.R. Чистое Небо (English title: S.T.A.L.K.E.R. - Clear Sky)
 - S.T.A.L.K.E.R. - Shadow of Chernobyl
 - Sacred Gold
 - Saints Row 3
@@ -89,7 +91,7 @@ Supported games
 - SPY Fox - Dry Cereal
 - SWAT 4
 - Sudden Strike
-- Syberia I
+- Syberia
 - Syberia II
 - The Alto Collection
 - The Cat Lady
@@ -97,12 +99,14 @@ Supported games
 - The Infectious Madness of Doctor Dekker
 - The Longest Journey
 - The Suicide of Rachel Foster
-- The Witcher 1
 - Thief: The Dark Project
 - Tom Clancy’s Splinter Cell
+- Тургор (English title: The Void)
 - Unreal
 - Unreal II - The Awakening
 - Uplink
 - Vampire’s Dawn 2
+- What Remains of Edith Finch
+- Wiedźmin (English title: The Witcher)
 - Worms Armageddon
 - XIII

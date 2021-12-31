@@ -13,6 +13,15 @@ mode con cols=100
 echo Cleanup script running
 echo.
 
+if "%gamerootdir%" == "" (
+	echo Please specify your game root directory
+	pause
+	exit
+) else (
+	echo Game root directory found. Continuing...
+	echo.
+)
+
 rem A Hand With Many Fingers
 
 set "ahwmflldir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers"
@@ -199,7 +208,7 @@ reg delete "HKCU\SOFTWARE\Not a Sailor Studios\Buddy Simulator 1984" /f
 
 rem Cave Story
 
-set "cavestorydir=%gamerootdir%\Cave_Story"
+set "cavestorydir=%gamerootdir%\Cave Story"
 
 rem Delete configuration and profile data. Profile data also contains savegame
 rem markers
@@ -653,6 +662,16 @@ set "larootdir=%gamerootdir%\AmerZone"
 rem Delete savegames
 del %larootdir%\*.bin
 
+rem Layers of Fear
+
+set "loflldir=%userprofile%\AppData\LocalLow\Bloober Team\Layers of Fear"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\Bloober Team\Layers of Fear" /f
+
+rem Delete LocalLow folder
+rd /q /s "%loflldir%"
+
 rem Legacy of Kain: Soul Reaver
 
 set "loksrdir=%gamerootdir%\Legacy of Kain Soul Reaver"
@@ -781,6 +800,21 @@ rd /q /s "%mbwaddir%"
 
 rem Delete Mount & Blade Warband savegame directory
 rd /q /s "%mbwsavedir%"
+
+rem Never Alone
+
+set "nadir=%userprofile%\AppData\LocalLow\E-Line Media\Never Alone"
+set "narootdir=%gamerootdir%\Never Alone"
+
+rem Delete log files
+del "%narootdir%\Never_Alone_Data\*.log"
+del "%narootdir%\Never_Alone_Data\*.txt"
+
+rem Delete registry keys
+reg delete "HKCU\SOFTWARE\E-Line Media\Never Alone" /f
+
+rem Delete LocalLow folder
+rd /q /s "%nadir%"
 
 rem Oddworld: Abe’s Oddysee
 
@@ -1277,6 +1311,34 @@ rem Delete configuration files
 del "%tcscrootdir%\system\SplinterCell.ini"
 del "%tcscrootdir%\system\SplinterCellUser.ini"
 
+rem Тургор
+rem English title: The Void
+
+set "thevoiddir=%userprofile%\Documents\My Games\Void"
+set "turgordir=%userprofile%\Documents\My Games\Turgor"
+set "thevoidrootdir=%gamerootdir%\The Void"
+set "turgorrootdir=%gamerootdir%\Turgor"
+set "turgorpddir=%programdata%\Ice-pick Lodge\Turgor"
+set "thevoidpddir=%programdata%\Ice-pick Lodge\Void"
+set "turgorregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Turgor"
+set "thevoidregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Void"
+
+rem Remove settings file
+del "%turgorrootdir%\data\settings.xml"
+del "%thevoidrootdir%\data\settings.xml"
+
+rem Remove ‘ProgramData’ folders
+rd /q /s "%turgorpddir%"
+rd /q /s "%thevoidpddir%"
+
+rem Remove ‘My Games’ folders
+rd /q /s "%turgordir%"
+rd /q /s "%thevoiddir%"
+
+rem Remove registry keys
+reg delete "%turgorregpath%" /f
+reg delete "%thevoidregpath%" /f
+
 rem Unreal
 
 set "unrealrootdir=%gamerootdir%\Unreal Gold"
@@ -1322,10 +1384,17 @@ del /q %ulrootdir%\userstmp\*
 
 rem Vampire’s Dawn 2
 
-set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
+set "vd2rootdir=%gamerootdir%\Vampire's Dawn 2"
 
 rem Delete savegames
 del /q %vd2rootdir%\*.lsd
+
+rem What Remains of Edith Finch
+
+set "wroefdir=%localappdata%\FinchGame"
+
+rem Delete LocalAppData folder
+rd /q /s "%wroefdir%"
 
 rem Worms Armageddon
 

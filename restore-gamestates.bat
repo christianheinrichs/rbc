@@ -2,7 +2,7 @@
 
 rem This script restores gamestates, which include profiles, savegames, setting
 rem files etc.
- 
+
 rem Write the path to your game directory here
 set "gamerootdir="
 
@@ -12,6 +12,15 @@ mode con cols=100
 
 echo Gamestate restore script running
 echo.
+
+if "%gamerootdir%" == "" (
+	echo Please specify your game root directory
+	pause
+	exit
+) else (
+	echo Game root directory found. Continuing...
+	echo.
+)
 
 rem A Hand With Many Fingers
 
@@ -296,15 +305,20 @@ rem Baldur’s Gate: Enhanced Edition
 
 set "bgeedir=%userprofile%\Documents\Baldur's Gate - Enhanced Edition"
 
-rem Restore savegames, ‘The Black Pits’ savegames, characters, character
-rem biographies, portraits and the Baldur.lua script
-if exist "Baldur's Gate - Enhanced Edition" (
-	echo Baldur's Gate: Enhanced Edition - Restoring folder
-	xcopy /e /i /y "Baldur's Gate - Enhanced Edition" "%bgeedir%"
-	echo.
+rem Installation check
+if exist "%bgeedir%" (
+	rem Restore savegames, ‘The Black Pits’ savegames, characters, character
+	rem biographies, portraits and the Baldur.lua script
+	if exist "Baldur's Gate - Enhanced Edition" (
+		echo Baldur's Gate: Enhanced Edition - Restoring folder
+		xcopy /e /i /y "Baldur's Gate - Enhanced Edition" "%bgeedir%"
+		echo.
+	) else (
+		echo Baldur's Gate: Enhanced Edition - Folder backup not found. Skipping...
+		echo.
+	)
 ) else (
-	echo Baldur's Gate: Enhanced Edition - Folder backup not found. Skipping...
-	echo.
+	echo Baldur's Gate: Enhanced Edition - Installation not found. Skipping...
 )
 
 echo Baldur's Gate: Enhanced Edition - Done.
@@ -468,42 +482,48 @@ rem Blood Omen: Legacy of Kain
 
 set "bolokrootdir=%gamerootdir%\Blood Omen"
 
-rem Restore savegames
-if exist "Blood Omen - Legacy of Kain\Saves\*.sav" (
-	echo Blood Omen: Legacy of Kain - Restoring savegames
-	xcopy /e /i /y "Blood Omen - Legacy of Kain\Saves" "%bolokrootdir%\Saves"
-	echo.
-) else (
-	echo Blood Omen: Legacy of Kain - Savegames backup not found. Skipping...
-	echo.
-)
-
-rem Restore configuration files and PTEMP.TMP
-if exist "Blood Omen - Legacy of Kain\Cfg\*.cfg" (
-	if exist "Blood Omen - Legacy of Kain\Cfg\*.TMP" (
-		echo Blood Omen: Legacy of Kain - Restoring configuration files and PTEMP.TMP
-		xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.cfg" "%bolokrootdir%\Cfg"
-		xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.TMP" "%bolokrootdir%\Cfg"
+rem Installation check
+if exist "%bolokrootdir%" (
+	rem Restore savegames
+	if exist "Blood Omen - Legacy of Kain\Saves\*.sav" (
+		echo Blood Omen: Legacy of Kain - Restoring savegames
+		xcopy /e /i /y "Blood Omen - Legacy of Kain\Saves" "%bolokrootdir%\Saves"
+		echo.
+	) else (
+		echo Blood Omen: Legacy of Kain - Savegames backup not found. Skipping...
 		echo.
 	)
+
+	rem Restore configuration files and PTEMP.TMP
+	if exist "Blood Omen - Legacy of Kain\Cfg\*.cfg" (
+		if exist "Blood Omen - Legacy of Kain\Cfg\*.TMP" (
+			echo Blood Omen: Legacy of Kain - Restoring configuration files and PTEMP.TMP
+			xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.cfg" "%bolokrootdir%\Cfg"
+			xcopy /e /i /y  "Blood Omen - Legacy of Kain\Cfg\*.TMP" "%bolokrootdir%\Cfg"
+			echo.
+		)
+	) else (
+		echo Blood Omen: Legacy of Kain - Configuration files and PTEMP.TMP backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DirectX configuration
+	if exist "Blood Omen - Legacy of Kain\dxcfg.ini" (
+		echo Blood Omen: Legacy of Kain - Restoring DirectX configuration
+		xcopy /i /y "Blood Omen - Legacy of Kain\dxcfg.ini" "%bolokrootdir%"
+		echo.
+	) else (
+		echo Blood Omen: Legacy of Kain - DirectX configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry keys
+	echo Blood Omen: Legacy of Kain - Restoring registry keys
+	reg import "Blood Omen - Legacy of Kain\bolok.reg"
 ) else (
-	echo Blood Omen: Legacy of Kain - Configuration files and PTEMP.TMP backup not found. Skipping...
+	echo Blood Omen: Legacy of Kain - Installation not found. Skipping...
 	echo.
 )
-
-rem Restore DirectX configuration
-if exist "Blood Omen - Legacy of Kain\dxcfg.ini" (
-	echo Blood Omen: Legacy of Kain - Restoring DirectX configuration
-	xcopy /i /y "Blood Omen - Legacy of Kain\dxcfg.ini" "%bolokrootdir%"
-	echo.
-) else (
-	echo Blood Omen: Legacy of Kain - DirectX configuration backup not found. Skipping...
-	echo.
-)
-
-rem Restore registry keys
-echo Blood Omen: Legacy of Kain - Restoring registry keys
-reg import "Blood Omen - Legacy of Kain\bolok.reg"
 
 echo Blood Omen: Legacy of Kain - Done.
 echo.
@@ -554,7 +574,7 @@ echo.
 
 rem Cave Story
 
-set "cavestoryrootdir=%gamerootdir%\Cave_Story"
+set "cavestoryrootdir=%gamerootdir%\Cave Story"
 
 rem Installation check
 if exist "%cavestoryrootdir%" (
@@ -1741,6 +1761,44 @@ if exist "%larootdir%" (
 echo L'Amerzone: Done.
 echo.
 
+rem Layers of Fear
+rem Layers of Fear: Inheritance
+
+set "loflldir=%userprofile%\AppData\LocalLow\Bloober Team\Layers of Fear"
+
+rem Restore savegames
+if exist "Layers of Fear\Savegames\*.dat" (
+	echo Layers of Fear: Restoring savegames
+	xcopy /i /y "Layers of Fear\Savegames\*.dat" "%loflldir%\0"
+	echo.
+) else (
+	echo Layers of Fear: Savegame backup not found. Skipping...
+	echo.
+)
+
+rem Restore configuration files
+if exist "Layers of Fear\cfg\*.xml" (
+	echo Layers of Fear: Restoring configuration files
+	xcopy /i /y "Layers of Fear\cfg\*.xml" "%loflldir%\0\cfg"
+	echo.
+) else (
+	echo Layers of Fear: Configuration files backup not found. Skipping...
+	echo.
+)
+
+rem Restore registry keys
+if exist "Layers of Fear\*.reg" (
+	echo Layers of Fear: Restoring registry keys
+	reg import "Layers of Fear\lof.reg"
+	echo.
+) else (
+	echo Layers of Fear: Registry keys backup not found. Skipping...
+	echo.
+)
+
+echo Layers of Fear: Done.
+echo.
+
 rem Legacy of Kain: Soul Reaver
 
 set "loksrrootdir=%gamerootdir%\Legacy of Kain Soul Reaver"
@@ -2112,6 +2170,27 @@ if exist "%mbwvcrootdir%" (
 )
 
 echo Mount and Blade Warband: Viking Conquest - Done.
+echo.
+
+rem Never Alone
+
+set "nadir=%userprofile%\AppData\LocalLow\E-Line Media\Never Alone"
+
+rem Restore savegame data
+if exist "Never Alone\*.dat" (
+	echo Never Alone: Restoring savegame
+	xcopy /i /y "Never Alone\*.dat" "%nadir%"
+	echo.
+) else (
+	echo Never Alone: Savegame backup not found. Skipping...
+	echo.
+)
+
+rem Restore registry keys
+echo Never Alone: Restoring registry keys
+reg import "Never Alone\na.reg"
+
+echo Never Alone: Done.
 echo.
 
 rem Oddworld: Abe’s Oddysee
@@ -3496,6 +3575,106 @@ if exist "%tcscrootdir%" (
 echo Tom Clancy's Splinter Cell: Done.
 echo.
 
+rem Тургор
+rem English title: The Void
+
+set "thevoiddir=%userprofile%\Documents\My Games\Void"
+set "turgordir=%userprofile%\Documents\My Games\Turgor"
+set "thevoidrootdir=%gamerootdir%\The Void"
+set "turgorrootdir=%gamerootdir%\Turgor"
+set "turgorpddir=%programdata%\Ice-pick Lodge\Turgor"
+set "thevoidpddir=%programdata%\Ice-pick Lodge\Void"
+
+rem Тургор: Restore savegames
+if exist "Turgor\Savegames\*.sav" (
+	echo Turgor: Restoring savegames
+	xcopy /e /i /y "Turgor\Savegames" "%turgordir%\Savegames"
+	echo.
+) else (
+	echo Turgor: Savegame backup not found. Skipping...
+	echo.
+)
+
+rem The Void: Restore savegames
+if exist "The Void\Savegames\*.sav" (
+	echo The Void: Restoring savegames
+	xcopy /e /i /y "The Void\Savegames" "%thevoiddir%\Savegames"
+	echo.
+) else (
+	echo The Void: Savegame backup not found. Skipping...
+	echo.
+)
+
+rem Тургор: Restore settings
+if exist "Turgor\settings\settings.xml" (
+	echo Turgor: Restoring settings
+	xcopy /i /y "Turgor\settings\settings.xml" "%turgorrootdir%\data"
+	echo.
+) else (
+	echo Turgor: Settings XML file backup not found. Skipping...
+	echo.
+)
+
+rem The Void: Restore settings
+if exist "The Void\settings\settings.xml" (
+	echo The Void: Restoring settings
+	xcopy /i /y "The Void\settings\settings.xml" "%thevoidrootdir%\data"
+	echo.
+) else (
+	echo The Void: Settings XML file backup not found. Skipping...
+	echo.
+)
+
+rem Тургор: Restore render and sound settings
+if exist "Turgor\settings\rcfg*" (
+	if exist "Turgor\settings\scfg*" (
+		echo Turgor: Restoring render and sound settings
+		xcopy /i /y "Turgor\settings\rcfg*" "%turgorpddir%"
+		xcopy /i /y "Turgor\settings\scfg*" "%turgorpddir%"
+		echo.
+	)
+) else (
+	echo Turgor: Render and sound settings backup not found. Skipping...
+	echo.
+)
+
+rem The Void: Backup render and sound settings
+if exist "The Void\settings\rcfg*" (
+	if exist "The Void\settings\scfg*" (
+		echo The Void: Restoring render and sound settings
+		xcopy /i /y "The Void\settings\rcfg*" "%thevoidpddir%"
+		xcopy /i /y "The Void\settings\scfg*" "%thevoidpddir%"
+		echo.
+	)
+) else (
+	echo The Void: Render and sound settings backup not found. Skipping...
+	echo.
+)
+
+rem Тургор: Restore registry keys
+if exist "Turgor\turgor.reg" (
+	echo Turgor: Restoring registry keys
+	reg import "Turgor\turgor.reg"
+	echo.
+) else (
+	echo Turgor: Registry keys backup not found. Skipping...
+	echo.
+)
+
+rem The Void: Restore registry keys
+if exist "The Void\the-void.reg" (
+	echo The Void: Restoring registry keys
+	reg import "The Void\the-void.reg"
+	echo.
+) else (
+	echo The Void: Registry keys backup not found. Skipping...
+	echo.
+)
+
+echo Turgor: Done.
+echo The Void: Done.
+echo.
+
 rem Unreal
 
 set "unrealrootdir=%gamerootdir%\Unreal Gold"
@@ -3613,7 +3792,7 @@ echo.
 
 rem Vampire’s Dawn 2
 
-set "vd2rootdir=%gamerootdir%\Vampires_Dawn_2"
+set "vd2rootdir=%gamerootdir%\Vampire's Dawn 2"
 
 rem Installation check
 if exist "%vd2rootdir%" (
@@ -3632,6 +3811,41 @@ if exist "%vd2rootdir%" (
 )
 
 echo Vampire's Dawn 2: Done.
+echo.
+
+rem What Remains of Edith Finch
+
+set "wroefdir=%localappdata%\FinchGame"
+
+rem Restore savegame
+rem Since the game creates a random ID suffix combined with the machine name,
+rem the existence check is being done on the SaveGames folder instead of the
+rem actual savegame. Not sure how to solve this.
+if exist "What Remains of Edith Finch\Saved\SaveGames" (
+	echo What Remains of Edith Finch: Restoring savegame
+	xcopy /e /i /y "What Remains of Edith Finch\Saved\SaveGames" "%wroefdir%\Saved\SaveGames"
+	echo.
+) else (
+	echo What Remains of Edith Finch: Savegame folder backup not found. Skipping...
+	echo.
+)
+
+rem Restore game user settings file and Engine settings file
+if exist "What Remains of Edith Finch\Saved\Config\WindowsNoEditor\*.ini" (
+	echo What Remains of Edith Finch: Restoring configuration files
+	if not exist "%wroefdir%\Saved\Config\WindowsNoEditor" (
+		md "%wroefdir%\Saved\Config\WindowsNoEditor"
+	)
+
+	xcopy /i /y "What Remains of Edith Finch\Saved\Config\WindowsNoEditor\Engine.ini" "%wroefdir%\Saved\Config\WindowsNoEditor"
+	xcopy /i /y "What Remains of Edith Finch\Saved\Config\WindowsNoEditor\GameUserSettings.ini" "%wroefdir%\Saved\Config\WindowsNoEditor"
+	echo.
+) else (
+	echo What Remains of Edith Finch: Configuration backup not found. Skipping...
+	echo.
+)
+
+echo What Remains of Edith Finch: Done.
 echo.
 
 rem Worms Armageddon
