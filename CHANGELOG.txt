@@ -1,0 +1,192 @@
+Version 15.7.2021
+- Release
+
+Version 28.7.2021
+- Remove ‘md’ routine in most cases
+- Prefer to use ‘xcopy’ instead of ‘copy’
+- Correct grammar
+- Use better folder structure
+- Replace HKEY_CURRENT_USER with HKCU for registry operations
+- A Hand With Many Fingers: Add settings support
+- Alan Wake’s American Nightmare: Backup and restore folder
+- Amnesia: A Machine for Pigs - Refactor code
+- Amnesia: The Dark Descent - Refactor code
+- Becherov: Add registry keys support
+- Cave Story: Add window.rect support
+- Darkest Dungeon: Refactor code
+- else Heart.Break(): Add registry keys support
+- Hacknet: Add settings support
+- Hellblade: Senua’s Sacrifice - Add user settings support
+- Inside: Add registry keys support
+- Jotun - Valhalla Edition: Refactor code
+- Metro 2033 Redux: Add keybinds and settings support
+- Mount & Blade: Warband - Viking Conquest: Add configuration support, delete
+  log file
+- Outlast: Add config support
+- Painkiller: Add config support
+- Ritual of the Moon: Add backup and restore support
+- S.T.A.L.K.E.R. - Clear Sky: Add user.ltx support
+- Serious Sam: The First Encounter - Refactor code
+- Sludge Life: Add picture and registry keys support
+- SOMA: Add game
+- Syberia: Add config support
+- Syberia II: Add config support
+- The Cat Lady: Add settings support
+- The Infectious Madness of Doctor Dekker: Add settings support
+- The Longest Journey: Refactor code
+- The Suicide of Rachel Foster: Add settings support
+- The Witcher: Use more explicit wildcard
+
+Version 6.8.2021
+- Add ‘ANNO 1602’
+- Add ‘BioShock’
+- Add ‘Diablo’
+- Add ‘Diablo II’
+- Add ‘Die Völker’
+- Add ‘Gothic’
+- Add ‘Gothic II’
+- Add ‘Metal Gear Solid’
+- Add ‘Oddworld: Abe’s Oddysee’
+- Add ‘Oddworld: Abe’s Exoddus’
+- Add ‘Postal Plus’
+- Add ‘Postal 2’
+- Add ‘Quake II’
+- Add ‘SPY Fox - Dry Cereal’
+- Add ‘The Elder Scrolls III: Morrowind’
+- Painkiller: Fix registry keys support
+- Update README.md
+- Update SUPPORTED.md
+
+Version 18.8.2021
+- Add ‘Aliens Versus Predator - Classic 2000’
+- Add ‘Barrow Hill - Curse of the Ancient Circle’
+- Add ‘Europa Universalis’
+- Add ‘Europa Universalis II’
+- Add ‘Firewatch’
+- Add ‘Grand Theft Auto’
+- Add ‘Hearts of Iron’
+- Add ‘Hitman - Codename 47’
+- Add ‘Omikron: The Nomad Soul’
+- Add ‘Open Arena’
+- Add ‘Penumbra: Black Plague’
+- Add ‘Penumbra: Overture’
+- Add ‘Penumbra: Requiem’
+- Add ‘Sudden Strike’
+- Add ‘The Alto Collection’
+- Add ‘Tom Clancy’s Splinter Cell’
+- Add ‘Unreal’
+- Add ‘Unreal II - The Awakening’
+- Add log file exclusion for ‘Amnesia: A Machine For Pigs’,
+  ‘Amnesia: The Dark Descent’, ‘SOMA’
+- Fix ‘SPY Fox - Dry Cereal’ folder variable name
+- Make README.md headings slightly bigger
+
+Version 7.9.2021
+- Set title
+- Set columns value to 100
+- Implement file and folder existence checks
+- Add ‘Alan Wake’
+- Add ‘Anachronox’
+- Add ‘Battle Realms’
+- Add ‘Crashday’
+- Add ‘Driver’
+- Add ‘Dungeon Keeper 2’
+- Add ‘Hotline Miami Updated’
+- Add ‘L’Amerzone’
+- Add ‘Legacy of Kain: Soul Reaver’
+- Add ‘Mafia’
+- Add ‘Mount & Blade’
+- Add ‘Mount & Blade: Warband’
+- Add ‘Planescape: Torment’
+- Add ‘Port Royale’
+- Add ‘Red Faction’
+- Add ‘S.T.A.L.K.E.R. Shadow of Chernobyl’
+- Add ‘Sacred Gold’
+- Add ‘Thief: The Dark Project’
+- Add ‘Worms Armageddon’
+- Add ‘XIII’
+- Alan Wake’s American Nightmare: Change folder path
+- Amnesia - The Dark Descent: Change folder path
+- Becherov: Change folder path
+- Chaser: Change folder path
+- Die Völker: Change folder path
+
+Version 14.9.2021
+- Add the following game: Die Gilde
+- Becherov: Use more specific backup folder structure
+- Fix folder variable name: Cave Story, Jotun - Valhalla Edition,
+  Oddworld: Abe’s Oddysee, Oddworld: Abe’s Exoddus, Postal Plus, Postal 2,
+  Serious Sam: The First Encounter
+- Enigmatis - The Ghosts of Maple Creek: Improve code
+- Implement existence checks: Aliens Versus Predator - Classic 2000,
+  Buddy Simulator 1984, Darkest Dungeon, Mount and Blade,
+  Mount and Blade: Warband, Postal 2, Quake II mission pack: The Reckoning,
+  Quake II mission pack 2: Ground Zero, Quake II - The Eraser Bot
+- Improve existence checks: BioShock, Diablo II, Hearts of Iron,
+  S.T.A.L.K.E.R. Clear Sky, Sludge Life, Syberia, Syberia II, The Cat Lady,
+  The Elder Scrolls III: Morrowind, Unreal, Unreal II - The Awakening, Worms
+  Armageddon
+- Inkslinger: Check if game installation exists
+- Use different folder structure: Hacknet, Hellblade - Senua’s Sacrifice, Master
+  Spy, Mirror’s Edge, Oddworld - New 'n' Tasty, Outlast, Remothered - Tormented
+  Fathers, Uplink
+
+Version 26.9.2021-r1
+- Implement installation check in the restore script
+- Add ‘Dear Devere’
+- Add ‘FaeFever’
+- A Hand With Many Fingers: Fix folder path, use more specific registry key path
+- Becherov: Use more specific registry key path
+- Buddy Simulator 1984: Use more specific registry key path
+- Darkest Dungeon: Use more specific registry key path
+- else Heart.Break(): Use root directory, use more specific registry key path
+- Enigmatis - The Ghosts of Maple Creek: Fix folder path
+- Firewatch: Fix folder path
+- Hotline Miami Original: Check file existence before copying
+- Inkslinger: Fix folder path, use more specific registry key path
+- Inside: Fix folder paths, use more specific registry key path
+- Jotun - Valhalla Edition: Fix folder variable name, use more specific registry
+  key path
+- Legacy of Kain: Soul Reaver - Fix folder variable name
+- Metal Gear Solid: Fix folder variable name
+- Metro 2033 Redux: Fix folder variable name, use more specific registry key path
+- Mirror’s Edge: Fix folder path
+- Mount & Blade: Fix folder variable name
+- Mount & Blade: Warband - Fix folder variable name
+- Oddworld - New 'n' Tasty: Fix folder path, use more specific registry key path
+- Painkiller: Fix folder variable name, use more specific registry key path
+- Remothered - Tormented Fathers: Fix folder variable name
+- Ritual of the Moon: Use more specific registry key path
+- S.T.A.L.K.E.R. - Clear Sky: Fix folder variable name
+- Saints Row 3: Fix folder variable name
+- Sludge Life: Fix folder paths, use more specific registry key path
+- The Elder Scrolls III: Morrowind - Use more specific registry key path
+- The Infectious Madness of Doctor Dekker: Fix folder variable name
+- The Suicide of Rachel Foster: Fix folder path
+- The Witcher: Fix folder variable names, use more specific registry key path
+
+Version 26.9.2021-r2
+- Update SUPPORTED.md
+
+Version 10.10.2021
+- Add ‘Baldur’s Gate’
+- Add ‘Baldur’s Gate: Enhanced Edition’
+- Add ‘Blood Omen: Legacy of Kain’
+- Add ‘Metal Gear’
+- A Hand With Many Fingers: Fix cleanup folder syntax
+
+Version 31.12.2021
+- Add game root directory check
+- Add ‘Layers of Fear’ and ‘Layers of Fear: Inheritance’
+- Add ‘Never Alone’
+- Add ‘Тургор (English title: The Void)’
+- Add ‘What Remains of Edith Finch’
+- Differentiate between original titles and English titles
+- Baldur’s Gate: Enhanced Edition - Add installation check
+- Blood Omen: Legacy of Kain - Add installation check
+- Cave Story: Change directory name
+- Vampire’s Dawn 2: Change directory name
+
+Version 14.1.2022
+- Add changelog
+- Add README and SUPPORTED as plaintext files
