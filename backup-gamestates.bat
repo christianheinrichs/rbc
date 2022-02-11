@@ -1,12 +1,15 @@
 @echo off
 
+rem rbc: Gamestate backup script
+rem Last modified on 11 February 2022
+
 rem This script should backup profiles, settings and savegames, which are herein
 rem collectively referred to as gamestate.
 
 rem Write the path to your game directory here
 set "gamerootdir="
 
-title Gamestate backup script
+title rbc: Gamestate backup script
 
 mode con cols=100
 
@@ -24,6 +27,7 @@ if "%gamerootdir%" == "" (
 
 rem A Hand With Many Fingers
 
+set "ahwmfregpath=HKCU\SOFTWARE\Colestia\A Hand With Many Fingers"
 set "ahwmfsavedir=%userprofile%\AppData\LocalLow\Colestia\A Hand With Many Fingers\saves"
 
 rem Backup savegame file
@@ -36,9 +40,9 @@ if exist "%ahwmfsavedir%" (
 	echo.
 )
 
-rem Export registry keys into file
-echo A Hand With Many Fingers: Backing up registry keys
-reg export HKCU\SOFTWARE\Colestia "A Hand With Many Fingers\ahwmf.reg" /y
+rem Export registry key into file
+echo A Hand With Many Fingers: Backing up registry key
+reg export "%ahwmfregpath%" "A Hand With Many Fingers\ahwmf.reg" /y
 
 echo A Hand With Many Fingers: Done.
 echo.
@@ -48,9 +52,9 @@ rem Alan Wake
 set "awdir=%userprofile%\Documents\Remedy\AlanWake_GOG_Version"
 
 rem Backup config file , keybinds, resolution settings and savegames
-if exist %awdir% (
+if exist "%awdir%" (
 	echo Alan Wake: Backing up config file, keybinds, resolution settings, savegames
-	xcopy /e /i /y %awdir% "Alan Wake"
+	xcopy /e /i /y "%awdir%" "Alan Wake"
 	echo.
 ) else (
 	echo Alan Wake: Directory not found. Skipping...
@@ -66,9 +70,9 @@ set "awandir=%userprofile%\Documents\Remedy\AmericanNightmare_GOG_Version"
 
 rem Backup config file (which contains Arcade score data), keybinds, resolution
 rem settings and savegames
-if exist %awandir% (
+if exist "%awandir%" (
 	echo Alan Wake's American Nightmare: Backing up config file, keybinds, resolution settings, savegames
-	xcopy /e /i /y %awandir% "Alan Wake's American Nightmare"
+	xcopy /e /i /y "%awandir%" "Alan Wake's American Nightmare"
 	echo.
 ) else (
 	echo Alan Wake's American Nightmare: Directory not found. Skipping...
@@ -122,7 +126,7 @@ rem Amnesia: A Machine For Pigs
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
 
 rem Backup Amnesia\Pig folder
-if exist %aamfpdir% (
+if exist "%aamfpdir%" (
 	echo Amnesia: A Machine For Pigs - Backing up profile folder, first start flag and main settings
 	xcopy /e /exclude:exclude.txt /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
 	echo.
@@ -139,7 +143,7 @@ rem Amnesia: The Dark Descent
 set "atdddir=%userprofile%\Documents\Amnesia\Main"
 
 rem Backup Amnesia\Main folder
-if exist %atdddir% (
+if exist "%atdddir%" (
 	echo Amnesia: The Dark Descent - Backing up profile folder, first start flag and main settings
 	xcopy /e /exclude:exclude.txt /i /y "%atdddir%" "Amnesia - The Dark Descent"
 	echo.
@@ -156,9 +160,9 @@ rem Anachronox
 set "anoxrootdir=%gamerootdir%\Anachronox"
 
 rem Backup SAVE folder
-if exist %anoxrootdir%\anoxdata\SAVE (
+if exist "%anoxrootdir%\anoxdata\SAVE" (
 	echo Anachronox: Backing up SAVE folder
-	xcopy /e /i /y %anoxrootdir%\anoxdata\SAVE Anachronox\SAVE
+	xcopy /e /i /y "%anoxrootdir%\anoxdata\SAVE" "Anachronox\SAVE"
 	echo.
 ) else (
 	echo Anachronox: SAVE folder not found. Skipping...
@@ -170,12 +174,13 @@ echo.
 
 rem ANNO 1602
 
+set "anno1602regpath=HKCU\SOFTWARE\ANNO1602"
 set "anno1602rootdir=%gamerootdir%\ANNO1602"
 
 rem Backup savegames
-if exist %anno1602rootdir%\Savegame (
+if exist "%anno1602rootdir%\Savegame" (
 	echo ANNO 1602: Backing up savegames
-	xcopy /e /i /y %anno1602rootdir%\Savegame "ANNO 1602\Savegame"
+	xcopy /e /i /y "%anno1602rootdir%\Savegame" "ANNO 1602\Savegame"
 	echo.
 ) else (
 	echo ANNO 1602: Savegame folder not found. Skipping...
@@ -185,28 +190,28 @@ if exist %anno1602rootdir%\Savegame (
 rem Backup Game.dat
 if exist "%anno1602rootdir%\Game.dat" (
 	echo ANNO 1602: Backing up Game.dat file
-	copy %anno1602rootdir%\Game.dat "ANNO 1602"
+	copy "%anno1602rootdir%\Game.dat" "ANNO 1602"
 	echo.
 ) else (
 	echo ANNO 1602: Game.dat file not found. Skipping...
 	echo.
 )
 
-rem Backup registry keys
-echo ANNO 1602: Backing up registry keys
-reg export HKCU\SOFTWARE\ANNO1602 "ANNO 1602\anno1602.reg" /y
+rem Backup registry key
+echo ANNO 1602: Backing up registry key
+reg export "%anno1602regpath%" "ANNO 1602\anno1602.reg" /y
 
 echo ANNO 1602: Done.
 echo.
 
 rem Baldur’s Gate
 
-set "bgrootdir=%gamerootdir%\Baldur's Gate"
+set "baldursgaterootdir=%gamerootdir%\Baldur's Gate"
 
 rem Backup savegames
-if exist "%bgrootdir%\Save" (
+if exist "%baldursgaterootdir%\Save" (
 	echo Baldur's Gate: Backing up savegames
-	xcopy /e /i /y "%bgrootdir%\Save" "Baldur's Gate\Save"
+	xcopy /e /i /y "%baldursgaterootdir%\Save" "Baldur's Gate\Save"
 	echo.
 ) else (
 	echo Baldur's Gate: Savegame folder not found. Skipping...
@@ -214,9 +219,9 @@ if exist "%bgrootdir%\Save" (
 )
 
 rem Backup configuration file
-if exist "%bgrootdir%\Baldur.ini" (
+if exist "%baldursgaterootdir%\Baldur.ini" (
 	echo Baldur's Gate: Backing up configuration file
-	xcopy /i /y "%bgrootdir%\Baldur.ini" "Baldur's Gate"
+	xcopy /i /y "%baldursgaterootdir%\Baldur.ini" "Baldur's Gate"
 	echo.
 ) else (
 	echo Baldur's Gate: Configuration file not found. Skipping...
@@ -224,9 +229,9 @@ if exist "%bgrootdir%\Baldur.ini" (
 )
 
 rem Backup characters
-if exist "%bgrootdir%\Characters\*.chr" (
+if exist "%baldursgaterootdir%\Characters\*.chr" (
 	echo Baldur's Gate: Backing up characters
-	xcopy /e /i /y "%bgrootdir%\Characters" "Baldur's Gate\Characters"
+	xcopy /e /i /y "%baldursgaterootdir%\Characters" "Baldur's Gate\Characters"
 	echo.
 ) else (
 	echo Baldur's Gate: Characters not found. Skipping...
@@ -283,6 +288,7 @@ echo.
 
 rem Battle Realms
 
+set "br1regpath=HKCU\SOFTWARE\Liquid Entertainment\Battle Realms"
 set "br1rootdir=%gamerootdir%\Battle Realms"
 
 rem Backup savegames
@@ -305,9 +311,9 @@ if exist "%br1rootdir%\*.ini" (
 	echo.
 )
 
-rem Backup registry keys
-echo Battle Realms: Backing up registry keys
-reg export "HKCU\SOFTWARE\Liquid Entertainment\Battle Realms" "Battle Realms\br1.reg" /y
+rem Backup registry key
+echo Battle Realms: Backing up registry key
+reg export "%br1regpath%" "Battle Realms\br1.reg" /y
 echo.
 
 rem Backup Serpent DLL file
@@ -332,21 +338,22 @@ echo.
 
 rem Becherov
 
+set "becherovregpath=HKCU\SOFTWARE\Inputwish\Becherov"
 set "becherovrootdir=%gamerootdir%\Becherov"
 
 rem Backup profile data
-if exist %becherovrootdir%\Data\Player\*.dat (
+if exist "%becherovrootdir%\Data\Player\*.dat" (
 	echo Becherov: Backing up profile data
-	xcopy /i /y %becherovrootdir%\Data\Player\*.dat Becherov\Data\Player
+	xcopy /i /y "%becherovrootdir%\Data\Player\*.dat" "Becherov\Data\Player"
 	echo.
 ) else (
 	echo Becherov: Profile data not found. Skipping...
 	echo.
 )
 
-rem Backup registry keys
-echo Becherov: Backing up registry keys
-reg export HKCU\SOFTWARE\Inputwish Becherov\becherov.reg /y
+rem Backup registry key
+echo Becherov: Backing up registry key
+reg export "%becherovregpath%" "Becherov\becherov.reg" /y
 
 echo Becherov: Done.
 echo.
@@ -357,9 +364,9 @@ set "bs1dir=%appdata%\Bioshock"
 set "bs1sgdir=%userprofile%\Documents\Bioshock\SaveGames"
 
 rem Backup savegames
-if exist %bs1sgdir%\*.bsb (
+if exist "%bs1sgdir%\*.bsb" (
 	echo BioShock: Backing up savegames
-	xcopy /e /i /y %bs1sgdir% "BioShock\SaveGames"
+	xcopy /e /i /y "%bs1sgdir%" "BioShock\SaveGames"
 	echo.
 ) else (
 	echo BioShock: Savegames not found. Skipping...
@@ -367,9 +374,9 @@ if exist %bs1sgdir%\*.bsb (
 )
 
 rem Backup memory file, configuration and keybinds
-if exist %bs1dir%\*.ini (
+if exist "%bs1dir%\*.ini" (
 	echo BioShock: Backing up memory file, configuration and keybinds
-	xcopy /e /i /y %bs1dir% BioShock\AppData
+	xcopy /e /i /y "%bs1dir%" "BioShock\AppData"
 	echo.
 ) else (
 	echo BioShock: .ini files not found. Skipping...
@@ -381,6 +388,7 @@ echo.
 
 rem Blood Omen: Legacy of Kain
 
+set "bolokregpath=HKCU\SOFTWARE\LegacyOfKain"
 set "bolokrootdir=%gamerootdir%\Blood Omen"
 
 rem Backup savegames
@@ -416,9 +424,9 @@ if exist "%bolokrootdir%\dxcfg.ini" (
 	echo.
 )
 
-rem Backup registry keys
-echo Blood Omen: Legacy of Kain - Backing up registry keys
-reg export "HKCU\SOFTWARE\LegacyOfKain" "Blood Omen - Legacy of Kain\bolok.reg" /y
+rem Backup registry key
+echo Blood Omen: Legacy of Kain - Backing up registry key
+reg export "%bolokregpath%" "Blood Omen - Legacy of Kain\bolok.reg" /y
 
 echo Blood Omen: Legacy of Kain - Done.
 echo.
@@ -426,6 +434,7 @@ echo.
 rem Buddy Simulator 1984
 
 set "bs1984datadir=%userprofile%\Documents\Buddy Simulator 1984"
+set "bs1984regpath=HKCU\SOFTWARE\Not a Sailor Studios\Buddy Simulator 1984"
 set "bs1984rootdir=%gamerootdir%\Buddy Simulator 1984"
 
 rem Backup DATA folder
@@ -448,11 +457,32 @@ if exist "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories" (
 	echo.
 )
 
-rem Export registry keys into file
-echo Buddy Simulator 1984: Backing up registry keys
-reg export "HKCU\SOFTWARE\Not a Sailor Studios" "Buddy Simulator 1984\buddy-sim-1984.reg" /y
+rem Export registry key into file
+echo Buddy Simulator 1984: Backing up registry key
+reg export "%bs1984regpath%" "Buddy Simulator 1984\buddy-sim-1984.reg" /y
 
 echo Buddy Simulator 1984: Done.
+echo.
+
+rem Call of Cthulhu: Dark Corners of the Earth
+
+set "cocdcotedir=%userprofile%\Documents\Bethesda\Call of Cthulhu"
+set "cocdcoteregpath=HKCU\SOFTWARE\Bethesda Softworks\Call Of Cthulhu DCoTE"
+
+rem Backup automatic save, options and manual savegames
+if exist "%cocdcotedir%" (
+	echo Call of Cthulhu: Dark Corners of the Earth - Backing up folder
+	xcopy /e /i /y "%cocdcotedir%" "Call of Cthulhu - Dark Corners of the Earth"
+	echo.
+) else (
+	echo Call of Cthulhu: Dark Corners of the Earth - Folder not found. Skipping...
+	echo.
+)
+
+rem Backup registry key
+reg export "%cocdcoteregpath%" "Call of Cthulhu - Dark Corners of the Earth\cocdcote.reg" /y
+
+echo Call of Cthulhu: Dark Corners of the Earth - Done.
 echo.
 
 rem Cave Story
@@ -460,9 +490,9 @@ rem Cave Story
 set "cavestoryrootdir=%gamerootdir%\Cave Story"
 
 rem Copy profile data from the game’s root directory into ‘Cave Story’ folder
-if exist %cavestorydir%\*.dat (
+if exist "%cavestoryrootdir%\*.dat" (
 	echo Cave Story: Backing up configuration and profile data
-	xcopy /i /y %cavestorydir%\*.dat "Cave Story"
+	xcopy /i /y "%cavestoryrootdir%\*.dat" "Cave Story"
 	echo.
 ) else (
 	echo Cave Story: Configuration and profile data not found. Skipping...
@@ -470,9 +500,9 @@ if exist %cavestorydir%\*.dat (
 )
 
 rem Back up window.rect
-if exist %cavestorydir%\*.rect (
+if exist "%cavestoryrootdir%\*.rect" (
 	echo Cave Story: Backing up window.rect
-	copy %cavestorydir%\*.rect "Cave Story"
+	copy "%cavestoryrootdir%\*.rect" "Cave Story"
 	echo.
 ) else (
 	echo Cave Story: window.rect not found. Skipping...
@@ -487,9 +517,9 @@ rem Chaser
 set "chaserrootdir=%gamerootdir%\Chaser"
 
 rem Backup savegames
-if exist %chaserrootdir%\Save\*.sav (
+if exist "%chaserrootdir%\Save\*.sav" (
 	echo Chaser: Backing up savegames
-	xcopy /i /y %chaserrootdir%\Save\*.sav Chaser\Save
+	xcopy /i /y "%chaserrootdir%\Save\*.sav" "Chaser\Save"
 	echo.
 ) else (
 	echo Chaser: Savegames not found. Skipping...
@@ -497,12 +527,12 @@ if exist %chaserrootdir%\Save\*.sav (
 )
 
 rem Backup Users folder
-if exist %chaserrootdir%\Save\Users\*.cfg (
+if exist "%chaserrootdir%\Save\Users\*.cfg" (
 	echo Chaser: Backing up user keybinds and settings
-	xcopy /e /i /y %chaserrootdir%\Save\Users Chaser\Save\Users
+	xcopy /e /i /y "%chaserrootdir%\Save\Users" "Chaser\Save\Users"
 	echo.
 ) else (
-	echo Chaser: Config file not found. Skipping...
+	echo Chaser: Configuration file not found. Skipping...
 	echo.
 )
 
@@ -514,9 +544,9 @@ rem Crashday
 set "crashdayrootdir=%gamerootdir%\Crashday"
 
 rem Backup savegames and last user file
-if exist %crashdayrootdir%\savegame\*.sav (
+if exist "%crashdayrootdir%\savegame\*.sav" (
 	echo Crashday: Backing up last user file and savegames
-	xcopy /e /i /y %crashdayrootdir%\savegame Crashday\savegame
+	xcopy /e /i /y "%crashdayrootdir%\savegame" "Crashday\savegame"
 	echo.
 ) else (
 	echo Crashday: Savegames not found. Skipping...
@@ -524,9 +554,9 @@ if exist %crashdayrootdir%\savegame\*.sav (
 )
 
 rem Backup minigame highscores
-if exist %crashdayrootdir%\career\minigame\*.hig (
+if exist "%crashdayrootdir%\career\minigame\*.hig" (
 	echo Crashday: Backing up minigame highscores
-	xcopy /i /y %crashdayrootdir%\career\minigame\*.hig Crashday\career\minigame
+	xcopy /i /y "%crashdayrootdir%\career\minigame\*.hig" "Crashday\career\minigame"
 	echo.
 ) else (
 	echo Crashday: Minigame highscores not found. Skipping...
@@ -534,10 +564,10 @@ if exist %crashdayrootdir%\career\minigame\*.hig (
 )
 
 rem Backup track highscores and replay file
-if exist %crashdayrootdir%\trkdata\tracks\*.hig (
+if exist "%crashdayrootdir%\trkdata\tracks\*.hig" (
 	echo Crashday: Backing up track highscores and replay file
-	xcopy /i /y %crashdayrootdir%\trkdata\tracks\*.hig Crashday\trkdata\tracks
-	copy "%crashdayrootdir%\trkdata\tracks\_!replay!_.trk" Crashday\trkdata\tracks
+	xcopy /i /y "%crashdayrootdir%\trkdata\tracks\*.hig" "Crashday\trkdata\tracks"
+	copy "%crashdayrootdir%\trkdata\tracks\_!replay!_.trk" "Crashday\trkdata\tracks"
 	echo.
 ) else (
 	echo Crashday: Highscores not found. Skipping...
@@ -545,9 +575,9 @@ if exist %crashdayrootdir%\trkdata\tracks\*.hig (
 )
 
 rem Backup replays
-if exist %crashdayrootdir%\replays\*.rpl (
+if exist "%crashdayrootdir%\replays\*.rpl" (
 	echo Crashday: Backing up replays
-	xcopy /e /i /y %crashdayrootdir%\replays Crashday\replays
+	xcopy /e /i /y "%crashdayrootdir%\replays" "Crashday\replays"
 	echo.
 ) else (
 	echo Crashday: Replays not found. Skipping...
@@ -555,20 +585,20 @@ if exist %crashdayrootdir%\replays\*.rpl (
 )
 
 rem Backup configuration files
-if exist %crashdayrootdir%\contrldx.cfg (
-	if exist %crashdayrootdir%\propsfx.cfg (
-		if exist %crashdayrootdir%\sounddx.cfg (
+if exist "%crashdayrootdir%\contrldx.cfg" (
+	if exist "%crashdayrootdir%\propsfx.cfg" (
+		if exist "%crashdayrootdir%\sounddx.cfg" (
 			echo Crashday: Backing up configuration files
-			if not exist Crashday (
-				md Crashday
-				copy %crashdayrootdir%\contrldx.cfg Crashday
-				copy %crashdayrootdir%\propsfx.cfg Crashday
-				copy %crashdayrootdir%\sounddx.cfg Crashday
+			if not exist "Crashday" (
+				md "Crashday"
+				copy "%crashdayrootdir%\contrldx.cfg" "Crashday"
+				copy "%crashdayrootdir%\propsfx.cfg" "Crashday"
+				copy "%crashdayrootdir%\sounddx.cfg" "Crashday"
 				echo.
 			) else (
-				copy %crashdayrootdir%\contrldx.cfg Crashday
-				copy %crashdayrootdir%\propsfx.cfg Crashday
-				copy %crashdayrootdir%\sounddx.cfg Crashday
+				copy "%crashdayrootdir%\contrldx.cfg" "Crashday"
+				copy "%crashdayrootdir%\propsfx.cfg" "Crashday"
+				copy "%crashdayrootdir%\sounddx.cfg" "Crashday"
 				echo.
 			)
 		)
@@ -579,27 +609,50 @@ if exist %crashdayrootdir%\contrldx.cfg (
 )
 
 rem Backup quickchat file
-if exist %crashdayrootdir%\quickchat.txt (
+if exist "%crashdayrootdir%\quickchat.txt" (
 	echo Crashday: Backing up quickchat file
-	md Crashday
-	copy %crashdayrootdir%\quickchat.txt Crashday
+	md "Crashday"
+	copy "%crashdayrootdir%\quickchat.txt" "Crashday"
 	echo.
 ) else (
-	copy %crashdayrootdir%\quickchat.txt Crashday
+	copy "%crashdayrootdir%\quickchat.txt" "Crashday"
 	echo.
 )
 
 echo Crashday: Done.
 echo.
 
+rem Dagon by H. P. Lovecraft
+
+set "dagondir=%userprofile%\AppData\LocalLow\BitGolem\Dagon"
+set "dagonregpath=HKCU\SOFTWARE\BitGolem\Dagon"
+
+rem Backup savegame
+if exist "%dagondir%\*.es3" (
+	echo Dagon: Backing up savegame
+	xcopy /i /y "%dagondir%\*.es3" "Dagon"
+	echo.
+) else (
+	echo Dagon: Savegame not found. Skipping...
+	echo.
+)
+
+rem Backup registry key
+echo Dagon: Backing up registry key
+reg export "%dagonregpath%" "Dagon\dagon.reg" /y
+echo.
+
+echo Dagon: Done.
+echo.
+
 rem Darkest Dungeon
 
-set "dddir=%userprofile%\Documents\Darkest"
+set "darkestdir=%userprofile%\Documents\Darkest"
 
 rem Copy JSON files into ‘Darkest Dungeon’ directory
-if exist %dddir% (
+if exist "%darkestdir%" (
 	echo Darkest Dungeon: Backing up profiles and persistent options file
-	xcopy /e /i /y %dddir% "Darkest Dungeon"
+	xcopy /e /i /y "%darkestdir%" "Darkest Dungeon"
 	echo.
 ) else (
 	echo Darkest Dungeon: Folder not found. Skipping...
@@ -611,12 +664,12 @@ echo.
 
 rem Dear Devere
 
-set "ddrootdir=%gamerootdir%\Dear Devere"
+set "devererootdir=%gamerootdir%\Dear Devere"
 
 rem Backup savegame
-if exist "%ddrootdir%\game\saves\*.save" (
+if exist "%devererootdir%\game\saves\*.save" (
 	echo Dear Devere: Backing up savegames
-	xcopy /i /y "%ddrootdir%\game\saves\*" "Dear Devere\game\saves"
+	xcopy /i /y "%devererootdir%\game\saves\*" "Dear Devere\game\saves"
 	echo.
 ) else (
 	echo Dear Devere: Savegames not found. Skipping...
@@ -624,9 +677,9 @@ if exist "%ddrootdir%\game\saves\*.save" (
 )
 
 rem Backup screenshots
-if exist "%ddrootdir%\*.png" (
+if exist "%devererootdir%\*.png" (
 	echo Dear Devere: Backing up screenshots
-	xcopy /i /y "%ddrootdir%\*.png" "Dear Devere"
+	xcopy /i /y "%devererootdir%\*.png" "Dear Devere"
 	echo.
 ) else (
 	echo Dear Devere: Screenshots not found. Skipping...
@@ -641,9 +694,9 @@ rem Diablo (Classic)
 set "diablorootdir=%gamerootdir%\Diablo"
 
 rem Backup savegame files
-if exist %diablorootdir%\*.sv (
+if exist "%diablorootdir%\*.sv" (
 	echo "Diablo (Classic): Backing up savegame files"
-	xcopy /i /y %diablorootdir%\*.sv Diablo\Classic
+	xcopy /i /y "%diablorootdir%\*.sv" "Diablo\Classic"
 	echo.
 ) else (
 	echo "Diablo (Classic): Savegames not found. Skipping..."
@@ -656,9 +709,9 @@ echo.
 rem Diablo
 
 rem Backup savegame files
-if exist %diablorootdir%\dx\*.sv (
+if exist "%diablorootdir%\dx\*.sv" (
 	echo Diablo: Backing up savegame files
-	xcopy /i /y %diablorootdir%\dx\*.sv Diablo\DX
+	xcopy /i /y "%diablorootdir%\dx\*.sv" "Diablo\DX"
 	echo.
 ) else (
 	echo Diablo: Savegames not found. Skipping...
@@ -666,9 +719,9 @@ if exist %diablorootdir%\dx\*.sv (
 )
 
 rem Backup DirectX configuration
-if exist %diablorootdir%\dx\dxcfg.ini (
+if exist "%diablorootdir%\dx\dxcfg.ini" (
 	echo Diablo: Backing up DirectX configuration
-	copy %diablorootdir%\dx\dxcfg.ini Diablo\DX
+	copy "%diablorootdir%\dx\dxcfg.ini" "Diablo\DX"
 	echo.
 ) else (
 	echo Diablo: DirectX configuration not found. Skipping...
@@ -681,9 +734,9 @@ echo.
 rem Diablo: Hellfire
 
 rem Backup savegame files
-if exist %diablorootdir%\hellfire\*.hsv (
+if exist "%diablorootdir%\hellfire\*.hsv" (
 	echo Diablo: Hellfire - Backing up savegame files
-	xcopy /i /y %diablorootdir%\hellfire\*.hsv Diablo\Hellfire
+	xcopy /i /y "%diablorootdir%\hellfire\*.hsv" "Diablo\Hellfire"
 	echo.
 ) else (
 	echo Diablo: Hellfire - Savegames not found. Skipping...
@@ -695,6 +748,7 @@ echo.
 
 rem Diablo II
 
+set "d2regpath=HKCU\SOFTWARE\Blizzard Entertainment\Diablo II"
 set "d2rootdir=%gamerootdir%\Diablo II"
 set "d2sgdir=%userprofile%\Saved Games\Diablo II"
 
@@ -718,15 +772,16 @@ if exist "%d2rootdir%\default.key" (
 	echo.
 )
 
-rem Backup registry keys
-echo Diablo II: Backing up registry keys
-reg export "HKCU\SOFTWARE\Blizzard Entertainment\Diablo II" "Diablo II\d2.reg" /y
+rem Backup registry key
+echo Diablo II: Backing up registry key
+reg export "%d2regpath%" "Diablo II\d2.reg" /y
 
 echo Diablo II: Done.
 echo.
 
 rem Die Gilde
 
+set "gilderegpath=HKCU\SOFTWARE\Ahead Entertainment"
 set "gilderootdir=%gamerootdir%\Die Gilde"
 
 rem Backup savegames
@@ -749,9 +804,9 @@ if exist "%gilderootdir%\game.ini" (
 	echo.
 )
 
-rem Backup registry keys
-echo Die Gilde: Backing up registry keys
-reg export "HKCU\SOFTWARE\Ahead Entertainment" "Die Gilde\gilde.reg" /y
+rem Backup registry key
+echo Die Gilde: Backing up registry key
+reg export "%gilderegpath%" "Die Gilde\gilde.reg" /y
 
 echo Die Gilde: Done.
 echo.
@@ -759,12 +814,12 @@ echo.
 rem Die Völker
 rem English title: Alien Nations
 
-set "dvrootdir=%gamerootdir%\Alien Nations"
+set "dievoelkerrootdir=%gamerootdir%\Alien Nations"
 
 rem Backup configuration and savegame files
-if exist "%dvrootdir%\Savegames" (
+if exist "%dievoelkerrootdir%\Savegames" (
 	echo Die Voelker: Backing up configuration and savegame files
-	xcopy /e /i /y "%dvrootdir%\Savegames" "Die Voelker\Savegames"
+	xcopy /e /i /y "%dievoelkerrootdir%\Savegames" "Die Voelker\Savegames"
 	echo.
 ) else (
 	echo Die Voelker: Savegames folder not found. Skipping...
@@ -781,7 +836,7 @@ set "driverrootdir=%gamerootdir%\Driver"
 rem Backup highscores, replays and savegames
 if exist "%driverrootdir%\Saves\*.BIN" (
 	echo Driver: Backing up highscores, replays and savegames
-	xcopy /e /i /y %driverrootdir%\Saves Driver\Saves
+	xcopy /e /i /y "%driverrootdir%\Saves" "Driver\Saves"
 	echo.
 ) else (
 	echo Driver: No replays or savegames found. Skipping...
@@ -793,12 +848,12 @@ if exist "%driverrootdir%\ReplayData\User\$TEMP$.CFG" (
 	echo Driver: Backing up temporary user replay data
 
 	if not exist "Driver\ReplayData\User" (
-		md Driver\ReplayData\User
-		copy "%driverrootdir%\ReplayData\User\$TEMP$.CFG" Driver\ReplayData\User
-		copy "%driverrootdir%\ReplayData\User\$TEMP$.PADS" Driver\ReplayData\User
+		md "Driver\ReplayData\User"
+		copy "%driverrootdir%\ReplayData\User\$TEMP$.CFG" "Driver\ReplayData\User"
+		copy "%driverrootdir%\ReplayData\User\$TEMP$.PADS" "Driver\ReplayData\User"
 	) else (
-		copy "%driverrootdir%\ReplayData\User\$TEMP$.CFG" Driver\ReplayData\User
-		copy "%driverrootdir%\ReplayData\User\$TEMP$.PADS" Driver\ReplayData\User
+		copy "%driverrootdir%\ReplayData\User\$TEMP$.CFG" "Driver\ReplayData\User"
+		copy "%driverrootdir%\ReplayData\User\$TEMP$.PADS" "Driver\ReplayData\User"
 	)
 
 	echo.
@@ -810,7 +865,7 @@ if exist "%driverrootdir%\ReplayData\User\$TEMP$.CFG" (
 rem Backup start position file
 if exist "%driverrootdir%\*.X" (
 	echo Driver: Backing up start position file
-	xcopy /i /y %driverrootdir%\*.X Driver
+	xcopy /i /y "%driverrootdir%\*.X" "Driver"
 	echo.
 ) else (
 	echo Driver: No start position file found. Skipping...
@@ -822,10 +877,10 @@ if exist "%driverrootdir%\CONFIG.DAT" (
 	echo Driver: Backing up configuration
 
 	if not exist "Driver" (
-		md Driver
-		copy %driverrootdir%\CONFIG.DAT Driver
+		md "Driver"
+		copy "%driverrootdir%\CONFIG.DAT" "Driver"
 	) else (
-		copy %driverrootdir%\CONFIG.DAT Driver
+		copy "%driverrootdir%\CONFIG.DAT" "Driver"
 	)
 
 	echo.
@@ -837,6 +892,8 @@ if exist "%driverrootdir%\CONFIG.DAT" (
 rem Dungeon Keeper 2
 
 set "dk2rootdir=%gamerootdir%\Dungeon Keeper 2"
+set "dk2confregpath=HKCU\SOFTWARE\Bullfrog Productions Ltd\Dungeon Keeper II"
+set "dk2versionregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bullfrog Productions Ltd\Dungeon Keeper II"
 
 rem Backup savegames
 if exist "%dk2rootdir%\Data\Save\*.SAV" (
@@ -860,18 +917,19 @@ if exist "%dk2rootdir%\Data\Settings\*.dat" (
 
 rem Backup configuration
 echo Dungeon Keeper 2: Backing up configuration
-reg export "HKCU\SOFTWARE\Bullfrog Productions Ltd\Dungeon Keeper II" "Dungeon Keeper 2\dk2-conf.reg" /y
+reg export "%dk2confregpath%" "Dungeon Keeper 2\dk2-conf.reg" /y
 echo.
 
-rem Backup version number registry keys
-echo Dungeon Keeper 2: Backing up version number registry keys
-reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bullfrog Productions Ltd\Dungeon Keeper II" "Dungeon Keeper 2\dk2-version.reg" /y
+rem Backup version number registry key
+echo Dungeon Keeper 2: Backing up version number registry key
+reg export "%dk2versionregpath%" "Dungeon Keeper 2\dk2-version.reg" /y
 
 echo Dungeon Keeper 2: Done.
 echo.
 
 rem else Heart.Break()
 
+set "ehbregpath=HKCU\SOFTWARE\Miman\Else Heartbreak"
 set "ehbrootdir=%gamerootdir%\ElseHeartbreak"
 
 rem Copy JSON savegame files into ‘Saves’ folder
@@ -884,9 +942,9 @@ if exist "%ehbrootdir%\ElseHeartbreak_Data\Saves\*.json" (
 	echo.
 )
 
-rem Export registry keys. Settings are stored in them.
-echo else Heart.Break(): Backing up registry keys
-reg export HKCU\SOFTWARE\Miman "Else Heartbreak\else-heartbreak.reg" /y
+rem Export registry key. Settings are stored in them.
+echo else Heart.Break(): Backing up registry key
+reg export "%ehbregpath%" "Else Heartbreak\else-heartbreak.reg" /y
 
 echo else Heart.Break(): Done.
 echo.
@@ -983,21 +1041,22 @@ echo.
 
 rem FaeFever
 
-set "fflldir=%userprofile%\AppData\LocalLow\MonkeyWizardEntertainment\FaeFever"
+set "faefeverlldir=%userprofile%\AppData\LocalLow\MonkeyWizardEntertainment\FaeFever"
+set "faefeverregpath=HKCU\SOFTWARE\MonkeyWizardEntertainment\FaeFever"
 
 rem Backup savegames and settings
-if exist "%fflldir%" (
+if exist "%faefeverlldir%" (
 	echo FaeFever: Backing up savegames and settings
-	xcopy /e /i /y "%fflldir%\Save" "FaeFever\Save"
+	xcopy /e /i /y "%faefeverlldir%\Save" "FaeFever\Save"
 	echo.
 ) else (
 	echo FaeFever: LocalLow directory not found. Skipping...
 	echo.
 )
 
-rem Backup registry keys
-echo FaeFever: Backing up registry keys
-reg export HKCU\SOFTWARE\MonkeyWizardEntertainment\FaeFever FaeFever\faefever.reg /y
+rem Backup registry key
+echo FaeFever: Backing up registry key
+reg export "%faefeverregpath%" "FaeFever\faefever.reg" /y
 
 echo FaeFever: Done.
 echo.
@@ -1005,11 +1064,12 @@ echo.
 rem Firewatch
 
 set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto\Firewatch"
+set "fwregpath=HKCU\SOFTWARE\CampoSanto\Firewatch"
 
 rem Backup localisation file, keybinds, photos and savegames
 if exist "%fwlldir%" (
 	echo Firewatch: Backing up localisation file, keybinds, photos and savegames
-	xcopy /e /i /y %fwlldir% Firewatch\CampoSanto
+	xcopy /e /i /y "%fwlldir%" "Firewatch\CampoSanto"
 	echo.
 ) else (
 	echo Firewatch: LocalLow directory not found. Skipping...
@@ -1018,7 +1078,7 @@ if exist "%fwlldir%" (
 
 rem Backup settings
 echo Firewatch: Backing up settings
-reg export HKCU\SOFTWARE\CampoSanto\Firewatch Firewatch\firewatch.reg /y
+reg export "%fwregpath%" "Firewatch\firewatch.reg" /y
 
 echo Firewatch: Done.
 echo.
@@ -1028,9 +1088,9 @@ rem Gothic
 set "g1rootdir=%gamerootdir%\Gothic"
 
 rem Backup savegames
-if exist %g1rootdir%\Saves (
+if exist "%g1rootdir%\Saves" (
 	echo Gothic: Backing up savegames
-	xcopy /e /i /y %g1rootdir%\Saves Gothic\Saves
+	xcopy /e /i /y "%g1rootdir%\Saves" "Gothic\Saves"
 	echo.
 ) else (
 	echo Gothic: Saves folder not found. Skipping...
@@ -1038,9 +1098,9 @@ if exist %g1rootdir%\Saves (
 )
 
 rem Backup configuration file
-if exist %g1rootdir%\system\*.INI (
+if exist "%g1rootdir%\system\*.INI" (
 	echo Gothic: Backing up configuration file
-	xcopy /i /y %g1rootdir%\system\*.INI Gothic\system
+	xcopy /i /y "%g1rootdir%\system\*.INI" "Gothic\system"
 	echo.
 ) else (
 	echo Gothic: Configuration not found. Skipping...
@@ -1079,12 +1139,13 @@ echo.
 
 rem Grand Theft Auto
 
-set "gta1rootdir=%gamerootdir%\Grand Theft Auto"
+set "gtaregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\DMA Design\Grand Theft Auto"
+set "gtarootdir=%gamerootdir%\Grand Theft Auto"
 
 rem Backup .dat file
-if exist "%gta1rootdir%\GTADATA\*.dat" (
+if exist "%gtarootdir%\GTADATA\*.dat" (
 	echo Grand Theft Auto: Backing up .dat file
-	xcopy /i /y "%gta1rootdir%\GTADATA\*.dat" "Grand Theft Auto\GTADATA"
+	xcopy /i /y "%gtarootdir%\GTADATA\*.dat" "Grand Theft Auto\GTADATA"
 	echo.
 ) else (
 	echo Grand Theft Auto: .dat file not found. Skipping...
@@ -1092,9 +1153,9 @@ if exist "%gta1rootdir%\GTADATA\*.dat" (
 )
 
 rem Backup replay file
-if exist "%gta1rootdir%\GTADATA\REPLAY.REP" (
+if exist "%gtarootdir%\GTADATA\REPLAY.REP" (
 	echo Grand Theft Auto: Backing up replay file
-	copy "%gta1rootdir%\GTADATA\REPLAY.REP" "Grand Theft Auto\GTADATA"
+	copy "%gtarootdir%\GTADATA\REPLAY.REP" "Grand Theft Auto\GTADATA"
 	echo.
 ) else (
 	echo Grand Theft Auto: Replay file not found. Skipping...
@@ -1103,7 +1164,7 @@ if exist "%gta1rootdir%\GTADATA\REPLAY.REP" (
 
 rem Backup language settings and key configuration
 echo Grand Theft Auto: Backing up language settings and key configuration
-reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\DMA Design\Grand Theft Auto" "Grand Theft Auto\gta-settings.reg" /y
+reg export "%gtaregpath%" "Grand Theft Auto\gta-settings.reg" /y
 
 echo Grand Theft Auto: Done.
 echo.
@@ -1168,13 +1229,13 @@ echo.
 rem Hacknet
 
 set "hacknetdir=%userprofile%\Documents\My Games\Hacknet"
-set "hnrootdir=%gamerootdir%\Hacknet"
+set "hacknetrootdir=%gamerootdir%\Hacknet"
 
 rem Copy Accounts.txt and XML savegame file into Hacknet directory
 if exist "%hacknet%\Accounts\*.txt" (
 	if exist "%hacknet%\Accounts\*.xml" (
 		echo Hacknet: Backing up Accounts.txt and XML savegame file
-		xcopy /i /y "%hacknetdir%\Accounts\*" Hacknet\Accounts
+		xcopy /i /y "%hacknetdir%\Accounts\*" "Hacknet\Accounts"
 		echo.
 	)
 ) else (
@@ -1183,9 +1244,9 @@ if exist "%hacknet%\Accounts\*.txt" (
 )
 
 rem Backup settings
-if exist %hnrootdir%\Settings.txt (
+if exist "%hacknetrootdir%\Settings.txt" (
 	echo Hacknet: Backing up settings
-	copy %hnrootdir%\Settings.txt Hacknet
+	copy "%hacknetrootdir%\Settings.txt" "Hacknet"
 	echo.
 ) else (
 	echo Hacknet: Settings file not found. Skipping...
@@ -1234,12 +1295,12 @@ echo.
 
 rem Hellblade - Senua’s Sacrifice
 
-set "hbdir=%userprofile%\AppData\Local\HellbladeGame"
+set "hellbladedir=%localappdata%\HellbladeGame"
 
 rem Backup savegame file
-if exist "%hbdir%\Saved\SaveGames\*.sav" (
+if exist "%hellbladedir%\Saved\SaveGames\*.sav" (
 	echo Hellblade - Senua's Sacrifice: Backing up savegame file
-	xcopy /i /y "%hbdir%\Saved\SaveGames\*.sav" "Hellblade - Senua's Sacrifice\SaveGames"
+	xcopy /i /y "%hellbladedir%\Saved\SaveGames\*.sav" "Hellblade - Senua's Sacrifice\SaveGames"
 	echo.
 ) else (
 	echo Hellblade - Senua's Sacrifice: Savegame not found. Skipping...
@@ -1247,9 +1308,9 @@ if exist "%hbdir%\Saved\SaveGames\*.sav" (
 )
 
 rem Backup user settings file
-if exist "%hbdir%\Saved\Config\WindowsNoEditor\GameUserSettings.ini" (
+if exist "%hellbladedir%\Saved\Config\WindowsNoEditor\GameUserSettings.ini" (
 	echo Hellblade - Senua's Sacrifice: Backing up user settings
-	copy "%hbdir%\Saved\Config\WindowsNoEditor\GameUserSettings.ini" "Hellblade - Senua's Sacrifice"
+	copy "%hellbladedir%\Saved\Config\WindowsNoEditor\GameUserSettings.ini" "Hellblade - Senua's Sacrifice"
 	echo.
 ) else (
 	echo Hellblade - Senua's Sacrifice: User settings not found. Skipping...
@@ -1353,16 +1414,17 @@ echo.
 
 rem Inkslinger
 
+set "inkslingerregpath=HKCU\SOFTWARE\Gateway"
 set "inkslingerrootdir=%gamerootdir%\Inkslinger"
 
-if exist %inkslingerrootdir% (
+if exist "%inkslingerrootdir%" (
 	rem Create folder structure
 	echo Inkslinger: Creating folder structure
-	md Inkslinger
+	md "Inkslinger"
 
-	rem Export registry keys into file
-	echo Inkslinger: Backing up registry keys
-	reg export HKCU\SOFTWARE\Gateway Inkslinger\inkslinger.reg /y
+	rem Export registry key into file
+	echo Inkslinger: Backing up registry key
+	reg export "%inkslingerregpath%" "Inkslinger\inkslinger.reg" /y
 
 	echo.
 ) else (
@@ -1376,20 +1438,21 @@ echo.
 rem Inside
 
 set "insidedir=%appdata%\Playdead\Inside"
+set "insideregpath=HKCU\SOFTWARE\Playdead\INSIDE"
 
 rem Backup savegame files
-if exist %insidedir%\*.sav (
+if exist "%insidedir%\*.sav" (
 	echo Inside: Backing up savegame file
-	xcopy /i /y %insidedir%\*.sav Inside
+	xcopy /i /y "%insidedir%\*.sav" "Inside"
 	echo.
 ) else (
 	echo Inside: Savegame not found. Skipping...
 	echo.
 )
 
-rem Back up registry keys. Settings are stored here
-echo Inside: Backing up registry keys
-reg export HKCU\SOFTWARE\Playdead Inside\inside.reg /y
+rem Back up registry key. Settings are stored here
+echo Inside: Backing up registry key
+reg export "%insideregpath%" "Inside\inside.reg" /y
 
 echo Inside: Done.
 echo.
@@ -1415,12 +1478,12 @@ echo.
 rem L’Amerzone
 rem English title: Amerzone
 
-set "larootdir=%gamerootdir%\AmerZone"
+set "lamerzonerootdir=%gamerootdir%\AmerZone"
 
 rem Backup savegames
-if exist "%larootdir%\*.bin" (
+if exist "%lamerzonerootdir%\*.bin" (
 	echo L'Amerzone: Backing up savegames
-	xcopy /i /y "%larootdir%\*.bin" "L'Amerzone"
+	xcopy /i /y "%lamerzonerootdir%\*.bin" "L'Amerzone"
 	echo.
 ) else (
 	echo L'Amerzone: Savegames not found. Skipping...
@@ -1434,6 +1497,7 @@ rem Layers of Fear
 rem Layers of Fear: Inheritance
 
 set "loflldir=%userprofile%\AppData\LocalLow\Bloober Team\Layers of Fear"
+set "lofregpath=HKCU\SOFTWARE\Bloober Team\Layers of Fear"
 
 rem Backup savegames
 if exist "%loflldir%\0\*.dat" (
@@ -1455,9 +1519,9 @@ if exist "%loflldir%\0\cfg\*.xml" (
 	echo.
 )
 
-rem Backup registry keys
-echo Layers of Fear: Backing up registry keys
-reg export "HKCU\SOFTWARE\Bloober Team\Layers of Fear" "Layers of Fear\lof.reg" /y
+rem Backup registry key
+echo Layers of Fear: Backing up registry key
+reg export "%lofregpath%" "Layers of Fear\lof.reg" /y
 echo.
 
 echo Layers of Fear: Done.
@@ -1482,21 +1546,22 @@ echo.
 
 rem Mafia
 
+set "mafiaregpath=HKCU\SOFTWARE\Illusion Softworks\Mafia"
 set "mafiarootdir=%gamerootdir%\Mafia"
 
 rem Backup savegame files
 if exist "%mafiarootdir%\savegame\*.sav" (
 	echo Mafia: Backing up savegame files
-	xcopy /e /i /y "%mafiarootdir%\savegame" Mafia\savegame
+	xcopy /e /i /y "%mafiarootdir%\savegame" "Mafia\savegame"
 	echo.
 ) else (
 	echo Mafia: Savegame files not found. Skipping...
 	echo.
 )
 
-rem Backup registry keys
-echo Mafia: Backing up registry keys
-reg export "HKCU\SOFTWARE\Illusion Softworks\Mafia" Mafia\mafia.reg /y
+rem Backup registry key
+echo Mafia: Backing up registry key
+reg export "%mafiaregpath%" "Mafia\mafia.reg" /y
 echo.
 
 echo Mafia: Done.
@@ -1558,6 +1623,7 @@ echo.
 
 rem Metal Gear Solid
 
+set "mgsregpath=HKCU\SOFTWARE\Metal Gear Solid"
 set "mgsrootdir=%gamerootdir%\Metal Gear Solid"
 
 rem Backup savegames
@@ -1610,9 +1676,9 @@ if exist "%mgsrootdir%\PHOTOS\*.bmp" (
 	echo.
 )
 
-rem Backup registry keys
-echo Metal Gear Solid: Backing up registry keys
-reg export "HKCU\SOFTWARE\Metal Gear Solid" "Metal Gear Solid\mgs.reg" /y
+rem Backup registry key
+echo Metal Gear Solid: Backing up registry key
+reg export "%mgsregpath%" "Metal Gear Solid\mgs.reg" /y
 
 echo Metal Gear Solid: Done.
 echo.
@@ -1759,6 +1825,7 @@ echo.
 rem Never Alone
 
 set "nadir=%userprofile%\AppData\LocalLow\E-Line Media\Never Alone"
+set "naregpath=HKCU\SOFTWARE\E-Line Media\Never Alone"
 
 rem Backup savegame data
 if exist "%nadir%\*.dat" (
@@ -1770,9 +1837,9 @@ if exist "%nadir%\*.dat" (
 	echo.
 )
 
-rem Backup registry keys
-echo Never Alone: Backing up registry keys
-reg export "HKCU\SOFTWARE\E-Line Media\Never Alone" "Never Alone\na.reg" /y
+rem Backup registry key
+echo Never Alone: Backing up registry key
+reg export "%naregpath%" "Never Alone\neveralone.reg" /y
 
 echo Never Alone: Done.
 echo.
@@ -1885,24 +1952,24 @@ echo.
 
 rem Outlast
 
-set "oldir=%userprofile%\Documents\My Games\Outlast"
+set "outlastdir=%userprofile%\Documents\My Games\Outlast"
 
 rem Backup profile and savegame files
-if exist "%oldir%\OLGame\SaveData" (
+if exist "%outlastdir%\OLGame\SaveData" (
 	echo Outlast: Backing up profile and savegame files
-	xcopy /i /y "%oldir%\OLGame\SaveData\*" Outlast\SaveData
+	xcopy /i /y "%outlastdir%\OLGame\SaveData\*" "Outlast\SaveData"
 	echo.
 ) else (
 	echo Outlast: SaveData folder not found. Skipping...
 )
 
 rem Backup config folder
-if exist "%oldir%\OLGame\Config" (
+if exist "%outlastdir%\OLGame\Config" (
 	echo Outlast: Backing up config folder
-	xcopy /e /i /y "%oldir%\OLGame\Config" Outlast\Config
+	xcopy /e /i /y "%outlastdir%\OLGame\Config" "Outlast\Config"
 	echo.
 ) else (
-	echo Outlast: Config folder not found. Skipping...
+	echo Outlast: Configuration folder not found. Skipping...
 	echo.
 )
 
@@ -1911,12 +1978,14 @@ echo.
 
 rem Painkiller
 
+set "pkregpath1=HKCU\SOFTWARE\PeopleCanFly"
+set "pkregpath2=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly"
 set "pkrootdir=%gamerootdir%\Painkiller Black"
 
 rem Backup savegames and folder structure
 if exist "%pkrootdir%\SaveGames" (
 	echo Painkiller: Backing up savegames
-	xcopy /e /i /y "%pkrootdir%\SaveGames" Painkiller\SaveGames
+	xcopy /e /i /y "%pkrootdir%\SaveGames" "Painkiller\SaveGames"
 	echo.
 ) else (
 	echo Painkiller: SaveGames folder not found. Skipping...
@@ -1925,18 +1994,18 @@ if exist "%pkrootdir%\SaveGames" (
 
 rem Back up config file
 if exist "%pkrootdir%\Bin\*.ini" (
-	echo Painkiller: Backing up config file
-	copy "%pkrootdir%\Bin\*.ini" Painkiller
+	echo Painkiller: Backing up configuration file
+	copy "%pkrootdir%\Bin\*.ini" "Painkiller"
 	echo.
 ) else (
-	echo Painkiller: Config file not found. Skipping...
+	echo Painkiller: Configuration file not found. Skipping...
 	echo.
 )
 
-rem Back up registry keys
-echo Painkiller: Backing up registry keys
-reg export HKEY_CURRENT_USER\SOFTWARE\PeopleCanFly Painkiller\painkiller-1.reg /y
-reg export HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly Painkiller\painkiller-2.reg /y
+rem Back up registry key
+echo Painkiller: Backing up registry key
+reg export "%pkregpath1%" "Painkiller\painkiller-1.reg" /y
+reg export "%pkregpath2%" "Painkiller\painkiller-2.reg" /y
 
 echo Painkiller: Done.
 echo.
@@ -2029,12 +2098,12 @@ echo.
 
 rem Port Royale
 
-set "prrootdir=%gamerootdir%\Port Royale"
+set "portroyalerootdir=%gamerootdir%\Port Royale"
 
 rem Backup options and savegames
-if exist "%prrootdir%\Save\*.mrk" (
+if exist "%portroyalerootdir%\Save\*.mrk" (
 	echo Port Royale: Backing up options and savegames
-	xcopy /e /i /y "%prrootdir%\Save" "Port Royale\Save"
+	xcopy /e /i /y "%portroyalerootdir%\Save" "Port Royale\Save"
 	echo.
 ) else (
 	echo Port Royale: Savegames not found. Skipping...
@@ -2042,9 +2111,9 @@ if exist "%prrootdir%\Save\*.mrk" (
 )
 
 rem Backup player .aim files
-if exist "%prrootdir%\Run\Player*" (
+if exist "%portroyalerootdir%\Run\Player*" (
 	echo Port Royale: Backing up player .aim files
-	xcopy /i /y "%prrootdir%\Run\Player*" "Port Royale\Run"
+	xcopy /i /y "%portroyalerootdir%\Run\Player*" "Port Royale\Run"
 	echo.
 ) else (
 	echo Port Royale: Player .aim files not found. Skipping...
@@ -2226,12 +2295,13 @@ echo.
 
 rem Red Faction
 
-set "rfrootdir=%gamerootdir%\Red Faction"
+set "redfactionregpath=HKCU\SOFTWARE\Volition\Red Faction"
+set "redfactionrootdir=%gamerootdir%\Red Faction"
 
 rem Backup savegames
-if exist "%rfrootdir%\savegame" (
+if exist "%redfactionrootdir%\savegame" (
 	echo Red Faction: Backing up savegames
-	xcopy /e /i /y "%rfrootdir%\savegame" "Red Faction\savegame"
+	xcopy /e /i /y "%redfactionrootdir%\savegame" "Red Faction\savegame"
 	echo.
 ) else (
 	echo Red Faction: Savegame folder not found. Skipping...
@@ -2239,9 +2309,9 @@ if exist "%rfrootdir%\savegame" (
 )
 
 rem Backup configuration file
-if exist "%rfrootdir%\*.cfg" (
+if exist "%redfactionrootdir%\*.cfg" (
 	echo Red Faction: Backing up configuration file
-	xcopy /i /y "%rfrootdir%\*.cfg" "Red Faction"
+	xcopy /i /y "%redfactionrootdir%\*.cfg" "Red Faction"
 	echo.
 ) else (
 	echo Red Faction: Configuration file not found. Skipping...
@@ -2249,17 +2319,17 @@ if exist "%rfrootdir%\*.cfg" (
 )
 
 rem Backup D3D file
-if exist "%rfrootdir%\*.id" (
+if exist "%redfactionrootdir%\*.id" (
 	echo Red Faction: Backing up D3D file
-	xcopy /i /y "%rfrootdir%\*.id" "Red Faction"
+	xcopy /i /y "%redfactionrootdir%\*.id" "Red Faction"
 	echo.
 ) else (
 	echo Red Faction: D3D file not found. Skipping...
 )
 
-rem Backup registry keys
-echo Red Faction: Backing up registry keys
-reg export "HKCU\SOFTWARE\Volition\Red Faction" "Red Faction\rf.reg" /y
+rem Backup registry key
+echo Red Faction: Backing up registry key
+reg export "%redfactionregpath%" "Red Faction\rf.reg" /y
 
 echo Red Faction: Done.
 echo.
@@ -2283,16 +2353,17 @@ echo.
 
 rem Ritual of the Moon
 
+set "rotmregpath=HKCU\SOFTWARE\Kara Stone\R o t M"
 set "rotmrootdir=%gamerootdir%\Ritual of the Moon"
 
-rem Backup registry keys
+rem Backup registry key
 if exist "%rotmrootdir%" (
 	rem Create folder structure
 	echo Ritual of the Moon: Creating folder structure
 	md "Ritual of the Moon"
 
 	echo Ritual of the Moon: Backing up progress and settings
-	reg export "HKCU\SOFTWARE\Kara Stone\R o t M" "Ritual of the Moon\rotm.reg" /y
+	reg export "%rotmregpath%" "Ritual of the Moon\rotm.reg" /y
 
 	echo.
 ) else (
@@ -2357,12 +2428,12 @@ echo.
 
 rem Sacred Gold
 
-set "sgrootdir=%gamerootdir%\Sacred Gold"
+set "sacredrootdir=%gamerootdir%\Sacred Gold"
 
 rem Backup exported characters and savegames
-if exist "%sgrootdir%\save" (
+if exist "%sacredrootdir%\save" (
 	echo Sacred Gold: Backing up exported characters and savegames
-	xcopy /e /i /y "%sgrootdir%\save" "Sacred Gold\save"
+	xcopy /e /i /y "%sacredrootdir%\save" "Sacred Gold\save"
 	echo.
 ) else (
 	echo Sacred Gold: save folder not found. Skipping...
@@ -2370,9 +2441,9 @@ if exist "%sgrootdir%\save" (
 )
 
 rem Backup configuration files
-if exist "%sgrootdir%\*.cfg" (
+if exist "%sacredrootdir%\*.cfg" (
 	echo Sacred Gold: Backing up configuration files
-	xcopy /i /y "%sgrootdir%\*.cfg" "Sacred Gold"
+	xcopy /i /y "%sacredrootdir%\*.cfg" "Sacred Gold"
 	echo.
 ) else (
 	echo Sacred Gold: Configuration files not found. Skipping...
@@ -2455,6 +2526,7 @@ echo.
 
 rem Sludge Life
 
+set "slregpath=HKCU\SOFTWARE\TerriVellmann\SludgeLife"
 set "slrootdir=%gamerootdir%\Sludge Life"
 
 rem Back up pictures
@@ -2477,9 +2549,9 @@ if exist "%slrootdir%\save.txt" (
 	echo.
 )
 
-rem Backup registry keys. Settings are stored here
-echo Sludge Life: Backing up registry keys
-reg export HKCU\SOFTWARE\TerriVellmann "Sludge Life\sludgelife.reg" /y
+rem Backup registry key. Settings are stored here
+echo Sludge Life: Backing up registry key
+reg export "%slregpath%" "Sludge Life\sludgelife.reg" /y
 echo.
 
 echo Sludge Life: Done.
@@ -2556,6 +2628,31 @@ if exist "%ssrootdir%\ratings\*.rtc" (
 echo Sudden Strike: Done.
 echo.
 
+rem Sunless Sea
+
+set "sunlesslldir=%userprofile%\AppData\LocalLow\Failbetter Games\Sunless Sea"
+set "sunlessregpath=HKCU\SOFTWARE\Failbetter Games\Sunless Sea"
+
+rem Backup Sunless Sea folder with the exclusion of analytical data
+if exist "%sunlesslldir%" (
+	echo Sunless Sea: Backing up LocalLow folder
+	rem For some reason, the /l argument makes the process of copying over 3000
+	rem files much faster. This is caused by the backing up of the icons in the
+	rem ‘images’ folder.
+	xcopy /e /exclude:exclude.txt /i /l /y "%sunlesslldir%" "Sunless Sea\LocalLow"
+	echo.
+) else (
+	echo Sunless Sea: LocalLow folder not found. Skipping...
+	echo.
+)
+
+rem Backup registry key
+echo Sunless Sea: Backing up registry key
+reg export "%sunlessregpath%" "Sunless Sea\sunless-sea.reg" /y
+
+echo Sunless Sea: Done.
+echo.
+
 rem SWAT 4
 
 set "swat4sysdir=%gamerootdir%\SWAT 4\Content\System"
@@ -2601,7 +2698,7 @@ set "syberiasavedir=%userprofile%\Documents\Syberia Saves"
 rem Backup configuration and savegame files
 if exist "%syberiasavedir%\*.sav" (
 	echo Syberia: Backing up configuration and savegames
-	xcopy /i /y "%syberiasavedir%\*" Syberia
+	xcopy /i /y "%syberiasavedir%\*" "Syberia"
 	echo.
 ) else (
 	echo Syberia: Savegames not found. Skipping...
@@ -2630,6 +2727,7 @@ echo.
 
 rem The Alto Collection
 
+set "tacregpath=HKCU\SOFTWARE\Team Alto\The Alto Collection"
 set "tacrootdir=%gamerootdir%\The Alto Collection"
 
 if exist "%tacrootdir%" (
@@ -2638,7 +2736,7 @@ if exist "%tacrootdir%" (
 
 	rem Backup configuration and savegame data
 	echo The Alto Collection: Backing up configuration and save data
-	reg export "HKCU\SOFTWARE\Team Alto\The Alto Collection" "The Alto Collection\tac.reg" /y
+	reg export "%tacregpath%" "The Alto Collection\tac.reg" /y
 
 	echo.
 ) else (
@@ -2667,12 +2765,13 @@ echo.
 
 rem The Elder Scrolls III: Morrowind
 
+set "tes3regpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks"
 set "tes3rootdir=%gamerootdir%\Morrowind"
 
 rem Backup savegames
 if exist "%tes3rootdir%\Saves\*.ess" (
 	echo The Elder Scrolls III: Morrowind - Backing up savegames
-	xcopy /e /i /y "%tes3rootdir%\Saves" Morrowind\Saves
+	xcopy /e /i /y "%tes3rootdir%\Saves" "Morrowind\Saves"
 	echo.
 ) else (
 	echo The Elder Scrolls III: Morrowind - Savegames not found. Skipping...
@@ -2682,7 +2781,7 @@ if exist "%tes3rootdir%\Saves\*.ess" (
 rem Backup configuration file
 if exist "%tes3rootdir%\Morrowind.ini" (
 	echo The Elder Scrolls III: Morrowind - Backing up configuration file
-	copy "%tes3rootdir%\Morrowind.ini" Morrowind
+	copy "%tes3rootdir%\Morrowind.ini" "Morrowind"
 	echo.
 ) else (
 	echo The Elder Scrolls III: Morrowind - Configuration file not found. Skipping...
@@ -2692,16 +2791,16 @@ if exist "%tes3rootdir%\Morrowind.ini" (
 rem Backup journal
 if exist "%tes3rootdir%\Journal.htm" (
 	echo The Elder Scrolls III: Morrowind - Backing up journal
-	copy "%tes3rootdir%\Journal.htm" Morrowind
+	copy "%tes3rootdir%\Journal.htm" "Morrowind"
 	echo.
 ) else (
 	echo The Elder Scrolls III: Morrowind - Journal not found. Skipping...
 	echo.
 )
 
-rem Backup registry keys
-echo The Elder Scrolls III: Morrowind - Backing up registry keys
-reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Bethesda Softworks" Morrowind\morrowind.reg /y
+rem Backup registry key
+echo The Elder Scrolls III: Morrowind - Backing up registry key
+reg export "%tes3regpath%" "Morrowind\morrowind.reg" /y
 
 echo The Elder Scrolls III: Morrowind - Done.
 echo.
@@ -2791,6 +2890,7 @@ echo.
 rem Wiedźmin
 rem English title: The Witcher
 
+set "tw1regpath=HKCU\SOFTWARE\CD Projekt RED\Witcher"
 set "tw1savedir=%userprofile%\Documents\The Witcher\saves"
 
 rem Backup savegame files
@@ -2803,9 +2903,9 @@ if exist "%tw1savedir%\*.TheWitcherSave" (
 	echo.
 )
 
-rem Export registry keys into file
-echo The Witcher: Backing up registry keys
-reg export "HKCU\SOFTWARE\CD Projekt RED" "The Witcher\tw1-settings.reg" /y
+rem Export registry key into file
+echo The Witcher: Backing up registry key
+reg export "%tw1regpath%" "The Witcher\tw1-settings.reg" /y
 
 echo The Witcher: Done.
 echo.
@@ -2894,6 +2994,8 @@ rem English title: The Void
 set "thevoiddir=%userprofile%\Documents\My Games\Void"
 set "turgordir=%userprofile%\Documents\My Games\Turgor"
 set "thevoidrootdir=%gamerootdir%\The Void"
+set "thevoidregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Void"
+set "turgorregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Turgor"
 set "turgorrootdir=%gamerootdir%\Turgor"
 set "turgorpddir=%programdata%\Ice-pick Lodge\Turgor"
 set "thevoidpddir=%programdata%\Ice-pick Lodge\Void"
@@ -2922,8 +3024,8 @@ rem Тургор: Backup settings
 if exist "%turgorrootdir%\data\settings.xml" (
 	echo Turgor: Backing up settings
 
-	if not exist Turgor\settings (
-		md Turgor\settings
+	if not exist "Turgor\settings" (
+		md "Turgor\settings"
 	)
 
 	xcopy /i /y "%turgorrootdir%\data\settings.xml" "Turgor\settings"
@@ -2968,14 +3070,14 @@ if exist "%thevoidpddir%\*.xml" (
 	echo.
 )
 
-rem Тургор: Export registry keys
-echo Turgor: Backing up registry keys
-reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Turgor" "Turgor\turgor.reg" /y
+rem Тургор: Export registry key
+echo Turgor: Backing up registry key
+reg export "%turgorregpath%" "Turgor\turgor.reg" /y
 echo.
 
-rem The Void: Export registry keys
-echo The Void: Backing up registry keys
-reg export "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Ice-pick Lodge\Void" "The Void\the-void.reg" /y
+rem The Void: Export registry key
+echo The Void: Backing up registry key
+reg export "%thevoidregpath%" "The Void\the-void.reg" /y
 echo.
 
 echo Turgor: Done.
@@ -3056,12 +3158,12 @@ echo.
 
 rem Uplink
 
-set "ulrootdir=%gamerootdir%\Uplink"
+set "uplinkrootdir=%gamerootdir%\Uplink"
 
 rem Copy user files from Uplink’s users directory
-if exist "%ulrootdir%\users\*.usr" (
+if exist "%uplinkrootdir%\users\*.usr" (
 	echo Uplink: Backing up user files
-	xcopy /i /y "%ulrootdir%\users\*.usr" Uplink
+	xcopy /i /y "%uplinkrootdir%\users\*.usr" "Uplink"
 	echo.
 ) else (
 	echo Uplink: User files not found. Skipping...
@@ -3069,9 +3171,9 @@ if exist "%ulrootdir%\users\*.usr" (
 )
 
 rem Copy options file from Uplink’s users directory
-if exist "%ulrootdir%\users\options" (
+if exist "%uplinkrootdir%\users\options" (
 	echo Uplink: Backing up options file
-	copy "%ulrootdir%\users\options" Uplink
+	copy "%uplinkrootdir%\users\options" "Uplink"
 	echo.
 ) else (
 	echo Uplink: Options file not found. Skipping...
@@ -3103,6 +3205,7 @@ rem What Remains of Edith Finch
 set "wroefdir=%localappdata%\FinchGame"
 
 rem Backup savegame
+rem
 rem Since the game creates a random ID suffix combined with the machine name,
 rem the existence check is being done on the SaveGames folder instead of the
 rem actual savegame. Not sure how to solve this.
@@ -3138,6 +3241,7 @@ echo.
 
 rem Worms Armageddon
 
+set "waregpath=HKCU\SOFTWARE\Team17SoftwareLTD\WormsArmageddon"
 set "warootdir=%gamerootdir%\Worms Armageddon"
 
 rem Backup games data
@@ -3181,9 +3285,9 @@ if exist "%warootdir%\DATA\land.dat" (
 	echo.
 )
 
-rem Backup registry keys
-echo Worms Armageddon: Backing up registry keys
-reg export HKCU\SOFTWARE\Team17SoftwareLTD\WormsArmageddon "Worms Armageddon\wa.reg" /y
+rem Backup registry key
+echo Worms Armageddon: Backing up registry key
+reg export "%waregpath%" "Worms Armageddon\wa.reg" /y
 
 echo Worms Armageddon: Done.
 echo.
@@ -3206,7 +3310,7 @@ rem Backup configuration file
 if exist "%xiiirootdir%\system\XIII.ini" (
 	echo XIII: Backing up configuration file
 	md XIII\system
-	xcopy /i /y "%xiiirootdir%\system\XIII.ini" XIII\system
+	xcopy /i /y "%xiiirootdir%\system\XIII.ini" "XIII\system"
 	echo.
 ) else (
 	echo XIII: Configuration file not found. Skipping...

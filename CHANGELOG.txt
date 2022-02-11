@@ -190,3 +190,13 @@ Version 31.12.2021
 Version 14.1.2022
 - Add changelog
 - Add README and SUPPORTED as plaintext files
+
+Version 11.2.2022
+- Add ‘Call of Cthulhu: Dark Corners of the Earth’
+- Add ‘Dagon by H. P. Lovecraft’
+- Add ‘Sunless Sea’
+- Add project name and modification date
+- Use registry key variables
+- Enforce double-quote usage
+- Refer to ‘registry key’ instead of ‘registry keys’ to be more precise
+- Use more descriptive variable names
