@@ -200,3 +200,22 @@ Version 11.2.2022
 - Enforce double-quote usage
 - Refer to ‘registry key’ instead of ‘registry keys’ to be more precise
 - Use more descriptive variable names
+
+Version 19.2.2022
+- Add ‘Heroine’s Quest: The Herald of Ragnarok’
+- Add ‘SuperTux’
+- Add ‘The Mystery of the Druids’
+- Add ‘Through the Woods’
+- Add TODO file
+- Make variable names more descriptive
+- Blood Omen: Legacy of Kain - Add missing registry key check
+- Call of Cthulhu: Dark Corners of the Earth - Delete device files
+- Diablo (Classic): Registry key support
+- Diablo: Hellfire - Registry key support
+- Painkiller: Add third registry registry key, add missing registry key check
+- S.T.A.L.K.E.R. Чистое Небо: Fix directory path name, add registry key support
+- The Longest Journey: Backup registry key
+- Wiedźmin: Move section down to ensure alphabetical order
+- Make file existence check more strict by using wildcards
+- Add licensing information
+- Add .err and .out files to exclusion list

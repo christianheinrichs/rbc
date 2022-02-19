@@ -17,9 +17,11 @@ Supported games
 - BioShock
 - Blood Omen: Legacy of Kain
 - Buddy Simulator 1984
+- Call of Cthulhu: Dark Corners of the Earth
 - Cave Story
 - Chaser
 - Crashday
+- Dagon by H. P. Lovecraft
 - Darkest Dungeon
 - Dear Devere
 - Diablo
@@ -43,6 +45,7 @@ Supported games
 - Hacknet
 - Hearts of Iron
 - Hellblade: Senua’s Sacrifice
+- Heroine’s Quest: The Herald of Ragnarok
 - Hitman - Codename 47
 - Hotline Miami Original
 - Hotline Miami Updated
@@ -91,6 +94,8 @@ Supported games
 - SPY Fox - Dry Cereal
 - SWAT 4
 - Sudden Strike
+- Sunless Sea
+- SuperTux
 - Syberia
 - Syberia II
 - The Alto Collection
@@ -98,8 +103,10 @@ Supported games
 - The Elder Scrolls III: Morrowind
 - The Infectious Madness of Doctor Dekker
 - The Longest Journey
+- The Mystery of the Druids
 - The Suicide of Rachel Foster
 - Thief: The Dark Project
+- Through the Woods
 - Tom Clancy’s Splinter Cell
 - Тургор (English title: The Void)
 - Unreal

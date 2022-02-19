@@ -1,7 +1,7 @@
 @echo off
 
 rem rbc: Cleanup script
-rem Last modified on 11 February 2022
+rem Last modified on 19 February 2022
 
 rem This script takes care of traces left behind by the games listed in the
 rem SUPPORTED file
@@ -210,7 +210,7 @@ rem Delete LocalLow directory
 rd /q /s "%bs1984lldir%"
 
 rem Delete memories
-del /q "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories\*"
+del "%bs1984rootdir%\Buddy Simulator 1984_Data\StreamingAssets\Memories\*.png"
 
 rem Delete registry key
 reg delete "%bs1984regpath%" /f
@@ -219,12 +219,16 @@ rem Call of Cthulhu: Dark Corners of the Earth
 
 set "cocdcotedir=%userprofile%\Documents\Bethesda\Call of Cthulhu"
 set "cocdcoteregpath=HKCU\SOFTWARE\Bethesda Softworks\Call Of Cthulhu DCoTE"
+set "cocdcoterootdir=%gamerootdir%\Spiele\Call of Cthulhu - DCotE"
 
 rem Delete automatic save, options and manual savegames
 rd /q /s "%cocdcotedir%"
 
 rem Delete registry key
 reg delete "%cocdcoteregpath%" /f
+
+rem Delete device files
+del "%cocdcoterootdir%\Engine\device*"
 
 rem Cave Story
 
@@ -313,7 +317,7 @@ rem Delete screenshots
 del "%devererootdir%\*.png"
 
 rem Delete savegames
-del /q "%devererootdir%\game\saves\*"
+del /q "%devererootdir%\game\saves\*.save"
 rd /q /s "%devereaddir%"
 
 rem Diablo (Classic)
@@ -340,11 +344,13 @@ del "%diablorootdir%\dx\dxcfg.ini"
 
 rem Diablo: Hellfire
 
+set "dhellfireregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Blizzard Entertainment\Hellfire"
+
 rem Delete savegames
 del "%diablorootdir%\hellfire\*.hsv"
 
 rem Delete registry key
-reg delete "HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Blizzard Entertainment" /f
+reg delete "%dhellfireregpath%" /f
 
 rem Diablo II
 
@@ -624,6 +630,13 @@ rem Delete local appdata Hellblade folder which contains .ini files and the
 rem savegame in .sav format
 rd /q /s "%hellbladedir%"
 
+rem Heroine’s Quest: The Herald of Ragnarok
+
+set "hqthordir=%userprofile%\Saved Games\Heroine's Quest 1.2"
+
+rem Delete savegame folder
+rd /q /s "%hqthordir%"
+
 rem Hitman - Codename 47
 
 set "hc47rootdir=%gamerootdir%\Hitman Codename 47"
@@ -810,15 +823,15 @@ rd /q /s "%medir%"
 
 rem Mount & Blade
 
-set "mbdir=%appdata%\Mount&Blade"
+set "mbaddir=%appdata%\Mount&Blade"
 set "mbrootdir=%gamerootdir%\Mount and Blade"
 set "mbsavedir=%userprofile%\Documents\Mount&Blade Savegames"
 
 rem Delete savegame folder
 rd /q /s "%mbsavedir%"
 
-rem Delete Mount & Blade appdata folder
-rd /q /s "%mbdir%"
+rem Delete Mount & Blade AppData folder
+rd /q /s "%mbaddir%"
 
 rem Delete log file
 del "%mbrootdir%\rgl_log.txt"
@@ -918,15 +931,16 @@ del "%oarootdir%\stderr.txt"
 
 rem Outlast
 
-set "oluserdir=%userprofile%\Documents\My Games\Outlast"
+set "outlastdir=%userprofile%\Documents\My Games\Outlast"
 
 rem Delete Outlast user directory
-rd /q /s "%oluserdir%"
+rd /q /s "%outlastdir%"
 
 rem Painkiller
 
-set "pkregpath1=HKCU\Software\PeopleCanFly"
+set "pkregpath1=HKCU\Software\PeopleCanFly\PainEditor"
 set "pkregpath2=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\PeopleCanFly\Painkiller"
+set "pkregpath3=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Aureal"
 set "pk1rootdir=%gamerootdir%\Painkiller Black"
 
 rem Delete configuration file
@@ -938,13 +952,14 @@ rd /q /s "%pk1rootdir%\SaveGames"
 rem Delete registry key
 reg delete "%pkregpath1%" /f
 reg delete "%pkregpath2%" /f
+reg delete "%pkregpath3%" /f
 
 rem Penumbra: Overture
 
-set "podir=%userprofile%\Documents\Penumbra Overture"
+set "poverturedir=%userprofile%\Documents\Penumbra Overture"
 
 rem Delete keybinds, log files, settings and savegames
-rd /q /s "%podir%"
+rd /q /s "%poverturedir%"
 
 rem Penumbra: Black Plague
 rem Penumbra: Requiem
@@ -956,22 +971,22 @@ rd /q /s "%penumbradir%"
 
 rem Planescape: Torment
 
-set "ptrootdir=%gamerootdir%\Planescape Torment"
+set "pstrootdir=%gamerootdir%\Planescape Torment"
 
 rem Delete save folder
-rd /q /s "%ptrootdir%\save"
+rd /q /s "%pstrootdir%\save"
 
 rem Delete cache files
-del /q "%ptrootdir%\cache\*"
+del /q "%pstrootdir%\cache\*"
 
 rem Delete configuration file
-del "%ptrootdir%\Torment.ini"
+del "%pstrootdir%\Torment.ini"
 
 rem Delete log files
-del "%ptrootdir%\*.log"
+del "%pstrootdir%\*.log"
 
 rem Delete error log file
-del "%ptrootdir%\*.err"
+del "%pstrootdir%\*.err"
 
 rem Port Royale
 
@@ -991,28 +1006,28 @@ del "%portroyalerootdir%\Save\*.mrk"
 
 rem Postal Plus
 
-set "p1dir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+set "p1rootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
 
 rem Delete configuration file
-del "%p1dir%\*.ini"
+del "%p1rootdir%\*.ini"
 
 rem Delete savegames and highscores
-del /q "%p1dir%\res\SaveGame\*"
+del /q "%p1rootdir%\res\SaveGame\*.gme"
 
 rem Postal 2
 
-set "p2dir=%gamerootdir%\Postal2STP"
+set "p2rootdir=%gamerootdir%\Postal2STP"
 
 rem Delete savegames
-del /q "%p2dir%\Save\*"
+del /q "%p2rootdir%\Save\*.usa"
 
 rem Delete log file
-del "%p2dir%\System\Postal2.log"
+del "%p2rootdir%\System\Postal2.log"
 
 rem Delete configuration, keybinds and savegame information
-del "%p2dir%\System\Postal2.ini"
-del "%p2dir%\System\SavedGameInfo.ini"
-del "%p2dir%\System\User.ini"
+del "%p2rootdir%\System\Postal2.ini"
+del "%p2rootdir%\System\SavedGameInfo.ini"
+del "%p2rootdir%\System\User.ini"
 
 rem Quake II
 
@@ -1064,7 +1079,7 @@ set "redfactionregpath=HKCU\SOFTWARE\Volition\Red Faction"
 set "redfactionrootdir=%gamerootdir%\Red Faction"
 
 rem Delete savegames
-del /q "%redfactionrootdir%\savegame\*"
+del /q "%redfactionrootdir%\savegame\*.svl"
 
 rem Delete configuration file
 del "%redfactionrootdir%\*.cfg"
@@ -1102,10 +1117,14 @@ reg delete "%rotmregpath%" /f
 rem S.T.A.L.K.E.R. Чистое Небо
 rem English title: S.T.A.L.K.E.R. Clear Sky
 
-set "stalkercsdir=%userprofile%\Documents\stalke~1"
+set "scsdir=%userprofile%\Documents\Stalker-STCS"
+set "scsregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\GSC Game World\STALKER-STCS"
 
 rem Delete S.T.A.L.K.E.R. Clear Sky user directory
-rd /q /s "%stalkercsdir%"
+rd /q /s "%scsdir%"
+
+rem Delete registry key
+reg delete "%scsregpath%" /f
 
 rem S.T.A.L.K.E.R. Shadow of Chernobyl
 
@@ -1156,7 +1175,7 @@ rem Delete control files
 del "%sstferootdir%\Controls\Controls*"
 
 rem Delete player files
-del /q "%sstferootdir%\Players\*"
+del /q "%sstferootdir%\Players\*.plr"
 
 rem Delete console history
 del "%sstferootdir%\Temp\ConsoleHistory.txt"
@@ -1173,21 +1192,21 @@ del /q "%sstferootdir%\Levels\*.vis"
 
 rem Sludge Life
 
-set "sllldir=%userprofile%\AppData\LocalLow\TerriVellmann\SludgeLife"
-set "slregpath=HKCU\Software\TerriVellmann\SludgeLife"
-set "slrootdir=%gamerootdir%\Sludge Life"
+set "sludgelifelldir=%userprofile%\AppData\LocalLow\TerriVellmann\SludgeLife"
+set "sludgeliferegpath=HKCU\Software\TerriVellmann\SludgeLife"
+set "sludgeliferootdir=%gamerootdir%\Sludge Life"
 
 rem Delete pictures
-del /q "%slrootdir%\PICS\*"
+del "%sludgeliferootdir%\PICS\*.png"
 
 rem Delete savegame
-del "%slrootdir%\save.txt"
+del "%sludgeliferootdir%\save.txt"
 
 rem Delete local low directory
-rd /q /s "%sllldir%"
+rd /q /s "%sludgelifelldir%"
 
 rem Delete registry key
-reg delete "%slregpath%" /f
+reg delete "%sludgeliferegpath%" /f
 
 rem SOMA
 
@@ -1207,16 +1226,16 @@ rd /q /s "%sfdcsavedir%"
 
 rem Sudden Strike
 
-set "ssrootdir=%gamerootdir%\Sudden Strike"
+set "suddenstrikerootdir=%gamerootdir%\Sudden Strike"
 
 rem Delete savegames
-rd /q /s "%ssrootdir%\SaveGames"
+rd /q /s "%suddenstrikerootdir%\SaveGames"
 
 rem Delete .ini file
-del "%ssrootdir%\sudtest.ini"
+del "%suddenstrikerootdir%\sudtest.ini"
 
 rem Delete ratings data
-del "%ssrootdir%\ratings\*.rtc"
+del "%suddenstrikerootdir%\ratings\*.rtc"
 
 rem Sunless Sea
 
@@ -1228,6 +1247,13 @@ rd /q /s "%sunlesslldir%"
 
 rem Delete registry key
 reg delete "%sunlessregpath%" /f
+
+rem SuperTux
+
+set "supertuxdir=%appdata%\SuperTux"
+
+rem Delete SuperTux AppData folder
+rd /q /s "%supertuxdir%"
 
 rem SWAT 4
 
@@ -1314,7 +1340,7 @@ rem The Infectious Madness of Doctor Dekker
 set "timoddaddir=%appdata%\timodd"
 set "timoddrootdir=%gamerootdir%\The Infectious Madness of Doctor Dekker"
 
-rem Delete app data folder
+rem Delete AppData folder
 rd /q /s "%timoddaddir%"
 
 rem Delete init.json settings file
@@ -1322,14 +1348,36 @@ del "%timoddrootdir%\resources\app\init.json"
 
 rem The Longest Journey
 
+set "tljregpath=HKCU\SOFTWARE\Paper Sun\Roots"
 set "tljrootdir=%gamerootdir%\The Longest Journey"
 
 rem Delete preferences file
 del "%tljrootdir%\preferences.ini"
 
 rem Delete savegame folders and savegames
-rd /q /s "%tljrootdir%\Save\01"
-del "%tljrootdir%\Save\01.txt"
+rd /q /s "%tljrootdir%\Save"
+
+rem Delete registry key
+reg delete "%tljregpath%" /f
+
+rem The Mystery of the Druids
+
+set "tmotdregpath1=HKCU\SOFTWARE\House of Tales\Mystery of the Druids"
+set "tmotdregpath2=HKCU\SOFTWARE\House of Tales\The Mystery of the Druids"
+set "tmotdrootdir=%gamerootdir%\The Mystery of the Druids"
+
+rem Delete log file
+del "%tmotdrootdir%\*.log"
+
+rem Delete lastgame file
+del "%tmotdrootdir%\lastgame"
+
+rem Delete registry keys
+reg delete "%tmotdregpath1%" /f
+reg delete "%tmotdregpath2%" /f
+
+rem Delete savegames
+del "%tmotdrootdir%\SAVEGAME\*.edd"
 
 rem The Suicide of Rachel Foster
 
@@ -1337,23 +1385,6 @@ set "tsorfladdir=%localappdata%\Daedalic Entertainment GmbH\The Suicide of Rache
 
 rem Delete local AppData folder
 rd /q /s "%tsorfladdir%"
-
-rem Wiedźmin
-rem English title: The Witcher
-
-set "tw1dir=%userprofile%\Documents\The Witcher"
-set "tw1laddir=%localappdata%\The Witcher"
-set "tw1regpath=HKCU\Software\CD Projekt RED\Witcher"
-
-rem Delete Witcher local appdata folder
-rem Contains multiple folders and log files
-rd /q /s "%tw1laddir%"
-
-rem Delete Witcher user directory
-rd /q /s "%tw1dir%"
-
-rem Delete Witcher registry key
-reg delete "%tw1regpath%" /f
 
 rem Thief: The Dark Project
 
@@ -1370,6 +1401,21 @@ del "%ttdprootdir%\cam.cfg"
 
 rem Delete keybinds
 del "%ttdprootdir%\user.bnd"
+
+rem Through the Woods
+
+set "ttwlldir=%userprofile%\AppData\LocalLow\Antagonist\ThroughTheWoods"
+set "ttwregpath=HKCU\SOFTWARE\Antagonist\ThroughTheWoods"
+set "ttwrootdir=%gamerootdir%\Through the Woods"
+
+rem Delete analytical data
+rd /q /s "%ttwlldir%"
+
+rem Delete registry key
+reg delete "%ttwregpath%" /f
+
+rem Delete JSON files
+del "%ttwrootdir%\Through the Woods_Data\*.json"
 
 rem Tom Clancy’s Splinter Cell
 
@@ -1465,6 +1511,23 @@ set "wroefdir=%localappdata%\FinchGame"
 
 rem Delete LocalAppData folder
 rd /q /s "%wroefdir%"
+
+rem Wiedźmin
+rem English title: The Witcher
+
+set "tw1dir=%userprofile%\Documents\The Witcher"
+set "tw1laddir=%localappdata%\The Witcher"
+set "tw1regpath=HKCU\Software\CD Projekt RED\Witcher"
+
+rem Delete Witcher local appdata folder
+rem Contains multiple folders and log files
+rd /q /s "%tw1laddir%"
+
+rem Delete Witcher user directory
+rd /q /s "%tw1dir%"
+
+rem Delete Witcher registry key
+reg delete "%tw1regpath%" /f
 
 rem Worms Armageddon
 

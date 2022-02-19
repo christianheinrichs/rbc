@@ -50,3 +50,8 @@ built-in Windows support. Do also bear in mind that despite this tool, data
 might still be leaked as soon as you connect to the internet. This is simply due
 to the nature of proprietary operating systems. The problem is, you don’t really
 know what code is running in the background.
+
+Licensing
+
+This project is licensed under the GNU GPL 3.0 license. To read it, please
+refer to the LICENSE document.

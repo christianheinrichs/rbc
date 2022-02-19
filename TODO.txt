@@ -1,0 +1,46 @@
+- Decide whether or not to use the ‘echo’ command in cleanup.bat to show the
+  user what is currently being done
+
+- Escape certain things within the command prompt: For example command prompt
+  keywords like else, Cyrillic characters, real quotation marks, letters with
+  an acute sign etc.
+
+- Find out if there is a shorter way of referring to
+  %userprofile%\AppData\LocalLow
+
+- If possible, check for the existence of a registry key and if it’s there,
+  export it to a .reg file, otherwise skip it
+
+- Port the batch files to Linux shell scripts. Decide whether to use ‘bash’ or
+  ‘sh’ syntax
+
+- Port the batch files to Python 3
+
+- Quake III: Find out console variables for the settings ‘Force player models’
+  and ‘Draw team overlay’
+
+- The Longest Journey: Concerning the cleanup procedure, the method here is
+  considered bad practice since it only takes into account the first saveslot.
+  Currently written to completely remove the ‘Save’ folder. Figure out how to
+  delete all files and folders in ‘Save’ without getting rid of it completely.
+
+- Try to find a middle ground between ‘copy’, ‘robocopy’ and ‘xcopy’, e.g. is
+  ‘copy’ in this project really needed or can it be completely replaced with
+  ‘robocopy or ‘xcopy’?
+
+  One of the reasons I am concerned about this is a particular use case:
+
+  A file exists somewhere in the game root directory or elsewhere on the
+  machine and is being copied over by explicit filename, yet no backup folder
+  exists on the flash drive. So if you apply ‘xcopy /e /i /y’ to copy that file
+  over you’ll get the following message:
+
+  Does TARGETFOLDER specify a file name
+  or directory name on the target
+  (F = file, D = directory)?
+
+  The only workaround I found for this so far is to first create the target
+  directory via ‘md’ and then either use ‘copy’ or ‘xcopy’.
+
+- What Remains of Edith Finch: Rewrite to use a *.sav wildcard without
+  referring to machine name, ID suffix or a combination of those.
