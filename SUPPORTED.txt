@@ -8,17 +8,21 @@ Supported games
 - Amnesia - The Dark Descent
 - Anachronox
 - ANNO 1602
+- ArmA: Armed Assault
+- Arma: Cold War Assault
 - Baldur’s Gate
 - Baldur’s Gate: Enhanced Edition
 - Barrow Hill - Curse of the Ancient Circle
 - Battle Realms
 - Becherov
 - BioShock
+- Blair Witch
 - Blood Omen: Legacy of Kain
 - Buddy Simulator 1984
 - Call of Cthulhu: Dark Corners of the Earth
 - Cave Story
 - Chaser
+- Cosmo’s Cosmic Adventure
 - Crashday
 - Dagon by H. P. Lovecraft
 - Darkest Dungeon
@@ -27,7 +31,9 @@ Supported games
 - Diablo II
 - Die Gilde
 - Die Völker (English title: Alien Nations)
+- DOOM II (GOG edition, DOSBox emulation)
 - Driver
+- Dungeon Keeper, including Deeper Dungeons (GOG edition, DOSBox emulation)
 - Dungeon Keeper 2
 - else Heart.Break()
 - Enigmatis - The Ghosts of Maple Creek
@@ -42,20 +48,26 @@ Supported games
 - Grand Theft Auto: San Andreas
 - Grand Theft Auto: Vice City
 - Hacknet
+- Hatred
 - Hearts of Iron
 - Hellblade: Senua’s Sacrifice
 - Heroine’s Quest: The Herald of Ragnarok
+- Hidden and Dangerous
+- Hidden and Dangerous Deluxe
+- Hidden and Dangerous - Fight for Freedom
 - Hitman - Codename 47
 - Hotline Miami Original
 - Hotline Miami Updated
 - Inkslinger
 - Inside
+- Jazz Jackrabbit Collection (GOG edition, DOSBox emulation)
 - Jotun - Valhalla Edition
 - L’Amerzone (English title: Amerzone)
 - Layers of Fear, including Layers of Fear: Inheritance
 - Legacy of Kain: Soul Reaver
 - Mafia
 - Master Spy
+- Medal of Honor - Pacific Assault
 - Metal Gear
 - Metal Gear Solid
 - Metro 2033 Redux
@@ -76,8 +88,14 @@ Supported games
 - Penumbra: Requiem
 - Planescape: Torment
 - Port Royale
-- Postal Plus
-- Postal 2
+- POSTAL Plus (Retail version)
+- POSTAL (Steam version)
+- POSTAL 2 (Retail version)
+- POSTAL 2 - Apocalypse Weekend (Retail version)
+- POSTAL 2 (Steam version)
+- POSTAL 2 - Paradise Lost
+- POSTAL 2 - Share The Pain (Steam version)
+- POSTAL Redux (Steam version)
 - Quake II
 - Quake III
 - Red Faction
@@ -89,7 +107,9 @@ Supported games
 - Saints Row 3
 - Serious Sam: The First Encounter
 - Sludge Life
+- Soldiers: Heroes of World War II
 - SOMA
+- Spear of Destiny (GOG edition, DOSBox emulation)
 - SPY Fox - Dry Cereal
 - SWAT 4
 - Sudden Strike
@@ -105,14 +125,19 @@ Supported games
 - The Mystery of the Druids
 - The Suicide of Rachel Foster
 - Thief: The Dark Project
+- This War of Mine
 - Through the Woods
 - Tom Clancy’s Splinter Cell
+- Tomb Raider (GOG edition, DOSBox emulation)
 - Тургор (English title: The Void)
+- Ultima I (GOG edition, DOSBox emulation)
 - Unreal
 - Unreal II - The Awakening
 - Uplink
 - Vampire’s Dawn 2
+- Warhammer 40,000 - Rites of War
 - What Remains of Edith Finch
 - Wiedźmin (English title: The Witcher)
+- Wolfenstein 3D (GOG edition, DOSBox emulation)
 - Worms Armageddon
 - XIII

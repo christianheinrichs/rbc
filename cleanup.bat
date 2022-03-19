@@ -1,13 +1,19 @@
 @echo off
 
 rem rbc: Cleanup script
-rem Last modified on 19 February 2022
+rem Last modified on 18 March 2022
 
 rem This script takes care of traces left behind by the games listed in the
 rem SUPPORTED file
 
 rem Write the path to your game directory here
 set "gamerootdir="
+
+rem Steam default game folder
+set "steamdefaultlibdir=C:\Program Files (x86)\Steam\steamapps\common"
+
+rem Steam alternative library
+rem set "steamlibdir=S:\Users\User\Games\SteamLibrary"
 
 title rbc: Cleanup script running
 
@@ -106,6 +112,43 @@ del /q "%anno1602rootdir%\Savegame\*"
 rem Delete registry key
 reg delete "%anno1602regpath%" /f
 
+rem ArmA: Armed Assault
+
+set "armadocdir1=%userprofile%\Documents\ArmA"
+set "armadocdir2=%userprofile%\Documents\ArmA Other Profiles"
+set "armaladdir=%localappdata%\ArmA"
+set "armaregkeypath1=HKCU\SOFTWARE\Bohemia Interactive Studio\ArmA"
+set "armaregkeypath2=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ArmA"
+set "armaregkeypath3=HKCU\SOFTWARE\GameSpy"
+set "armaregkeypath4=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive\BattlEye"
+
+rem Delete local AppData folder
+rd /q /s "%armaladdir%"
+
+rem Delete registry keys
+reg delete "%armaregkeypath1%" /f
+reg delete "%armaregkeypath2%" /f
+reg delete "%armaregkeypath3%" /f
+reg delete "%armaregkeypath4%" /f
+
+rem Delete profile folders
+rd /q /s "%armadocdir1%"
+rd /q /s "%armadocdir2%"
+
+rem Arma: Cold War Assault
+
+set "acwaregkeypath=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ColdWarAssault"
+set "acwarootdir=%gamerootdir%\Arma Cold War Assault"
+
+rem Delete registry key
+reg delete "%acwaregkeypath%" /f
+
+rem Delete configuration
+"%acwarootdir%\ColdWarAssault.cfg"
+
+rem Delete Users folder
+rd /q /s "%acwarootdir%\Users"
+
 rem Baldur’s Gate
 
 set "baldursgaterootdir=%gamerootdir%\Baldur's Gate"
@@ -177,6 +220,13 @@ rd /q /s "%bs1sgdir%"
 
 rem Delete Bioshock folder located in AppData
 rd /q /s "%bs1dir%"
+
+rem Blair Witch
+
+set "blairwitchdir=%localappdata%\Blairwitch"
+
+rem Delete local AppData folder
+rd /q /s "%blairwitchdir%"
 
 rem Blood Omen: Legacy of Kain
 
@@ -250,6 +300,17 @@ del "%chaserdir%\Save\Users\*.cfg"
 
 rem Delete savegame files
 del "%chaserdir%\Save\*.sav"
+
+rem Cosmo’s Cosmic Adventure
+rem GOG edition, emulated in DOSBox
+
+set "ccarootdir=%gamerootdir%\Cosmo's Cosmic Adventure"
+
+rem Delete DOSBox log file
+del "%ccarootdir%\DOSBOX\stdout*"
+
+rem Delete savegames, SVT files and highscore file
+del "%ccarootdir%\cloud_saves\COSMO*"
 
 rem Crashday
 
@@ -397,6 +458,20 @@ set "dievoelkerrootdir=%gamerootdir%\Alien Nations"
 rem Delete configuration and savegame files
 del /q "%dievoelkerrootdir%\Savegames\*"
 
+rem DOOM II
+rem GOG edition, emulated in DOSBox
+
+set "doom2rootdir=%gamerootdir%\DOOM 2"
+
+rem Delete DOSBox log file
+del "%doom2rootdir%\DOSBOX\stdout*"
+
+rem Delete MASTER folder
+rd /q /s "%doom2rootdir%\cloud_saves\MASTER"
+
+rem Delete DOOM2 folder
+rd /q /s "%doom2rootdir%\cloud_saves\DOOM2"
+
 rem Driver
 
 set "driverrootdir=%gamerootdir%\Driver"
@@ -416,6 +491,21 @@ del "%driverrootdir%\ReplayData\User\$TEMP$.PADS"
 
 rem Delete highscores, replays and savegames
 del /q "%driverrootdir%\Saves\*"
+
+rem Dungeon Keeper
+rem Deeper Dungeons
+rem GOG edition, DOSBox emulation
+
+set "dk1rootdir=%gamerootdir%\Dungeon Keeper Gold"
+
+rem Delete DOSBox log file
+del "%dk1rootdir%\DOSBOX\stdout*"
+
+rem Delete DATA folder
+rd /q /s "%dk1rootdir%\cloud_saves\DATA"
+
+rem Delete SAVE folder
+rd /q /s "%dk1rootdir%\cloud_saves\SAVE"
 
 rem Dungeon Keeper 2
 
@@ -606,6 +696,16 @@ rem in XML format. These user profiles also contain savegame information, but
 rem are only functional in combination with the correct accounts file
 rd /q /s "%hacknetdir%"
 
+rem Hatred
+
+set "hatredrootdir=%gamerootdir%\Hatred"
+
+rem Delete configuration files
+del "%hatredrootdir%\Hatred\Saved\Config\WindowsNoEditor\*.ini"
+
+rem Delete savegames
+del "%hatredrootdir%\Hatred\Saved\SaveGames\*.sav"
+
 rem Hearts of Iron
 
 set "hoirootdir=%gamerootdir%\Hearts of Iron"
@@ -636,6 +736,50 @@ set "hqthordir=%userprofile%\Saved Games\Heroine's Quest 1.2"
 
 rem Delete savegame folder
 rd /q /s "%hqthordir%"
+
+rem Hidden and Dangerous
+
+set "hadregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Take2\Hidden and Dangerous"
+set "hadregkeypath2=HKLM\SOFTWARE\WOW6432Node\Take2\Hidden and Dangerous"
+set "hadrootdir=%gamerootdir%\Hidden and Dangerous\HD"
+
+rem Delete registry keys
+reg delete "%hadregkeypath1%" /f
+reg delete "%hadregkeypath2%" /f
+
+rem Delete .ini file
+del "%hadrootdir%\*.ini"
+
+rem Delete savegames
+del "%hadrootdir%\savegame\single\*.bin"
+
+rem Hidden and Dangerous Deluxe
+
+set "haddregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
+set "haddregkeypath2=HKCU\SOFTWARE\Insanity3D system"
+set "haddregkeypath3=HKLM\SOFTWARE\WOW6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
+set "haddrootdir=%gamerootdir%\Hidden and Dangerous\HD Deluxe"
+
+rem Delete registry keys
+reg delete "%haddregkeypath1%" /f
+reg delete "%haddregkeypath2%" /f
+reg delete "%haddregkeypath3%" /f
+
+rem Delete savegames
+del "%haddrootdir%\Savegame\*.bin"
+
+rem Hidden and Dangerous - Fight for Freedom
+
+set "hadfff=%gamerootdir%\Hidden and Dangerous\HD FF"
+
+rem Delete .ini file
+del "%hadfff%\*.ini"
+
+rem Delete controls file
+del "%hadfff%\*.cfg"
+
+rem Delete savegames
+del "%hadfff%\savegame\single\*.bin"
 
 rem Hitman - Codename 47
 
@@ -700,6 +844,20 @@ rd /q /s "%insidelldir%"
 rem Delete INSIDE registry key
 reg delete "%insideregpath%" /f
 
+rem Jazz Jackrabbit Collection
+rem GOG edition, emulated in DOSBox
+
+set "jjrrootdir=%gamerootdir%\Jazz Jackrabbit"
+
+rem Delete DOSBox log file
+del "%jjrrootdir%\DOSBOX\stdout*"
+
+rem Delete savegames
+del "%jjrrootdir%\cloud_saves\SAVE*"
+
+rem Delete Holiday Hare 1995 folder
+rd /q /s "%jjrrootdir%\cloud_saves\HH95"
+
 rem Jotun - Valhalla Edition
 
 set "jvelldir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
@@ -760,6 +918,17 @@ set "masterspydir=%localappdata%\Master Spy"
 
 rem Delete local Master Spy directory
 rd /q /s "%masterspydir%"
+
+rem Medal of Honor - Pacific Assault
+
+set "mohpadir=%userprofile%\Documents\EA Games\Medal of Honor Pacific Assault(tm)"
+set "mohparegkeypath=HKCU\SOFTWARE\EA Games\Medal of Honor Pacific Assault"
+
+rem Delete registry key
+reg delete "%mohparegkeypath%" /f
+
+rem Delete folder
+rd /q /s "%mohpadir%"
 
 rem Metal Gear
 
@@ -1004,30 +1173,151 @@ del "%portroyalerootdir%\Save\*.sav"
 rem Delete savegames
 del "%portroyalerootdir%\Save\*.mrk"
 
-rem Postal Plus
+rem POSTAL Plus
+rem Retail version
 
-set "p1rootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+set "postalrootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+
+rem Delete level files
+del "%postalrootdir%\levels\*.rgn"
+del "%postalrootdir%\levels\*.rlm"
 
 rem Delete configuration file
-del "%p1rootdir%\*.ini"
+del "%postalrootdir%\*.ini"
 
 rem Delete savegames and highscores
-del /q "%p1rootdir%\res\SaveGame\*.gme"
+del "%postalrootdir%\res\SaveGame\*.gme"
 
-rem Postal 2
+rem POSTAL
+rem Steam version
 
-set "p2rootdir=%gamerootdir%\Postal2STP"
+rem Note: Cannot be launched without Steam client
+
+set "postalsteamaddir=%appdata%\RunningWithScissors\Postal Plus"
+
+rem Delete configuration file
+del "%postalsteamaddir%\*.INI"
 
 rem Delete savegames
-del /q "%p2rootdir%\Save\*.usa"
+del "%postalsteamaddir%\steamcloud\*.gme"
 
-rem Delete log file
-del "%p2rootdir%\System\Postal2.log"
+rem Delete savegames and remote cache file from Steam’s userdata folder
+rem
+rem This section is broken. Need to find out how to programatically get the
+rem userdata user ID. In this case the user ID is simply replaced with an
+rem asterisk for ease of use. As far as I know, Steam app IDs in contrary to
+rem user IDs are static, so it should be relatively safe to use app ID 232770.
+
+rem del "C:\Program Files (x86)\Steam\userdata\*\232770\*.vdf"
+rem del "C:\Program Files (x86)\Steam\userdata\*\232770\remote\*.gme"
+
+rem POSTAL 2
+rem Retail version
+
+set "postal2rootdir=%gamerootdir%\Postal2STP"
+
+rem Delete log files
+del "%postal2rootdir%\System\*.log"
+
+rem Removing the uninstall log file is a bad idea, since this prevents you from
+rem uninstalling the Retail version due to information in uninstal.log
+rem del "%postal2rootdir%\*.log"
+
+rem Delete Unreal level editor configuration file
+del "%postal2rootdir%\System\unrealed.ini"
+
+rem Delete Unreal level editor map files
+rem
+rem Whenever you use the Unreal level editor, it leaves behind a log file, a
+rem configuration file and when you decide to save a map you worked on, map
+rem files. Backing up all map files with a wildcard doesn’t really make sense
+rem because this copies over all map files, not just the ones left behind by
+rem the Unreal level editor. As a result, I decided to comment out the
+rem following section, because I doubt its usefulness.
+rem
+rem del "%postal2rootdir%\Maps\*.fuk"
 
 rem Delete configuration, keybinds and savegame information
-del "%p2rootdir%\System\Postal2.ini"
-del "%p2rootdir%\System\SavedGameInfo.ini"
-del "%p2rootdir%\System\User.ini"
+del "%postal2rootdir%\System\Postal2.ini"
+del "%postal2rootdir%\System\SavedGameInfo.ini"
+del "%postal2rootdir%\System\User.ini"
+
+rem Delete savegames
+del "%postal2rootdir%\Save\*.usa"
+
+rem POSTAL 2 - Apocalypse Weekend
+rem Retail version
+
+set "postal2awrootdir=%gamerootdir%\Postal2STP\ApocalypseWeekend"
+
+rem Delete log files
+del "%postal2awrootdir%\System\*.log"
+
+rem Delete Unreal level editor configuration file
+del "%postal2awrootdir%\System\unrealed.ini"
+
+rem Delete configuration, keybinds and savegame information
+del "%postal2awrootdir%\System\ApocalypseWeekend.ini"
+del "%postal2awrootdir%\System\Postal2.ini"
+del "%postal2awrootdir%\System\SavedGameInfo.ini"
+del "%postal2awrootdir%\System\User.ini"
+
+rem Delete savegames
+del "%postal2awrootdir%\AWSave\*.usa"
+
+rem POSTAL 2
+rem Steam version
+
+set "postal2steamrootdir=%steamdefaultlibdir%\POSTAL2Complete"
+
+rem Delete log file
+del "%postal2steamrootdir%\System\*.log"
+
+rem Delete configuration, keybinds, savegame information and entry fix file
+del "%postal2steamrootdir%\System\EntryFix.ini"
+del "%postal2steamrootdir%\System\Postal2.ini"
+del "%postal2steamrootdir%\System\SavedGameInfo.ini"
+del "%postal2steamrootdir%\System\User.ini"
+
+rem Delete savegames
+del "%postal2steamrootdir%\Save\*.usa"
+
+rem POSTAL 2 - Paradise Lost
+rem Steam version
+
+set "postal2plsteamrootdir=%steamdefaultlibdir%\POSTAL2Complete\Paradise Lost"
+
+rem Delete log file
+del "%postal2plsteamrootdir%\System\*.log"
+
+rem Backup configuration files
+del "%postal2plsteamrootdir%\System\EntryFix.ini"
+del "%postal2plsteamrootdir%\System\ParadiseLost.ini"
+del "%postal2plsteamrootdir%\System\SavedGameInfo.ini"
+del "%postal2plsteamrootdir%\System\User.ini"
+
+rem Delete savegames
+del "%postal2plsteamrootdir%\PLSave\*.usa"
+
+rem POSTAL 2 - Share The Pain
+rem Steam version
+
+set "postal2stpsteamrootdir=%steamdefaultlibdir%\POSTAL2Complete\ShareThePain"
+
+rem Delete log file
+del "%postal2stpsteamrootdir%\System\*.log"
+
+rem Delete configuration files
+del "%postal2stpsteamrootdir%\System\Postal2MP.ini"
+del "%postal2stpsteamrootdir%\System\User.ini"
+
+rem POSTAL Redux
+rem Steam version
+
+set "postalreduxdir=%localappdata%\PostalREDUX"
+
+rem Delete local AppData folder
+rd /q /s "%postalreduxdir%"
 
 rem Quake II
 
@@ -1129,6 +1419,10 @@ reg delete "%scsregpath%" /f
 rem S.T.A.L.K.E.R. Shadow of Chernobyl
 
 set "sshocdir=%userprofile%\Documents\Stalker-SHOC"
+set "sshocregkeypath=HKLM\SOFTWARE\WOW6432Node\GSC Game World\STALKER-SHOC"
+
+rem Delete registry key
+reg delete "%sshocregkeypath%" /f
 
 rem Delete S.T.A.L.K.E.R. Shadow of Chernobyl user directory
 rd /q /s "%sshocdir%"
@@ -1208,6 +1502,22 @@ rd /q /s "%sludgelifelldir%"
 rem Delete registry key
 reg delete "%sludgeliferegpath%" /f
 
+rem Soldiers: Heroes of World War II
+
+set "showw2regkeypath1=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers"
+set "showw2regkeypath2=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers - Heroes of World War II"
+set "showw2rootdir=%gamerootdir%\Soldiers - Heroes of World War II"
+
+rem Delete log file
+del "%showw2rootdir%\*.log"
+
+rem Delete registry keys
+reg delete "%showw2regkeypath1%" /f
+reg delete "%showw2regkeypath2%" /f
+
+rem Delete profile folder
+rd /q /s "%showw2rootdir%\profiles"
+
 rem SOMA
 
 set "somadir=%userprofile%\Documents\My Games\Soma"
@@ -1217,6 +1527,19 @@ rem an empty first start flag, profile folders which in turn contain savegames,
 rem user bindings and user settings
 
 rd /q /s "%somadir%"
+
+rem Spear of Destiny
+rem GOG edition, DOSBox emulation
+
+set "sodrootdir=%gamerootdir%\Spear of Destiny"
+
+rem Delete DOSBox log file
+del "%sodrootdir%\DOSBOX\stdout*"
+
+rem Delete folders M1, M2, M3
+rd /q /s "%sodrootdir%\cloud_saves\M1"
+rd /q /s "%sodrootdir%\cloud_saves\M2"
+rd /q /s "%sodrootdir%\cloud_saves\M3"
 
 rem SPY Fox - Dry Cereal
 
@@ -1402,6 +1725,17 @@ del "%ttdprootdir%\cam.cfg"
 rem Delete keybinds
 del "%ttdprootdir%\user.bnd"
 
+rem This War of Mine
+
+set "twomaddir=%appdata%\11bitstudios\This War Of Mine"
+set "twomdocdir=%userprofile%\Documents\This War of Mine"
+
+rem Delete AppData folder
+rd /q /s "%twomaddir%"
+
+rem Delete documents folder
+rd /q /s "%twomdocdir%"
+
 rem Through the Woods
 
 set "ttwlldir=%userprofile%\AppData\LocalLow\Antagonist\ThroughTheWoods"
@@ -1427,6 +1761,24 @@ rd /q /s "%tcscrootdir%\Save"
 rem Delete configuration files
 del "%tcscrootdir%\system\SplinterCell.ini"
 del "%tcscrootdir%\system\SplinterCellUser.ini"
+
+rem Tomb Raider
+rem GOG edition, DOSBox emulation
+
+set "tombraiderrootdir=%gamerootdir%\Tomb Raider 1"
+
+rem Delete log files
+del "%tombraiderrootdir%\DOSBOX\*.log"
+del "%tombraiderrootdir%\DOSBOX\*.txt"
+
+rem Delete .3df files
+del "%tombraiderrootdir%\TOMBRAID\*.3DF"
+
+rem Delete settings
+del "%tombraiderrootdir%\TOMBRAID\*.DAT"
+
+rem Delete savegames
+del "%tombraiderrootdir%\TOMBRAID\SAVEGAME*"
 
 rem Тургор
 rem English title: The Void
@@ -1455,6 +1807,17 @@ rd /q /s "%thevoiddir%"
 rem Remove registry key
 reg delete "%turgorregpath%" /f
 reg delete "%thevoidregpath%" /f
+
+rem Ultima I
+rem GOG edition, DOSBox emulation
+
+set "ultimarootdir=%gamerootdir%\Ultima 1"
+
+rem Delete DOSBox log file
+del "%ultimarootdir%\DOSBOX\stdout*"
+
+rem Delete characters
+del "%ultimarootdir%\cloud_saves\*.U1"
 
 rem Unreal
 
@@ -1505,6 +1868,22 @@ set "vd2rootdir=%gamerootdir%\Vampire's Dawn 2"
 rem Delete savegames
 del /q "%vd2rootdir%\*.lsd"
 
+rem Warhammer 40,000 - Rites of War
+
+set "wh40krowrootdir=%gamerootdir%\WARHAMMER 40K Rites of War"
+
+rem Delete row.int file
+del "%wh40krowrootdir%\*.int"
+
+rem Delete customised armies
+del "%wh40krowrootdir%\save\Armies\*.arm"
+
+rem Delete all user scenario files
+del /q "%wh40krowrootdir%\userscen\*"
+
+rem Delete savegames
+del "%wh40krowrootdir%\save\*.csv"
+
 rem What Remains of Edith Finch
 
 set "wroefdir=%localappdata%\FinchGame"
@@ -1528,6 +1907,17 @@ rd /q /s "%tw1dir%"
 
 rem Delete Witcher registry key
 reg delete "%tw1regpath%" /f
+
+rem Wolfenstein 3D
+rem GOG version, DOSBox emulation
+
+set "w3drootdir=%gamerootdir%\Wolfenstein 3D"
+
+rem Delete DOSBox log file
+del "%w3drootdir%\DOSBOX\stdout*"
+
+rem Delete configuration and savegames
+del "%w3drootdir%\cloud_saves\*.WL6"
 
 rem Worms Armageddon
 

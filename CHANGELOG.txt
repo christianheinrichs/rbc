@@ -127,15 +127,16 @@ Version 14.9.2021
   The Elder Scrolls III: Morrowind, Unreal, Unreal II - The Awakening, Worms
   Armageddon
 - Inkslinger: Check if game installation exists
-- Use different folder structure: Hacknet, Hellblade - Senua’s Sacrifice, Master
-  Spy, Mirror’s Edge, Oddworld - New 'n' Tasty, Outlast, Remothered - Tormented
-  Fathers, Uplink
+- Use different folder structure: Hacknet, Hellblade - Senua’s Sacrifice,
+  Master Spy, Mirror’s Edge, Oddworld - New 'n' Tasty, Outlast,
+  Remothered - Tormented Fathers, Uplink
 
 Version 26.9.2021-r1
 - Implement installation check in the restore script
 - Add ‘Dear Devere’
 - Add ‘FaeFever’
-- A Hand With Many Fingers: Fix folder path, use more specific registry key path
+- A Hand With Many Fingers: Fix folder path, use more specific registry key
+  path
 - Becherov: Use more specific registry key path
 - Buddy Simulator 1984: Use more specific registry key path
 - Darkest Dungeon: Use more specific registry key path
@@ -145,15 +146,17 @@ Version 26.9.2021-r1
 - Hotline Miami Original: Check file existence before copying
 - Inkslinger: Fix folder path, use more specific registry key path
 - Inside: Fix folder paths, use more specific registry key path
-- Jotun - Valhalla Edition: Fix folder variable name, use more specific registry
-  key path
+- Jotun - Valhalla Edition: Fix folder variable name, use more specific
+  registry key path
 - Legacy of Kain: Soul Reaver - Fix folder variable name
 - Metal Gear Solid: Fix folder variable name
-- Metro 2033 Redux: Fix folder variable name, use more specific registry key path
+- Metro 2033 Redux: Fix folder variable name, use more specific registry key
+  path
 - Mirror’s Edge: Fix folder path
 - Mount & Blade: Fix folder variable name
 - Mount & Blade: Warband - Fix folder variable name
-- Oddworld - New 'n' Tasty: Fix folder path, use more specific registry key path
+- Oddworld - New 'n' Tasty: Fix folder path, use more specific registry key
+  path
 - Painkiller: Fix folder variable name, use more specific registry key path
 - Remothered - Tormented Fathers: Fix folder variable name
 - Ritual of the Moon: Use more specific registry key path
@@ -219,3 +222,35 @@ Version 19.2.2022
 - Make file existence check more strict by using wildcards
 - Add licensing information
 - Add .err and .out files to exclusion list
+
+Version 19.3.2022
+- Add ‘ArmA: Armed Assault’
+- Add ‘Arma: Cold War Assault’
+- Add ‘Blair Witch’
+- Add ‘Cosmo’s Cosmic Adventure’
+- Add ‘DOOM II’
+- Add ‘Dungeon Keeper’
+- Add ‘Hatred’
+- Add ‘Hidden and Dangerous’
+- Add ‘Hidden and Dangerous Deluxe’
+- Add ‘Hidden and Dangerous - Fight for Freedom’
+- Add ‘Jazz Jackrabbit Collection’
+- Add ‘Medal of Honor - Pacific Assault’
+- Add ‘POSTAL (Steam version)’
+- Add ‘POSTAL 2 - Apocalypse Weekend’
+- Add ‘POSTAL 2 (Steam version)’
+- Add ‘POSTAL 2 - Paradise Lost’
+- Add ‘POSTAL 2 - Share The Pain’
+- Add ‘POSTAL Redux’
+- Add ‘Soldiers: Heroes of World War II’
+- Add ‘Spear of Destiny’
+- Add ‘This War of Mine’
+- Add ‘Tomb Raider’
+- Add ‘Ultima I’
+- Add ‘Warhammer 40,000 - Rites of War’
+- Add ‘Wolfenstein 3D’
+- Add Steam library folders
+- POSTAL Plus: Include level files, rename root directory variable
+- POSTAL 2 (Retail version): Include Unreal level editor configuration file,
+  rename root directory variable
+- S.T.A.L.K.E.R. Shadow of Chernobyl: Include registry key

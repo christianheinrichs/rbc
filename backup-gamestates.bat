@@ -1,13 +1,19 @@
 @echo off
 
 rem rbc: Gamestate backup script
-rem Last modified on 19 February 2022
+rem Last modified on 18 March 2022
 
-rem This script should backup profiles, settings and savegames, which are herein
-rem collectively referred to as gamestate.
+rem This script should backup profiles, settings and savegames, which are
+rem herein collectively referred to as gamestate.
 
 rem Write the path to your game directory here
 set "gamerootdir="
+
+rem Steam default game folder
+set "steamdefaultlibdir=C:\Program Files (x86)\Steam\steamapps\common"
+
+rem Steam alternative library
+rem set "steamlibdir=S:\Users\User\Games\SteamLibrary"
 
 title rbc: Gamestate backup script
 
@@ -200,8 +206,81 @@ if exist "%anno1602rootdir%\Game.dat" (
 rem Backup registry key
 echo ANNO 1602: Backing up registry key
 reg export "%anno1602regpath%" "ANNO 1602\anno1602.reg" /y
+echo.
 
 echo ANNO 1602: Done.
+echo.
+
+rem ArmA: Armed Assault
+
+set "armadocdir1=%userprofile%\Documents\ArmA"
+set "armadocdir2=%userprofile%\Documents\ArmA Other Profiles"
+set "armaregkeypath1=HKCU\SOFTWARE\Bohemia Interactive Studio\ArmA"
+set "armaregkeypath2=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ArmA"
+
+rem Backup main profile folder
+if exist "%armadocdir1%" (
+	echo ArmA: Armed Assault - Backing up main profile folder
+	xcopy /e /i /y "%armadocdir1%" "ArmA - Armed Assault\ArmA"
+	echo.
+) else (
+	echo ArmA: Armed Assault - Main profile folder not found. Skipping...
+	echo.
+)
+
+rem Backup other profile folder
+if exist "%armadocdir2%" (
+	echo ArmA: Armed Assault - Backing up other profile folder
+	xcopy /e /i /y "%armadocdir2%" "ArmA - Armed Assault\ArmA - Other Profiles"
+	echo.
+) else (
+	echo ArmA: Armed Assault - Other profile folder not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo ArmA: Armed Assault - Backing up registry keys
+reg export "%armaregkeypath1%" "ArmA - Armed Assault\arma-1.reg" /y
+reg export "%armaregkeypath2%" "ArmA - Armed Assault\arma-2.reg" /y
+echo.
+
+echo ArmA: Armed Assault - Done.
+echo.
+
+rem Arma: Cold War Assault
+
+set "acwaregkeypath=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ColdWarAssault"
+set "acwarootdir=%gamerootdir%\Arma Cold War Assault"
+
+rem Backup ‘Users’ folder
+rem Checking for all the profile folders within Users is too complicated for
+rem me, so the existence of the folder itself is checked, however pointless
+rem that may seem
+if exist "%acwarootdir%\Users" (
+	echo Arma: Cold War Assault - Backing up Users folder
+	xcopy /e /i /y "%acwarootdir%\Users" "Arma - Cold War Assault\Users"
+	echo.
+) else (
+	echo Arma: Cold War Assault - Users folder not found. Skipping...
+	echo.
+)
+
+rem Backup configuration file
+if exist "%acwarootdir%\ColdWarAssault.cfg" (
+	echo Arma: Cold War Assault - Backing up configuration
+	xcopy /i /y "%acwarootdir%\ColdWarAssault.cfg" "Arma - Cold War Assault"
+	echo.
+) else (
+	echo Arma: Cold War Assault - Configuration file not found. Skipping...
+	echo.
+)
+
+rem Backup registry key
+echo Arma: Cold War Assault - Backing up registry key
+reg export "%acwaregkeypath%" "Arma - Cold War Assault\acwa.reg" /y
+echo.
+
+echo Arma: Cold War Assault - Done.
 echo.
 
 rem Baldur’s Gate
@@ -386,6 +465,34 @@ if exist "%bs1dir%\*.ini" (
 echo BioShock: Done.
 echo.
 
+rem Blair Witch
+
+set "blairwitchdir=%localappdata%\Blairwitch"
+
+rem Backup .sav files. In this case, savegames, an ‘input rebinding’ file, a
+rem player profile and an achievements file
+if exist "%blairwitchdir%\Saved\SaveGames\*.sav" (
+	echo Blair Witch: Backing up .sav files
+	xcopy /i /y "%blairwitchdir%\Saved\SaveGames\*.sav" "Blair Witch\Savegames"
+	echo.
+) else (
+	echo Blair Witch: .sav files not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files
+if exist "%blairwitchdir%\Saved\Config\WindowsNoEditor\*.ini" (
+	echo Blair Witch: Backing up configuration files
+	xcopy /i /y "%blairwitchdir%\Saved\Config\WindowsNoEditor\*.ini" "Blair Witch\Configuration"
+	echo.
+) else (
+	echo Blair Witch: Configuration files not found. Skipping...
+	echo.
+)
+
+echo Blair Witch: Done.
+echo.
+
 rem Blood Omen: Legacy of Kain
 
 set "bolokregpath=HKCU\SOFTWARE\LegacyOfKain"
@@ -537,6 +644,27 @@ if exist "%chaserrootdir%\Save\Users\*.cfg" (
 )
 
 echo Chaser: Done.
+echo.
+
+rem Cosmo’s Cosmic Adventure
+rem GOG edition, emulated in DOSBox
+
+set "ccarootdir=%gamerootdir%\Cosmo's Cosmic Adventure"
+
+rem Backup savegames, SVT files and highscore file
+rem I think that the actual savegames are in the SV[saveslot] format as in SV1,
+rem SV2, SV3 etc. There are however SVT files also; what their purpose is, I do
+rem not know. The .CFG file seems to contain highscore data.
+if exist "%ccarootdir%\cloud_saves\COSMO*" (
+	echo Cosmo's Cosmic Adventure: Backing up savegames, SVT files and highscores
+	xcopy /i /y "%ccarootdir%\cloud_saves\COSMO*" "Cosmo's Cosmic Adventure"
+	echo.
+) else (
+	echo Cosmo's Cosmic Adventure: Files not found. Skipping...
+	echo.
+)
+
+echo Cosmo's Cosmic Adventure: Done.
 echo.
 
 rem Crashday
@@ -840,6 +968,24 @@ if exist "%dievoelkerrootdir%\Savegames\*" (
 echo Die Voelker: Done.
 echo.
 
+rem DOOM II
+rem GOG edition, emulated in DOSBox
+
+set "doom2rootdir=%gamerootdir%\DOOM 2"
+
+rem Backup savegames, configuration and response file
+if exist "%doom2rootdir%\cloud_saves\DOOM2" (
+	echo DOOM II: Backing up savegames, configuration and response file
+	xcopy /e /i /y "%doom2rootdir%\cloud_saves\DOOM2" "DOOM 2"
+	echo.
+) else (
+	echo DOOM II: Folder not found. Skipping...
+	echo.
+)
+
+echo DOOM II: Done.
+echo.
+
 rem Driver
 
 set "driverrootdir=%gamerootdir%\Driver"
@@ -899,6 +1045,35 @@ if exist "%driverrootdir%\CONFIG.DAT" (
 	echo Driver: Configuration not found. Skipping...
 	echo.
 )
+
+rem Dungeon Keeper
+rem Deeper Dungeons
+rem GOG edition, DOSBox emulation
+
+set "dk1rootdir=%gamerootdir%\Dungeon Keeper Gold"
+
+rem Backup SAVE folder
+if exist "%dk1rootdir%\cloud_saves\SAVE" (
+	echo Dungeon Keeper: Backing up SAVE folder
+	xcopy /e /i /y "%dk1rootdir%\cloud_saves\SAVE" "Dungeon Keeper\SAVE"
+	echo.
+) else (
+	echo Dungeon Keeper: SAVE folder not found. Skipping...
+	echo.
+)
+
+rem Backup highscore file
+if exist "%dk1rootdir%\cloud_saves\DATA\*.DAT" (
+	echo Dungeon Keeper: Backing up highscore file
+	xcopy /i /y "%dk1rootdir%\cloud_saves\DATA\*.DAT" "Dungeon Keeper\DATA"
+	echo.
+) else (
+	echo Dungeon Keeper: Highscore file not found. Skipping...
+	echo.
+)
+
+echo Dungeon Keeper: Done.
+echo.
 
 rem Dungeon Keeper 2
 
@@ -1267,6 +1442,33 @@ if exist "%hacknetrootdir%\Settings.txt" (
 echo Hacknet: Done.
 echo.
 
+rem Hatred
+
+set "hatredrootdir=%gamerootdir%\Hatred"
+
+rem Backup savegames
+if exist "%hatredrootdir%\Hatred\Saved\SaveGames\*.sav" (
+	echo Hatred: Backing up savegames
+	xcopy /i /y "%hatredrootdir%\Hatred\Saved\SaveGames\*.sav" "Hatred\Savegames"
+	echo.
+) else (
+	echo Hatred: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files
+if exist "%hatredrootdir%\Hatred\Saved\Config\WindowsNoEditor\*.ini" (
+	echo Hatred: Backing up configuration files
+	xcopy /i /y "%hatredrootdir%\Hatred\Saved\Config\WindowsNoEditor\*.ini" "Hatred\Configuration"
+	echo.
+) else (
+	echo Hatred: Configuration files not found. Skipping...
+	echo.
+)
+
+echo Hatred: Done.
+echo.
+
 rem Hearts of Iron
 
 set "hoirootdir=%gamerootdir%\Hearts of Iron"
@@ -1348,6 +1550,120 @@ if exist "%hqthordir%\*.hqthor" (
 )
 
 echo Heroine's Quest: The Herald of Ragnarok - Done.
+echo.
+
+rem Hidden and Dangerous
+
+set "hadregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Take2\Hidden and Dangerous"
+set "hadregkeypath2=HKLM\SOFTWARE\WOW6432Node\Take2\Hidden and Dangerous"
+set "hadrootdir=%gamerootdir%\Hidden and Dangerous\HD"
+
+rem Backup savegames
+if exist "%hadrootdir%\savegame\single\*.bin" (
+	echo Hidden and Dangerous: Backing up savegames
+	xcopy /i /y "%hadrootdir%\savegame\single\*.bin" "Hidden and Dangerous\savegame\single"
+	echo.
+) else (
+	echo Hidden and Dangerous: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup .ini file
+if exist "%hadrootdir%\*.ini" (
+	echo Hidden and Dangerous: Backing up .ini file
+	rem For some reason the .ini file is marked ‘hidden’, so the /h argument is
+	rem needed here
+	xcopy /h /i /y "%hadrootdir%\*.ini" "Hidden and Dangerous"
+	echo.
+) else (
+	echo Hidden and Dangerous: .ini file not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Hidden and Dangerous: Backing up registry keys
+reg export "%hadregkeypath1%" "Hidden and Dangerous\had-1.reg" /y
+reg export "%hadregkeypath2%" "Hidden and Dangerous\had-2.reg" /y
+echo.
+
+echo Hidden and Dangerous: Done.
+echo.
+
+rem Hidden and Dangerous Deluxe
+
+set "haddregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
+set "haddregkeypath2=HKCU\SOFTWARE\Insanity3D system"
+set "haddregkeypath3=HKLM\SOFTWARE\WOW6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
+set "haddrootdir=%gamerootdir%\Hidden and Dangerous\HD Deluxe"
+
+rem Backup savegames
+if exist "%haddrootdir%\Savegame\*.bin" (
+	echo Hidden and Dangerous Deluxe: Backing up savegames
+	xcopy /i /y "%haddrootdir%\Savegame\*.bin" "Hidden and Dangerous Deluxe\Savegame"
+	echo.
+) else (
+	echo Hidden and Dangerous Deluxe: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Hidden and Dangerous Deluxe: Backing up registry keys
+reg export "%haddregkeypath1%" "Hidden and Dangerous Deluxe\hadd-1.reg" /y
+rem Concerning the next registry key, normally, you should simply backup the
+rem ‘HD Deluxe’ key of this path, which is not easy to do, so as a
+rem workaround the whole ‘Insanity3D system’ key is exported. If your username
+rem is ‘User’ and your offline game directory ‘C:\Users\User\offlinegames’,
+rem then you’ll see a registry key structure like this:
+rem - Insanity3D system
+rem   - Applications
+rem     - C:
+rem       - Users
+rem         - User
+rem           - offlinegames
+rem             - Hidden and Dangerous
+rem               - HD Deluxe
+reg export "%haddregkeypath2%" "Hidden and Dangerous Deluxe\hadd-2.reg" /y
+echo.
+
+echo Hidden and Dangerous Deluxe: Done.
+echo.
+
+rem Hidden and Dangerous - Fight for Freedom
+
+set "hadfffrootdir=%gamerootdir%\Hidden and Dangerous\HD FF"
+
+rem Backup savegames
+if exist "%hadfffrootdir%\savegame\single\*.bin" (
+	echo Hidden and Dangerous - Fight for Freedom: Backing up savegames
+	xcopy /i /y "%hadfffrootdir%\savegame\single\*.bin" "Hidden and Dangerous - Fight for Freedom\savegame\single"
+	echo.
+) else (
+	echo Hidden and Dangerous - Fight for Freedom: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup .ini file
+if exist "%hadfffrootdir%\*.ini" (
+	echo Hidden and Dangerous - Fight for Freedom: Backing up .ini file
+	rem /h parameter needed, because of hidden file attribute
+	xcopy /h /i /y "%hadfffrootdir%\*.ini" "Hidden and Dangerous - Fight for Freedom"
+	echo.
+) else (
+	echo Hidden and Dangerous - Fight for Freedom: .ini file not found. Skipping...
+	echo.
+)
+
+rem Backup controls file
+if exist "%hadfffrootdir%\*.cfg" (
+	echo Hidden and Dangerous - Fight for Freedom: Backing up controls file
+	xcopy /i /y "%hadfffrootdir%\*.cfg" "Hidden and Dangerous - Fight for Freedom"
+	echo.
+) else (
+	echo Hidden and Dangerous - Fight for Freedom: Controls file not found. Skipping...
+	echo.
+)
+
+echo Hidden and Dangerous - Fight for Freedom: Done.
 echo.
 
 rem Hitman - Codename 47
@@ -1487,6 +1803,34 @@ reg export "%insideregpath%" "Inside\inside.reg" /y
 echo Inside: Done.
 echo.
 
+rem Jazz Jackrabbit Collection
+rem GOG edition, emulated in DOSBox
+
+set "jjrrootdir=%gamerootdir%\Jazz Jackrabbit"
+
+rem Backup savegames
+if exist "%jjrrootdir%\cloud_saves\SAVE*" (
+	echo Jazz Jackrabbit: Backing up savegames
+	xcopy /i /y "%jjrrootdir%\cloud_saves\SAVE*" "Jazz Jackrabbit"
+	echo.
+) else (
+	echo Jazz Jackrabbit: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup savegames for Holiday Hare 1995
+if exist "%jjrrootdir%\cloud_saves\HH95\SAVE*" (
+	echo Jazz Jackrabbit - Holiday Hare 1995: Backing up savegames
+	xcopy /i /y "%jjrrootdir%\cloud_saves\HH95\SAVE*" "Jazz Jackrabbit\HH95"
+	echo.
+) else (
+	echo Jazz Jackrabbit - Holiday Hare 1995: Savegames not found. Skipping...
+	echo.
+)
+
+echo Jazz Jackrabbit Collection: Done.
+echo.
+
 rem Jotun - Valhalla Edition
 
 set "jvelldir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
@@ -1612,6 +1956,29 @@ if exist "%masterspydir%\Local Storage\*" (
 )
 
 echo Master Spy: Done.
+echo.
+
+rem Medal of Honor - Pacific Assault
+
+set "mohpadir=%userprofile%\Documents\EA Games\Medal of Honor Pacific Assault(tm)"
+set "mohparegkeypath=HKCU\SOFTWARE\EA Games\Medal of Honor Pacific Assault"
+
+rem Backup folder
+if exist "%mohpadir%" (
+	echo Medal of Honor - Pacific Assault: Backing up folder
+	xcopy /e /i /y "%mohpadir%" "Medal of Honor - Pacific Assault"
+	echo.
+) else (
+	echo Medal of Honor - Pacific Assault: Folder not found. Skipping...
+	echo.
+)
+
+rem Backup registry key
+echo Medal of Honor - Pacific Assault: Backing up registry key
+reg export "%mohparegkeypath%" "Medal of Honor - Pacific Assault\mohpa.reg" /y
+echo.
+
+echo Medal of Honor - Pacific Assault: Done.
 echo.
 
 rem Metal Gear
@@ -2159,65 +2526,351 @@ if exist "%portroyalerootdir%\Run\Player*" (
 echo Port Royale: Done.
 echo.
 
-rem Postal Plus
+rem POSTAL Plus
+rem Retail version
 
-set "p1rootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
+set "postalrootdir=%gamerootdir%\Postal2STP\PostalClassic&Uncut"
 
 rem Back up savegames and highscores
-if exist "%p1rootdir%\res\SaveGame\*.gme" (
-	echo Postal Plus: Backing up savegames and highscores
-	xcopy /e /i /y "%p1rootdir%\res\SaveGame" "Postal Plus\res\SaveGame"
+if exist "%postalrootdir%\res\SaveGame\*.gme" (
+	echo POSTAL Plus: Backing up savegames and highscores
+	xcopy /e /i /y "%postalrootdir%\res\SaveGame" "POSTAL Plus\res\SaveGame"
 	echo.
 ) else (
-	echo Postal Plus: Savegames not found. Skipping...
+	echo POSTAL Plus: Savegames not found. Skipping...
 	echo.
 )
 
 rem Backup configuration
-if exist "%p1rootdir%\*.ini" (
-	echo Postal Plus: Backing up configuration
-	copy "%p1rootdir%\*.ini" "Postal Plus"
+if exist "%postalrootdir%\*.ini" (
+	echo POSTAL Plus: Backing up configuration
+	copy "%postalrootdir%\*.ini" "POSTAL Plus"
 	echo.
 ) else (
-	echo Postal Plus: Configuration file not found. Skipping...
+	echo POSTAL Plus: Configuration file not found. Skipping...
 	echo.
 )
 
-echo Postal Plus: Done.
+rem Backup level files
+if exist "%postalrootdir%\levels\*.rgn" (
+	if exist "%postalrootdir%\levels\*.rlm" (
+		echo POSTAL Plus: Backing up level files
+		xcopy /i /y "%postalrootdir%\levels\*.rgn" "POSTAL Plus\levels"
+		xcopy /i /y "%postalrootdir%\levels\*.rlm" "POSTAL Plus\levels"
+		echo.
+	)
+) else (
+	echo POSTAL Plus: Level files not found. Skipping...
+	echo.
+)
+
+echo POSTAL Plus: Done.
 echo.
 
-rem Postal 2
+rem POSTAL
+rem Steam version
 
-set "p2rootdir=%gamerootdir%\Postal2STP"
+rem Note: Cannot be launched without Steam client
+
+set "postalsteamaddir=%appdata%\RunningWithScissors\Postal Plus"
 
 rem Backup savegames
-if exist "%p2rootdir%\Save\*.usa" (
-	echo Postal 2: Backing up savegames
-	xcopy /e /i /y "%p2rootdir%\Save" "Postal 2\Save"
+if exist "%postalsteamaddir%\steamcloud\*.gme" (
+	echo POSTAL - Steam version: Backing up savegames
+	xcopy /i /y "%postalsteamaddir%\steamcloud\*.gme" "POSTAL - Steam version\Savegames"
 	echo.
 ) else (
-	echo Postal 2: Savegames not found. Skipping...
+	echo POSTAL - Steam version: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration file
+if exist "%postalsteamaddir%\*.INI" (
+	echo POSTAL - Steam version: Backing up configuration file
+	xcopy /i /y "%postalsteamaddir%\*.INI" "POSTAL - Steam version"
+	echo.
+) else (
+	echo POSTAL - Steam version: Configuration file not found. Skipping...
+	echo.
+)
+
+rem Backup savegames and remote cache file from Steam’s userdata folder
+rem
+rem This section is broken. Need to find out how to programatically get the
+rem userdata user ID. In this case the user ID is simply replaced with an
+rem asterisk for ease of use. As far as I know, Steam app IDs in contrary to
+rem user IDs are static, so it should be relatively safe to use app ID 232770.
+rem
+rem if exist "C:\Program Files (x86)\Steam\userdata\*\232770\remote\*.gme" (
+rem 	echo POSTAL - Steam version: Backing up userdata savegames
+rem 	xcopy /i /y "C:\Program Files (x86)\Steam\userdata\*\232770\remote\*.gme" "POSTAL - Steam version\userdata\remote"
+rem 	echo.
+rem ) else (
+rem 	echo POSTAL - Steam version: Userdata savegames not found. Skipping...
+rem 	echo.
+rem )
+
+rem if exist "C:\Program Files (x86)\Steam\userdata\*\232770\*.vdf" (
+rem 	echo POSTAL - Steam version: Backing up userdata remote cache file
+rem 	xcopy /i /y "C:\Program Files (x86)\Steam\userdata\*\232770\*.vdf" "POSTAL - Steam version\userdata"
+rem 	echo.
+rem ) else (
+rem 	echo POSTAL - Steam version: Userdata remote cache file not found. Skipping...
+rem 	echo.
+rem )
+
+echo POSTAL - Steam version: Done.
+echo.
+
+rem POSTAL 2
+rem Retail version
+
+set "postal2rootdir=%gamerootdir%\Postal2STP"
+
+rem Backup savegames
+if exist "%postal2rootdir%\Save\*.usa" (
+	echo POSTAL 2: Backing up savegames
+	xcopy /i /y "%postal2rootdir%\Save\*.usa" "POSTAL 2\Save"
+	echo.
+) else (
+	echo POSTAL 2: Savegames not found. Skipping...
 	echo.
 )
 
 rem Backup configuration, keybinds and savegame information
-if exist "%p2rootdir%\System\Postal2.ini" (
-	if exist "%p2rootdir%\System\SavedGameInfo.ini" (
-		if exist "%p2rootdir%\System\User.ini" (
-			echo Postal 2: Backing up configuration, keybinds and savegame information
-			md "Postal 2\System"
-			copy "%p2rootdir%\System\Postal2.ini" "Postal 2\System"
-			copy "%p2rootdir%\System\SavedGameInfo.ini" "Postal 2\System"
-			copy "%p2rootdir%\System\User.ini" "Postal 2\System"
+if exist "%postal2rootdir%\System\Postal2.ini" (
+	if exist "%postal2rootdir%\System\SavedGameInfo.ini" (
+		if exist "%postal2rootdir%\System\User.ini" (
+			echo POSTAL 2: Backing up configuration, keybinds and savegame information
+
+			md "POSTAL 2\System"
+
+			copy "%postal2rootdir%\System\Postal2.ini" "POSTAL 2\System"
+			copy "%postal2rootdir%\System\SavedGameInfo.ini" "POSTAL 2\System"
+			copy "%postal2rootdir%\System\User.ini" "POSTAL 2\System"
+
 			echo.
 		)
 	)
 ) else (
-	echo Postal 2: Configuration, keybinds, savegame information not found. Skipping...
+	echo POSTAL 2: Configuration, keybinds, savegame information not found. Skipping...
 	echo.
 )
 
-echo Postal 2: Done.
+rem Backup Unreal level editor map files
+rem
+rem Whenever you use the Unreal level editor, it leaves behind a log file, a
+rem configuration file and when you decide to save a map you worked on, map
+rem files. Backing up all map files with a wildcard doesn’t really make sense
+rem because this copies over all map files, not just the ones left behind by
+rem the Unreal level editor. As a result, I decided to comment out the
+rem following section, because I doubt its usefulness.
+rem
+rem if exist "%postal2rootdir%\Maps\*.fuk" (
+rem 	echo POSTAL 2: Backing up map files
+rem 	xcopy /i /y "%postal2rootdir%\Maps\*.fuk" "POSTAL 2\Maps"
+rem 	echo.
+rem ) else (
+rem 	echo POSTAL 2: Map files not found. Skipping...
+rem 	echo.
+rem )
+
+rem Backup Unreal level editor configuration file
+if exist "%postal2rootdir%\System\unrealed.ini" (
+	echo POSTAL 2: Backing up Unreal level editor configuration file
+	md "POSTAL 2\System"
+	copy "%postal2rootdir%\System\unrealed.ini" "POSTAL 2\System"
+	echo.
+) else (
+	echo POSTAL 2: Unreal level editor configuration file not found. Skipping...
+	echo.
+)
+
+echo POSTAL 2: Done.
+echo.
+
+rem POSTAL 2 - Apocalypse Weekend
+rem Retail version
+
+set "postal2awrootdir=%gamerootdir%\Postal2STP\ApocalypseWeekend"
+
+rem Backup savegames
+if exist "%postal2awrootdir%\AWSave\*.usa" (
+	echo POSTAL 2 - Apocalypse Weekend: Backing up savegames
+	xcopy /i /y "%postal2awrootdir%\AWSave\*.usa" "POSTAL 2 - Apocalypse Weekend\AWSave"
+	echo.
+) else (
+	echo POSTAL 2 - Apocalypse Weekend: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration, keybinds and savegame information
+if exist "%postal2awrootdir%\System\ApocalypseWeekend.ini" (
+	if exist "%postal2awrootdir%\System\Postal2.ini" (
+		if exist "%postal2awrootdir%\System\SavedGameInfo.ini" (
+			if exist "%postal2awrootdir%\System\User.ini" (
+				echo POSTAL 2 - Apocalypse Weekend: Backing up configuration, keybinds and savegame information
+
+				md "POSTAL 2 - Apocalypse Weekend\System"
+
+				copy "%postal2awrootdir%\System\ApocalypseWeekend.ini" "POSTAL 2 - Apocalypse Weekend\System"
+				copy "%postal2awrootdir%\System\Postal2.ini" "POSTAL 2 - Apocalypse Weekend\System"
+				copy "%postal2awrootdir%\System\SavedGameInfo.ini" "POSTAL 2 - Apocalypse Weekend\System"
+				copy "%postal2awrootdir%\System\User.ini" "POSTAL 2 - Apocalypse Weekend\System"
+
+				echo.
+			)
+		)
+	)
+) else (
+	echo POSTAL 2 - Apocalypse Weekend: Configuration, keybinds, savegame information not found. Skipping...
+	echo.
+)
+
+rem Backup Unreal level editor configuration file
+if exist "%postal2awrootdir%\System\unrealed.ini" (
+	echo POSTAL 2 - Apocalypse Weekend: Backing up Unreal level editor configuration file
+
+	md "POSTAL 2 - Apocalypse Weekend\System"
+	copy "%postal2awrootdir%\System\unrealed.ini" "POSTAL 2 - Apocalypse Weekend\System"
+	echo.
+) else (
+	echo POSTAL 2 - Apocalypse Weekend: Unreal level editor configuration file not found. Skipping...
+	echo.
+)
+
+echo POSTAL 2 - Apocalypse Weekend: Done.
+echo.
+
+rem POSTAL 2
+rem Steam version
+
+set "postal2steamrootdir=%steamdefaultlibdir%\POSTAL2Complete"
+
+rem Backup savegames
+if exist "%postal2steamrootdir%\Save\*.usa" (
+	echo POSTAL 2 - Steam version: Backing up savegames
+	xcopy /i /y "%postal2steamrootdir%\Save\*.usa" "POSTAL 2 - Steam version\Save"
+	echo.
+) else (
+	echo POSTAL 2 - Steam version: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration, keybinds, savegame information and entry fix file
+if exist "%postal2steamrootdir%\System\EntryFix.ini" (
+	if exist "%postal2steamrootdir%\System\Postal2.ini" (
+		if exist "%postal2steamrootdir%\System\SavedGameInfo.ini" (
+			if exist "%postal2steamrootdir%\System\User.ini" (
+				echo POSTAL 2 - Steam version: Backing up configuration, keybinds, savegame information and entry fix file
+
+				md "POSTAL 2 - Steam version\System"
+
+				copy "%postal2steamrootdir%\System\EntryFix.ini" "POSTAL 2 - Steam version\System"
+				copy "%postal2steamrootdir%\System\Postal2.ini" "POSTAL 2 - Steam version\System"
+				copy "%postal2steamrootdir%\System\SavedGameInfo.ini" "POSTAL 2 - Steam version\System"
+				copy "%postal2steamrootdir%\System\User.ini" "POSTAL 2 - Steam version\System"
+
+				echo.
+			)
+		)
+	)
+) else (
+	echo POSTAL 2 - Steam version: Configuration, keybinds, savegame information and entry fix file not found. Skipping...
+	echo.
+)
+
+echo POSTAL 2 - Steam version: Done.
+echo.
+
+rem POSTAL 2 - Paradise Lost
+rem Steam version
+
+set "postal2plsteamrootdir=%steamdefaultlibdir%\POSTAL2Complete\Paradise Lost"
+
+rem Backup savegames
+if exist "%postal2plsteamrootdir%\PLSave\*.usa" (
+	echo POSTAL 2 - Paradise Lost: Backing up savegames
+	xcopy /i /y "%postal2plsteamrootdir%\PLSave\*.usa" "POSTAL 2 - Paradise Lost\PLSave"
+	echo.
+) else (
+	echo POSTAL 2 - Paradise Lost: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files
+if exist "%postal2plsteamrootdir%\System\EntryFix.ini" (
+	if exist "%postal2plsteamrootdir%\System\ParadiseLost.ini" (
+		if exist "%postal2plsteamrootdir%\System\SavedGameInfo.ini" (
+			if exist "%postal2plsteamrootdir%\System\User.ini" (
+				echo POSTAL 2 - Paradise Lost: Backing up configuration files
+
+				md "POSTAL 2 - Paradise Lost\System"
+
+				copy "%postal2plsteamrootdir%\System\EntryFix.ini" "POSTAL 2 - Paradise Lost\System"
+				copy "%postal2plsteamrootdir%\System\ParadiseLost.ini" "POSTAL 2 - Paradise Lost\System"
+				copy "%postal2plsteamrootdir%\System\SavedGameInfo.ini" "POSTAL 2 - Paradise Lost\System"
+				copy "%postal2plsteamrootdir%\System\User.ini" "POSTAL 2 - Paradise Lost\System"
+
+				echo.
+			)
+		)
+	)
+) else (
+	echo POSTAL 2 - Paradise Lost: Configuration files not found. Skipping...
+	echo.
+)
+
+echo POSTAL 2 - Paradise Lost: Done.
+echo.
+
+rem POSTAL 2 - Share The Pain
+rem Steam version
+
+set "postal2stpsteamrootdir=%steamdefaultlibdir%\POSTAL2Complete\ShareThePain"
+
+rem Backup configuration files
+if exist "%postal2stpsteamrootdir%\System\Postal2MP.ini" (
+	if exist "%postal2stpsteamrootdir%\System\User.ini" (
+		echo POSTAL 2 - Share The Pain: Backing up configuration files
+		copy "%postal2stpsteamrootdir%\System\Postal2MP.ini" "POSTAL 2 - Share The Pain\System"
+		copy "%postal2stpsteamrootdir%\System\User.ini" "POSTAL 2 - Share The Pain\System"
+		echo.
+	)
+) else (
+	echo POSTAL 2 - Share The Pain: Configuration files not found. Skipping...
+	echo.
+)
+
+echo POSTAL 2 - Share The Pain: Done.
+echo.
+
+rem POSTAL Redux
+rem Steam version
+
+set "postalreduxdir=%localappdata%\PostalREDUX"
+
+rem Backup savegames
+if exist "%postalreduxdir%\Saved\SaveGames\*.sav" (
+	echo POSTAL Redux: Backing up savegames
+	xcopy /i /y "%postalreduxdir%\Saved\SaveGames\*.sav" "POSTAL Redux\Savegames"
+	echo.
+) else (
+	echo POSTAL Redux: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup configuration files
+if exist "%postalreduxdir%\Saved\Config\WindowsNoEditor\*.ini" (
+	echo POSTAL Redux: Backing up configuration files
+	xcopy /i /y "%postalreduxdir%\Saved\Config\WindowsNoEditor\*.ini" "POSTAL Redux\Configuration"
+	echo.
+) else (
+	echo POSTAL Redux: Configuration files not found. Skipping...
+	echo.
+)
+
+echo POSTAL Redux: Done.
 echo.
 
 rem Quake II
@@ -2444,6 +3097,7 @@ echo.
 rem S.T.A.L.K.E.R. Shadow of Chernobyl
 
 set "sshocdir=%userprofile%\Documents\Stalker-SHOC"
+set "sshocregkeypath=HKLM\SOFTWARE\WOW6432Node\GSC Game World\STALKER-SHOC"
 
 rem Backup savegame textures and saves
 if exist "%sshocdir%\savedgames\*.sav" (
@@ -2464,6 +3118,10 @@ if exist "%sshocdir%\user.ltx" (
 	echo S.T.A.L.K.E.R. Shadow of Chernobyl: user.ltx file not found. Skipping...
 	echo.
 )
+
+rem Backup registry key
+echo S.T.A.L.K.E.R. Shadow of Chernobyl: Backing up registry key
+reg export "%sshocregkeypath%" "S.T.A.L.K.E.R. Shadow of Chernobyl\sshoc.reg" /y
 
 echo S.T.A.L.K.E.R. Shadow of Chernobyl: Done.
 echo.
@@ -2599,6 +3257,31 @@ echo.
 echo Sludge Life: Done.
 echo.
 
+rem Soldiers: Heroes of World War II
+
+set "showw2regkeypath1=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers"
+set "showw2regkeypath2=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers - Heroes of World War II"
+set "showw2rootdir=%gamerootdir%\Soldiers - Heroes of World War II"
+
+rem Backup profile folders and last user file
+if exist "%showw2rootdir%\profiles" (
+	echo Soldiers: Heroes of World War II - Backing up profile folders and last user file
+	xcopy /e /i /y "%showw2rootdir%\profiles" "Soldiers - Heroes of World War II\profiles"
+	echo.
+) else (
+	echo Soldiers: Heroes of World War II - Profile folder not found. Skipping...
+	echo.
+)
+
+rem Backup registry keys
+echo Soldiers: Heroes of World War II - Backing up registry keys
+reg export "%showw2regkeypath1%" "Soldiers - Heroes of World War II\showw2-1.reg" /y
+reg export "%showw2regkeypath2%" "Soldiers - Heroes of World War II\showw2-2.reg" /y
+echo.
+
+echo Soldiers: Heroes of World War II - Done.
+echo.
+
 rem SOMA
 
 set "somadir=%userprofile%\Documents\My Games\Soma"
@@ -2614,6 +3297,24 @@ if exist "%somadir%" (
 )
 
 echo SOMA: Done.
+echo.
+
+rem Spear of Destiny
+rem GOG edition, DOSBox emulation
+
+set "sodrootdir=%gamerootdir%\Spear of Destiny"
+
+rem Backup M1, M2 and M3 folders
+if exist "%sodrootdir%\cloud_saves" (
+	echo Spear of Destiny: Backing up folders
+	xcopy /e /i /y "%sodrootdir%\cloud_saves" "Spear of Destiny"
+	echo.
+) else (
+	echo Spear of Destiny: Folders not found. Skipping...
+	echo.
+)
+
+echo Spear of Destiny: Done.
 echo.
 
 rem SPY Fox - Dry Cereal
@@ -2773,7 +3474,7 @@ rem Syberia II
 
 set "syb2savedir=%userprofile%\Documents\Syberia 2 Saves"
 
-rem Backup config and savegame files
+rem Backup configuration and savegame files
 if exist "%syb2savedir%\*.sav" (
 	echo Syberia II: Backing up configuration and savegames
 	xcopy /i /y "%syb2savedir%\*" "Syberia 2"
@@ -2969,7 +3670,7 @@ set "tsorfsavedir=%localappdata%\Daedalic Entertainment GmbH\The Suicide of Rach
 rem Backup savegame files
 if exist "%tsorfsavedir%\SaveGames\*.sav" (
 	echo The Suicide of Rachel Foster: Backing up savegame file and game options
-	xcopy /i /y "%tsorfsavedir%\SaveGames\*.sav" "The Suicide of Rachel Foster\SaveGames"
+	xcopy /i /y "%tsorfsavedir%\SaveGames\*.sav" "The Suicide of Rachel Foster\Savegames"
 	echo.
 ) else (
 	echo The Suicide of Rachel Foster: Savegame and game options files not found. Skipping...
@@ -2979,7 +3680,7 @@ if exist "%tsorfsavedir%\SaveGames\*.sav" (
 rem Backup user settings
 if exist "%tsorfsavedir%\Config\WindowsNoEditor\GameUserSettings.ini" (
 	echo The Suicide of Rachel Foster: Backing up user settings
-	copy "%tsorfsavedir%\Config\WindowsNoEditor\GameUserSettings.ini" "The Suicide of Rachel Foster"
+	copy "%tsorfsavedir%\Config\WindowsNoEditor\GameUserSettings.ini" "The Suicide of Rachel Foster\Configuration"
 	echo.
 ) else (
 	echo The Suicide of Rachel Foster: User settings not found. Skipping...
@@ -3036,6 +3737,34 @@ if exist "%ttdprootdir%\user.bnd" (
 echo Thief: The Dark Project - Done.
 echo.
 
+rem This War of Mine
+
+set "twomaddir=%appdata%\11bitstudios\This War Of Mine"
+set "twomdocdir=%userprofile%\Documents\This War of Mine"
+
+rem Backup AppData folder
+if exist "%twomaddir%" (
+	echo This War of Mine: Backing up AppData folder
+	xcopy /e /i /y "%twomaddir%" "This War of Mine\AppData"
+	echo.
+) else (
+	echo This War of Mine: AppData folder not found. Skipping...
+	echo.
+)
+
+rem Backup Documents folder
+if exist "%twomdocdir%" (
+	echo This War of Mine: Backing up Documents folder
+	xcopy /e /i /y "%twomdocdir%" "This War of Mine\Documents"
+	echo.
+) else (
+	echo This War of Mine: Documents folder not found. Skipping...
+	echo.
+)
+
+echo This War of Mine: Done.
+echo.
+
 rem Through the Woods
 
 set "ttwregpath=HKCU\SOFTWARE\Antagonist\ThroughTheWoods"
@@ -3088,6 +3817,34 @@ if exist "%tcscrootdir%\system\SplinterCell.ini" (
 )
 
 echo Tom Clancy's Splinter Cell: Done.
+echo.
+
+rem Tomb Raider
+rem GOG edition, DOSBox emulation
+
+set "tombraiderrootdir=%gamerootdir%\Tomb Raider 1"
+
+rem Backup savegames
+if exist "%tombraiderrootdir%\TOMBRAID\SAVEGAME*" (
+	echo Tomb Raider: Backing up savegames
+	xcopy /i /y "%tombraiderrootdir%\TOMBRAID\SAVEGAME*" "Tomb Raider"
+	echo.
+) else (
+	echo Tomb Raider: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup settings
+if exist "%tombraiderrootdir%\TOMBRAID\*.DAT" (
+	echo Tomb Raider: Backing up settings
+	xcopy /i /y "%tombraiderrootdir%\TOMBRAID\*.DAT" "Tomb Raider"
+	echo.
+) else (
+	echo Tomb Raider: Settings file not found. Skipping...
+	echo.
+)
+
+echo Tomb Raider: Done.
 echo.
 
 rem Тургор
@@ -3184,6 +3941,24 @@ echo.
 
 echo Turgor: Done.
 echo The Void: Done.
+echo.
+
+rem Ultima I
+rem GOG edition, DOSBox emulation
+
+set "ultimarootdir=%gamerootdir%\Ultima 1"
+
+rem Backup characters
+if exist "%ultimarootdir%\cloud_saves\*.U1" (
+	echo Ultima I: Backing up characters
+	xcopy /i /y "%ultimarootdir%\cloud_saves\*.U1" "Ultima I"
+	echo.
+) else (
+	echo Ultima I: Characters not found. Skipping...
+	echo.
+)
+
+echo Ultima I: Done.
 echo.
 
 rem Unreal
@@ -3302,6 +4077,53 @@ if exist "%vd2rootdir%\*.lsd" (
 echo Vampire's Dawn 2: Done.
 echo.
 
+rem Warhammer 40,000 - Rites of War
+
+set "wh40krowrootdir=%gamerootdir%\WARHAMMER 40K Rites of War"
+
+rem Backup savegames
+if exist "%wh40krowrootdir%\save\*.csv" (
+	echo Warhammer 40,000 - Rites of War: Backing up savegames
+	xcopy /i /y "%wh40krowrootdir%\save\*.csv" "Warhammer 40,000 - Rites of War\save"
+	echo.
+) else (
+	echo Warhammer 40,000 - Rites of War: Savegames not found. Skipping...
+	echo.
+)
+
+rem Backup customised armies
+if exist "%wh40krowrootdir%\save\Armies\*.arm" (
+	echo Warhammer 40,000 - Rites of War: Backing up customised armies
+	xcopy /i /y "%wh40krowrootdir%\save\Armies\*.arm" "Warhammer 40,000 - Rites of War\save\Armies"
+	echo.
+) else (
+	echo Warhammer 40,000 - Rites of War: Customised armies not found. Skipping...
+	echo.
+)
+
+rem Backup user scenarios
+if exist "%wh40krowrootdir%\userscen\*.scn" (
+	echo Warhammer 40,000 - Rites of War: Backing up user scenarios
+	xcopy /i /y "%wh40krowrootdir%\userscen\*.scn" "Warhammer 40,000 - Rites of War\userscen"
+	echo.
+) else (
+	echo Warhammer 40,000 - Rites of War: User scenarios not found. Skipping...
+	echo.
+)
+
+rem Backup row.int file
+if exist "%wh40krowrootdir%\*.int" (
+	echo Warhammer 40,000 - Rites of War: Backing up row.int file
+	xcopy /i /y "%wh40krowrootdir%\*.int" "Warhammer 40,000 - Rites of War"
+	echo.
+) else (
+	echo Warhammer 40,000 - Rites of War: row.int file not found. Skipping...
+	echo.
+)
+
+echo Warhammer 40,000 - Rites of War: Done.
+echo.
+
 rem What Remains of Edith Finch
 
 set "wroefdir=%localappdata%\FinchGame"
@@ -3362,6 +4184,24 @@ echo The Witcher: Backing up registry key
 reg export "%tw1regpath%" "The Witcher\tw1-settings.reg" /y
 
 echo The Witcher: Done.
+echo.
+
+rem Wolfenstein 3D
+rem GOG version, DOSBox emulation
+
+set "w3drootdir=%gamerootdir%\Wolfenstein 3D"
+
+rem Backup configuration and savegames
+if exist "%w3drootdir%\cloud_saves\*.WL6" (
+	echo Wolfenstein 3D: Backing up configuration and savegames
+	xcopy /i /y "%w3drootdir%\cloud_saves\*.WL6" "Wolfenstein 3D"
+	echo.
+) else (
+	echo Wolfenstein 3D: Configuration and savegames not found. Skipping...
+	echo.
+)
+
+echo Wolfenstein 3D: Done.
 echo.
 
 rem Worms Armageddon

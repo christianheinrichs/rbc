@@ -1,3 +1,6 @@
+- Arma: Cold War Assault - Instead of removing the entire ‘Users’ folder,
+  delete every folder in it
+
 - Decide whether or not to use the ‘echo’ command in cleanup.bat to show the
   user what is currently being done
 
@@ -8,8 +11,11 @@
 - Find out if there is a shorter way of referring to
   %userprofile%\AppData\LocalLow
 
+- Hidden and Dangerous Deluxe: Figure out a proper method of exporting the
+  second registry key
+
 - If possible, check for the existence of a registry key and if it’s there,
-  export it to a .reg file, otherwise skip it
+  export it to a .reg file; otherwise skip it
 
 - Port the batch files to Linux shell scripts. Decide whether to use ‘bash’ or
   ‘sh’ syntax
@@ -19,6 +25,9 @@
 - Quake III: Find out console variables for the settings ‘Force player models’
   and ‘Draw team overlay’
 
+- Soldiers: Heroes of World War II - Instead of removing the entire ‘profiles’
+  folder, delete every folder in it and the last user file
+
 - The Longest Journey: Concerning the cleanup procedure, the method here is
   considered bad practice since it only takes into account the first saveslot.
   Currently written to completely remove the ‘Save’ folder. Figure out how to
@@ -26,7 +35,7 @@
 
 - Try to find a middle ground between ‘copy’, ‘robocopy’ and ‘xcopy’, e.g. is
   ‘copy’ in this project really needed or can it be completely replaced with
-  ‘robocopy or ‘xcopy’?
+  ‘robocopy’ or ‘xcopy’?
 
   One of the reasons I am concerned about this is a particular use case:
 

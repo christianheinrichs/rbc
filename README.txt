@@ -1,22 +1,23 @@
 RBC
 
-This is the RBC. A simple abbreviation symbolising three tasks. Restore, Backup,
-Clean up. A collection of three batch files which you can apply to offline
-games.
+This is the RBC. A simple abbreviation symbolising three tasks. Restore,
+Backup, Clean up. A collection of three batch files which you can apply to
+offline games.
 
 Introduction
 
-Video game privacy these days is turning into more and more of an issue; this is
-especially true for new releases, requiring to be constantly connected to the
-internet, be it due to DRM mechanisms, pseudo-DRM mechanisms or so called game
-analytics. In addition to that, a lot of information is simply being left on the
-operating system, either in the game folder itself, its subdirectories, the user
-document folder, the various appdata folders and registry keys.
+Video game privacy these days is turning into more and more of an issue; this
+is especially true for new releases, requiring to be constantly connected to
+the internet, be it due to DRM mechanisms, pseudo-DRM mechanisms or so called
+game analytics. In addition to that, a lot of information is simply being left
+on the operating system, either in the game folder itself, its subdirectories,
+the user document folder, the various AppData folders and registry keys.
 
 However, there are also a lot of games which work perfectly fine in offline
-mode. Multiplayer games, understandably, have to be connected to the internet or
-a local network, although not in every case. Offline installers can be aquired
-in many ways, such as buying games on websites such as GameJolt, GOG or itch.
+mode. Multiplayer games, understandably, have to be connected to the internet
+or a local network, although not in every case. Offline installers can be
+aquired in many ways, such as buying games on websites such as GameJolt, GOG,
+itch etc.
 
 These scripts are an attempt to keep the footprint which offline games leave
 behind on your system to a minimum. There is also a backup and restore script,
@@ -47,9 +48,9 @@ can still occur due to bugs and different system configurations; among other
 factors. Do backup everything manually first and if you really care about the
 data, encrypt it, preferably by using open source encryption software with
 built-in Windows support. Do also bear in mind that despite this tool, data
-might still be leaked as soon as you connect to the internet. This is simply due
-to the nature of proprietary operating systems. The problem is, you don’t really
-know what code is running in the background.
+might still be leaked as soon as you connect to the internet. This is simply
+due to the nature of proprietary operating systems. The problem is, you don’t
+really know what code is running in the background.
 
 Licensing
 
