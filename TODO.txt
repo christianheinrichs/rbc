@@ -22,8 +22,20 @@
 
 - Port the batch files to Python 3
 
+- Quake: When deleting .cfg files, exclude the default config.cfg file
+
 - Quake III: Find out console variables for the settings ‘Force player models’
   and ‘Draw team overlay’
+
+- Steam user ID problem: Two ways to get the user ID programatically would be:
+  1. `dir /b "C:\Program Files (x86)\Steam\userdata" | findstr /v "ac"`
+
+  2. `for /f %%a in ('dir /b "C:\Program Files (x86)\Steam\userdata"') do echo "%%a" | findstr /v "ac"`
+
+  Then, you would probably need to store the result in a variable like so:
+  `set "steamuserid=for /f %%a in ('dir /b "C:\Program Files (x86)\Steam\userdata"') do echo "%%a" | findstr /v "ac""`
+
+  How to continue from that point however, I don’t know.
 
 - Soldiers: Heroes of World War II - Instead of removing the entire ‘profiles’
   folder, delete every folder in it and the last user file

@@ -1,7 +1,7 @@
 @echo off
 
 rem rbc: Cleanup script
-rem Last modified on 18 March 2022
+rem Last modified on 16 April 2022
 
 rem This script takes care of traces left behind by the games listed in the
 rem SUPPORTED file
@@ -75,6 +75,17 @@ rd /q /s %avpc2kdir1%
 
 rem Delete configuration
 del "%avpc2krootdir%\CONFIG.CFG"
+
+rem Alpha Polaris
+
+set "alphapolarisregpath=HKCU\SOFTWARE\TurmoilGames\AlphaPolaris"
+set "alphapolarissgdir=%userprofile%\Saved Games\Alpha Polaris"
+
+rem Delete registry key
+reg delete "%alphapolarisregpath%" /f
+
+rem Delete savegame folder
+rd /q /s "%alphapolarissgdir%"
 
 rem Amnesia - The Dark Descent
 rem Amnesia - A Machine for Pigs
@@ -210,6 +221,23 @@ del "%becherovdir%\Data\Player\profiles.dat"
 rem Delete all registry data for Becherov
 reg delete "%becherovregpath%" /f
 
+rem Bio Menace
+rem GOG edition, DOSBox emulation
+
+set "biomenacerootdir=%gamerootdir%\Bio Menace"
+
+rem Delete DOSBox log file
+del "%biomenacerootdir%\DOSBOX\stdout*"
+
+rem Delete configuration
+del "%biomenacerootdir%\cloud_saves\CONFIG*"
+
+rem Delete DOSBox configuration file
+del "%biomenacerootdir%\dosbox_biomenace.conf"
+
+rem Delete savegames
+del "%biomenacerootdir%\cloud_saves\SAVEGAM*"
+
 rem BioShock
 
 set "bs1dir=%appdata%\Bioshock"
@@ -227,6 +255,43 @@ set "blairwitchdir=%localappdata%\Blairwitch"
 
 rem Delete local AppData folder
 rd /q /s "%blairwitchdir%"
+
+rem Blitzkrieg
+
+set "blitzkriegregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Nival Interactive\Blitzkrieg"
+set "blitzkriegrootdir=%gamerootdir%\Blitzkrieg"
+
+rem Delete address book
+del "%blitzkriegrootdir%\data\*.xml"
+
+rem Delete registry key
+reg delete "%blitzkriegregpath%" /f
+
+rem Delete chapters folder
+rd /q /s "%blitzkriegrootdir%\data\scenarios\chapters"
+
+rem Delete savegames
+del "%blitzkriegrootdir%\saves\*.sav"
+
+rem Blitzkrieg Anthology: Burning Horizon - Rolling Thunder
+
+set "babhrtregpath=HKLM\SOFTWARE\WOW6432Node\CDV Software Entertainment AG\Blitzkrieg Rolling Thunder"
+set "babhrtrootdir=%gamerootdir%\Blitzkrieg BHRT"
+
+rem Delete address book
+del "%babhrtrootdir%\Run\data\AddressBook.xml"
+
+rem Delete configuration
+del "%babhrtrootdir%\Run\config.cfg"
+
+rem Delete registry key
+reg delete "%babhrtregpath%" /f
+
+rem Delete chapters folder
+rd /q /s "%babhrtrootdir%\Run\data\scenarios\chapters"
+
+rem Delete savegames
+del "%babhrtrootdir%\Run\saves\*.sav"
 
 rem Blood Omen: Legacy of Kain
 
@@ -445,18 +510,72 @@ set "gilderootdir=%gamerootdir%\Die Gilde"
 rem Delete configuration
 del "%gilderootdir%\game.ini"
 
-rem Delete registry key
-reg delete "HKCU\SOFTWARE\Ahead Entertainment" /f
-
 rem Delete savegames
 del /q "%gilderootdir%\Resources\gamedata\saves\*"
 
+rem Delete registry key
+reg delete "HKCU\SOFTWARE\Ahead Entertainment" /f
+
+rem Die Siedler II - Gold Edition
+rem English title: The Settlers II GOLD
+rem
+rem GOG edition, DOSBox emulation
+
+set "diesiedler2rootdir=%gamerootdir%\The Settlers 2 GOLD"
+
+rem Delete configuration
+del "%diesiedler2rootdir%\SETUP.INI"
+
+rem Delete EDITRES.IDX
+del "%diesiedler2rootdir%\DATA\EDITRES.IDX"
+
+rem Delete REMAP.DAT
+del "%diesiedler2rootdir%\DATA\REMAP.DAT"
+
+rem Delete RESOURCE.IDX
+del "%diesiedler2rootdir%\DATA\RESOURCE.IDX"
+
+rem Delete EDITIO.IDX
+del "%diesiedler2rootdir%\DATA\IO\EDITIO.IDX"
+
+rem Delete IO.IDX
+del "%diesiedler2rootdir%\DATA\IO\IO.IDX"
+
+rem Delete DOSBox log file
+del "%diesiedler2rootdir%\DOSBOX\stdout*"
+
+rem Delete .DAT save files
+del "%diesiedler2rootdir%\SAVE\*.DAT"
+
+rem Delete world files
+del "%diesiedler2rootdir%\WORLDS\*.SWD"
+
+rem Delete world screenshots
+del "%diesiedler2rootdir%\WORLDS\*.PCX"
+
 rem Die Völker
+rem English title: Alien Nations
 
 set "dievoelkerrootdir=%gamerootdir%\Alien Nations"
 
 rem Delete configuration and savegame files
 del /q "%dievoelkerrootdir%\Savegames\*"
+
+rem DOOM
+rem GOG edition, emulated in DOSBox
+rem
+rem Known as ‘The Ultimate DOOM’
+
+set "doomrootdir=%gamerootdir%\DOOM"
+
+rem Delete DOSBox log file
+del "%doomrootdir%\DOSBOX\stdout*"
+
+rem Delete configuration
+del "%doomrootdir%\cloud_saves\*.CFG"
+
+rem Delete savegames
+del "%doomrootdir%\cloud_saves\*.DSG"
 
 rem DOOM II
 rem GOG edition, emulated in DOSBox
@@ -594,6 +713,24 @@ reg delete "%faefeverregpath%" /f
 rem Delete LocalLow directory
 rd /q /s "%faefeverlldir%"
 
+rem Final DOOM
+rem GOG edition, DOSBox emulation
+
+set "finaldoomrootdir=%gamerootdir%\Final DOOM"
+
+rem Delete DOSBox log file
+del "%finaldoomrootdir%\DOSBOX\stdout*"
+
+rem TNT: Evilution
+
+rem Delete TNT folder
+rd /q /s "%finaldoomrootdir%\cloud_saves\TNT"
+
+rem The Plutonium Experiment
+
+rem Delete PLUTONIA folder
+rd /q /s "%finaldoomrootdir%\cloud_saves\PLUTONIA"
+
 rem Firewatch
 
 set "fwlldir=%userprofile%\AppData\LocalLow\CampoSanto\Firewatch"
@@ -726,9 +863,40 @@ rem Hellblade - Senua’s Sacrifice
 
 set "hellbladedir=%localappdata%\HellbladeGame"
 
-rem Delete local appdata Hellblade folder which contains .ini files and the
+rem Delete local AppData Hellblade folder which contains .ini files and the
 rem savegame in .sav format
 rd /q /s "%hellbladedir%"
+
+rem Heretic: Shadow of the Serpent Riders
+rem GOG edition, DOSBox emulation
+
+set "hsotsrrootdir=%gamerootdir%\Heretic"
+
+rem Delete DOSBox log file
+del "%hsotsrrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration file
+del "%hsotsrrootdir%\dosbox_heretic.conf"
+
+rem Delete configuration files, savegames and temporary deathmatch file
+del /q "%hsotsrrootdir%\cloud_saves\*"
+
+rem Heroes of Might and Magic
+rem GOG edition, DOSBox emulation
+
+set "homamrootdir=%gamerootdir%\HoMM"
+
+rem Delete DOSBox log file
+del "%homamrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration
+del "%homamrootdir%\dosboxHOMM1.conf"
+
+rem Delete configuration
+del "%homamrootdir%\cloud_saves\*.CFG"
+
+rem Delete savegame folder
+rd /q /s "%homamrootdir%\cloud_saves\GAMES"
 
 rem Heroine’s Quest: The Herald of Ragnarok
 
@@ -736,6 +904,97 @@ set "hqthordir=%userprofile%\Saved Games\Heroine's Quest 1.2"
 
 rem Delete savegame folder
 rd /q /s "%hqthordir%"
+
+rem Hexen: Beyond Heretic
+rem GOG edition, DOSBox emulation
+
+set "hexenrootdir=%gamerootdir%\HeXen"
+
+rem Delete DOSBox log file
+del "%hexenrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration
+del "%hexenrootdir%\dosbox_hexen.conf"
+
+rem Delete configuration files and temporary deathmatch file
+del /q "%hexenrootdir%\cloud_saves\*"
+
+rem Delete savegame folder
+rd /q /s "%hexenrootdir%\cloud_saves\HEXNDATA"
+
+rem Hexen: Deathkings of the Dark Citadel
+rem GOG edition, DOSBox emulation
+
+set "hdotdcrootdir=%gamerootdir%\HeXenDK"
+
+rem Delete DOSBox log file
+del "%hdotdcrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration
+del "%hdotdcrootdir%\dosbox_hexenDK.conf"
+
+rem Delete configuration files and temporary deathmatch file
+del /q "%hdotdcrootdir%\cloud_saves\*"
+
+rem Delete savegame folder
+rd /q /s "%hdotdcrootdir%\cloud_saves\HEXNDATA"
+
+rem Hexen II
+
+set "nglideconfigregpath=HKCU\SOFTWARE\Zeus Software\nGlide2"
+set "hexen2regpath=HKLM\SOFTWARE\WOW6432Node\Activision\Hexen II"
+set "hexen2rootdir=%gamerootdir%\HeXen II"
+set "hexen2sgdirs=for /f %%a in ('dir /b "%hexen2rootdir%\data1"') do echo %%a | findstr "quick s" | findstr /v "Strings.txt""
+
+rem Delete registry keys
+reg delete "%nglideconfigregpath%" /f
+
+rem Without administrator rights, the following command shows the
+rem ‘ERROR: Access is denied.’ message.
+rem reg delete "%hexen2regpath%" /f
+
+rem Delete configuration files
+del "%hexen2rootdir%\data1\*.cfg"
+
+rem Delete savegame folders
+rem
+rem The command sequence contained in the variable ‘hexen2sgdirs’ does output
+rem the savegames folders. I could not figure out how to delete them by
+rem accessing the result of ‘hexen2sgdirs’. Therefore, just delete all savegame
+rem folders explicitly.
+rem
+rem `rd /q /s %hexen2sgdirs%` and `rd /q /s "%hexen2sgdirs%"` throw errors
+
+rem rem Delete multiplayer savegame folders explicitly
+rd /q /s "%hexen2rootdir%\data1\ms0"
+rd /q /s "%hexen2rootdir%\data1\ms1"
+rd /q /s "%hexen2rootdir%\data1\ms2"
+rd /q /s "%hexen2rootdir%\data1\ms3"
+rd /q /s "%hexen2rootdir%\data1\ms4"
+rd /q /s "%hexen2rootdir%\data1\ms5"
+rd /q /s "%hexen2rootdir%\data1\ms6"
+rd /q /s "%hexen2rootdir%\data1\ms7"
+rd /q /s "%hexen2rootdir%\data1\ms8"
+rd /q /s "%hexen2rootdir%\data1\ms9"
+rd /q /s "%hexen2rootdir%\data1\ms10"
+rd /q /s "%hexen2rootdir%\data1\ms11"
+
+rem Delete quicksave folder
+rd /q /s "%hexen2rootdir%\data1\quick"
+
+rem Delete singleplayer savegame folders explicitly
+rd /q /s "%hexen2rootdir%\data1\s0"
+rd /q /s "%hexen2rootdir%\data1\s1"
+rd /q /s "%hexen2rootdir%\data1\s2"
+rd /q /s "%hexen2rootdir%\data1\s3"
+rd /q /s "%hexen2rootdir%\data1\s4"
+rd /q /s "%hexen2rootdir%\data1\s5"
+rd /q /s "%hexen2rootdir%\data1\s6"
+rd /q /s "%hexen2rootdir%\data1\s7"
+rd /q /s "%hexen2rootdir%\data1\s8"
+rd /q /s "%hexen2rootdir%\data1\s9"
+rd /q /s "%hexen2rootdir%\data1\s10"
+rd /q /s "%hexen2rootdir%\data1\s11"
 
 rem Hidden and Dangerous
 
@@ -818,6 +1077,59 @@ rem Delete Hotline Miami folder, which includes configuration, a log file and
 rem save data
 rd /q /s "%hmudir%"
 
+rem I Have No Mouth, and I Must Scream
+rem GOG edition, ScummVM emulation
+
+set "ihnmaimsrootdir=%gamerootdir%\I Have No Mouth"
+set "svmregpath=HKCU\SOFTWARE\scummvm.org"
+set "svmadpath=%appdata%\ScummVM"
+
+rem Delete registry key
+reg delete "%svmregpath%" /f
+
+rem Delete AppData folder
+rd /q /s "%svmadpath%"
+
+rem Delete configuration
+del "%ihnmaimsrootdir%\ihnm.ini"
+
+rem Delete savegames
+del "%ihnmaimsrootdir%\saves\*.s*"
+
+rem Icewind Dale Complete
+
+set "idcregpath1=HKLM\SOFTWARE\WOW6432Node\Black Isle\Icewind Dale"
+set "idcregpath2=HKLM\SOFTWARE\WOW6432Node\Black Isle\Icewind Dale - Heart of Winter"
+set "idcregpath3=HKLM\SOFTWARE\WOW6432Node\Black Isle\Icewind Dale - Heart of Winter: Trials of the Luremaster"
+set "idcrootdir=%gamerootdir%\Icewind Dale Complete"
+
+rem Delete registry keys
+rem HKLM rootkey access seems to be restricted to administrators. It doesn’t
+rem really make sense to include these.
+rem
+rem reg delete "%idcregpath1%" /f
+rem reg delete "%idcregpath2%" /f
+rem reg delete "%idcregpath3%" /f
+
+rem Delete log file(s)
+del "%idcrootdir%\*.log"
+
+rem Delete cache
+del "%idcrootdir%\Cache\Data\*.bif"
+
+rem Delete keybinds
+del "%idcrootdir%\Keymap*"
+
+rem Delete configuration
+del "%idcrootdir%\icewind*"
+
+rem Delete characters
+del "%idcrootdir%\Characters\*.chr"
+del "%idcrootdir%\Characters\*.res"
+
+rem Delete savegame folder
+rd /q /s "%idcrootdir%\mpsave"
+
 rem Inkslinger
 
 set "inkslingerlldir=%userprofile%\AppData\LocalLow\Gateway\Inkslinger"
@@ -828,6 +1140,55 @@ rd /q /s "%inkslingerlldir%"
 
 rem Delete registry key
 reg delete "%inkslingerregpath%" /f
+
+rem Indiana Jones and the Fate of Atlantis
+rem GOG edition, ScummVM emulation
+
+set "ijatfoarootdir=%gamerootdir%\Indiana Jones and the Fate of Atlantis"
+set "svmregpath=HKCU\SOFTWARE\scummvm.org"
+set "svmadpath=%appdata%\ScummVM"
+
+rem Delete registry key
+reg delete "%svmregpath%" /f
+
+rem Delete AppData folder
+rd /q /s "%svmadpath%"
+
+rem Delete configuration
+del "%ijatfoarootdir%\atlantis.ini"
+
+rem Delete savegames
+del "%ijatfoarootdir%\saves\*.s*"
+
+rem Indiana Jones and the Infernal Machine
+
+set "ijatimregpath=HKCU\SOFTWARE\LucasArts Entertainment Company LLC\Indiana Jones and the Infernal Machine"
+set "ijatimrootdir=%gamerootdir%\Infernal Machine"
+
+rem Delete registry key
+reg delete "%ijatimregpath%" /f
+
+rem Delete savegames
+del "%ijatimrootdir%\SaveGames\*.nds"
+
+rem Indiana Jones and the Last Crusade
+rem GOG edition, ScummVM emulation
+
+set "ijatlcrootdir=%gamerootdir%\Indiana Jones and The Last Crusade"
+set "svmregpath=HKCU\SOFTWARE\scummvm.org"
+set "svmadpath=%appdata%\ScummVM"
+
+rem Delete registry key
+reg delete "%svmregpath%" /f
+
+rem Delete AppData folder
+rd /q /s "%svmadpath%"
+
+rem Delete configuration
+del "%ijatlcrootdir%\last-crusade.ini"
+
+rem Delete savegames
+del "%ijatlcrootdir%\saves\*.s*"
 
 rem Inside
 
@@ -847,16 +1208,74 @@ reg delete "%insideregpath%" /f
 rem Jazz Jackrabbit Collection
 rem GOG edition, emulated in DOSBox
 
-set "jjrrootdir=%gamerootdir%\Jazz Jackrabbit"
+set "jjcrootdir=%gamerootdir%\Jazz Jackrabbit"
 
 rem Delete DOSBox log file
-del "%jjrrootdir%\DOSBOX\stdout*"
+del "%jjcrootdir%\DOSBOX\stdout*"
 
 rem Delete savegames
-del "%jjrrootdir%\cloud_saves\SAVE*"
+del "%jjcrootdir%\cloud_saves\SAVE*"
 
 rem Delete Holiday Hare 1995 folder
-rd /q /s "%jjrrootdir%\cloud_saves\HH95"
+rd /q /s "%jjcrootdir%\cloud_saves\HH95"
+
+rem Jazz Jackrabbit 2
+
+set "jj2regpath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Epic MegaGames\Jazz Creation Station"
+set "jj2regpath2=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Epic MegaGames\Jazz Jackrabbit 2 Secret Files"
+set "jj2regpath3=HKCU\SOFTWARE\Epic MegaGames\Jazz Creation Station"
+set "jj2regpath4=HKCU\SOFTWARE\Epic MegaGames\Jazz Jackrabbit 2 Secret Files"
+set "jj2regpath5=HKLM\SOFTWARE\WOW6432Node\Epic MegaGames\Jazz Creation Station"
+set "jj2regpath6=HKLM\SOFTWARE\WOW6432Node\Epic MegaGames\Jazz Jackrabbit 2 Secret Files"
+set "jj2regpath7=HKLM\SOFTWARE\WOW6432Node\Epic MegaGames\Jazz Jackrabbit 2 Special Edition"
+set "jj2rootdir=%gamerootdir%\Jazz Jackrabbit 2"
+
+rem Delete log file
+del "%jj2rootdir%\*.log"
+
+rem Delete ‘Jazz Creation Station’ configuration
+del "%jj2rootdir%\JCS.ini"
+
+rem Delete configuration
+del "%jj2rootdir%\*.CFG"
+
+rem Delete savegames
+del "%jj2rootdir%\SAVEGAME*"
+
+rem Delete registry keys
+reg delete "%jj2regpath1%" /f
+reg delete "%jj2regpath2%" /f
+reg delete "%jj2regpath3%" /f
+reg delete "%jj2regpath4%" /f
+reg delete "%jj2regpath5%" /f
+reg delete "%jj2regpath6%" /f
+reg delete "%jj2regpath7%" /f
+
+rem Jazz Jackrabbit 2 - The Christmas Chronicles
+
+set "jj2tccregpath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Epic MegaGames\Jazz Jackrabbit 2 Christmas Chronicles '99"
+set "jj2tccregpath2=HKCU\SOFTWARE\Epic MegaGames\Christmas Chronicles '99"
+set "jj2tccregpath3=HKCU\SOFTWARE\Epic MegaGames\Jazz Jackrabbit 2 Christmas Chronicles '99"
+set "jj2tccregpath4=HKLM\SOFTWARE\WOW6432Node\Epic MegaGames\Christmas Chronicles '99"
+set "jj2tccrootdir=%gamerootdir%\Jazz Jackrabbit 2 CC"
+
+rem Delete log file
+del "%jj2tccrootdir%\*.log"
+
+rem Delete ‘Jazz Creation Station’ configuration
+del "%jj2tccrootdir%\Jcs.ini"
+
+rem Delete configuration
+del "%jj2tccrootdir%\*.CFG"
+
+rem Delete savegames
+del "%jj2tccrootdir%\SAVEGAME*"
+
+rem Delete registry keys
+reg delete "%jj2tccregpath1%" /f
+reg delete "%jj2tccregpath2%" /f
+reg delete "%jj2tccregpath3%" /f
+reg delete "%jj2tccregpath4%" /f
 
 rem Jotun - Valhalla Edition
 
@@ -875,6 +1294,20 @@ set "lamerzonerootdir=%gamerootdir%\AmerZone"
 
 rem Delete savegames
 del "%lamerzonerootdir%\*.bin"
+
+rem Lands Of Lore - The Throne of Chaos
+rem GOG edition, DOSBox emulation
+
+set "lolttocrootdir=%gamerootdir%\Lands Of Lore"
+
+rem Delete DOSBox log file
+del "%lolttocrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration
+del "%lolttocrootdir%\dosboxLOL1.conf"
+
+rem Delete temporary level file, configuration and savegames
+del /q "%lolttocrootdir%\cloud_saves\*"
 
 rem Layers of Fear
 
@@ -1230,10 +1663,10 @@ rem Delete Unreal level editor map files
 rem
 rem Whenever you use the Unreal level editor, it leaves behind a log file, a
 rem configuration file and when you decide to save a map you worked on, map
-rem files. Backing up all map files with a wildcard doesn’t really make sense
-rem because this copies over all map files, not just the ones left behind by
-rem the Unreal level editor. As a result, I decided to comment out the
-rem following section, because I doubt its usefulness.
+rem files. Deleting all map files with a wildcard doesn’t really make sense
+rem because this erases all map files, not just the ones left behind by the
+rem Unreal level editor. As a result, I decided to comment out the following
+rem section, because I doubt its usefulness.
 rem
 rem del "%postal2rootdir%\Maps\*.fuk"
 
@@ -1318,6 +1751,44 @@ set "postalreduxdir=%localappdata%\PostalREDUX"
 
 rem Delete local AppData folder
 rd /q /s "%postalreduxdir%"
+
+rem Quake
+
+set "nglideconfigregpath=HKCU\SOFTWARE\Zeus Software\nGlide"
+set "q1rootdir=%gamerootdir%\Quake"
+
+rem Delete DOSBox log file
+del "%q1rootdir%\DOSBox\stdout*"
+
+rem Delete configuration files
+del "%q1rootdir%\id1\*.cfg"
+
+rem Delete savegames
+del "%q1rootdir%\id1\*.SAV"
+
+rem Quake mission pack: Scourge of Armagon
+
+rem Delete configuration files
+del "%q1rootdir%\hipnotic\*.cfg"
+
+rem Delete savegames
+del "%q1rootdir%\hipnotic\*.SAV"
+
+rem Quake mission pack 2: Dissolution of Eternity
+
+rem Delete configuration files
+del "%q1rootdir%\rogue\*.CFG"
+
+rem Delete savegames
+del "%q1rootdir%\rogue\*.SAV"
+
+rem QuakeWorld
+
+rem Delete configuration files
+del "%q1rootdir%\qw\*.cfg
+
+rem Delete nGlide configuration registry key
+reg delete "%nglideconfigregpath%" /f
 
 rem Quake II
 
@@ -1404,6 +1875,38 @@ rd /q /s "%rotmlldir%"
 rem Delete registry key
 reg delete "%rotmregpath%" /f
 
+rem RollerCoaster Tycoon Deluxe
+
+set "rctdregpath=HKLM\SOFTWARE\WOW6432Node\Fish Technology Group\RollerCoaster Tycoon Setup"
+set "rctdrootdir=%gamerootdir%\RollerCoaster Tycoon Deluxe"
+
+rem Delete CSS0.DAT file
+del "%rctdrootdir%\Data\CSS0.DAT"
+
+rem Delete screenshots
+del "%rctdrootdir%\*.PCX"
+
+rem Delete configuration
+del "%rctdrootdir%\Data\*.cfg"
+
+rem Delete savegames
+del "%rctdrootdir%\Saved Games\*.SV4"
+
+rem Delete registry key
+rem Throws an ‘Access denied’ message; therefore commented out
+rem reg delete "%rctdregpath%" /f
+
+rem Runo
+
+set "runolldir=%userprofile%\AppData\LocalLow\Kratti\Runo"
+set "runoregpath=HKCU\SOFTWARE\Kratti\Runo"
+
+rem Delete LocalLow folder
+rd /q /s "%runolldir%"
+
+rem Delete registry key
+reg delete "%runoregpath%" /f
+
 rem S.T.A.L.K.E.R. Чистое Небо
 rem English title: S.T.A.L.K.E.R. Clear Sky
 
@@ -1484,6 +1987,64 @@ del /q "%sstferootdir%\Savegame\Player0\Quick\*"
 rem Delete .vis files
 del /q "%sstferootdir%\Levels\*.vis"
 
+rem Serious Sam: The Second Encounter
+
+set "gamespyregpath=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\GameSpy\games"
+set "sstseregpath=HKCU\SOFTWARE\CroTeam"
+set "sstserootdir=%gamerootdir%\Serious Sam The Second Encounter"
+
+rem Delete log files
+del "%sstserootdir%\*.log"
+
+rem Delete SeriousSkaStudio files
+del "%sstserootdir%\*.aal"
+del "%sstserootdir%\*.aml"
+del "%sstserootdir%\*.asl"
+del "%sstserootdir%\*.ba"
+del "%sstserootdir%\*.bm"
+del "%sstserootdir%\*.bs"
+del "%sstserootdir%\*.smc"
+
+rem Delete dec.txt
+del "%sstserootdir%\Bin\*.txt"
+
+rem Delete .RPT files
+del "%sstserootdir%\Bin\*.RPT"
+
+rem Delete control files
+del "%sstserootdir%\Controls\Controls*"
+
+rem Delete GMS file
+del "%sstserootdir%\Data\*.gms"
+
+rem Delete demos
+del "%sstserootdir%\Demos\Demo*"
+
+rem Delete .vis files
+del "%sstserootdir%\Levels\LevelsMP\*.vis"
+
+rem Delete console history
+del "%sstserootdir%\Temp\*.txt"
+
+rem Delete temporary demos
+del "%sstserootdir%\Temp\*.dem"
+
+rem Delete screenshots
+del "%sstserootdir%\ScreenShots\*.tga
+
+rem Delete .plr files
+del "%sstserootdir%\Players\*.plr"
+
+rem Delete persistent symbols file, which contains setting values
+del "%sstserootdir%\Scripts\PersistentSymbols.ini"
+
+rem Delete savegame folder
+rd /q /s "%sstserootdir%\SaveGame"
+
+rem Delete registry keys
+reg delete "%gamespyregpath%" /f
+reg delete "%sstseregpath%" /f
+
 rem Sludge Life
 
 set "sludgelifelldir=%userprofile%\AppData\LocalLow\TerriVellmann\SludgeLife"
@@ -1560,6 +2121,42 @@ del "%suddenstrikerootdir%\sudtest.ini"
 rem Delete ratings data
 del "%suddenstrikerootdir%\ratings\*.rtc"
 
+rem Sudden Strike - Resource War
+
+set "ssrwrootdir=%gamerootdir%\Sudden Strike Resource War"
+
+rem Delete configuration
+del "%ssrwrootdir%\sudtest.ini"
+
+rem Delete edit3 configuration
+del "%ssrwrootdir%\Edit3.ini"
+
+rem Delete edit3 maps
+rd /q /s "%ssrwrootdir%\maps.src"
+
+rem Delete savegames folder
+rd /q /s "%ssrwrootdir%\plr\savegames"
+
+rem Sudden Strike II
+
+set "edit3regpath=HKCU\SOFTWARE\Fireglow\edit3"
+set "suddenstrike2rootdir=%gamerootdir%\Sudden Strike 2"
+
+rem Delete edit3 configuration
+del "%suddenstrike2rootdir%\Edit3.ini"
+
+rem Delete edit3 maps
+rd /q /s "%suddenstrike2rootdir%\maps.src"
+
+rem Delete configuration
+del "%suddenstrike2rootdir%\sudtest.ini"
+
+rem Delete savegames folder
+rd /q /s "%suddenstrike2rootdir%\plr\savegames"
+
+rem Delete edit3 registry key
+reg delete "%edit3regpath%" /f
+
 rem Sunless Sea
 
 set "sunlesslldir=%userprofile%\AppData\LocalLow\Failbetter Games\Sunless Sea"
@@ -1615,6 +2212,38 @@ del "%syb2rootdir%\debug.log"
 rem Delete Syberia II savegame directory
 rd /q /s "%syb2savedir%"
 
+rem System Shock
+rem GOG edition, DOSBox emulation
+rem
+rem Known as ‘System Shock - Classic Edition’
+
+set "sscerootdir=%gamerootdir%\System Shock - Classic Edition"
+
+rem Delete DOSBox log file
+del "%sscerootdir%\dosbox_windows\stdout*"
+
+rem Delete configuration
+del "%sscerootdir%\SSHOCK\CYB*"
+
+rem Delete savegames
+del "%sscerootdir%\SSHOCK\DATA\CURRSAVE*"
+del "%sscerootdir%\SSHOCK\DATA\SAVGAM*"
+
+rem Terraria
+
+set "terrariadir=%userprofile%\Documents\My Games\Terraria"
+set "terrariaregpath=HKCU\SOFTWARE\Terraria"
+set "terrariarootdir=%gamerootdir%\Terraria"
+
+rem Delete Terraria registry key (which, as far as I know is empty)
+reg delete "%terrariaregpath%" /f
+
+rem Delete ban list
+del "%terrariarootdir%\banlist.txt"
+
+rem Delete Terraria folder
+rd /q /s "%terrariadir%"
+
 rem The Alto Collection
 
 set "taclldir=%userprofile%\AppData\LocalLow\Team Alto"
@@ -1632,6 +2261,20 @@ set "tclsavedir=%userprofile%\Saved Games\The Cat Lady"
 
 rem Delete savegame directory
 rd /q /s "%tclsavedir%"
+
+rem The Elder Scrolls: Arena
+rem GOG edition, DOSBox emulation
+
+set "tesarenarootdir=%gamerootdir%\Arena"
+
+rem Delete DOSBox log file
+del "%tesarenarootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration file
+del "%tesarenarootdir%\dosbox_arena.conf"
+
+rem Delete data
+del /q "%tesarenarootdir%\cloud_saves\*"
 
 rem The Elder Scrolls III: Morrowind
 
@@ -1919,6 +2562,22 @@ del "%w3drootdir%\DOSBOX\stdout*"
 rem Delete configuration and savegames
 del "%w3drootdir%\cloud_saves\*.WL6"
 
+rem Worms
+rem GOG edition, DOSBox emulation
+rem
+rem Known as ‘Worms United’
+
+set "wormsrootdir=%gamerootdir%\Worms United"
+
+rem Delete DOSBox log file
+del "%wormsrootdir%\DOSBOX\stdout*"
+
+rem Delete DOSBox configuration file
+del "%wormsrootdir%\dosboxWORMS.conf"
+
+rem Delete configuration file
+del "%wormsrootdir%\cloud_saves\*.CFG"
+
 rem Worms Armageddon
 
 set "waregpath=HKCU\SOFTWARE\Team17SoftwareLTD\WormsArmageddon"
@@ -1941,6 +2600,42 @@ reg delete "%waregpath%" /f
 
 echo Worms Armageddon: Done.
 echo.
+
+rem X-COM: UFO Defense
+rem GOG edition, DOSBox emulation
+
+set "xcudrootdir=%gamerootdir%\X-COM UFO Defense"
+
+rem Delete DOSBox log file
+del "%xcudrootdir%\DOSBOX\stdout*"
+
+rem Delete MVOL.DAT file
+del "%xcudrootdir%\cloud_saves\*.DAT"
+
+rem Delete savegame folders
+rem
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME*" throws the message
+rem ‘The filename, directory name, or volume label syntax is incorrect.’
+rem
+rem Although it is bad practice, delete the entire cloud_saves folder instead
+rem Another workaround would be:
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_1"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_2"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_3"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_4"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_5"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_6"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_7"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_8"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_9"
+rem rd /q /s "%xcudrootdir%\cloud_saves\GAME_10"
+rd /q /s "%xcudrootdir%\cloud_saves"
+
+rem Delete SOUND folder
+rd /q /s "%xcudrootdir%\cloud_saves\SOUND"
+
+rem Delete DOSBox configuration file
+del "%xcudrootdir%\dosbox_xcomud.conf"
 
 rem XIII
 

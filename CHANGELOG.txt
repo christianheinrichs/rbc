@@ -254,3 +254,40 @@ Version 19.3.2022
 - POSTAL 2 (Retail version): Include Unreal level editor configuration file,
   rename root directory variable
 - S.T.A.L.K.E.R. Shadow of Chernobyl: Include registry key
+
+Version 16.4.2022
+- Add ‘Alpha Polaris’
+- Add ‘Bio Menace’
+- Add ‘Blitzkrieg’
+- Add ‘Blitzkrieg Anthology: Burning Horizon - Rolling Thunder’
+- Add ‘Die Siedler II - Gold Edition’
+- Add ‘DOOM’
+- Add ‘Final DOOM’
+- Add ‘Heretic: Shadow of the Serpent Riders’
+- Add ‘Heroes of Might and Magic’
+- Add ‘Hexen: Beyond Heretic’
+- Add ‘Hexen: Deathkings of the Dark Citadel’
+- Add ‘Hexen II’
+- Add ‘I Have No Mouth, and I Must Scream’
+- Add ‘Icewind Dale Complete’
+- Add ‘Indiana Jones and the Fate of Atlantis’
+- Add ‘Indiana Jones and the Infernal Machine’
+- Add ‘Indiana Jones and the Last Crusade’
+- Add ‘Jazz Jackrabbit 2’
+- Add ‘Jazz Jackrabbit 2 - The Christmas Chronicles’
+- Add ‘Lands Of Lore - The Throne of Chaos’
+- Add ‘Quake’
+- Add ‘RollerCoaster Tycoon Deluxe’
+- Add ‘Runo’
+- Add ‘Serious Sam: The Second Encounter’
+- Add ‘Sudden Strike - Resource War’
+- Add ‘Sudden Strike II’
+- Add ‘System Shock’
+- Add ‘Terraria’
+- Add ‘The Elder Scrolls: Arena’
+- Add ‘Worms’
+- Add ‘X-COM: UFO Defense’
+- Include a few missing installation checks and registry key backup existence
+  checks in the restore batch file
+- Add additional exclusion file for ‘Hexen II’
+- Remove registry key variables from restore batch file

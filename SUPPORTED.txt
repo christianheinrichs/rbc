@@ -4,6 +4,7 @@ Supported games
 - Alan Wake (GOG version)
 - Alan Wake’s American Nightmare (GOG version)
 - Aliens Versus Predator - Classic 2000
+- Alpha Polaris
 - Amnesia - A Machine for Pigs
 - Amnesia - The Dark Descent
 - Anachronox
@@ -15,14 +16,17 @@ Supported games
 - Barrow Hill - Curse of the Ancient Circle
 - Battle Realms
 - Becherov
+- Bio Menace (GOG edition, DOSBox emulation)
 - BioShock
 - Blair Witch
+- Blitzkrieg
+- Blitzkrieg Anthology: Burning Horizon - Rolling Thunder
 - Blood Omen: Legacy of Kain
 - Buddy Simulator 1984
 - Call of Cthulhu: Dark Corners of the Earth
 - Cave Story
 - Chaser
-- Cosmo’s Cosmic Adventure
+- Cosmo’s Cosmic Adventure (GOG edition, DOSBox emulation)
 - Crashday
 - Dagon by H. P. Lovecraft
 - Darkest Dungeon
@@ -30,7 +34,10 @@ Supported games
 - Diablo
 - Diablo II
 - Die Gilde
+- Die Siedler II - Gold Edition (English title: The Settlers II GOLD, GOG
+  edition, DOSBox emulation)
 - Die Völker (English title: Alien Nations)
+- DOOM (GOG edition, DOSBox emulation)
 - DOOM II (GOG edition, DOSBox emulation)
 - Driver
 - Dungeon Keeper, including Deeper Dungeons (GOG edition, DOSBox emulation)
@@ -40,6 +47,7 @@ Supported games
 - Europa Universalis
 - Europa Universalis II
 - FaeFever
+- Final DOOM (GOG edition, DOSBox emulation)
 - Firewatch
 - Gothic
 - Gothic II
@@ -51,18 +59,31 @@ Supported games
 - Hatred
 - Hearts of Iron
 - Hellblade: Senua’s Sacrifice
+- Heretic: Shadow of the Serpent Riders (GOG edition, DOSBox emulation)
+- Heroes of Might and Magic (GOG edition, DOSBox emulation)
 - Heroine’s Quest: The Herald of Ragnarok
+- Hexen: Beyond Heretic (GOG edition, DOSBox emulation)
+- Hexen: Deathkings of the Dark Citadel (GOG edition, DOSBox emulation)
+- Hexen II
 - Hidden and Dangerous
 - Hidden and Dangerous Deluxe
 - Hidden and Dangerous - Fight for Freedom
 - Hitman - Codename 47
 - Hotline Miami Original
 - Hotline Miami Updated
+- I Have No Mouth, and I Must Scream (GOG edition, ScummVM emulation)
+- Icewind Dale Complete
+- Indiana Jones and the Fate of Atlantis (GOG edition, ScummVM emulation)
+- Indiana Jones and the Infernal Machine
+- Indiana Jones and the Last Crusade (GOG edition, ScummVM emulation)
 - Inkslinger
 - Inside
 - Jazz Jackrabbit Collection (GOG edition, DOSBox emulation)
+- Jazz Jackrabbit 2
+- Jazz Jackrabbit 2 - The Christmas Chronicles
 - Jotun - Valhalla Edition
 - L’Amerzone (English title: Amerzone)
+- Lands Of Lore - The Throne of Chaos (GOG edition, DOSBox emulation)
 - Layers of Fear, including Layers of Fear: Inheritance
 - Legacy of Kain: Soul Reaver
 - Mafia
@@ -96,16 +117,20 @@ Supported games
 - POSTAL 2 - Paradise Lost
 - POSTAL 2 - Share The Pain (Steam version)
 - POSTAL Redux (Steam version)
+- Quake
 - Quake II
 - Quake III
 - Red Faction
 - Remothered - Tormented Fathers
 - Ritual of the Moon
+- RollerCoaster Tycoon Deluxe
+- Runo
 - S.T.A.L.K.E.R. Чистое Небо (English title: S.T.A.L.K.E.R. - Clear Sky)
 - S.T.A.L.K.E.R. - Shadow of Chernobyl
 - Sacred Gold
 - Saints Row 3
 - Serious Sam: The First Encounter
+- Serious Sam: The Second Encounter
 - Sludge Life
 - Soldiers: Heroes of World War II
 - SOMA
@@ -113,12 +138,17 @@ Supported games
 - SPY Fox - Dry Cereal
 - SWAT 4
 - Sudden Strike
+- Sudden Strike - Resource War
+- Sudden Strike II
 - Sunless Sea
 - SuperTux
 - Syberia
 - Syberia II
+- System Shock (GOG edition, DOSBox emulation)
+- Terraria
 - The Alto Collection
 - The Cat Lady
+- The Elder Scrolls: Arena (GOG edition, DOSBox emulation)
 - The Elder Scrolls III: Morrowind
 - The Infectious Madness of Doctor Dekker
 - The Longest Journey
@@ -139,5 +169,7 @@ Supported games
 - What Remains of Edith Finch
 - Wiedźmin (English title: The Witcher)
 - Wolfenstein 3D (GOG edition, DOSBox emulation)
+- Worms (GOG edition, DOSBox emulation)
 - Worms Armageddon
+- X-COM: UFO Defense (GOG edition, DOSBox emulation)
 - XIII

@@ -1,0 +1,6 @@
+.cfg
+.pak
+.rc
+.txt
+\glhexen\
+PROGS

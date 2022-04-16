@@ -1,4 +1,11 @@
 .err
 .log
 .out
+\map.020\
+\map.101\
+\plr\savegames\info
 \Unity\
+dummy.txt
+MISSION.DAT
+MVOL.DAT
+SOUND

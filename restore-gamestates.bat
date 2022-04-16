@@ -1,7 +1,7 @@
 @echo off
 
 rem rbc: Gamestate restore script
-rem Last modified on 19 March 2022
+rem Last modified on 16 April 2022
 
 rem This script restores gamestates, which include profiles, savegames, setting
 rem files etc.
@@ -153,6 +153,50 @@ if exist "Aliens Versus Predator - Classic 2000\CONFIG.CFG" (
 echo Aliens Versus Predator - Classic 2000: Done.
 echo.
 
+rem Alpha Polaris
+
+set "alphapolarisrootdir=%gamerootdir%\Alpha Polaris"
+set "alphapolarissgdir=%userprofile%\Saved Games\Alpha Polaris"
+
+rem Installation check
+if exist "%alphapolarisrootdir%" (
+	rem Restore savegames
+	if exist "Alpha Polaris\Savegames\*.dsv" (
+		echo Alpha Polaris: Restoring savegames
+		xcopy /i /y "Alpha Polaris\Savegames\*.dsv" "%alphapolarissgdir%"
+		echo.
+	) else (
+		echo Alpha Polaris: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore options
+	if exist "Alpha Polaris\Options\*.dat" (
+		echo Alpha Polaris: Restoring options file
+		xcopy /i /y "Alpha Polaris\Options\*.dat" "%alphapolarissgdir%"
+		echo.
+	) else (
+		echo Alpha Polaris: Options file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Alpha Polaris\alpha-polaris.reg" (
+		echo Alpha Polaris: Restoring registry key
+		reg import "Alpha Polaris\alpha-polaris.reg"
+		echo.
+	) else (
+		echo Alpha Polaris: Registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Alpha Polaris: Installation not found. Skipping...
+	echo.
+)
+
+echo Alpha Polaris: Done.
+echo.
+
 rem Amnesia: A Machine for Pigs
 
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
@@ -271,8 +315,6 @@ rem ArmA: Armed Assault
 
 set "armadocdir1=%userprofile%\Documents\ArmA"
 set "armadocdir2=%userprofile%\Documents\ArmA Other Profiles"
-set "armaregkeypath1=HKCU\SOFTWARE\Bohemia Interactive Studio\ArmA"
-set "armaregkeypath2=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ArmA"
 set "armarootdir=%gamerootdir%\Arma Gold Edition"
 
 rem Installation check
@@ -298,11 +340,17 @@ if exist "%armarootdir%" (
 	)
 
 	rem Restore registry keys
-	echo ArmA: Armed Assault - Restoring registry keys
-	reg import "ArmA - Armed Assault\arma-1.reg"
-	reg import "ArmA - Armed Assault\arma-2.reg"
-	echo.
-
+	if exist "ArmA - Armed Assault\arma-1.reg" (
+		if exist "ArmA - Armed Assault\arma-2.reg" (
+			echo ArmA: Armed Assault - Restoring registry keys
+			reg import "ArmA - Armed Assault\arma-1.reg"
+			reg import "ArmA - Armed Assault\arma-2.reg"
+			echo.
+		)
+	) else (
+		echo ArmA: Armed Assault: Registry keys backup not found. Skipping...
+		echo.
+	)
 ) else (
 	echo ArmA: Armed Assault - Installation not found. Skipping...
 	echo.
@@ -313,7 +361,6 @@ echo.
 
 rem Arma: Cold War Assault
 
-set "acwaregkeypath=HKLM\SOFTWARE\WOW6432Node\Bohemia Interactive Studio\ColdWarAssault"
 set "acwarootdir=%gamerootdir%\Arma Cold War Assault"
 
 rem Installation check
@@ -540,6 +587,50 @@ if exist "%becherovrootdir%" (
 echo Becherov: Done.
 echo.
 
+rem Bio Menace
+rem GOG edition, DOSBox emulation
+
+set "biomenacerootdir=%gamerootdir%\Bio Menace"
+
+rem Installation check
+if exist "%biomenacerootdir%" (
+	rem Restore savegames
+	if exist "Bio Menace\Savegames\SAVEGAM*" (
+		echo Bio Menace: Restoring savegames
+		xcopy /i /y "Bio Menace\Savegames\SAVEGAM*" "%biomenacerootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Bio Menace: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Bio Menace\Configuration\CONFIG*" (
+		echo Bio Menace: Restoring configuration
+		xcopy /i /y "Bio Menace\Configuration\CONFIG*" "%biomenacerootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Bio Menace: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration file
+	if exist "Bio Menace\dosbox_biomenace.conf" (
+		echo Bio Menace: Restoring DOSBox configuration file
+		xcopy /i /y "Bio Menace\dosbox_biomenace.conf" "%biomenacerootdir%"
+		echo.
+	) else (
+		echo Bio Menace: DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Bio Menace: Installation not found. Skipping...
+	echo.
+)
+
+echo Bio Menace: Done.
+echo.
+
 rem BioShock
 
 set "bs1dir=%appdata%\Bioshock"
@@ -608,6 +699,132 @@ if exist "%blairwitchrootdir%" (
 )
 
 echo Blair Witch: Done.
+echo.
+
+rem Blitzkrieg
+
+set "blitzkriegrootdir=%gamerootdir%\Blitzkrieg"
+
+rem Installation check
+if exist "%blitzkriegrootdir%" (
+	rem Restore savegames
+	if exist "Blitzkrieg\saves\*.sav" (
+		echo Blitzkrieg: Restoring savegames
+		xcopy /i /y "Blitzkrieg\saves\*.sav" "%blitzkriegrootdir%\saves"
+		echo.
+	) else (
+		echo Blitzkrieg: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore chapters folder
+	if exist "Blitzkrieg\data\scenarios\chapters" (
+		echo Blitzkrieg: Restoring chapters folder
+		xcopy /e /i /y "Blitzkrieg\data\scenarios\chapters" "%blitzkriegrootdir%\data\scenarios\chapters"
+		echo.
+	) else (
+		echo Blitzkrieg: Chapters folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Blitzkrieg\config.cfg" (
+		echo Blitzkrieg: Restoring configuration
+		xcopy /i /y "Blitzkrieg\config.cfg" "%blitzkriegrootdir%"
+		echo.
+	) else (
+		echo Blitzkrieg: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Blitzkrieg\blitzkrieg.reg" (
+		echo Blitzkrieg: Restoring registry key
+		reg import "Blitzkrieg\blitzkrieg.reg"
+		echo.
+	) else (
+		echo Blitzkrieg: Registry key backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore address book
+	if exist "Blitzkrieg\data\*.xml" (
+		echo Blitzkrieg: Restoring address book
+		xcopy /i /y "Blitzkrieg\data\*.xml" "%blitzkriegrootdir%\data"
+		echo.
+	) else (
+		echo Blitzkrieg: Address book backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Blitzkrieg: Installation not found. Skipping...
+	echo.
+)
+
+echo Blitzkrieg: Done.
+echo.
+
+rem Blitzkrieg Anthology: Burning Horizon - Rolling Thunder
+
+set "babhrtrootdir=%gamerootdir%\Blitzkrieg BHRT"
+
+rem Installation check
+if exist "%babhrtrootdir%" (
+	rem Restore savegames
+	if exist "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\saves\*.sav" (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Restoring savegames
+		xcopy /i /y "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\saves\*.sav" "%babhrtrootdir%\Run\saves"
+		echo.
+	) else (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\config.cfg" (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Restoring configuration
+		xcopy /i /y "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\config.cfg" "%babhrtrootdir%\Run"
+		echo.
+	) else (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore chapters folder
+	if exist "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\data\scenarios\chapters" (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Restoring chapters folder
+		xcopy /e /i /y "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\data\scenarios\chapters" "%babhrtrootdir%\Run\data\scenarios\chapters"
+		echo.
+	) else (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Chapters folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\babhrt.reg" (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Restoring registry key
+		reg import "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\babhrt.reg"
+		echo.
+	) else (
+		echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Registry key backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore address book
+	if exist "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\data\AddressBook.xml" (
+		echo Blitzkrieg: Restoring address book
+		xcopy /i /y "Blitzkrieg Anthology - Burning Horizon - Rolling Thunder\Run\data\AddressBook.xml" "%babhrtrootdir%\Run\data"
+		echo.
+	) else (
+		echo Blitzkrieg: Address book backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Installation not found. Skipping...
+	echo.
+)
+
+echo Blitzkrieg Anthology: Burning Horizon - Rolling Thunder - Done.
 echo.
 
 rem Blood Omen: Legacy of Kain
@@ -713,7 +930,6 @@ echo.
 rem Call of Cthulhu: Dark Corners of the Earth
 
 set "cocdcotedir=%userprofile%\Documents\Bethesda\Call of Cthulhu"
-set "cocdcoteregpath=HKCU\SOFTWARE\Bethesda Softworks\Call Of Cthulhu DCoTE"
 set "cocdcoterootdir=%gamerootdir%\Call of Cthulhu - DCotE"
 
 rem Installation check
@@ -918,7 +1134,6 @@ echo.
 rem Dagon by H. P. Lovecraft
 
 set "dagondir=%userprofile%\AppData\LocalLow\BitGolem\Dagon"
-set "dagonregpath=HKCU\SOFTWARE\BitGolem\Dagon"
 set "dagonrootdir=%gamerootdir%\Dagon by H. P. Lovecraft"
 
 rem Installation check
@@ -1179,6 +1394,112 @@ if exist "%gilderootdir%" (
 echo Die Gilde: Done.
 echo.
 
+rem Die Siedler II - Gold Edition
+rem English title: The Settlers II GOLD
+rem
+rem GOG edition, DOSBox emulation
+
+set "diesiedler2rootdir=%gamerootdir%\The Settlers 2 GOLD"
+
+rem Installation check
+if exist "%diesiedler2rootdir%" (
+	rem Restore .DAT save files
+	if exist "Die Siedler II - Gold Edition\SAVE\*.DAT" (
+		echo Die Siedler II - Gold Edition: Restoring .DAT save files
+		xcopy /i /y "Die Siedler II - Gold Edition\SAVE\*.DAT" "%diesiedler2rootdir%\SAVE"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: .DAT save files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Die Siedler II - Gold Edition\SETUP.INI" (
+		echo Die Siedler II - Gold Edition: Restoring configuration
+		xcopy /i /y "Die Siedler II - Gold Edition\SETUP.INI" "%diesiedler2rootdir%"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restoring EDITRES.IDX
+	if exist "Die Siedler II - Gold Edition\DATA\EDITRES.IDX" (
+		echo Die Siedler II - Gold Edition: Restoring EDITRES.IDX
+		xcopy /i /y "Die Siedler II - Gold Edition\DATA\EDITRES.IDX" "%diesiedler2rootdir%\DATA"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: EDITRES.IDX backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore REMAP.DAT
+	if exist "Die Siedler II - Gold Edition\DATA\REMAP.DAT" (
+		echo Die Siedler II - Gold Edition: Restoring REMAP.DAT
+		xcopy /i /y "Die Siedler II - Gold Edition\DATA\REMAP.DAT" "%diesiedler2rootdir%\DATA"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: REMAP.DAT backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore RESOURCE.IDX
+	if exist "Die Siedler II - Gold Edition\DATA\RESOURCE.IDX" (
+		echo Die Siedler II - Gold Edition: Restoring RESOURCE.IDX
+		xcopy /i /y "Die Siedler II - Gold Edition\DATA\RESOURCE.IDX" "%diesiedler2rootdir%\DATA"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: RESOURCE.IDX backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore EDITIO.IDX
+	if exist "Die Siedler II - Gold Edition\DATA\IO\EDITIO.IDX" (
+		echo Die Siedler II - Gold Edition: Restoring EDITIO.IDX
+		xcopy /i /y "Die Siedler II - Gold Edition\DATA\IO\EDITIO.IDX" "%diesiedler2rootdir%\DATA\IO"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: EDITIO.IDX backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore IO.IDX
+	if exist "Die Siedler II - Gold Edition\DATA\IO\IO.IDX" (
+		echo Die Siedler II - Gold Edition: Restoring IO.IDX
+		xcopy /i /y "Die Siedler II - Gold Edition\DATA\IO\IO.IDX" "%diesiedler2rootdir%\DATA\IO"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: IO.IDX backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore world files
+	if exist "Die Siedler II - Gold Edition\WORLDS\*.SWD" (
+		echo Die Siedler II - Gold Edition: Restoring world files
+		xcopy /i /y "Die Siedler II - Gold Edition\WORLDS\*.SWD" "%diesiedler2rootdir%\WORLDS"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: World files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore world screenshots
+	if exist "Die Siedler II - Gold Edition\WORLDS\*.PCX" (
+		echo Die Siedler II - Gold Edition: Restoring world screenshots
+		xcopy /i /y "Die Siedler II - Gold Edition\WORLDS\*.PCX" "%diesiedler2rootdir%\WORLDS"
+		echo.
+	) else (
+		echo Die Siedler II - Gold Edition: World screenshots backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Die Siedler II - Gold Edition: Installation not found. Skipping...
+	echo.
+)
+
+echo Die Siedler II - Gold Edition: Done.
+echo.
+
 rem Die Völker
 
 set "dievoelkerrootdir=%gamerootdir%\Alien Nations"
@@ -1200,6 +1521,42 @@ if exist "%dievoelkerrootdir%" (
 )
 
 echo Die Voelker: Done.
+echo.
+
+rem DOOM
+rem GOG edition, emulated in DOSBox
+rem
+rem Known as ‘The Ultimate DOOM’
+
+set "doomrootdir=%gamerootdir%\DOOM"
+
+rem Installation check
+if exist "%doomrootdir%" (
+	rem Restore savegames
+	if exist "DOOM\*.DSG" (
+		echo DOOM: Restoring savegames
+		xcopy /i /y "DOOM\*.DSG" "%doomrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo DOOM: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "DOOM\*.CFG" (
+		echo DOOM: Restoring configuration
+		xcopy /i /y "DOOM\*.CFG" "%doomrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo DOOM: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo DOOM: Installation not found. Skipping...
+	echo.
+)
+
+echo DOOM: Done.
 echo.
 
 rem DOOM II
@@ -1534,6 +1891,64 @@ if exist "%faefeverrootdir%" (
 )
 
 echo FaeFever: Done.
+echo.
+
+rem Final DOOM
+rem GOG edition, DOSBox emulation
+
+set "finaldoomrootdir=%gamerootdir%\Final DOOM"
+
+rem Installation check
+if exist "%finaldoomrootdir%" (
+	rem TNT: Evilution
+
+	rem Restore savegames
+	if exist "Final DOOM\TNT\*.DSG" (
+		echo Final DOOM - TNT: Evilution - Restoring savegames
+		xcopy /i /y "Final DOOM\TNT\*.DSG" "%finaldoomrootdir%\cloud_saves\TNT"
+		echo.
+	) else (
+		echo Final DOOM - TNT: Evilution - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Final DOOM\TNT\*.CFG" (
+		echo Final DOOM - TNT: Evilution - Restoring configuration
+		xcopy /i /y "Final DOOM\TNT\*.CFG" "%finaldoomrootdir%\cloud_saves\TNT"
+		echo.
+	) else (
+		echo Final DOOM - TNT: Evilution - Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem The Plutonium Experiment
+
+	rem Restore savegames
+	if exist "Final DOOM\PLUTONIA\*.DSG" (
+		echo Final DOOM - The Plutonium Experiment: Restoring savegames
+		xcopy /i /y "Final DOOM\PLUTONIA\*.DSG" "%finaldoomrootdir%\cloud_saves\PLUTONIA"
+		echo.
+	) else (
+		echo Final DOOM - The Plutonium Experiment: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Final DOOM\PLUTONIA\*.CFG" (
+		echo Final DOOM - The Plutonium Experiment: Restoring configuration
+		xcopy /i /y "Final DOOM\PLUTONIA\*.CFG" "%finaldoomrootdir%\cloud_saves\PLUTONIA"
+		echo.
+	) else (
+		echo Final DOOM - The Plutonium Experiment: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Final DOOM: Installation not found
+	echo.
+)
+
+echo Final DOOM: Done.
 echo.
 
 rem Firewatch
@@ -1895,6 +2310,104 @@ if exist "%hellbladerootdir%" (
 echo Hellblade - Senua's Sacrifice: Done.
 echo.
 
+rem Heretic: Shadow of the Serpent Riders
+rem GOG edition, DOSBox emulation
+
+set "hsotsrrootdir=%gamerootdir%\Heretic"
+
+rem Installation check
+if exist "%hsotsrrootdir%" (
+	rem Restore savegames
+	if exist "Heretic - Shadow of the Serpent Riders\Savegames\*.HSG" (
+		echo Heretic: Shadow of the Serpent Riders - Restoring savegames
+		xcopy /i /y "Heretic - Shadow of the Serpent Riders\Savegames\*.HSG" "%hsotsrrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Heretic: Shadow of the Serpent Riders - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Heretic - Shadow of the Serpent Riders\Configuration\*.CFG" (
+		echo Heretic: Shadow of the Serpent Riders - Restoring configuration files
+		xcopy /i /y "Heretic - Shadow of the Serpent Riders\Configuration\*.CFG" "%hsotsrrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Heretic: Shadow of the Serpent Riders - Configuration files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore temporary deathmatch file
+	if exist "Heretic - Shadow of the Serpent Riders\*.TMP" (
+		echo Heretic: Shadow of the Serpent Riders - Restoring temporary deathmatch file
+		xcopy /i /y "Heretic - Shadow of the Serpent Riders\*.TMP" "%hsotsrrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Heretic: Shadow of the Serpent Riders - Temporary deathmatch file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration file
+	if exist "Heretic - Shadow of the Serpent Riders\dosbox_heretic.conf" (
+		echo Heretic: Shadow of the Serpent Riders - Restoring DOSBox configuration file
+		xcopy /i /y "Heretic - Shadow of the Serpent Riders\dosbox_heretic.conf" "%hsotsrrootdir%"
+		echo.
+	) else (
+		echo Heretic: Shadow of the Serpent Riders - DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Heretic: Shadow of the Serpent Riders - Installation not found. Skipping...
+	echo.
+)
+
+echo Heretic: Shadow of the Serpent Riders - Done.
+echo.
+
+rem Heroes of Might and Magic
+rem GOG edition, DOSBox emulation
+
+set "homamrootdir=%gamerootdir%\HoMM"
+
+rem Installation check
+if exist "%homamrootdir%" (
+	rem Restore savegames
+	if exist "Heroes of Might and Magic\Savegames\GAMES\*" (
+		echo Heroes of Might and Magic: Restoring savegames
+		xcopy /i /y "Heroes of Might and Magic\Savegames\*" "%homamrootdir%\cloud_saves\GAMES"
+		echo.
+	) else (
+		echo Heroes of Might and Magic: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Heroes of Might and Magic\Configuration\*.CFG" (
+		echo Heroes of Might and Magic: Restoring configuration
+		xcopy /i /y "Heroes of Might and Magic\Configuration\*.CFG" "%homamrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Heroes of Might and Magic: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration
+	if exist "Heroes of Might and Magic\dosboxHOMM1.conf" (
+		echo Heroes of Might and Magic: Restoring DOSBox configuration
+		xcopy /i /y "Heroes of Might and Magic\dosboxHOMM1.conf" "%homamrootdir%"
+		echo.
+	) else (
+		echo Heroes of Might and Magic: DOSBox configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Heroes of Might and Magic: Installation not found. Skipping...
+	echo.
+)
+
+echo Heroes of Might and Magic: Done.
+echo.
+
 rem Heroine’s Quest: The Herald of Ragnarok
 
 set "hqthordir=%userprofile%\Saved Games\Heroine's Quest 1.2"
@@ -1921,10 +2434,169 @@ if exist "%hqthorrootdir%" (
 echo Heroine's Quest: The Herald of Ragnarok - Done.
 echo.
 
+rem Hexen: Beyond Heretic
+rem GOG edition, DOSBox emulation
+
+set "hexenrootdir=%gamerootdir%\HeXen"
+
+rem Installation check
+if exist "%hexenrootdir%" (
+	rem Restore savegames
+	if exist "Hexen - Beyond Heretic\Savegames\*.HXS" (
+		echo Hexen: Beyond Heretic - Restore savegames
+		xcopy /i /y "Hexen - Beyond Heretic\Savegames\*.HXS" "%hexenrootdir%\cloud_saves\HEXNDATA"
+		echo.
+	) else (
+		echo Hexen: Beyond Heretic - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Hexen - Beyond Heretic\Configuration\*.CFG" (
+		echo Hexen: Beyond Heretic - Restoring configuration files
+		xcopy /i /y "Hexen - Beyond Heretic\Configuration\*.CFG" "%hexenrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Hexen: Beyond Heretic - Configuration files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore temporary deathmatch file
+	if exist "Hexen - Beyond Heretic\*.TMP" (
+		echo Hexen: Beyond Heretic - Restoring temporary deathmatch file
+		xcopy /i /y "Hexen - Beyond Heretic\*.TMP" "%hexenrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Hexen: Beyond Heretic - Temporary deathmatch file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration
+	if exist "Hexen - Beyond Heretic\dosbox_hexen.conf" (
+		echo Hexen: Beyond Heretic - Restoring DOSBox configuration
+		xcopy /i /y "Hexen - Beyond Heretic\dosbox_hexen.conf" "%hexenrootdir%"
+		echo.
+	) else (
+		echo Hexen: Beyond Heretic - DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Hexen: Beyond Heretic - Installation not found. Skipping...
+	echo.
+)
+
+echo Hexen: Beyond Heretic - Done.
+echo.
+
+rem Hexen: Deathkings of the Dark Citadel
+rem GOG edition, DOSBox emulation
+
+set "hdotdcrootdir=%gamerootdir%\HeXenDK"
+
+rem Installation check
+if exist "%hdotdcrootdir%" (
+	rem Restore savegames
+	if exist "Hexen - Deathkings of the Dark Citadel\Savegames\*.HXS" (
+		echo Hexen: Deathkings of the Dark Citadel - Restoring savegames
+		xcopy /i /y "Hexen - Deathkings of the Dark Citadel\Savegames\*.HXS" "%hdotdcrootdir%\cloud_saves\HEXNDATA"
+		echo.
+	) else (
+		echo Hexen: Deathkings of the Dark Citadel - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Hexen - Deathkings of the Dark Citadel\Configuration\*.CFG" (
+		echo Hexen: Deathkings of the Dark Citadel - Restoring configuration files
+		xcopy /i /y "Hexen - Deathkings of the Dark Citadel\Configuration\*.CFG" "%hdotdcrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Hexen: Deathkings of the Dark Citadel - Configuration files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore temporary deathmatch file
+	if exist "Hexen - Deathkings of the Dark Citadel\*.TMP" (
+		echo Hexen: Deathkings of the Dark Citadel - Restoring temporary deathmatch file
+		xcopy /i /y "Hexen - Deathkings of the Dark Citadel\*.TMP" "%hdotdcrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Hexen: Deathkings of the Dark Citadel - Temporary deathmatch file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration
+	if exist "Hexen - Deathkings of the Dark Citadel\dosbox_hexenDK.conf" (
+		echo Hexen: Deathkings of the Dark Citadel - Restoring DOSBox configuration
+		xcopy /i /y "Hexen - Deathkings of the Dark Citadel\dosbox_hexenDK.conf" "%hdotdcrootdir%"
+		echo.
+	) else (
+		echo Hexen: Deathkings of the Dark Citadel - DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Hexen: Deathkings of the Dark Citadel - Installation not found. Skipping...
+	echo.
+)
+
+echo Hexen: Deathkings of the Dark Citadel - Done.
+echo.
+
+rem Hexen II
+
+set "hexen2rootdir=%gamerootdir%\HeXen II"
+
+rem Installation check
+if exist "%hexen2rootdir%" (
+	rem Restore savegames
+	if exist "Hexen II\Savegames" (
+		echo Hexen II: Restoring savegames
+		xcopy /e /i /y "Hexen II\Savegames\data1" "%hexen2rootdir%"
+		echo.
+	) else (
+		echo Hexen II: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Hexen II\Configuration\*.cfg" (
+		echo Hexen II: Restoring configuration files
+		xcopy /i /y "Hexen II\Configuration\*.cfg" "%hexen2rootdir%\data1"
+		echo.
+	) else (
+		echo Hexen II: Configuration files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Hexen II\hexen2.reg" (
+		echo Hexen II: Restoring registry key
+		reg import "Hexen II\hexen2.reg"
+		echo.
+	) else (
+		echo Hexen II: Registry key backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore nGlide registry key
+	if exist "Hexen II\h2-nglide.reg" (
+		echo Hexen II: Restoring nGlide registry key
+		reg import "Hexen II\h2-nglide.reg"
+		echo.
+	) else (
+		echo Hexen II: nGlide registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Hexen II: Installation not found. Skipping...
+	echo.
+)
+
+echo Hexen II: Done.
+echo.
+
 rem Hidden and Dangerous
 
-set "hadregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Take2\Hidden and Dangerous"
-set "hadregkeypath2=HKLM\SOFTWARE\WOW6432Node\Take2\Hidden and Dangerous"
 set "hadrootdir=%gamerootdir%\Hidden and Dangerous\HD"
 
 rem Installation check
@@ -1973,9 +2645,6 @@ echo.
 
 rem Hidden and Dangerous Deluxe
 
-set "haddregkeypath1=HKCU\SOFTWARE\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
-set "haddregkeypath2=HKCU\SOFTWARE\Insanity3D system"
-set "haddregkeypath3=HKLM\SOFTWARE\WOW6432Node\Lonely Cat Games\Hidden and Dangerous Deluxe"
 set "haddrootdir=%gamerootdir%\Hidden and Dangerous\HD Deluxe"
 
 rem Installation check
@@ -2154,6 +2823,220 @@ if exist "%hmrootdir%" (
 echo Hotline Miami Updated: Done.
 echo.
 
+rem I Have No Mouth, and I Must Scream
+rem GOG edition, ScummVM emulation
+
+set "ihnmaimsrootdir=%gamerootdir%\I Have No Mouth"
+
+rem Installation check
+if exist "%ihnmaimsrootdir%" (
+	rem Restore savegames
+	if exist "I Have No Mouth, and I Must Scream\Savegames\*.s*" (
+		echo I Have No Mouth, and I Must Scream: Restoring savegames
+		xcopy /i /y "I Have No Mouth, and I Must Scream\Savegames\*.s*" "%ihnmaimsrootdir%\saves"
+		echo.
+	) else (
+		echo I Have No Mouth, and I Must Scream: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "I Have No Mouth, and I Must Scream\ihnm.ini" (
+		echo I Have No Mouth, and I Must Scream: Restoring configuration
+		xcopy /i /y "I Have No Mouth, and I Must Scream\ihnm.ini" "%ihnmaimsrootdir%"
+		echo.
+	) else (
+		echo I Have No Mouth, and I Must Scream: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo I Have No Mouth, and I Must Scream: Installation not found. Skipping...
+	echo.
+)
+
+echo I Have No Mouth, and I Must Scream: Done.
+echo.
+
+rem Icewind Dale Complete
+
+set "idcrootdir=%gamerootdir%\Icewind Dale Complete"
+
+rem Installation check
+if exist "%idcrootdir%" (
+	rem Restore savegame folders
+	if exist "Icewind Dale Complete\Savegames" (
+		echo Icewind Dale Complete: Restoring savegame folders
+		xcopy /e /i /y "Icewind Dale Complete\Savegames" "%idcrootdir%\mpsave"
+		echo.
+	) else (
+		echo Icewind Dale Complete: Savegame folders not found. Skipping...
+		echo.
+	)
+
+	rem Restore characters
+	if exist "Icewind Dale Complete\Characters\*.CHR" (
+		echo Icewind Dale Complete: Restoring characters
+		xcopy /e /i /y "Icewind Dale Complete\Characters" "%idcrootdir%\Characters"
+		echo.
+	) else (
+		echo Icewind Dale Complete: Character files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Icewind Dale Complete\Configuration\icewind*" (
+		echo Icewind Dale Complete: Restoring configuration
+		xcopy /i /y "Icewind Dale Complete\Configuration\icewind*" "%idcrootdir%"
+		echo.
+	) else (
+		echo Icewind Dale Complete: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restoring keybinds
+	if exist "Icewind Dale Complete\Keybinds\Keymap*" (
+		echo Icewind Dale Complete: Restoring keybinds
+		xcopy /i /y "Icewind Dale Complete\Keybinds\Keymap*" "%idcrootdir%"
+		echo.
+	) else (
+		echo Icewind Dale Complete: Keybinds backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore cache
+	if exist "Icewind Dale Complete\Cache\*.bif" (
+		echo Icewind Dale Complete: Restoring cache
+		xcopy /i /y "Icewind Dale Complete\Cache\*.bif" "%idcrootdir%\Cache\Data"
+		echo.
+	) else (
+		echo Icewind Dale Complete: Cache backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry keys
+	if exist "Icewind Dale Complete\idc-1.reg" (
+		if exist "Icewind Dale Complete\idc-1.reg" (
+			if exist "Icewind Dale Complete\idc-1.reg" (
+				echo Icewind Dale Complete: Restoring registry keys
+				reg import "Icewind Dale Complete\idc-1.reg"
+				reg import "Icewind Dale Complete\idc-2.reg"
+				reg import "Icewind Dale Complete\idc-3.reg"
+				echo.
+			)
+		)
+	) else (
+		echo Icewind Dale Complete: Registry keys backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Icewind Dale Complete: Installation not found. Skipping...
+	echo.
+)
+
+echo Icewind Dale Complete: Done.
+echo.
+
+rem Indiana Jones and the Fate of Atlantis
+rem GOG edition, ScummVM emulation
+
+set "ijatfoarootdir=%gamerootdir%\Indiana Jones and the Fate of Atlantis"
+
+rem Installation check
+if exist "%ijatfoarootdir%" (
+	rem Restore savegames
+	if exist "Indiana Jones and the Fate of Atlantis\Savegames\*.s*" (
+		echo Indiana Jones and the Fate of Atlantis: Restoring savegames
+		xcopy /i /y "Indiana Jones and the Fate of Atlantis\Savegames\*.s*" "%ijatfoarootdir%\saves"
+		echo.
+	) else (
+		echo Indiana Jones and the Fate of Atlantis: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Indiana Jones and the Fate of Atlantis\atlantis.ini" (
+		echo Indiana Jones and the Fate of Atlantis: Restoring configuration
+		xcopy /i /y "Indiana Jones and the Fate of Atlantis\atlantis.ini" "%ijatfoarootdir%"
+		echo.
+	) else (
+		echo Indiana Jones and the Fate of Atlantis: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Indiana Jones and the Fate of Atlantis: Installation not found. Skipping...
+	echo.
+)
+
+echo Indiana Jones and the Fate of Atlantis: Done.
+echo.
+
+rem Indiana Jones and the Infernal Machine
+
+set "ijatimrootdir=%gamerootdir%\Infernal Machine"
+
+rem Installation check
+if exist "%ijatimrootdir%" (
+	rem Restore savegames
+	if exist "Indiana Jones and the Infernal Machine\Savegames\*.nds" (
+		echo Indiana Jones and the Infernal Machine: Restoring savegames
+		xcopy /i /y "Indiana Jones and the Infernal Machine\Savegames\*.nds" "%ijatimrootdir%\SaveGames"
+		echo.
+	) else (
+		echo Indiana Jones and the Infernal Machine: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Indiana Jones and the Infernal Machine\ijatim.reg" (
+		echo Indiana Jones and the Infernal Machine: Restoring registry key
+		reg import "Indiana Jones and the Infernal Machine\ijatim.reg"
+		echo.
+	) else (
+		echo Indiana Jones and the Infernal Machine: Registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Indiana Jones and the Infernal Machine: Installation not found. Skipping...
+	echo.
+)
+
+echo Indiana Jones and the Infernal Machine: Done.
+echo.
+
+rem Indiana Jones and the Last Crusade
+rem GOG edition, ScummVM emulation
+
+set "ijatlcrootdir=%gamerootdir%\Indiana Jones and The Last Crusade"
+
+rem Installation check
+if exist "%ijatlcrootdir%" (
+	rem Restore savegames
+	if exist "Indiana Jones and the Last Crusade\Savegames\*.s*" (
+		echo Indiana Jones and the Last Crusade: Restoring savegames
+		xcopy /i /y "Indiana Jones and the Last Crusade\Savegames\*.s*" "%ijatlcrootdir%\saves"
+		echo.
+	) else (
+		echo Indiana Jones and the Last Crusade: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Indiana Jones and the Last Crusade\last-crusade.ini" (
+		echo Indiana Jones and the Last Crusade: Restoring configuration
+		xcopy /i /y "Indiana Jones and the Last Crusade\last-crusade.ini" "%ijatlcrootdir%"
+		echo.
+	) else (
+		echo Indiana Jones and the Last Crusade: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Indiana Jones and the Last Crusade: Installation not found. Skipping...
+	echo.
+)
+
+echo Indiana Jones and the Last Crusade: Done.
+echo.
+
 rem Inkslinger
 
 set "inkslingerrootdir=%gamerootdir%\Inkslinger"
@@ -2241,6 +3124,139 @@ if exist "%jjrrootdir%" (
 echo Jazz Jackrabbit Collection: Done.
 echo.
 
+rem Jazz Jackrabbit 2
+
+set "jj2rootdir=%gamerootdir%\Jazz Jackrabbit 2"
+
+rem Installation check
+if exist "%jj2rootdir%" (
+	rem Restore savegames
+	if exist "Jazz Jackrabbit 2\SAVEGAME*" (
+		echo Jazz Jackrabbit 2: Restoring savegames
+		xcopy /i /y "Jazz Jackrabbit 2\SAVEGAME*" "%jj2rootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Jazz Jackrabbit 2\*.CFG" (
+		echo Jazz Jackrabbit 2: Restoring configuration
+		xcopy /i /y "Jazz Jackrabbit 2\*.CFG" "%jj2rootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore ‘Jazz Creation Station’ configuration
+	if exist "Jazz Jackrabbit 2\JCS.ini" (
+		echo Jazz Jackrabbit 2: Restoring Jazz Creation Station configuration
+		xcopy /i /y "Jazz Jackrabbit 2\JCS.ini" "%jj2rootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2: Jazz Creation Station configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry keys
+	if exist "Jazz Jackrabbit 2\jj2-1.reg" (
+		if exist "Jazz Jackrabbit 2\jj2-2.reg" (
+			if exist "Jazz Jackrabbit 2\jj2-3.reg" (
+				if exist "Jazz Jackrabbit 2\jj2-4.reg" (
+					if exist "Jazz Jackrabbit 2\jj2-5.reg" (
+						if exist "Jazz Jackrabbit 2\jj2-6.reg" (
+							if exist "Jazz Jackrabbit 2\jj2-7.reg" (
+								echo Jazz Jackrabbit 2: Restoring registry keys
+								reg import "Jazz Jackrabbit 2\jj2-1.reg"
+								reg import "Jazz Jackrabbit 2\jj2-2.reg"
+								reg import "Jazz Jackrabbit 2\jj2-3.reg"
+								reg import "Jazz Jackrabbit 2\jj2-4.reg"
+								reg import "Jazz Jackrabbit 2\jj2-5.reg"
+								reg import "Jazz Jackrabbit 2\jj2-6.reg"
+								reg import "Jazz Jackrabbit 2\jj2-7.reg"
+								echo.
+							)
+						)
+					)
+				)
+			)
+		)
+	) else (
+		echo Jazz Jackrabbit 2: Registry keys backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Jazz Jackrabbit 2: Installation not found. Skipping...
+	echo
+)
+
+echo Jazz Jackrabbit 2: Done.
+echo.
+
+rem Jazz Jackrabbit 2 - The Christmas Chronicles
+
+set "jj2tccrootdir=%gamerootdir%\Jazz Jackrabbit 2 CC"
+
+rem Installation check
+if exist "%jj2tccrootdir%" (
+	rem Restore savegames
+	if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\SAVEGAME*" (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Restoring savegames
+		xcopy /i /y "Jazz Jackrabbit 2 - The Christmas Chronicles\SAVEGAME*" "%jj2tccrootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\*.CFG" (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Restoring configuration
+		xcopy /i /y "Jazz Jackrabbit 2 - The Christmas Chronicles\*.CFG" "%jj2tccrootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore ‘Jazz Creation Station’ configuration
+	if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\Jcs.ini" (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Restoring Jazz Creation Station configuration
+		xcopy /i /y "Jazz Jackrabbit 2 - The Christmas Chronicles\Jcs.ini" "%jj2tccrootdir%"
+		echo.
+	) else (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Jazz Creation Station configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry keys
+	if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-1.reg" (
+		if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-2.reg" (
+			if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-3.reg" (
+				if exist "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-4.reg" (
+					echo Jazz Jackrabbit 2 - The Christmas Chronicles: Restoring registry keys
+					reg import "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-1.reg"
+					reg import "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-2.reg"
+					reg import "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-3.reg"
+					reg import "Jazz Jackrabbit 2 - The Christmas Chronicles\jj2tcc-4.reg"
+					echo.
+				)
+			)
+		)
+	) else (
+		echo Jazz Jackrabbit 2 - The Christmas Chronicles: Registry keys backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Jazz Jackrabbit 2 - The Christmas Chronicles: Installation not found. Skipping...
+	echo.
+)
+
+echo Jazz Jackrabbit 2 - The Christmas Chronicles: Done.
+echo.
+
 rem Jotun - Valhalla Edition
 
 set "jvelldir=%userprofile%\AppData\LocalLow\Thunder Lotus Games\Jotun"
@@ -2286,6 +3302,60 @@ if exist "%lamerzonerootdir%" (
 )
 
 echo L'Amerzone: Done.
+echo.
+
+rem Lands Of Lore - The Throne of Chaos
+rem GOG edition, DOSBox emulation
+
+set "lolttocrootdir=%gamerootdir%\Lands Of Lore"
+
+rem Installation check
+if exist "%lolttocrootdir%" (
+	rem Restore savegames
+	if exist "Lands Of Lore - The Throne of Chaos\Savegames\*.DAT" (
+		echo Lands Of Lore - The Throne of Chaos: Restoring savegames
+		xcopy /i /y "Lands Of Lore - The Throne of Chaos\Savegames\*.DAT" "%lolttocrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Lands Of Lore - The Throne of Chaos: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Lands Of Lore - The Throne of Chaos\Configuration\*.CFG" (
+		echo Lands Of Lore - The Throne of Chaos: Restoring configuration
+		xcopy /i /y "Lands Of Lore - The Throne of Chaos\Configuration\*.CFG" "%lolttocrootdir%\cloud_saves
+		echo.
+	) else (
+		echo Lands Of Lore - The Throne of Chaos: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore temporary level file
+	if exist "Lands Of Lore - The Throne of Chaos\*.TMP" (
+		echo Lands Of Lore - The Throne of Chaos: Restoring temporary level file
+		xcopy /i /y "Lands Of Lore - The Throne of Chaos\*.TMP" "%lolttocrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Lands Of Lore - The Throne of Chaos: Temporary level file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration
+	if exist "Lands Of Lore - The Throne of Chaos\dosboxLOL1.conf" (
+		echo Lands Of Lore - The Throne of Chaos: Restoring DOSBox configuration
+		xcopy /i /y "Lands Of Lore - The Throne of Chaos\dosboxLOL1.conf" "%lolttocrootdir%"
+		echo.
+	) else (
+		echo Lands Of Lore - The Throne of Chaos: DOSBox configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Lands Of Lore - The Throne of Chaos: Installation not found. Skipping...
+	echo.
+)
+
+echo Lands Of Lore - The Throne of Chaos: Done.
 echo.
 
 rem Layers of Fear
@@ -2412,21 +3482,33 @@ echo.
 rem Medal of Honor - Pacific Assault
 
 set "mohpadir=%userprofile%\Documents\EA Games\Medal of Honor Pacific Assault(tm)"
+set "mohparootdir=%gamerootdir%\Medal of Honor - Pacific Assault"
 
-rem Restore folder
-if exist "Medal of Honor - Pacific Assault" (
-	echo Medal of Honor - Pacific Assault: Restoring folder
-	xcopy /e /i /y "Medal of Honor - Pacific Assault" "%mohpadir%"
-	echo.
+rem Installation check
+if exist "%mohparootdir%" (
+	rem Restore folder
+	if exist "Medal of Honor - Pacific Assault" (
+		echo Medal of Honor - Pacific Assault: Restoring folder
+		xcopy /e /i /y "Medal of Honor - Pacific Assault" "%mohpadir%"
+		echo.
+	) else (
+		echo Medal of Honor - Pacific Assault: Folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Medal of Honor - Pacific Assault\mohpa.reg" (
+		echo Medal of Honor - Pacific Assault: Restoring registry key
+		reg import "Medal of Honor - Pacific Assault\mohpa.reg"
+		echo.
+	) else (
+		echo Medal of Honor - Pacific Assault: Registry key backup not found. Skipping...
+		echo.
+	)
 ) else (
-	echo Medal of Honor - Pacific Assault: Folder backup not found. Skipping...
+	echo Medal of Honor - Pacific Assault: Installation not found. Skipping...
 	echo.
 )
-
-rem Restore registry key
-echo Medal of Honor - Pacific Assault: Restoring registry key
-reg import "Medal of Honor - Pacific Assault\mohpa.reg"
-echo.
 
 echo Medal of Honor - Pacific Assault: Done.
 echo.
@@ -2726,20 +3808,33 @@ echo.
 rem Never Alone
 
 set "nadir=%userprofile%\AppData\LocalLow\E-Line Media\Never Alone"
+set "narootdir=%gamerootdir%\Never Alone"
 
-rem Restore savegame data
-if exist "Never Alone\*.dat" (
-	echo Never Alone: Restoring savegame
-	xcopy /i /y "Never Alone\*.dat" "%nadir%"
-	echo.
+rem Installation check
+if exist "%narootdir%" (
+	rem Restore savegame data
+	if exist "Never Alone\*.dat" (
+		echo Never Alone: Restoring savegame
+		xcopy /i /y "Never Alone\*.dat" "%nadir%"
+		echo.
+	) else (
+		echo Never Alone: Savegame backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Never Alone\na.reg" (
+		echo Never Alone: Restoring registry key
+		reg import "Never Alone\na.reg"
+		echo.
+	) else (
+		echo Never Alone: Registry key backup not found. Skipping...
+		echo.
+	)
 ) else (
-	echo Never Alone: Savegame backup not found. Skipping...
+	echo Never Alone: Installation not found. Skipping...
 	echo.
 )
-
-rem Restore registry key
-echo Never Alone: Restoring registry key
-reg import "Never Alone\na.reg"
 
 echo Never Alone: Done.
 echo.
@@ -3442,6 +4537,117 @@ if exist "%postalreduxdir%" (
 echo POSTAL Redux: Done.
 echo.
 
+rem Quake
+
+set "q1rootdir=%gamerootdir%\Quake"
+
+rem Installation check
+if exist "%q1rootdir%" (
+	rem Restore savegames
+	if exist "Quake\*.SAV" (
+		echo Quake: Restoring savegames
+		xcopy /i /y "Quake\*.SAV" "%q1rootdir%\id1"
+		echo.
+	) else (
+		echo Quake: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Quake\*.cfg" (
+		echo Quake: Restoring configuration files
+		xcopy /i /y "Quake\*.cfg" "%q1rootdir%\id1"
+		echo.
+	) else (
+		echo Quake: Configuration files backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Quake: Installation not found. Skipping...
+	echo.
+)
+
+rem Quake mission pack: Scourge of Armagon
+
+rem Installation check
+if exist "%q1rootdir%\hipnotic" (
+	rem Restore savegames
+	if exist "Quake - Scourge of Armagon\*.SAV" (
+		echo Quake mission pack: Scourge of Armagon - Restoring savegames
+		xcopy /i /y "Quake - Scourge of Armagon\*.SAV" "%q1rootdir%\hipnotic"
+		echo.
+	) else (
+		echo Quake mission pack: Scourge of Armagon - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Quake - Scourge of Armagon\*.cfg" (
+		echo Quake mission pack: Scourge of Armagon - Restoring configuration files
+		xcopy /i /y "Quake - Scourge of Armagon\*.cfg" "%q1rootdir%\hipnotic"
+		echo.
+	) else (
+		echo Quake mission pack: Scourge of Armagon - Configuration files backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Quake mission pack: Scourge of Armagon - Installation not found. Skipping...
+	echo.
+)
+
+rem Quake mission pack 2: Dissolution of Eternity
+
+rem Installation check
+if exist "%q1rootdir%\rogue" (
+	rem Restore savegames
+	if exist "Quake - Dissolution of Eternity\*.SAV" (
+		echo Quake mission pack 2: Dissolution of Eternity - Restoring savegames
+		xcopy /i /y "Quake - Dissolution of Eternity\*.SAV" "%q1rootdir%\rogue"
+		echo.
+	) else (
+		echo Quake mission pack 2: Dissolution of Eternity - Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration files
+	if exist "Quake - Dissolution of Eternity\*.CFG" (
+		echo Quake mission pack 2: Dissolution of Eternity - Restoring configuration files
+		xcopy /i /y "Quake - Dissolution of Eternity\*.CFG" "%q1rootdir%\rogue"
+		echo.
+	) else (
+		echo Quake mission pack 2: Dissolution of Eternity - Configuration files backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Quake mission pack 2: Dissolution of Eternity - Installation not found. Skipping...
+	echo.
+)
+
+rem QuakeWorld
+
+rem Restore configuration files
+if exist "QuakeWorld\*.cfg" (
+	echo QuakeWorld: Restoring configuration files
+	xcopy /i /y "QuakeWorld\*.cfg" "%q1rootdir%\qw"
+	echo.
+) else (
+	echo QuakeWorld: Configuration files backup not found. Skipping...
+	echo.
+)
+
+rem Restore registry key for nGlide configuration
+if exist "Quake\q1-nglide.reg" (
+	echo Quake: Restoring nGlide configuration registry key
+	reg import "Quake\q1-nglide.reg"
+	echo.
+) else (
+	echo Quake: nGlide configuration registry key backup not found. Skipping...
+	echo.
+)
+
+echo Quake: Done.
+echo.
+
 rem Quake II
 
 set "q2rootdir=%gamerootdir%\Quake II"
@@ -3681,6 +4887,123 @@ if exist "%rotmrootdir%" (
 echo Ritual of the Moon: Done.
 echo.
 
+rem RollerCoaster Tycoon Deluxe
+
+set "rctdrootdir=%gamerootdir%\RollerCoaster Tycoon Deluxe"
+
+rem Installation check
+if exist "%rctdrootdir%" (
+	rem Restore savegames
+	if exist "RollerCoaster Tycoon Deluxe\Savegames\*.SV4" (
+		echo RollerCoaster Tycoon Deluxe: Restoring savegames
+		xcopy /i /y "RollerCoaster Tycoon Deluxe\Savegames\*.SV4" "%rctdrootdir%\Saved Games"
+		echo.
+	) else (
+		echo RollerCoaster Tycoon Deluxe: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "RollerCoaster Tycoon Deluxe\Data\*.cfg" (
+		echo RollerCoaster Tycoon Deluxe: Restoring configuration
+		xcopy /i /y "RollerCoaster Tycoon Deluxe\Data\*.cfg" "%rctdrootdir%\Data"
+		echo.
+	) else (
+		echo RollerCoaster Tycoon Deluxe: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore screenshots
+	if exist "RollerCoaster Tycoon Deluxe\Screenshots\*.PCX" (
+		echo RollerCoaster Tycoon Deluxe: Restoring screenshots
+		xcopy /i /y "RollerCoaster Tycoon Deluxe\Screenshots\*.PCX" "%rctdrootdir%"
+		echo.
+	) else (
+		echo RollerCoaster Tycoon Deluxe: Screenshots backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore CSS0.DAT file
+	if exist "RollerCoaster Tycoon Deluxe\Data\CSS0.DAT" (
+		echo RollerCoaster Tycoon Deluxe: Restoring CSS0.DAT
+		xcopy /i /y "RollerCoaster Tycoon Deluxe\Data\CSS0.DAT" "%rctdrootdir%\Data"
+		echo.
+	) else (
+		echo RollerCoaster Tycoon Deluxe: CSS0.DAT backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "RollerCoaster Tycoon Deluxe\rctd.reg" (
+		echo RollerCoaster Tycoon Deluxe: Restoring registry key
+		reg import "RollerCoaster Tycoon Deluxe\rctd.reg"
+		echo.
+	) else (
+		echo RollerCoaster Tycoon Deluxe: Registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo RollerCoaster Tycoon Deluxe: Installation not found. Skipping...
+	echo.
+)
+
+echo RollerCoaster Tycoon Deluxe: Done.
+echo.
+
+rem Runo
+
+set "runolldir=%userprofile%\AppData\LocalLow\Kratti\Runo"
+set "runorootdir=%gamerootdir%\Runo"
+
+rem Installation check
+if exist "%runorootdir%" (
+	rem Restore options file
+	if exist "Runo\*.dat" (
+		echo Runo: Restoring game options file
+		xcopy /i /y "Runo\*.dat" "%runolldir%"
+		echo.
+	) else (
+		echo Runo: Game options file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore core.dat
+	if exist "Runo\full\*.dat" (
+		echo Runo: Restoring core.dat
+		xcopy /i /y "Runo\full\*.dat" "%runolldir%\full"
+		echo.
+	) else (
+		echo Runo: core.dat backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore photos
+	if exist "Runo\Photos\*.png" (
+		echo Runo: Restoring photos
+		xcopy /i /y "Runo\Photos\*.png" "%runolldir%"
+		echo.
+	) else (
+		echo Runo: Photos backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry key
+	if exist "Runo\runo.reg" (
+		echo Runo: Restoring registry key
+		reg import "Runo\runo.reg"
+		echo.
+	) else (
+		echo Runo: Registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Runo: Installation not found. Skipping...
+	echo.
+)
+
+echo Runo: Done.
+echo.
+
 rem S.T.A.L.K.E.R. Чистое Небо
 rem English title: S.T.A.L.K.E.R. Clear Sky
 
@@ -3879,6 +5202,112 @@ if exist "%sstferootdir%" (
 echo Serious Sam: The First Encounter: Done.
 echo.
 
+rem Serious Sam: The Second Encounter
+
+set "sstserootdir=%gamerootdir%\Serious Sam The Second Encounter"
+
+rem Installation check
+if exist "%sstserootdir%" (
+	rem Restore savegame files
+	if exist "Serious Sam - The Second Encounter\SaveGame" (
+		echo Serious Sam: The Second Encounter - Restoring savegame files
+		xcopy /e /i /y "Serious Sam - The Second Encounter\SaveGame" "%sstserootdir%\SaveGame"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - SaveGame folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore demos
+	if exist "Serious Sam - The Second Encounter\Demos\Demo*" (
+		echo Serious Sam: The Second Encounter - Restoring demos
+		xcopy /i /y "Serious Sam - The Second Encounter\Demos\Demo*" "%sstserootdir%\Demos"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - Demos backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore temporary demos
+	if exist "Serious Sam - The Second Encounter\Temporary demos\*.dem" (
+		echo Serious Sam: The Second Encounter - Restoring temporary demos
+		xcopy /i /y "Serious Sam - The Second Encounter\Temporary demos\*.dem" "%sstserootdir%\Temp"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - Temporary demos backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore screenshots
+	if exist "Serious Sam - The Second Encounter\Screenshots\*.tga" (
+		echo Serious Sam: The Second Encounter - Restoring screenshots
+		xcopy /i /y "Serious Sam - The Second Encounter\Screenshots\*.tga" "%sstserootdir%\ScreenShots"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - Screenshots backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore persistent symbols file, which contains setting values
+	if exist "Serious Sam - The Second Encounter\Scripts\PersistentSymbols.ini" (
+		echo Serious Sam: The Second Encounter - Restoring persistent symbols file
+		copy "Serious Sam - The Second Encounter\Scripts\PersistentSymbols.ini" "%sstserootdir%\Scripts"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - Persistent symbols file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore control files
+	if exist "Serious Sam - The Second Encounter\Controls\Controls*" (
+		echo Serious Sam: The Second Encounter - Restoring control files
+		xcopy /i /y "Serious Sam - The Second Encounter\Controls\Controls*" "%sstserootdir%\Controls"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - Control files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore .plr files
+	if exist "Serious Sam - The Second Encounter\Players\*.plr" (
+		echo Serious Sam: The Second Encounter - Restoring .plr files
+		xcopy /i /y "Serious Sam - The Second Encounter\Players\*.plr" "%sstserootdir%\Players"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - .plr files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore SeriousSkaStudio files
+	if exist "Serious Sam - The Second Encounter\SeriousSkaStudio\*.smc" (
+		echo Serious Sam: The Second Encounter - Restoring SeriousSkaStudio files
+		xcopy /i /y "Serious Sam - The Second Encounter\SeriousSkaStudio\*" "%sstserootdir%"
+		echo.
+	) else (
+		echo Serious Sam: The Second Encounter - SeriousSkaStudio files backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore registry keys
+	if exist "Serious Sam - The Second Encounter\sstse-1.reg" (
+		if exist "Serious Sam - The Second Encounter\sstse-2.reg" (
+			echo Serious Sam: The Second Encounter - Restoring registry keys
+			reg import "Serious Sam - The Second Encounter\sstse-1.reg"
+			reg import "Serious Sam - The Second Encounter\sstse-2.reg"
+			echo.
+		)
+	) else (
+		echo Serious Sam: The Second Encounter - Registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Serious Sam: The Second Encounter - Installation not found. Skipping...
+	echo.
+)
+
+echo Serious Sam: The Second Encounter - Done.
+echo.
+
 rem Sludge Life
 
 set "sludgeliferootdir=%gamerootdir%\Sludge Life"
@@ -3923,8 +5352,6 @@ echo.
 
 rem Soldiers: Heroes of World War II
 
-set "showw2regkeypath1=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers"
-set "showw2regkeypath2=HKLM\SOFTWARE\WOW6432Node\Codemasters\Soldiers - Heroes of World War II"
 set "showw2rootdir=%gamerootdir%\Soldiers - Heroes of World War II"
 
 rem Installation check
@@ -4066,6 +5493,122 @@ if exist "%suddenstrikerootdir%" (
 echo Sudden Strike: Done.
 echo.
 
+rem Sudden Strike - Resource War
+
+set "ssrwrootdir=%gamerootdir%\Sudden Strike Resource War"
+
+rem Installation check
+if exist "%ssrwrootdir%" (
+	rem Restore savegames folder
+	if exist "Sudden Strike - Resource War\Savegames" (
+		echo Sudden Strike - Resource War: Restoring savegames folder
+		xcopy /e /i /y "Sudden Strike - Resource War\Savegames" "%ssrwrootdir%\plr\savegames"
+		echo.
+	) else (
+		echo Sudden Strike - Resource War: Savegames folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Sudden Strike - Resource War\sudtest.ini" (
+		echo Sudden Strike - Resource War: Restoring configuration
+		xcopy /i /y "Sudden Strike - Resource War\sudtest.ini" "%ssrwrootdir%"
+		echo.
+	) else (
+		echo Sudden Strike - Resource War: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore edit3 maps
+	if exist "Sudden Strike - Resource War\Maps" (
+		echo Sudden Strike - Resource War: Restoring edit3 maps folder
+		xcopy /e /i /y "Sudden Strike - Resource War\Maps" "%ssrwrootdir%\maps.src"
+		echo.
+	) else (
+		echo Sudden Strike - Resource War: edit3 maps folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore edit3 configuration
+	if exist "Sudden Strike - Resource War\Edit3.ini" (
+		echo Sudden Strike - Resource War: Restoring edit3 configuration
+		xcopy /i /y "Sudden Strike - Resource War\Edit3.ini" "%ssrwrootdir%"
+		echo.
+	) else (
+		echo Sudden Strike - Resource War: edit3 configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Sudden Strike - Resource War: Installation not found. Skipping...
+	echo.
+)
+
+echo Sudden Strike - Resource War: Done.
+echo.
+
+rem Sudden Strike II
+
+set "suddenstrike2rootdir=%gamerootdir%\Sudden Strike 2"
+
+rem Installation check
+if exist "%suddenstrike2rootdir%" (
+	rem Restore savegames folder
+	if exist "Sudden Strike II\Savegames" (
+		echo Sudden Strike II: Restoring savegames folder
+		xcopy /e /i /y "Sudden Strike II\Savegames" "%suddenstrike2rootdir%\plr\savegames"
+		echo.
+	) else (
+		echo Sudden Strike II: Savegames folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "Sudden Strike II\sudtest.ini" (
+		echo Sudden Strike II: Restoring configuration
+		xcopy /i /y "Sudden Strike II\sudtest.ini" "%suddenstrike2rootdir%"
+		echo.
+	) else (
+		echo Sudden Strike II: Configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore edit3 maps
+	if exist "Sudden Strike II\Maps" (
+		echo Sudden Strike II: Restoring edit3 maps folder
+		xcopy /e /i /y "Sudden Strike II\Maps" "%suddenstrike2rootdir%\maps.src"
+		echo.
+	) else (
+		echo Sudden Strike II: edit3 maps folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore edit3 configuration
+	if exist "Sudden Strike II\Edit3.ini" (
+		echo Sudden Strike II: Restoring edit3 configuration
+		xcopy /i /y "Sudden Strike II\Edit3.ini" "%suddenstrike2rootdir%"
+		echo.
+	) else (
+		echo Sudden Strike II: edit3 configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore edit3 registry key
+	if exist "Sudden Strike II\ss2-edit3.reg" (
+		echo Sudden Strike II: Restoring edit3 registry key
+		reg import "Sudden Strike II\ss2-edit3.reg"
+		echo.
+	) else (
+		echo Sudden Strike II: edit3 registry key backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Sudden Strike II: Installation not found. Skipping...
+	echo.
+)
+
+echo Sudden Strike II: Done.
+echo.
+
 rem Sunless Sea
 
 set "sunlesslldir=%userprofile%\AppData\LocalLow\Failbetter Games\Sunless Sea"
@@ -4192,6 +5735,77 @@ if exist "%syb2rootdir%" (
 echo Syberia II: Done.
 echo.
 
+rem System Shock
+rem GOG edition, DOSBox emulation
+rem
+rem Known as ‘System Shock - Classic Edition’
+
+set "sscerootdir=%gamerootdir%\System Shock - Classic Edition"
+
+rem Installation check
+if exist "%sscerootdir%" (
+	rem Restore savegames
+	if exist "System Shock - Classic Edition\Savegames\SAVGAM*" (
+		echo System Shock - Classic Edition: Restoring savegames
+		xcopy /i /y "System Shock - Classic Edition\Savegames\CURRSAVE*" "%sscerootdir%\SSHOCK\DATA"
+		xcopy /i /y "System Shock - Classic Edition\Savegames\SAVGAM*" "%sscerootdir%\SSHOCK\DATA"
+		echo.
+	) else (
+		echo System Shock - Classic Edition: Savegames backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore configuration
+	if exist "System Shock - Classic Edition\Configuration\CYB*" (
+		echo System Shock - Classic Edition: Restoring configuration
+		xcopy /i /y "System Shock - Classic Edition\Configuration\CYB*" "%sscerootdir%\SSHOCK"
+		echo.
+	) else (
+		echo System Shock - Classic Edition: Configuration backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo System Shock - Classic Edition: Installation not found. Skipping...
+	echo.
+)
+
+echo System Shock - Classic Edition: Done.
+echo.
+
+rem Terraria
+
+set "terrariadir=%userprofile%\Documents\My Games\Terraria"
+set "terrariarootdir=%gamerootdir%\Terraria"
+
+rem Installation check
+if exist "%terrariarootdir%" (
+	rem Restore Terraria folder
+	if exist "Terraria\Terraria" (
+		echo Terraria: Restoring Terraria folder
+		xcopy /e /i /y "Terraria\Terraria" "%terrariadir%"
+		echo.
+	) else (
+		echo Terraria: Terraria folder backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore ban list
+	if exist "Terraria\banlist.txt" (
+		echo Terraria: Restoring ban list
+		xcopy /i /y "Terraria\banlist.txt" "%terrariarootdir%"
+		echo.
+	) else (
+		echo Terraria: Ban list backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Terraria: Installation not found. Skipping...
+	echo.
+)
+
+echo Terraria: Done.
+echo.
+
 rem The Alto Collection
 
 set "tacrootdir=%gamerootdir%\The Alto Collection"
@@ -4237,6 +5851,40 @@ if exist "%tclrootdir%" (
 )
 
 echo The Cat Lady: Done.
+echo.
+
+rem The Elder Scrolls: Arena
+rem GOG edition, DOSBox emulation
+
+set "tesarenarootdir=%gamerootdir%\Arena"
+
+rem Installation check
+if exist "%tesarenarootdir%" (
+	rem Restore data
+	if exist "The Elder Scrolls - Arena\*" (
+		echo The Elder Scrolls: Arena - Restoring data
+		xcopy /i /y "The Elder Scrolls - Arena\*" "%tesarenarootdir%\cloud_saves"
+		echo.
+	) else (
+		echo The Elder Scrolls: Arena - Data backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration file
+	if exist "The Elder Scrolls - Arena\dosbox_arena.conf" (
+		echo The Elder Scrolls: Arena - Restoring DOSBox configuration file
+		xcopy /i /y "The Elder Scrolls - Arena\dosbox_arena.conf" "%tesarenarootdir%"
+		echo.
+	) else (
+		echo The Elder Scrolls: Arena - DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo The Elder Scrolls: Arena - Installation not found. Skipping...
+	echo.
+)
+
+echo The Elder Scrolls: Arena - Done.
 echo.
 
 rem The Elder Scrolls III: Morrowind
@@ -4328,7 +5976,6 @@ echo.
 
 rem The Longest Journey
 
-set "tljregpath=HKCU\SOFTWARE\Paper Sun\Roots"
 set "tljrootdir=%gamerootdir%\The Longest Journey"
 
 rem Installation check
@@ -4372,8 +6019,6 @@ echo.
 
 rem The Mystery of the Druids
 
-set "tmotdregpath1=HKCU\SOFTWARE\House of Tales\Mystery of the Druids"
-set "tmotdregpath2=HKCU\SOFTWARE\House of Tales\The Mystery of the Druids"
 set "tmotdrootdir=%gamerootdir%\The Mystery of the Druids"
 
 rem Installation check
@@ -4489,7 +6134,6 @@ echo.
 
 rem Through the Woods
 
-set "ttwregpath=HKCU\SOFTWARE\Antagonist\ThroughTheWoods"
 set "ttwrootdir=%gamerootdir%\Through the Woods"
 
 rem Installation check
@@ -5115,6 +6759,96 @@ if exist "%warootdir%" (
 )
 
 echo Worms Armageddon: Done.
+echo.
+
+rem Worms
+rem GOG edition, DOSBox emulation
+rem
+rem Known as ‘Worms United’
+
+set "wormsrootdir=%gamerootdir%\Worms United"
+
+rem Installation check
+if exist "%wormsrootdir%" (
+	rem Restore configuration file
+	if exist "Worms\*.CFG" (
+		echo Worms: Restoring configuration file
+		xcopy /i /y "Worms\*.CFG" "%wormsrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo Worms: Configuration file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration file
+	if exist "Worms\dosboxWORMS.conf" (
+		echo Worms: Restoring DOSBox configuration file
+		xcopy /i /y "Worms\dosboxWORMS.conf" "%wormsrootdir%"
+		echo.
+	) else (
+		echo Worms: DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo Worms: Installation not found. Skipping...
+	echo.
+)
+
+echo Worms: Done.
+echo.
+
+rem X-COM: UFO Defense
+rem GOG edition, DOSBox emulation
+
+set "xcudrootdir=%gamerootdir%\X-COM UFO Defense"
+
+rem Installation check
+if exist "%xcudrootdir%" (
+	rem Restore savegame folders
+	if exist "X-COM - UFO Defense\Savegames" (
+		echo X-COM: UFO Defense - Restoring savegame folders
+		xcopy /e /i /y "X-COM - UFO Defense\Savegames" "%xcudrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo X-COM: UFO Defense - Savegame folders backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore SOUND folder
+	if exist "X-COM - UFO Defense\SOUND\*.CFG" (
+		echo X-COM: UFO Defense - Restoring SOUND folder
+		xcopy /e /i /y "X-COM - UFO Defense\SOUND" "%xcudrootdir%\cloud_saves\SOUND"
+		echo.
+	) else (
+		echo X-COM: UFO Defense - Sound configuration backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore MVOL.DAT file
+	if exist "X-COM - UFO Defense\*.DAT" (
+		echo X-COM: UFO Defense - Restoring MVOL.DAT file
+		xcopy /i /y "X-COM - UFO Defense\*.DAT" "%xcudrootdir%\cloud_saves"
+		echo.
+	) else (
+		echo X-COM: UFO Defense - MVOL.DAT file backup not found. Skipping...
+		echo.
+	)
+
+	rem Restore DOSBox configuration file
+	if exist "X-COM - UFO Defense\dosbox_xcomud.conf" (
+		echo X-COM: UFO Defense - Restoring DOSBox configuration file
+		xcopy /i /y "X-COM - UFO Defense\dosbox_xcomud.conf" "%xcudrootdir%"
+		echo.
+	) else (
+		echo X-COM: UFO Defense - DOSBox configuration file backup not found. Skipping...
+		echo.
+	)
+) else (
+	echo X-COM: UFO Defense - Installation not found. Skipping...
+	echo.
+)
+
+echo X-COM: UFO Defense - Done.
 echo.
 
 rem XIII
