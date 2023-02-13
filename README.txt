@@ -27,6 +27,12 @@ external hard drive, isolated from the operating system.
 To see which games are currently supported, please read the SUPPORTED.txt
 document. This project was tested on Windows 10 64-bit.
 
+Integrity checking
+
+To easily check the integrity of the files located in this repository on
+Linux, simply issue the command:
+‘sha512sum -c SHA512SUMS.txt’
+
 Quick start guide
 
 1. Go offline. Do this by any method of your choice. Either use a physical

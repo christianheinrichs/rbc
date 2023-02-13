@@ -1,7 +1,7 @@
 @echo off
 
 rem rbc: Gamestate backup script
-rem Last modified on 16 April 2022
+rem Last modified on 13 February 2023
 
 rem This script should backup profiles, settings and savegames, which are
 rem herein collectively referred to as gamestate.
@@ -164,10 +164,10 @@ rem Amnesia: A Machine For Pigs
 
 set "aamfpdir=%userprofile%\Documents\Amnesia\Pig"
 
-rem Backup Amnesia\Pig folder
+rem Backup Amnesia\Pig folder with the exclusion of two log files
 if exist "%aamfpdir%" (
 	echo Amnesia: A Machine For Pigs - Backing up profile folder, first start flag and main settings
-	xcopy /e /exclude:exclude.txt /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
+	xcopy /e /exclude:exclude\aamfp-exclude.txt /i /y "%aamfpdir%" "Amnesia - A Machine for Pigs"
 	echo.
 ) else (
 	echo Amnesia: A Machine For Pigs - Folder not found. Skipping...
@@ -181,10 +181,10 @@ rem Amnesia: The Dark Descent
 
 set "atdddir=%userprofile%\Documents\Amnesia\Main"
 
-rem Backup Amnesia\Main folder
+rem Backup Amnesia\Main folder with the exclusion of two log files
 if exist "%atdddir%" (
 	echo Amnesia: The Dark Descent - Backing up profile folder, first start flag and main settings
-	xcopy /e /exclude:exclude.txt /i /y "%atdddir%" "Amnesia - The Dark Descent"
+	xcopy /e /exclude:exclude\atdd-exclude.txt /i /y "%atdddir%" "Amnesia - The Dark Descent"
 	echo.
 ) else (
 	echo Amnesia: The Dark Descent - Folder not found. Skipping...
@@ -1134,10 +1134,10 @@ rem GOG edition, DOSBox emulation
 
 set "diesiedler2rootdir=%gamerootdir%\The Settlers 2 GOLD"
 
-rem Backup .DAT save files
+rem Backup .DAT save files with the exclusion of MISSION.DAT
 if exist "%diesiedler2rootdir%\SAVE\*.DAT" (
 	echo Die Siedler II - Gold Edition: Backing up .DAT save files
-	xcopy /exclude:exclude.txt /i /y "%diesiedler2rootdir%\SAVE\*.DAT" "Die Siedler II - Gold Edition\SAVE"
+	xcopy /exclude:exclude\ds2-exclude.txt /i /y "%diesiedler2rootdir%\SAVE\*.DAT" "Die Siedler II - Gold Edition\SAVE"
 	echo.
 ) else (
 	echo Die Siedler II - Gold Edition: .DAT save files not found. Skipping...
@@ -2123,7 +2123,7 @@ set "hexen2rootdir=%gamerootdir%\HeXen II"
 rem Backup savegames
 if exist "%hexen2rootdir%\data1" (
 	echo Hexen II: Backing up savegames
-	xcopy /e /exclude:h2-exclude.txt /i /y "%hexen2rootdir%\data1" "Hexen II\Savegames"
+	xcopy /e /exclude:exclude\h2-exclude.txt /i /y "%hexen2rootdir%\data1" "Hexen II\Savegames"
 	echo.
 ) else (
 	echo Hexen II: Savegames not found. Skipping...
@@ -2348,7 +2348,7 @@ rem Backup configuration and save data
 if exist "%hmudir%\*.cfg" (
 	if exist "%hmudir%\*.sav" (
 		echo Hotline Miami Updated: Backing up configuration and save data
-		xcopy /e /exclude:exclude.txt /i /y "%hmudir%" "Hotline Miami Updated"
+		xcopy /e /exclude:exclude\hmu-exclude.txt /i /y "%hmudir%" "Hotline Miami Updated"
 		echo.
 	)
 ) else (
@@ -3365,7 +3365,7 @@ set "pbpdir=%userprofile%\Documents\Penumbra\Black Plague"
 rem Backup keybinds, savegames and settings
 if exist "%pbpdir%" (
 	echo Penumbra: Black Plague - Backing up keybinds, savegames and settings
-	xcopy /e /exclude:exclude.txt /i /y "%pbpdir%" "Penumbra - Black Plague"
+	xcopy /e /exclude:exclude\pbp-exclude.txt /i /y "%pbpdir%" "Penumbra - Black Plague"
 	echo.
 ) else (
 	echo Penumbra: Black Plague - Folder not found. Skipping...
@@ -3382,7 +3382,7 @@ set "poverturedir=%userprofile%\Documents\Penumbra Overture"
 rem Backup keybinds, savegames and settings
 if exist "%poverturedir%" (
 	echo Penumbra: Overture - Backing up keybinds, settings and savegames
-	xcopy /e /exclude:exclude.txt /i /y "%poverturedir%" "Penumbra - Overture"
+	xcopy /e /exclude:exclude\pot-exclude.txt /i /y "%poverturedir%" "Penumbra - Overture"
 	echo.
 ) else (
 	echo Penumbra: Overture - Folder not found. Skipping...
@@ -3398,7 +3398,7 @@ set "prequiemdir=%userprofile%\Documents\Penumbra\Requiem"
 rem Backup keybinds, savegames and settings
 if exist "%prequiemdir%" (
 	echo Penumbra: Requiem - Backing up keybinds, savegames and settings
-	xcopy /e /exclude:exclude.txt /i /y "%prequiemdir%" "Penumbra - Requiem"
+	xcopy /e /exclude:exclude\prq-exclude.txt /i /y "%prequiemdir%" "Penumbra - Requiem"
 	echo.
 ) else (
 	echo Penumbra: Requiem - Folder not found. Skipping...
@@ -4518,10 +4518,10 @@ rem SOMA
 
 set "somadir=%userprofile%\Documents\My Games\Soma"
 
-rem Backup Soma\Main folder
+rem Backup Soma\Main folder with the exception of log files
 if exist "%somadir%" (
 	echo SOMA: Backing up profile folder, first start flag and main settings
-	xcopy /e /exclude:exclude.txt /i /y "%somadir%" "SOMA"
+	xcopy /e /exclude:exclude\soma-exclude.txt /i /y "%somadir%" "SOMA"
 	echo.
 ) else (
 	echo SOMA: Folder not found. Skipping...
@@ -4610,7 +4610,7 @@ set "ssrwrootdir=%gamerootdir%\Sudden Strike Resource War"
 rem Backup savegames folder
 if exist "%ssrwrootdir%\plr\savegames" (
 	echo Sudden Strike - Resource War: Backing up savegames folder
-	xcopy /e /exclude:exclude.txt /i /y "%ssrwrootdir%\plr\savegames" "Sudden Strike - Resource War\Savegames"
+	xcopy /e /exclude:exclude\ssrw-exclude.txt /i /y "%ssrwrootdir%\plr\savegames" "Sudden Strike - Resource War\Savegames"
 	echo.
 ) else (
 	echo Sudden Strike - Resource War: Savegames folder not found. Skipping...
@@ -4658,7 +4658,7 @@ set "suddenstrike2rootdir=%gamerootdir%\Sudden Strike 2"
 rem Backup savegames folder
 if exist "%suddenstrike2rootdir%\plr\savegames" (
 	echo Sudden Strike II: Backing up savegames folder
-	xcopy /e /exclude:exclude.txt /i /y "%suddenstrike2rootdir%\plr\savegames" "Sudden Strike II\Savegames"
+	xcopy /e /exclude:exclude\ss2-exclude.txt /i /y "%suddenstrike2rootdir%\plr\savegames" "Sudden Strike II\Savegames"
 	echo.
 ) else (
 	echo Sudden Strike II: Savegames folder not found. Skipping...
@@ -4714,7 +4714,7 @@ if exist "%sunlesslldir%" (
 	rem For some reason, the /l argument makes the process of copying over 3000
 	rem files much faster. This is caused by the backing up of the icons in the
 	rem ‘images’ folder.
-	xcopy /e /exclude:exclude.txt /i /l /y "%sunlesslldir%" "Sunless Sea\LocalLow"
+	xcopy /e /exclude:exclude\sunless-exclude.txt /i /l /y "%sunlesslldir%" "Sunless Sea\LocalLow"
 	echo.
 ) else (
 	echo Sunless Sea: LocalLow folder not found. Skipping...
@@ -4734,10 +4734,11 @@ set "supertuxdir=%appdata%\SuperTux"
 
 rem Backup SuperTux folder structure with the exception of the console error
 rem file and the console output file. Effectively, this should backup the
-rem configuration file, profile folders containing savegames and addons
+rem configuration file, profile folders containing savegames, addons and level
+rem editor files
 if exist "%supertuxdir%" (
 	echo SuperTux: Backing up folder
-	xcopy /e /exclude:exclude.txt /i /y "%supertuxdir%" "SuperTux"
+	xcopy /e /exclude:exclude\supertux-exclude.txt /i /y "%supertuxdir%" "SuperTux"
 	echo.
 ) else (
 	echo SuperTux: Folder not found. Skipping...
@@ -5711,10 +5712,12 @@ rem GOG edition, DOSBox emulation
 
 set "xcudrootdir=%gamerootdir%\X-COM UFO Defense"
 
-rem Backup savegame folders
+rem Backup savegame folders with the exception of the SOUND folder. Not sure if
+rem I got the MVOL.DAT dynamically modified as per in-game action, but since I
+rem was not able to reproduce this behaviour, I removed it from the exclude file
 if exist "%xcudrootdir%\cloud_saves" (
 	echo X-COM: UFO Defense - Backing up savegame folders
-	xcopy /e /exclude:exclude.txt /i /y "%xcudrootdir%\cloud_saves" "X-COM - UFO Defense\Savegames"
+	xcopy /e /exclude:exclude\xcud-exclude.txt /i /y "%xcudrootdir%\cloud_saves" "X-COM - UFO Defense\Savegames"
 	echo.
 ) else (
 	echo X-COM: UFO Defense - Savegame folders not found. Skipping...

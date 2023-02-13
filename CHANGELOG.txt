@@ -291,3 +291,7 @@ Version 16.4.2022
   checks in the restore batch file
 - Add additional exclusion file for ‘Hexen II’
 - Remove registry key variables from restore batch file
+
+Version 13.2.2023
+- Implement file integrity check via SHA-512 checksum list
+- Split up exclude files more logically
